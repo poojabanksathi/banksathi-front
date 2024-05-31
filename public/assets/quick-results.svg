@@ -1,0 +1,30 @@
+<svg width="158" height="158" viewBox="0 0 158 158" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 48095756">
+<g id="Ellipse 1003" filter="url(#filter0_d_5667_20674)">
+<circle cx="79" cy="73" r="55" fill="white"/>
+</g>
+<g id="Graphic">
+<circle id="Ellipse 1005" cx="79" cy="73" r="26.25" fill="#7BE0B8" stroke="black" stroke-width="1.5"/>
+<path id="Vector 3446" d="M51 63H36" stroke="#212529" stroke-width="1.5" stroke-linecap="round"/>
+<path id="Vector 3447" d="M50 71H40" stroke="#212529" stroke-width="1.5" stroke-linecap="round"/>
+<path id="Vector 3448" d="M50 79H45" stroke="#212529" stroke-width="1.5" stroke-linecap="round"/>
+<path id="Ellipse 988" d="M93 57.1508C89.155 53.2125 83.9401 51 78.5025 51C73.0649 51 67.85 53.2125 64.0051 57.1508C60.1601 61.089 58 66.4305 58 72" stroke="#212529" stroke-width="1.5" stroke-dasharray="3 6"/>
+<path id="Ellipse 992" d="M81.0315 73.3849C80.3864 73.9753 79.3848 73.9309 78.7945 73.2858C78.2041 72.6407 78.2485 71.6392 78.8936 71.0488C78.9679 70.9808 79.2987 70.735 79.8953 70.3149C80.4671 69.9123 81.2349 69.3826 82.1324 68.7694C83.927 67.5434 86.2321 65.9893 88.509 64.4613C89.6347 63.7058 90.7532 62.957 91.7993 62.2577C90.9488 63.1434 90.0408 64.0885 89.1257 65.04C85.3412 68.9753 81.4834 72.9713 81.0315 73.3849Z" fill="#212529" stroke="#212529" stroke-width="1.5"/>
+<path id="Ellipse 1006" opacity="0.2" d="M77.75 73.8914C77.75 73.2999 78.2697 72.75 79 72.75C79.7303 72.75 80.25 73.2999 80.25 73.8914C80.25 73.8913 80.2495 73.9139 80.2446 73.9721C80.2401 74.0255 80.233 74.0955 80.2232 74.1828C80.2035 74.3571 80.1741 74.5878 80.136 74.8686C80.0599 75.4297 79.9507 76.1776 79.8191 77.0497C79.556 78.793 79.2049 81.0214 78.8535 83.219C78.7315 83.9825 78.6094 84.7421 78.491 85.4761C78.4424 84.7632 78.3924 84.0269 78.3424 83.2869C78.0436 78.864 77.75 74.3802 77.75 73.8914Z" fill="#212529" stroke="#212529" stroke-width="1.5"/>
+<circle id="Ellipse 990" cx="78.9974" cy="72.9994" r="5.08333" fill="white" stroke="#212529" stroke-width="1.5"/>
+<circle id="Ellipse 991" cx="79" cy="73" r="1.25" fill="#212529" stroke="#212529" stroke-width="1.5"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_5667_20674" x="0" y="0" width="158" height="158" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="6"/>
+<feGaussianBlur stdDeviation="12"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5667_20674"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5667_20674" result="shape"/>
+</filter>
+</defs>
+</svg>

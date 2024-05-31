@@ -1,0 +1,46 @@
+.stepItem{
+    @apply relative flex flex-col justify-center items-center w-[6rem] flex-1;
+}
+.stepItem:not(:first-child):before{
+    @apply content-[''] bg-[#E6DCF5] absolute w-1/2 h-[1px] right-2/4 top-1/2 -translate-y-2/4 z-0;
+}
+.stepItem:not(:last-child):after{
+    @apply content-[''] bg-[#E6DCF5] absolute w-1/2 h-[1px] left-2/4 top-1/2 -translate-y-2/4 z-0;
+}
+.step{
+    @apply rounded-full transition duration-500 ease-in-out h-8 w-8 max-sm:h-[1.5rem] max-sm:w-[1.5rem] max-sm:py-[0.5rem] py-3 border-2 bg-white
+    flex justify-center border-[#844FCF] z-10;
+}
+.stepSpan{
+    @apply bg-[#E6DCF5] max-sm:w-[10px] max-sm:h-[10px] max-sm:bottom-[6px] w-[15px] mb-[1px] h-[15px] absolute bottom-[7px] rounded-full
+    align-middle;
+}
+.activeStepSpan{
+    @apply text-white text-[14px] leading-[4px] align-middle;
+}
+
+.active.stepItem:not(:first-child):before{
+    @apply bg-[#49D49D] opacity-[1];
+}
+.active.stepItem:not(:last-child):after{
+    @apply bg-[#844FCF] opacity-[1];
+}
+.active .step{
+    @apply rounded-full transition duration-500 ease-in-out border-2
+    bg-[#844FCF] flex justify-center border-[#844FCF]
+}
+.btn{
+    @apply bg-slate-300 px-4 py-2 rounded
+}
+.complete.stepItem:not(:first-child):before{
+    @apply bg-[#49D49D] opacity-[1];
+}
+.complete.stepItem:not(:last-child):after{
+    @apply bg-[#49D49D] opacity-[1];
+}
+.complete .step{
+    @apply border-[#49D49D] bg-[#49D49D]
+}
+.complete p{
+    @apply text-[#212529]
+}

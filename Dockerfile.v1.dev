@@ -1,0 +1,38 @@
+FROM node:18-alpine
+
+ENV PORT 8080
+
+ENV NEXT_PUBLIC_BASE_URL  'https://micro2.banksathi.com/'
+ENV NEXT_PUBLIC_WEBSITE_URL   'beta.banksathi.com'
+ENV NEXT_PUBLIC_BASE_IMG_CDN_URL   'https://media.banksathi.com'
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# Installing dependencies
+COPY package*.json /usr/src/app/
+#RUN npm install
+RUN npm install --save-dev eslint --force
+
+# Copying source files
+COPY . /usr/src/app
+
+# Building app
+RUN npm run build
+
+# npm run build:production
+# npm run build:dev
+EXPOSE 8080
+
+# Running the app in dev mode
+#CMD "npm" "run" "dev"
+
+# Running the app  in production mode
+CMD [ "npm", "start" ]
+
+#docker build -t banksathiplus:v1 .
+#docker ps
+#docker stop  d306bc3bd130
+#docker container run -d -p 8080:8080 banksathiplus:v1
+#

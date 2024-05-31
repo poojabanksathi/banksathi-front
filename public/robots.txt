@@ -1,0 +1,7 @@
+User-agent: *
+#Disallow: /
+Disallow: *?slug*
+Disallow: /leads*
+#Disallow: ?eligible=*
+Disallow: /login
+Disallow: /*?*

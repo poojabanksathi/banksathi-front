@@ -1,0 +1,79 @@
+.inputLabel{
+    @apply block  text-sm font-[400] text-[#212529];
+}
+
+.input{
+    @apply block w-full p-3 mt-2 text-gray-900 border border-gray-300 rounded-lg focus:ring-gray-900 focus:border-gray-900 focus:!outline-none
+}
+.inputError{
+    @apply focus:border-red-600 border-red-600
+}
+
+.consentContainer {
+  display: block;
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 20px;
+  cursor: pointer;
+  color: #000;
+}
+
+/* Hide the default checkbox */
+.consentContainer .consentInput {
+  visibility: hidden;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.consentContainer .mark {
+  border-radius: 2px;
+  border: 1px solid #d1d5db;
+  @apply w-4 h-4 absolute top-[3px] left-[5px]
+}
+
+.consentContainer:hover .consentInput ~ .mark {
+    border: 1px solid #49d49d;
+}
+
+.consentContainer .consentInput:checked ~ .mark {
+  background-color: #49d49d;
+  border: 1px solid #49d49d;
+}
+
+/* Create the mark/indicator (hidden when not checked) */
+.consentContainer .mark:after {
+  content: "";
+  display: none;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  margin: auto;
+  margin-top: 1.5px;
+}
+
+/* Show the mark when checked */
+.consentContainer .consentInput:checked ~ .mark:after {
+  display: block;
+}
+
+.otpBox {
+    width: 2.8rem;
+    height: 2.8rem;
+    text-align: center;
+    font-size: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem;
+}
+
+.stepperNextBtn{
+    @apply xl:w-2/5 w-2/3 text-center  bg-[#49D49D] p-4 font-[faktum] text-[#212529] mt-4 text-[14px] rounded-[12px] inline-flex justify-center
+}
+.stepperDisabledNextBtn{
+    @apply xl:w-2/5 w-2/3 text-center  bg-[#dfe8e5] p-4 font-[faktum] text-white mt-4 text-[14px] rounded-[12px] inline-flex justify-center
+}
+
+.stepperPrevBtn{
+    @apply absolute top-[43px] left-[-15px] text-center shadow-md text-[#212529] bg-[#fff] max-lg:p-2 p-2.5 font-[faktum] text-[14px] rounded-[25px] inline-flex justify-center
+}

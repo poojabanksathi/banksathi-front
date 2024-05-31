@@ -1,0 +1,233 @@
+
+export const Trenddetail =
+{
+  rewards: 'Best of Rewards Cards',
+  card: 'Millennia Credit Card',
+  cardforyou: 'Trending Credit cards for you',
+  Personalcard: 'Personal Loans',
+  image: '/assets/cr_card.svg',
+  hdfcimage: '/assets/hdfc.svg',
+  fees: 'Annual Fees',
+  money: '₹ 300/-',
+  spends: ' Wave of your spends 30,000 in 6 mo.',
+  benefite: 'Benefits',
+  none: 'None',
+  future: 'Feature',
+  shopping: 'Shopping, Rewards..',
+  compare: 'Add to Compare',
+  details: 'View Details',
+  viewmore: 'View More',
+  joiningfees: "Joining Fees",
+  welcomebenefits: "Benefits",
+  addditional: "Additional"
+}
+
+
+
+
+
+export const TrendDetailHome = [
+  {
+    id:1,
+    slug:"slug1",
+    rewards: 'Best of Rewards Cards',
+    card: 'Millennia Credit Card',
+    Personalcard: 'Personal Loans',
+    image: '/assets/cr_card.svg',
+    hdfcimage: '/assets/hdfc.svg',
+    fees: 'Annual Fees',
+    money: '₹ 300/-',
+    spends: ' Wave of your spends 30,000 in 6 mo.',
+    benefite: 'Benefits',
+    none: 'None',
+    future: 'Feature',
+    shopping: 'Shopping, Rewards..',
+    compare: 'Add to Compare',
+    details: 'View Details',
+    joiningfees: "Joining Fees"
+  },
+  {id:2,
+    slug:"slug2",
+    rewards: 'Best of Rewards Cards',
+    card: 'Millennia Credit Card',
+    Personalcard: 'Personal Loans',
+    image: '/assets/cr_card.svg',
+    hdfcimage: '/assets/hdfc.svg',
+    fees: 'Annual Fees',
+    money: '₹ 400/-',
+    spends: ' Wave of your spends 30,000 in 6 mo.',
+    benefite: 'Benefits',
+    none: 'None',
+    future: 'Feature',
+    shopping: 'Shopping, Rewards..',
+    compare: 'Add to Compare',
+    details: 'View Details',
+    joiningfees: "Joining Fees"
+  },
+  {
+    id:3,
+    slug:"slug3",
+    rewards: 'Best of Rewards Cards',
+    card: 'Millennia Credit Card',
+    Personalcard: 'Personal Loans',
+    image: '/assets/cr_card.svg',
+    hdfcimage: '/assets/hdfc.svg',
+    fees: 'Annual Fees',
+    money: '₹ 500/-',
+    spends: ' Wave of your spends 30,000 in 6 mo.',
+    benefite: 'Benefits',
+    none: 'None',
+    future: 'Feature',
+    shopping: 'Shopping, Rewards..',
+    compare: 'Add to Compare',
+    details: 'View Details',
+    joiningfees: "Joining Fees"
+  },
+  {
+    id:4,
+    slug:"slug4",
+    rewards: 'Best of Rewards Cards',
+    card: 'Millennia Credit Card',
+    Personalcard: 'Personal Loans',
+    image: '/assets/cr_card.svg',
+    hdfcimage: '/assets/hdfc.svg',
+    fees: 'Annual Fees',
+    money: '₹ 600/-',
+    spends: ' Wave of your spends 30,000 in 6 mo.',
+    benefite: 'Benefits',
+    none: 'None',
+    future: 'Feature',
+    shopping: 'Shopping, Rewards..',
+    compare: 'Add to Compare',
+    details: 'View Details',
+    joiningfees: "Joining Fees"
+  },
+]
+
+
+
+export const TrendDetailHomeMobile = [
+  {id:1,
+    slug:"slug1",
+    rewards: 'Best of Rewards Cards',
+    card: 'Millennia Credit Card',
+    Personalcard: 'Personal Loans',
+    image: '/assets/cr_card.svg',
+    hdfcimage: '/assets/hdfc.svg',
+    fees: 'Annual Fees',
+    money: '₹ 300/-',
+    spends: ' Wave of your spends 30,000 in 6 mo.',
+    benefite: 'Benefits',
+    none: 'None',
+    future: 'Feature',
+    shopping: 'Shopping, Rewards..',
+    compare: 'Add to Compare',
+    details: 'View Details',
+    joiningfees: "Joining Fees"
+  },
+  {id:2,
+    slug:"slug2",
+    rewards: 'Best of Rewards Cards',
+    card: 'Millennia Credit Card',
+    Personalcard: 'Personal Loans',
+    image: '/assets/cr_card.svg',
+    hdfcimage: '/assets/hdfc.svg',
+    fees: 'Annual Fees',
+    money: '₹ 400/-',
+    spends: ' Wave of your spends 30,000 in 6 mo.',
+    benefite: 'Benefits',
+    none: 'None',
+    future: 'Feature',
+    shopping: 'Shopping, Rewards..',
+    compare: 'Add to Compare',
+    details: 'View Details',
+    joiningfees: "Joining Fees"
+  },
+  {id:3,
+    slug:"slug3",
+    rewards: 'Best of Rewards Cards',
+    card: 'Millennia Credit Card',
+    Personalcard: 'Personal Loans',
+    image: '/assets/cr_card.svg',
+    hdfcimage: '/assets/hdfc.svg',
+    fees: 'Annual Fees',
+    money: '₹ 700/-',
+    spends: ' Wave of your spends 30,000 in 6 mo.',
+    benefite: 'Benefits',
+    none: 'None',
+    future: 'Feature',
+    shopping: 'Shopping, Rewards..',
+    compare: 'Add to Compare',
+    details: 'View Details',
+    joiningfees: "Joining Fees"
+  },
+ 
+]
+
+
+
+
+
+export const TrendCreditCardsMobile = [
+  {id:1,
+    slug:"slug1",
+ rewards: 'Best of Rewards Cards',
+ card: 'Millennia Credit Card',
+ Personalcard: 'Personal Loans',
+ image: '/assets/cr_card.svg',
+ hdfcimage: '/assets/hdfc.svg',
+ fees: 'Annual Fees',
+ money: '₹ 500/-',
+ spends: ' Wave of your spends 30,000 in 6 mo.',
+ benefite: 'Benefits',
+ none: 'None',
+ future: 'Feature',
+ shopping: 'Shopping, Rewards..',
+ compare: 'Add to Compare',
+ details: 'View Details',
+ joiningfees: "Joining Fees"
+},
+  {id:2,
+    slug:"slug2",
+ rewards: 'Best of Rewards Cards',
+ card: 'Millennia Credit Card',
+ Personalcard: 'Personal Loans',
+ image: '/assets/cr_card.svg',
+ hdfcimage: '/assets/hdfc.svg',
+ fees: 'Annual Fees',
+ money: '₹ 400/-',
+ spends: ' Wave of your spends 30,000 in 6 mo.',
+ benefite: 'Benefits',
+ none: 'None',
+ future: 'Feature',
+ shopping: 'Shopping, Rewards..',
+ compare: 'Add to Compare',
+ details: 'View Details',
+ joiningfees: "Joining Fees"
+},
+
+
+]
+
+export const TrendFullMobile = [
+  {id:1,
+  slug:"slug1",
+ rewards: 'Best of Rewards Cards',
+ card: 'Millennia Credit Card',
+ Personalcard: 'Personal Loans',
+ image: '/assets/cr_card.svg',
+ hdfcimage: '/assets/hdfc.svg',
+ fees: 'Annual Fees',
+ money: '₹ 600/-',
+ spends: ' Wave of your spends 30,000 in 6 mo.',
+ benefite: 'Benefits',
+ none: 'None',
+ future: 'Feature',
+ shopping: 'Shopping, Rewards..',
+ compare: 'Add to Compare',
+ details: 'View Details',
+ joiningfees: "Joining Fees"
+},
+
+
+]
