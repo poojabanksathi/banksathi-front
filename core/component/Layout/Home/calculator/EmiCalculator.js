@@ -18,7 +18,7 @@ function EmiCalculator() {
       <div className=' container   max-[1024px]:px-8 mx-auto max-[991px]:max-w-full py-[100px] max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4 max-[375px]:hidden'>
         <div className='w-[78%] mx-auto max-[1440px]:w-[90%] max-[1200px]:w-full'>
           <div className='pb-10'>
-            <h3 className='head-text font-[faktum] font-semibold text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px]  max-[576px]:text-[34px] max-[479px]:text-[28px] max-[479px]:leading-10 max-[375px]:text-[24px] max-[320px]:text-[22px] text-left text-[#212529]'>
+            <h3 className='head-text font-semibold text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px]  max-[576px]:text-[34px] max-[479px]:text-[28px] max-[479px]:leading-10 max-[375px]:text-[24px] max-[320px]:text-[22px] text-left text-[#212529]'>
               EMI Calculator
             </h3>
             <p className='text-[24px] font-normal max-[771px]:text-[20px] max-[576px]:text-[18px] max-[375px]:text-[18px] max-[320px]:text-[16px] text-[#212529] youtub-sub'>
@@ -28,14 +28,14 @@ function EmiCalculator() {
           <div className='pb-8'>
             <div className='benefit-tabs emi-tabs w-[26%] max-[1440px]:w-[28%] max-[1200px]:w-[30%] max-[1024px]:w-[32%] max-[820px]:w-[42%] max-[771px]:w-[45%] max-[576px]:w-[60%] flex gap-2  bg-white py-2 px-2 justify-between rounded-full items-center max-[479px]:w-full'>
               <p
-                className={`head-text font-[faktum] px-6 font-semibold text-[15px] py-2  max-[320px]:px-4 rounded-full ${
+                className={`head-text px-6 font-semibold text-[15px] py-2  max-[320px]:px-4 rounded-full ${
                   tabs == 0 ? 'bg-[#844FCF] text-white' : 'text-[#212529]'
                 }`}
                 onClick={() => settab(0)}>
                 Personal Loan
               </p>
               <p
-                className={`head-text font-[faktum] text-[15px] font-semibold rounded-full py-2 px-6 max-[320px]:px-4 mt-0 ${
+                className={`head-text text-[15px] font-semibold rounded-full py-2 px-6 max-[320px]:px-4 mt-0 ${
                   tabs == 1 ? 'bg-[#844FCF]  text-white' : ' text-[#212529]'
                 }`}
                 onClick={() => settab(1)}>

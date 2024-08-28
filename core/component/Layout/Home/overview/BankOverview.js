@@ -14,7 +14,7 @@ function BankOverview() {
             <div className=''>
               <div className='pb-10 '>
                 {/* <Link href='/about-us' prefetch={false}> */}
-                  <h2 className='head-text font-[faktum] font-semibold text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-center max-[479px]:text-[28px] text-left text-[#212529] pb-5'>
+                  <h2 className='head-text font-semibold text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-center max-[479px]:text-[28px] text-left text-[#212529] pb-5'>
                     Why BankSathi?
                   </h2>
                 {/* </Link> */}
@@ -29,7 +29,7 @@ function BankOverview() {
                 </p>
                 <div className='max-[479px]:text-center'>
                   <Link href='/about-us' prefetch={false}>
-                    <button className='text-[#212529] cursor-pointer head-text font-[faktum]  py-[15px] px-[27px] mt-4 rounded-lg border border-[#000] text-[14px] font-semibold recome-card-btn'>
+                    <button className='text-[#212529] cursor-pointer head-text py-[15px] px-[27px] mt-4 rounded-lg border border-[#000] text-[14px] font-semibold recome-card-btn'>
                       About BankSathi
                     </button>
                   </Link>

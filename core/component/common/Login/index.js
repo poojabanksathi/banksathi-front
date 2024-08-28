@@ -14,11 +14,12 @@ import LoaderComponent from '../../Partners/LoaderComponent/LoaderComponent'
 import IsThatYouComp from '../CommonList/IsThatYouComp/IsThatYouComp'
 import CheckAgree from '../CommonList/CheckAgree/CheckAgree'
 import TagManager from 'react-gtm-module'
+import { is_webengage_event_enabled } from '@/utils/util'
 
 const Loginpage = ({ lastPageVisited, metaData }) => {
   const localUserData = typeof window !== 'undefined' && localStorage?.getItem('userData')
   const userData = localUserData && JSON.parse(localUserData)
-  const leadprofileid = localStorage?.getItem('leadprofileid')
+    const leadprofileid = localStorage?.getItem('leadprofileid')
   
   const [modalIsOpen, setIsOpen] = useState(0)
 
@@ -120,18 +121,24 @@ const Loginpage = ({ lastPageVisited, metaData }) => {
   }
 
   const handleGTM = (profileId) => {
+    const names = profileId?.full_name.split(' ');
     TagManager?.dataLayer({
       dataLayer: {
         event: 'user_login',
-        lead_profile_id: profileId,
-        name: userData?.full_name,
-        cust_id: profileId,
-        customer_name : userData?.full_name,
-        customer_mobile_no : mobile,
+        user_id: profileId?.lead_profile_id,
+        first_name: names[0],
+        last_name: names[names.length - 1],
+        phone : `+91${mobile}`,
       },
     });
   }
 
+  const handleWebEngageEvent = (eventName, eventData) => {
+      if (is_webengage_event_enabled && typeof window !== 'undefined' && window.webengage) {
+      window.webengage.track(eventName, eventData);
+    }
+  }
+  
   const LoginOtp = (e) => {
     e?.preventDefault()
     setLoading(true)
@@ -232,7 +239,31 @@ const Loginpage = ({ lastPageVisited, metaData }) => {
             }
             getUserProfileData(response?.data?.data?.access_token, response?.data?.data?.lead_profile_id)
             toast.success(ApiMessage?.loginverify)
-            handleGTM(response?.data?.data?.lead_profile_id)
+            handleGTM(response?.data?.data)
+            if (typeof window !== 'undefined' && window.webengage) {
+              const names = response.data.data.full_name.split(' ');
+            window.webengage.user.login(response?.data?.data?.lead_profile_id || '');
+            window.webengage.user.setAttribute('we_email', response?.data?.data?.email || '');
+            window.webengage.user.setAttribute('we_birth_date', response?.data?.data?.dob || '');
+            window.webengage.user.setAttribute('we_phone',  response?.data?.data?.mobile_no ? `+91${response.data.data.mobile_no}` : "");
+            window.webengage.user.setAttribute('we_gender', response?.data?.data?.gender?.toLowerCase() || '');
+            window.webengage.user.setAttribute('we_first_name', names[0] || '');
+            window.webengage.user.setAttribute('we_last_name', names[names.length - 1] || '');
+            window.webengage.user.setAttribute('we_email_opt_in', true); 
+            window.webengage.user.setAttribute('we_sms_opt_in', true);
+            window.webengage.user.setAttribute('we_whatsapp_opt_in', true); 
+            }
+            handleWebEngageEvent('user_login', {
+              user_id: response?.data?.data?.lead_profile_id,
+              ...(response?.data?.data?.full_name && (() => {
+                  const names = response.data.data.full_name.split(' ');
+                  return {
+                      first_name: names[0],
+                      last_name: names[names.length - 1],
+                  };
+              })()),
+              phone :`+91${mobile}`,
+            });
             if (response?.data?.data?.is_first_time_user) {
               setModalStepper(2)
             } else {
@@ -367,7 +398,7 @@ const Loginpage = ({ lastPageVisited, metaData }) => {
                 name='otp'
                 renderInput={(props) => <input {...props} className='text-[#212529]' />}
               />
-              {errOtp && <p className='text-[12px] text-[#FF000F] font-no mt-2'>{ApiMessage?.otpValidError}</p>}
+              {errOtp && <p className='text-[12px] text-[#FF000F] font-normal mt-2'>{ApiMessage?.otpValidError}</p>}
             </div>
           </div>
           <div className='flex flex-col items-center justify-center'>

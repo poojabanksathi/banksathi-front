@@ -1,4 +1,4 @@
-import { BASE_URL, BUSINESSCATEGORY, COMMON } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
@@ -12,9 +12,7 @@ const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const CommonBreadCrumbComponent = dynamic(
   () => import('@/core/component/common/CommonList/CommonBreadCrumbComponent'),
   {
@@ -36,7 +34,6 @@ export async function getServerSideProps(context) {
     const { resolvedUrl, req } = context
     const url_slug = resolvedUrl?.split('/')?.pop()
     const referer = req?.headers?.referer || null
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const h = context?.query?.h || ''
 
     const langIdParam = {
@@ -99,34 +96,23 @@ const LoanRecommendationResultIndex = ({ businessCategoryData, leftMenuFilterDat
   return (
     <div>
       <div className=' bg-[#844FCF]'>
-        <DynamicHeader businessCategorydata={businessCategorydata} />
+        <DynamicHeader businessCategorydata={businessCategoryData} />
       </div>
       <div className='bg-[#F4F8FB]'>
-        <>
-          <div className='container max-[1200px]:px-0 max-[1024px]:px-0 mx-auto max-[991px]:max-w-full'>
-            <CommonBreadCrumbComponent
-              link1={'/personal-loan'}
-              link1Name='Personal Loan'
-              link2={'/personal-loan/recommendation'}
-              link2Name='Recommendation'
-              link3={`/personal-loan/recommendation/result`}
-              link3Name='Result'
-            />
-          </div>
-          <LoanRecommendationResult filteredList={filteredList} leftMenuFilterData={leftMenuFilterData} />
-        </>
-        <div>
+        <div className='container max-[1200px]:px-0 max-[1024px]:px-0 mx-auto max-[991px]:max-w-full'>
+          <CommonBreadCrumbComponent
+            link1={'/personal-loan'}
+            link1Name='Personal Loan'
+            link2={'/personal-loan/recommendation'}
+            link2Name='Recommendation'
+            link3={`/personal-loan/recommendation/result`}
+            link3Name='Result'
+          />
         </div>
-        <div>
-          <MobileFooter businessCategorydata={businessCategorydata} />
-        </div>
+        <LoanRecommendationResult filteredList={filteredList} leftMenuFilterData={leftMenuFilterData} />
+        <MobileFooter businessCategorydata={businessCategoryData} />
       </div>
-      <div>
-        <DynamicFooter businessCategorydata={businessCategoryData} />
-        <div className='scroll-top'>
-          <ScrollToTop smooth color='#000' />
-        </div>
-      </div>
+
     </div>
   )
 }

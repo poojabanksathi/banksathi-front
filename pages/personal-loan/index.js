@@ -1,8 +1,7 @@
 import dynamic from 'next/dynamic'
-import React, { useEffect } from 'react'
-import { BASE_URL, BUSINESSCATEGORY, BrowseServices, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
+import React, { useEffect, useState } from 'react'
+import { BASE_URL, BUSINESSCATEGORY, BrowseServices, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 import CommonBreadCrumbComponent from '@/core/component/common/CommonList/CommonBreadCrumbComponent'
 import { useRouter } from 'next/router'
 
@@ -14,9 +13,7 @@ const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 
 const FAQ = dynamic(() => import('@/core/component/common/FAQ/FAQ'), {
   ssr: false
@@ -27,7 +24,6 @@ export async function getServerSideProps(context) {
     const { query, resolvedUrl, req } = context
     const url_slug = query ? resolvedUrl?.split('?')?.[0]?.replace('/', '') : resolvedUrl?.split('/')?.pop()
     const referer = req?.headers?.referer || null
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const h = context?.query?.h || ''
     const ip = context?.req?.headers?.['x-forwarded-for']?.split(',')?.[0] || ''
     const user_agent = context?.req?.headers?.['user-agent'] || ''
@@ -166,6 +162,10 @@ const PersonalLoanPage = ({
   allPersonalProducts
 }) => {
   const router = useRouter()
+  const [faqLoad , setFaqLoad] = useState(false)
+useEffect(() => {
+  setFaqLoad(true)
+},[faqLoad])
 
   useEffect(() => {
     if (!personalProducts || !personalProducts?.length <= 0) {
@@ -175,11 +175,9 @@ const PersonalLoanPage = ({
 
   return (
     <>
-      <section>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader businessCategorydata={businessCategoryData} />
-        </div>
-      </section>
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader businessCategorydata={businessCategoryData} />
+      </div>
       <div className='bg-[#F4F8FB]'>
         <CommonBreadCrumbComponent link1={'/personal-loan'} link1Name='Personal Loan' />
         <PersonalLoan
@@ -193,16 +191,13 @@ const PersonalLoanPage = ({
           serviceTabs={serviceTabs}
         />
       </div>
+      {faqLoad &&
       <div className='bg-[#F4F8FB]'>
         <FAQ faqdata={faqData} />
       </div>
-      <div>
-        <MobileFooter businessCategorydata={businessCategoryData} />
-      </div>
-      <DynamicFooter />
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
+      }
+      <MobileFooter businessCategorydata={businessCategoryData} />
+
     </>
   )
 }

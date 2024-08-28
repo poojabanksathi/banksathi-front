@@ -60,10 +60,10 @@ const LoanSortingFilter = ({
           : 'top-[354px]'
 
   return (
-    <div className='flex flex-col gap-y-[4px]' onMouseLeave={() => setOpenSortBy(false)}>
-      <div className="text-neutral-800 text-xs font-medium font-['Poppins'] uppercase">Sort By</div>
+    <div className='flex items-center gap-4' onMouseLeave={() => setOpenSortBy(false)}>
+      <div className="text-neutral-800 md:text-[14px] text-[13px] font-semibold font-['Poppins']">SORT BY :</div>
       <div
-        className={`flex flex-row justify-around items-center w-[235px] h-[45px] bg-white rounded-lg border ${
+        className={`flex flex-row justify-around items-center w-[235px] h-[45px] bg-white rounded-lg border relative ${
           !openSortBy ? 'border border-[#212529] rounded-[5px]' : ' border-[#212529] !border-b-0 rounded-t-[5px]'
         }`}
         onMouseEnter={() => setOpenSortBy(true)}>
@@ -76,19 +76,16 @@ const LoanSortingFilter = ({
           width={17}
           height={17}
           priority={true}
-          className={openSortBy ? 'rotate-180 relative top-[2px]' : 'relative top-[2px]'}
         />
         {openSortBy && (
           <>
             <div
-              className={`border-t-0 border border-[#212529] shadow-md rounded-b-[5px] xl:w-[235px] lg:w-[235px] px-[24px] h-auto  bg-white flex flex-col gap-[12px] items-start justify-start absolute ${
-                isSubCategoryFlow ? forSubCategoryPage : forListing
-              }`}>
+              className={`border-t-0 top-0 border border-[#212529] shadow-md rounded-[5px] xl:w-[235px] lg:w-[235px] px-[24px] h-auto  bg-white flex flex-col gap-[12px] items-start justify-start absolute`}>
               {loanSortingOptions?.map((item) => {
                 return (
                   <div key={item?.id} className='last:pb-4 first:pt-2'>
                     <div
-                      className='hover:text-[#a882dd] cursor-pointer hover:text-[14px]'
+                      className='hover:text-[#a882dd] text-[#212529] cursor-pointer hover:text-[14px]'
                       onClick={() => handleSortingOptionClick(item?.name)}>
                       {item?.name}
                     </div>

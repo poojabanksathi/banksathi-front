@@ -45,8 +45,8 @@ const ScoreProducts = ({
     setSelectprodctTabs(index)
   }
 
-  const leadId = localStorage.getItem('leadprofileid')
-  const token = localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
 
   const router = useRouter()
 
@@ -132,7 +132,6 @@ const ScoreProducts = ({
     })
 
   const handleScroll = (name) => {
-    console.log(name)
     if (name === 'credit') scrollIntoSection(creditRef)
     if (name === 'loan') scrollIntoSection(loanRef)
     if (name === 'bank') scrollIntoSection(bankRef)
@@ -209,7 +208,7 @@ const ScoreProducts = ({
               return (
                 <>
                   <p
-                    className={`text-center cursor-pointer head-text font-[faktum]  font-semibold text-[15px] h-full flex justify-center items-center max-[479px]:text-[14px]  max-[375px]:text-[14px] max-[360px]:text-[13px] max-[320px]:text-[14px] max-[320px]:px-0 mt-0 rounded-full  max-[280px]:text-[12px] ${
+                    className={`text-center cursor-pointer head-text font-semibold text-[15px] h-full flex justify-center items-center max-[479px]:text-[14px]  max-[375px]:text-[14px] max-[360px]:text-[13px] max-[320px]:text-[14px] max-[320px]:px-0 mt-0 rounded-full  max-[280px]:text-[12px] ${
                       index == SelectProductTabs ? 'bg-[#844FCF] text-white' : 'text-[#212529]'
                     }`}
                     onClick={() => handleClick(index)}>

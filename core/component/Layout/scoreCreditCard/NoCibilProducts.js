@@ -161,7 +161,7 @@ const NoCibilProducts = ({ noCibilProductsData }) => {
 
                       {size?.width >= 768 && (
                         <div className='flex flex-col md:flex-col gap-4 lg:flex-col absolute right-4 xl:mr-[5rem]'>
-                          <ApplyNowButton data={item} userData={userData} position={index} disabled={item?.bank_name === "KOTAK MAHINDRA BANK"} />
+                          <ApplyNowButton data={item} userData={userData} position={index} disabled={!item?.is_apply_now} />
 
                           <Link href={`/${item?.url_slug}`} prefetch={false}>
                             <button
@@ -178,7 +178,7 @@ const NoCibilProducts = ({ noCibilProductsData }) => {
                 {size?.width < 768 && (
                   <>
                     <div className='flex flex-col items-center justify-between  mt-4 w-full gap-4 px-2'>
-                      <ApplyNowButton data={item} userData={userData} position={index} disabled={item?.bank_name === "KOTAK MAHINDRA BANK"}/>
+                      <ApplyNowButton data={item} userData={userData} position={index} disabled={!item?.is_apply_now}/>
 
                       <Link
                         href={`/${item?.url_slug}`}

@@ -134,7 +134,7 @@ const CommonPartnersForm = ({ isMobile = false, partnerRef }) => {
                     inputType='tel'
                     renderInput={(props) => <input {...props} />}
                   />
-                  {errOtp && <p className='text-[12px] text-[#FF000F] font-no mt-2'>{ApiMessage?.otpValidError}</p>}
+                  {errOtp && <p className='text-[12px] text-[#FF000F] font-normal mt-2'>{ApiMessage?.otpValidError}</p>}
                 </div>
               </div>
               <p className='font-normal  pt-5 max-[479px]:text-center text-[#212529]'></p>
@@ -146,7 +146,7 @@ const CommonPartnersForm = ({ isMobile = false, partnerRef }) => {
                   <SubmitFormBtn
                     name={'Resend'}
                     onClick={callOtpApi}
-                    className={`head-text font-medium font-[faktum] w-[25vw] h-[50px] text-center bg-[#49D49D] !text-[#212529] rounded-lg text-[15px]  mx-auto flex items-center justify-center gap-4 relative bottom-[16px] ${
+                    className={`head-text font-medium w-[25vw] h-[50px] text-center bg-[#49D49D] !text-[#212529] rounded-lg text-[15px]  mx-auto flex items-center justify-center gap-4 relative bottom-[16px] ${
                       resendOtp ? '' : 'disableClassBtn'
                     }`}
                   />
@@ -154,7 +154,7 @@ const CommonPartnersForm = ({ isMobile = false, partnerRef }) => {
                   <SubmitFormBtn
                     name={'Verify'}
                     onClick={() => {}}
-                    className={`head-text font-medium font-[faktum] w-[25vw] h-[50px] text-center bg-[#49D49D] !text-[#212529] rounded-lg text-[15px]  mx-auto flex items-center justify-center gap-4 relative bottom-[16px] ${
+                    className={`head-text font-medium w-[25vw] h-[50px] text-center bg-[#49D49D] !text-[#212529] rounded-lg text-[15px]  mx-auto flex items-center justify-center gap-4 relative bottom-[16px] ${
                       otpdata?.length === 4 || resendOtp ? '' : 'disableClassBtn'
                     }`}
                   />
@@ -388,7 +388,7 @@ const CommonPartnersForm = ({ isMobile = false, partnerRef }) => {
                       }}
                     />
                     {errorHrefName && (
-                      <p className='text-[12px] text-[#FF000F] font-no  mt-2'>{ApiMessage?.linkError}</p>
+                      <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>{ApiMessage?.linkError}</p>
                     )}
                     {/* {errorMessage && <p className='text-[12px] text-[#FF000F] font-no'>{ApiMessage?.letterNameErr}</p>} */}
                   </div>
@@ -432,14 +432,14 @@ const CommonPartnersForm = ({ isMobile = false, partnerRef }) => {
                 </div>
                 <div className='mt-[10px]'>
                   <textarea
-                    className='conformtext'
+                    className='conformtext text-[#000]' 
                     name='enquiry'
                     id='enquiry'
                     onChange={(e) => setGetInTouchData({ ...getInTouchData, enquiry: e?.target?.value })}
                     value={getInTouchData?.enquiry}
                     type='text-area'
                     placeholder='Your Message'></textarea>
-                  {errorHref && <p className='text-[12px] text-[#FF000F] font-no  mt-2'>{ApiMessage?.linkError}</p>}
+                  {errorHref && <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>{ApiMessage?.linkError}</p>}
                 </div>
               </div>
               <div className='flex items-center justify-center mt-[17px]'>
@@ -447,7 +447,7 @@ const CommonPartnersForm = ({ isMobile = false, partnerRef }) => {
                   name={'Send OTP'}
                   disabled={disableButton}
                   onClick={callOtpApi}
-                  className={`cursor-pointer head-text font-[faktum] text-center bg-cyan-950 !text-white py-2 pl-2 pr-2 rounded-lg text-[16px] w-full h-[64px] mx-auto flex items-center justify-center gap-4 max-sm:w-[127px] max-sm:h-[40px] max-sm:text-[12px] md:text-[12px] ${
+                  className={`cursor-pointer head-text  text-center bg-cyan-950 !text-white py-2 pl-2 pr-2 rounded-lg text-[16px] w-full h-[64px] mx-auto flex items-center justify-center gap-4 max-sm:w-[127px] max-sm:h-[40px] max-sm:text-[12px] md:text-[12px] ${
                     disableButton ? 'disableClassBtn' : ''
                   }`}
                 />

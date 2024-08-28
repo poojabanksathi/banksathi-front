@@ -103,7 +103,7 @@ const MobileHeader = ({ headermobile, headerclose, businessCategorydata }) => {
                   <div className=' '>
                     <Link
                       href='/credit-cards'
-                      className='head-text font-[faktum] text-[#212529]  hover:!text-[#212529]  font-semibold text-[18px]  '
+                      className='head-text text-[#212529]  hover:!text-[#212529]  font-semibold text-[18px]  '
                       prefetch={false}>
                       <button className='text-center cursor-pointer mx-auto max-[820px]:px-4 flex gap-4 px-5 py-2 bg-white rounded-lg max-[771px]:px-3 w-auto justify-center'>
                         Find the Right Card

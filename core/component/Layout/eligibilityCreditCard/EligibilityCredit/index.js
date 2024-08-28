@@ -291,8 +291,8 @@ function EligibilityCredit() {
     setLoadingOtp(false)
   }
 
-  const leadId = localStorage.getItem('leadprofileid')
-  const token = localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
 
   useEffect(() => {
     if (token) {
@@ -790,7 +790,7 @@ function EligibilityCredit() {
                   e.target.value = removeNonAlphaNumeric(e)
                 }}
               />
-              {errorHrefName && <p className='text-[12px] text-[#FF000F] font-no  mt-2'>{ApiMessage?.linkError}</p>}
+              {errorHrefName && <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>{ApiMessage?.linkError}</p>}
               {errorMessage && <p className='text-[12px] text-[#FF000F] font-no'>{ApiMessage?.letterNameErr}</p>}
             </div>
             <div className='grid grid-cols-2 gap-4 max-[771px]:grid-cols-1 max-[771px]:gap-0 '>
@@ -935,7 +935,7 @@ function EligibilityCredit() {
                     }}
                   />
                   {errHrefCompany && (
-                    <p className='text-[12px] text-[#FF000F] font-no  mt-2'>{ApiMessage?.linkError}</p>
+                    <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>{ApiMessage?.linkError}</p>
                   )}
 
                   {errorCompany && <p className='text-[12px] text-[#FF000F] font-no'>{ApiMessage?.letterNameErr}</p>}
@@ -1084,7 +1084,7 @@ function EligibilityCredit() {
                     renderInput={(props) => <input {...props} />}
                   />
                 )}
-                {errOtp && <p className='text-[12px] text-[#FF000F] font-no mt-2'>{ApiMessage?.otpValidError}</p>}
+                {errOtp && <p className='text-[12px] text-[#FF000F] font-normal mt-2'>{ApiMessage?.otpValidError}</p>}
               </div>
             </div>
             <p className='font-normal  pt-5 max-[479px]:text-center text-[#212529]'>

@@ -68,7 +68,7 @@ const EPFSliderChart = () => {
           <div className='loan-calculator-bg'>
             <div className='flex items-center justify-between'>
               <div>
-                <h3 className='text-[15px] max-sm:text-[14px] font-semibold'>Monthly Salary (Basic + DA)</h3>
+                <h3 className='text-[15px] text-[#212529] max-sm:text-[14px] font-semibold'>Monthly Salary (Basic + DA)</h3>
               </div>
               <div className='bg-[#F4F8FB] w-[150px] flex justify-center gap-[36px] px-3 text-[#212529] items-center h-[40px] rounded font-semibold'>
                 <Input
@@ -98,7 +98,7 @@ const EPFSliderChart = () => {
           <div className='loan-calculator-bg mt-[28px]'>
             <div className='flex items-center justify-between'>
               <div>
-                <h3 className='text-[15px] max-sm:text-[14px] font-semibold'>Your Age</h3>
+                <h3 className='text-[15px] text-[#212529] max-sm:text-[14px] font-semibold'>Your Age</h3>
               </div>
               <div className='bg-[#F4F8FB] w-[150px] flex justify-center  px-3 text-[#212529] items-center h-[40px] rounded font-semibold'>
                 <Input
@@ -125,7 +125,7 @@ const EPFSliderChart = () => {
           <div className='loan-calculator-bg mt-[28px]'>
             <div className='flex items-center justify-between'>
               <div>
-                <h3 className='text-[15px] max-sm:text-[14px] font-semibold'>Your contribution to EPF</h3>
+                <h3 className='text-[15px] text-[#212529] max-sm:text-[14px] font-semibold'>Your contribution to EPF</h3>
               </div>
               <div className='bg-[#F4F8FB] w-[150px] flex justify-center  px-3 text-[#212529] items-center h-[40px] rounded font-semibold'>
                 <Input
@@ -152,7 +152,7 @@ const EPFSliderChart = () => {
           <div className='loan-calculator-bg mt-[28px]'>
             <div className='flex items-center justify-between'>
               <div>
-                <h3 className='text-[15px] max-sm:text-[14px] font-semibold'>Annual increase in salary</h3>
+                <h3 className='text-[15px] text-[#212529] max-sm:text-[14px] font-semibold'>Annual increase in salary</h3>
               </div>
               <div className='bg-[#F4F8FB] w-[150px] flex justify-center  px-3 text-[#212529] items-center h-[40px] rounded font-semibold'>
                 <Input
@@ -179,10 +179,10 @@ const EPFSliderChart = () => {
           <div className='loan-calculator-bg mt-[28px]'>
             <div className='flex items-center justify-between'>
               <div>
-                <h3 className='text-[15px] font-semibold'>Rate of interest</h3>
+                <h3 className='text-[15px] text-[#212529] font-semibold'>Rate of interest</h3>
               </div>
-              <div className='w-[150px] flex justify-center gap-[30px] text-[#212529] items-center h-[40px] rounded font-semibold'>
-                <p className='m-0'>{rateOfInterest}%</p>
+              <div className='bg-[#F4F8FB] w-[150px] flex justify-center  px-3 text-[#212529] items-center h-[40px] rounded font-semibold'>
+                <p className='m-0 text-right w-full'>{rateOfInterest}%</p>
               </div>
             </div>
           </div>

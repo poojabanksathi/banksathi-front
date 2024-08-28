@@ -2,13 +2,10 @@ import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BLOG, BUSINESSCATEGORY, COMMON } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
@@ -17,7 +14,6 @@ const NewHomePage = dynamic(() => import('@/core/component/Layout/NewHomePage/Ne
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const device_expiry = '24 hours'
     const ref = context?.req?.headers?.referer || ''
 
@@ -28,10 +24,6 @@ export async function getServerSideProps(context) {
     const deviceId = user_agent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i)
 
     const req1 = {
-      lang_id: lang_id
-    }
-    const req6 = {
-      website_url: website_url,
       lang_id: lang_id
     }
     const req7 = {
@@ -89,9 +81,10 @@ export default function Home({
   blogData,
   businessmetaheadtag,
 }) {
- 
+
   const [scrollY, setScrollY] = useState(0)
   const router = useRouter()
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,27 +102,25 @@ export default function Home({
       router.push('/maintenance')
     }
   }, [businessCategorydata?.productInfo?.length, router])
-  
-  useEffect(() => {
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    window.OneSignalDeferred.push(function (OneSignal) {
-      OneSignal.init({
-        appId: "12ebd861-92be-4b68-b8be-0a138021c887",
-      });
-    });
-  }, []);
 
+  // useEffect(() => {
+  //   window.OneSignalDeferred = window.OneSignalDeferred || [];
+  //   window.OneSignalDeferred.push(function (OneSignal) {
+  //     OneSignal.init({
+  //       appId: "12ebd861-92be-4b68-b8be-0a138021c887",
+  //     });
+  //   });
+  // }, []);
+  
   return (
     <>
-      <Head>
+      {/* <Head>
         <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-      </Head>
-      <section className=''>
-        <div
-          className={`bg-[#844FCF] w-full  xl:min-h-[500px] lg:min-h-[750px] max-[576px]:min-h-full relative`}>
-          <DynamicHeader businessCategorydata={businessCategorydata} />
-        </div>
-      </section>
+      </Head> */}
+      <div
+        className={`bg-[#844FCF] w-full  xl:min-h-[500px] lg:min-h-[750px] max-[576px]:min-h-full relative`}>
+        <DynamicHeader businessCategorydata={businessCategorydata} />
+      </div>
 
       <div className='bg-[#F4F8FB]'>
         <NewHomePage
@@ -139,10 +130,6 @@ export default function Home({
         />
       </div>
 
-      <DynamicFooter businessCategorydata={businessCategorydata} />
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
     </>
   )
 }

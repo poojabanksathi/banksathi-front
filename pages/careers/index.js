@@ -1,15 +1,12 @@
 import React from 'react'
-import ScrollToTop from 'react-scroll-to-top'
 import dynamic from 'next/dynamic'
-import { BASE_URL, BUSINESSCATEGORY, COMMON } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const CareerPage = dynamic(() => import('@/core/component/Layout/CareerPage/Career/CareerPage'), {
   ssr: false
 })
@@ -17,8 +14,7 @@ const CareerPage = dynamic(() => import('@/core/component/Layout/CareerPage/Care
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
-    const ref=context?.req?.headers?.referer || '';
+    const ref = context?.req?.headers?.referer || '';
 
     const req1 = {
       lang_id: lang_id
@@ -34,7 +30,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         businessCategorydata: data1,
-        referer:ref,
+        referer: ref,
       }
     }
   } catch (error) {
@@ -49,20 +45,13 @@ export async function getServerSideProps(context) {
 const index = ({ businessCategorydata }) => {
   return (
     <>
-      <div>
-        <section>
-          <div className='bg-[#844FCF]'>
-            <DynamicHeader
-              businessCategorydata={businessCategorydata}
-            />
-          </div>
-        </section>
-        <CareerPage />
-        <DynamicFooter businessCategorydata={businessCategorydata} />
-        <div className='scroll-top'>
-          <ScrollToTop smooth color='#000' />
-        </div>
+      <div className='bg-[#844FCF]'>
+        <DynamicHeader
+          businessCategorydata={businessCategorydata}
+        />
       </div>
+      <CareerPage />
+
     </>
   )
 }

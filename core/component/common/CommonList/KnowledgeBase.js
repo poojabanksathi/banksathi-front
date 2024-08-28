@@ -84,12 +84,12 @@ function KnowledgeBase({title}) {
     <>
       <div className='py-[100px] max-[479px]:py-[50px] knowledge-resolution max-[393px]:py-[30px] max-[479px]:px-4'>
         <div className='flex justify-between w-[78%] mx-auto pb-10 max-[1440px]:w-[90%] max-[1200px]:w-full max-[479px]:px-4 max-[479px]:justify-center max-[479px]:justify-center max-[375px]:px-4 max-[320px]:px-4  max-[479px]:pb-6 tutorial-resolution'>
-          <h2 className='head-text font-[faktum] text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[32px] max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] text-center font-semibold text-[#212529]'>
+          <h2 className='head-text  text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[32px] max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] text-center font-semibold text-[#212529]'>
           {title ? title :"Knowledge base"}
           </h2>
           <Link
             href='#'
-            className='!text-[#212529] hover:!text-[#212529]  head-text font-[faktum] max-[479px]:hidden text-[18px] p-4 w-auto h-full font-semibold border rounded-xl border-[#212529]  tutorial-seemore !text-center'
+            className='!text-[#212529] hover:!text-[#212529]  head-text  max-[479px]:hidden text-[18px] p-4 w-auto h-full font-semibold border rounded-xl border-[#212529]  tutorial-seemore !text-center'
             prefetch={false}
             >
             <button className='text-center cursor-pointer'>Read More Articles</button>

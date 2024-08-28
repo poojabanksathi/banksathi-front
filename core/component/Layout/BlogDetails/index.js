@@ -42,7 +42,7 @@ function BlogDetails({ blogPostDetailData }) {
   useEffect(() => {
     if (blogPostDetailData == undefined) {
       router.push('/404');
-    }
+    } 
   }, [blogPostDetailData, router]);
 
   const headers = {
@@ -77,17 +77,16 @@ function BlogDetails({ blogPostDetailData }) {
   const size = useWindowSize();
   const mobileSize = size?.width <= 576;
   const contentWithDimensions = addImageDimensions(blogPostDetailData?.content || '');
+  
 
   return (
-    <div className="container h-full px-16 max-[1024px]:px-8 mx-auto sm:mb-[60px] max-sm:mb-[30px] max-[991px]:max-w-full pt-[30px] max-[576px]:px-6 max-[479px]:px-4 max-[576px]:py-[30px] max-[375px]:px-4 max-[320px]:px-4">
+    <div className="container h-full px-16 max-[1024px]:px-8 mx-auto sm:pb-[60px] max-sm:pb-[30px] max-[991px]:max-w-full pt-[30px] max-[576px]:px-6 max-[479px]:px-4 max-[576px]:py-[30px] max-[375px]:px-4 max-[320px]:px-4">
       <div className="grid grid-cols-12 gap-12 max-[576px]:gap-0 border-b-2 border-black max-sm:pb-5">
         <div className="col-span-8 max-[768px]:col-span-7 max-[576px]:col-span-12">
           {blogPostDetailData?.title && (
-            <div>
-              <h1 className="text-[#212529] max-sm:text-[18px] max-sm:leading-7 head-text font-[faktum] xl:text-[32px] lg:text-[20px] md:text-[24px] leading-[50px] max-[576px]:text-[20px] max-[479px]:text-[20px] font-semibold max-[479px]:w-full md:leading-[40px] xl:leading-[48px]">
-                {blogPostDetailData?.title}
-              </h1>
-            </div>
+            <h1 className="text-[#212529] max-sm:text-[18px] max-sm:leading-7 head-text xl:text-[32px] lg:text-[20px] md:text-[24px] leading-[50px] max-[576px]:text-[20px] max-[479px]:text-[20px] font-semibold max-[479px]:w-full md:leading-[40px] xl:leading-[48px]">
+              {blogPostDetailData?.title}
+            </h1>
           )}
           <div className="flex items-center gap-3 my-5">
             {blogPostDetailData?.author && (
@@ -104,40 +103,32 @@ function BlogDetails({ blogPostDetailData }) {
               <p className="text-[15px] text-[#0E1B2C] max-sm:text-[14px]">{blogPostDetailData?.tor} min read</p>
             )}
           </div>
-            <div className="mt-[30px] mb-[51px] card-img-space sm:block hidden">
-              <div style={{ width: 'auto', height: 'auto' }}>
-                <Image
-                  src={`${Img_URL}/${blogPostDetailData?.image}`}
-                  alt="image"
-                  className="w-full h-[350px] rounded-2xl object-cover bolg-details-card-img"
-                  width={80}
-                  height={80}
-                  unoptimized={true}
-                  priority={true}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
+          <div className="mt-[30px] mb-[51px] card-img-space sm:block hidden">
+            <div style={{ width: 'auto', height: 'auto' }}>
+              <Image
+                src={`${Img_URL}/${blogPostDetailData?.image}`}
+                alt="image"
+                className="w-full h-[350px] rounded-2xl object-cover bolg-details-card-img"
+                width={80}
+                height={80}
+                unoptimized={true}
+                priority={true}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
             </div>
-          <div>
-            <div>
-              <SocialMediaShareComp productDetails={blogPostDetailData} />
+          </div>
+          <SocialMediaShareComp productDetails={blogPostDetailData} />
+            <div className="pb-6 hidden max-[576px]:block">
+              <Link href="/credit-cards/eligibility" prefetch={false}>
+                <button className="bg-[#49D49D] w-full lg:w-[240px] h-[48px] rounded-md font-faktum font-semibold text-[15px] leading-[18px] tracking-wide text-[#212529]">
+                  Check Credit Card Eligibility
+                </button>
+              </Link>
             </div>
-            {mobileSize && (
-              <div className="pb-6">
-                <Link href="/credit-cards/eligibility" prefetch={false}>
-                  <button className="bg-[#49D49D] w-full lg:w-[240px] h-[48px] rounded-md font-faktum font-semibold text-[15px] leading-[18px] tracking-wide text-[#212529]">
-                    Check Credit Card Eligibility
-                  </button>
-                </Link>
-              </div>
-            )}
-          </div>
-          <div>
-            <p
-              className="text-[#212529] text-[15px] font-normal longform-list mb-[40px] blog-Post-detail-table"
-              dangerouslySetInnerHTML={{ __html: `<div>${contentWithDimensions}</div>` }}
-            />
-          </div>
+          <div
+            className="text-[#212529] text-[15px] font-normal longform-list mb-[40px] blog-Post-detail-table"
+            dangerouslySetInnerHTML={{ __html: `<div>${contentWithDimensions}</div>` }}
+          />
         </div>
         <div className="col-span-4 xl:w-fit space-y-6 max-[768px]:col-span-5 h-auto max-[576px]:col-span-12 max-sm:pt-[0px] recent-blog">
           <CheckCibilCard cardData={scoreData} position={'3'} title={'Check Score'} />

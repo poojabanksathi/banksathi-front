@@ -1,16 +1,12 @@
 import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
-import { BASE_URL, BUSINESSCATEGORY, COMMON, PRODUCTSAPI, multipleSlug } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY, PRODUCTSAPI, multipleSlug } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
 const EligibilityCreditCardTwo = dynamic(() => import('@/core/component/Layout/eligibilityCreditCardTwo'), {
-  ssr: false
-})
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
   ssr: false
 })
 
@@ -42,10 +38,8 @@ export default function Index({
         <EligibilityCreditCardTwo eligibleSlug={eligibleSlug} alternetRelatedproduct={productList} />
         <div className='bg-[#fff]'>
           <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
         </div>
       </div>
-      <ScrollToTop smooth color='#000' />
     </>
   )
 }
@@ -55,7 +49,6 @@ export async function getServerSideProps(context) {
     const slug = context?.params?.index[0]
 
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
 
     const ip = context?.req?.headers?.['x-forwarded-for']?.split(',')?.[0] || ''

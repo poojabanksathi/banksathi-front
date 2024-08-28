@@ -1,6 +1,5 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 
@@ -11,10 +10,6 @@ const FAQ = dynamic(() => import('@/core/component/common/FAQ/FAQ'), {
   ssr: false
 })
 const SimpleSavingTellUs = dynamic(() => import('@/core/component/common/CalculatorCards/SimpleSavingTellus'), {
-  ssr: false
-})
-
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
   ssr: false
 })
 
@@ -42,41 +37,36 @@ export default function Index({
 }) {
   return (
     <>
-      <div>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader businessCategorydata={businessCategorydata} />
-        </div>
-        <div className='bg-[#F4F8FB] h-auto'>
-          <CommonRoundedBreadcrumb
-            link1={'/credit-cards'}
-            link1Name={'Credit Cards'}
-            link2={'/credit-cards/saving-calculator'}
-            link2Name='saving-calculator'
-            highlight2={true}
-          />
-        </div>
-
-        <div className='bg-[#F4F8FB] h-auto'>
-          <SimpleSavingTellUs recommendProductList={recommendProductList} metaData={businessmetaheadtag} />
-          <VedioCheck productDetailsData={businessmetaheadtag} />
-
-          <CreditBeginnerCard longTerm={businessmetaheadtag} saving={true} />
-
-          <FAQ faqdata={faqdata} />
-        </div>
-        <div className='bg-[#fff]'>
-          <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
-        </div>
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader businessCategorydata={businessCategorydata} />
       </div>
-      <ScrollToTop smooth color='#000' />
+      <div className='bg-[#F4F8FB] h-auto'>
+        <CommonRoundedBreadcrumb
+          link1={'/credit-cards'}
+          link1Name={'Credit Cards'}
+          link2={'/credit-cards/saving-calculator'}
+          link2Name='saving-calculator'
+          highlight2={true}
+        />
+      </div>
+
+      <div className='bg-[#F4F8FB] h-auto'>
+        <SimpleSavingTellUs recommendProductList={recommendProductList} metaData={businessmetaheadtag} />
+        <VedioCheck productDetailsData={businessmetaheadtag} />
+
+        <CreditBeginnerCard longTerm={businessmetaheadtag} saving={true} />
+
+        <FAQ faqdata={faqdata} />
+      </div>
+      <div className='bg-[#fff]'>
+        <MobileFooter businessCategorydata={businessCategorydata} />
+      </div>
     </>
   )
 }
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
     const last_url = context?.resolvedUrl && context?.resolvedUrl.split('/')
     const faqUrl = last_url?.[last_url?.length - 1]
@@ -119,7 +109,6 @@ export async function getServerSideProps(context) {
     const response6 = Axios.post(BASE_URL + COMMON?.recommendProductSavingCal, req7).catch((error) => {
       return { data: null }
     })
-    // LONG FORM CONTENT
     const longForm = await Axios.post(BASE_URL + COMMON?.metaDetailPage, req1).catch((error) => {
       return { data: null }
     })

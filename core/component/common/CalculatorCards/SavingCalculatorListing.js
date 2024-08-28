@@ -273,7 +273,7 @@ const SavingCalculatorListing = ({ productURlAPiData }) => {
                       <div
                         id='save-aply-btn'
                         className='flex lg:col-span-2 md:flex-col gap-4 lg:flex-col  items-end absolute right-8'>
-                        <ApplyNowButton data={alldata} userData={userData} pos='2' position={index}  disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"} />
+                        <ApplyNowButton data={alldata} userData={userData} pos='2' position={index}  disabled={!alldata?.is_apply_now} />
                         <Link href={`/${alldata?.full_url_slug}`} prefetch={false}>
                           <button
                             key={alldata.id}
@@ -290,7 +290,7 @@ const SavingCalculatorListing = ({ productURlAPiData }) => {
                             onClick={() => {
                               // handleClick(index)
                             }}
-                            className='text-[15px] text-black font-["Poppins"] font-normal'>
+                            className='text-[15px] text-black font-[poppins] font-normal'>
                             Monthly Savings - <span className='font-["Faktum"]'>₹{monthlySavings}</span>
                           </button>
 
@@ -301,7 +301,7 @@ const SavingCalculatorListing = ({ productURlAPiData }) => {
                         <div className='my-1 relative px-[10px] z-[10]'>
                           <button
                             onClick={() => handleClickAnual(index)}
-                            className='text-[15px] text-black font-["Poppins"] font-normal'>
+                            className='text-[15px] text-black font-[poppins] font-normal'>
                             {/* className='w-[260px] cursor-pointer  px-1 flex font-medium py-[5px] justify-center items-center md:h-auto  max-sm:h-[37px] gap-5 max-sm:gap-3 max-sm:text-[11px] rounded-lg  bg-[#DEF7ED] text-[15px]  text-[#212529]'> */}
                             Anuual Savings - <span className='font-["Faktum"]'>₹{alldata?.total_saving}</span>
                             {/* <Image

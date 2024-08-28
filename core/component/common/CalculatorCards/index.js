@@ -19,14 +19,14 @@ function CalculatorCards() {
                 />
               </div>
               <div>
-                <p className='text-head text-[20px] font-semibold leading-[25px] pb-5 calc-card-text'>
+                <p className='text-head text-[#212529] text-[20px] font-semibold leading-[25px] pb-5 calc-card-text'>
                   Loan EMI Calculator
                 </p>
                 <Link
                   href='/calculators/loan-emi-calculator'
                   prefetch={false}
                   className='text-[#212529] text-center hover:text-white '>
-                  <button className='!text-[#212529] cursor-pointer hover:!text-white duration-300 hover:border-[#49d49d] mb-2 hover:bg-[#49d49d]  head-text font-[faktum] text-[15px] px-6 py-2  w-auto h-full font-semibold border rounded-lg border-[#212529]  '>
+                  <button className='!text-[#212529] cursor-pointer hover:!text-white duration-300 hover:border-[#49d49d] mb-2 hover:bg-[#49d49d] head-text text-[15px] px-6 py-2  w-auto h-full font-semibold border rounded-lg border-[#212529]  '>
                     Try Now
                   </button>
                 </Link>
@@ -46,7 +46,7 @@ function CalculatorCards() {
                       />
                     </div>
                     <div className='max-[576px]:text-center'>
-                      <p className='text-head text-[20px] font-semibold leading-[25px] pb-5 max-[576px]:text-[18px] max-[479px]:text-[15px] calc-card-text'>
+                      <p className='text-head text-[#212529] text-[20px] font-semibold leading-[25px] pb-5 max-[576px]:text-[18px] max-[479px]:text-[15px] calc-card-text'>
                         {cardData?.cardTitle}
                       </p>
                     </div>
@@ -55,7 +55,7 @@ function CalculatorCards() {
                         href={`/calculators/${cardData?.linkpage}`}
                         prefetch={false}
                         className='text-[#212529] hover:text-white '>
-                        <button className='!text-[#212529] cursor-pointer hover:!text-white duration-300 hover:border-[#49d49d] mb-2 hover:bg-[#49d49d]  head-text font-[faktum] text-[15px] px-6 py-2  w-auto h-full font-semibold border rounded-lg border-[#212529] max-[479px]:text-[14px] '>
+                        <button className='!text-[#212529] cursor-pointer hover:!text-white duration-300 hover:border-[#49d49d] mb-2 hover:bg-[#49d49d]  head-text text-[15px] px-6 py-2  w-auto h-full font-semibold border rounded-lg border-[#212529] max-[479px]:text-[14px] '>
                           {cardData?.cardtrybutton}
                         </button>
                       </Link>

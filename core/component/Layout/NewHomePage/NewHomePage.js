@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import dynamic from 'next/dynamic'
 
@@ -11,20 +11,29 @@ export const NewHomePage = ({ businessCategorydata, blogData }) => {
   const size = useWindowSize()
   const isDesktop = size?.width >= 768
 
+  const SkeletonLoader = () => (
+    <div className='bg-gray-200 min-h-[200px] w-full'></div>
+  );
+
   return (
     <>
       <CategoryBaseTab isDesktop={isDesktop} businessCategorydata={businessCategorydata} />
-      <div className='pt-[50px] max-sm:pt-[30px]'>
-        <PersonalisedProduct />
+      {/* <div className='pt-[50px] max-sm:pt-[30px]'>
+        <Suspense fallback={<SkeletonLoader />}>
+          <PersonalisedProduct />
+        </Suspense>
       </div>
       <div className='h-auto container pt-[50px] max-[768px]:pt-12 mx-auto bg-[#F4F8FB] max-[1024px]:px-8 max-[991px]:max-w-full max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4'>
-        <CustomerReviews />
-      </div>
-      {blogData?.data?.resulted_data?.length > 0 && (
+        <Suspense fallback={<SkeletonLoader />}>
+          <CustomerReviews />
+        </Suspense>
+
+      </div> */}
+      {/* {blogData?.data?.resulted_data?.length > 0 && (
         <div className='bg-white max-w-[1550px] mx-auto mt-[60px]'>
           <KnowledgeBaseComp blogData={blogData} />
         </div>
-      )}
+      )} */}
     </>
   )
 }

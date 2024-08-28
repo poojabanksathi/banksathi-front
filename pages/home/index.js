@@ -2,34 +2,22 @@
 
 import dynamic from 'next/dynamic'
 import React from 'react'
-import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 
 const HomePageV2 = dynamic(() => import('@/core/component/Layout/HomepageV2'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
 export default function Index({ businessmetaheadtag, faqdata }) {
   return (
     <>
-      <section>
-        <HomePageV2 faqdata={faqdata} />
-      </section>
-      <div>
-        <DynamicFooter />
-      </div>
-      <div>
-        <MobileFooter />
-      </div>
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
+      <HomePageV2 faqdata={faqdata} />
+      <MobileFooter />
+
     </>
   )
 }
@@ -44,7 +32,6 @@ export async function getServerSideProps(context) {
     const lang_id = 1
     const url_slug = context_params
     const page_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
 
     const req1 = {
       lang_id: lang_id,

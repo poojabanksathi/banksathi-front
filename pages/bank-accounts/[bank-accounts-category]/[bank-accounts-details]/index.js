@@ -13,7 +13,6 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import ScrollToTop from 'react-scroll-to-top'
 
 const CreditNewsDetails = dynamic(
   () => import('@/core/component/Layout/CreditNews/CreditNewsDetails/CreditNewsDetails'),
@@ -35,9 +34,7 @@ const CommonBreadCrumbComponent = dynamic(
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const FAQ = dynamic(() => import('@/core/component/common/FAQ/FAQ'), {
   ssr: false
 })
@@ -288,6 +285,8 @@ const SavingsAccountsDetails = ({
   const router = useRouter()
   const isInfoPage = categoryUrl === 'i'
 
+
+
   //product json ld schema
   const addProductJsonLd = () => {
     const reviewCount = overallRatingData?.data?.total_reviews > 0 ? overallRatingData?.data?.total_reviews : 1
@@ -338,63 +337,56 @@ const SavingsAccountsDetails = ({
         </Head>
       )}
       <>
-        <div>
-          <section>
-            <div className='bg-[#844FCF]'>
-              <DynamicHeader businessCategorydata={businessCategorydata} />
-            </div>
-          </section>
-          <div className='bg-[#F4F8FB]'>
-            {isInfoPage ? (
-              <>
-                <CommonBreadCrumbComponent
-                  link1={'/bank-accounts'}
-                  link1Name='Bank Accounts'
-                  link2={`/bank-accounts/${categoryUrl}`}
-                  link2Name='Info'
-                  link3Name={capitalizeFirstLetter(pdpUrl)?.split('-')?.join(' ')}
-                  isDetailsPage={true}
-                />
-                <CreditNewsDetails
-                  blogUrl={pdpUrl}
-                  newsDetailsData={newsDetailsData}
-                  newsListData={newsListData}
-                  bankPage={true}
-                />
-              </>
-            ) : (
-              <>
-                <CommonBreadCrumbComponent
-                  link1={'/bank-accounts'}
-                  link1Name='Bank Accounts'
-                  link2={`/bank-accounts/${categoryUrl}`}
-                  link2Name={capitalizeFirstLetter(categoryUrl)?.split('-')?.join(' ')}
-                  link3Name={capitalizeFirstLetter(pdpUrl)?.split('-')?.join(' ')}
-                  isDetailsPage={true}
-                />
-                {productDetailsData?.product_details && (
-                  <SavingAccountsDetails
-                    productDetailsData={productDetailsData}
-                    longFormData={longFormData}
-                    relatedAccountsData={relatedAccountsData}
-                    reviewsData={reviewsData?.all_review}
-                    overallRatingData={overallRatingData?.data}
-                    serviceTabs={serviceTabs}
-                    CONS_PROS={CONS_PROS}
-                    url_slug={pdpUrl}
-                  />
-                )}
-              </>
-            )}
-          </div>
-          <div className='bg-[#F4F8FB]'>
-            <FAQ faqdata={faqData} />
-          </div>
-          <DynamicFooter businessCategorydata={businessCategorydata} />
-          <div className='scroll-top'>
-            <ScrollToTop smooth color='#000' />
-          </div>
+        <div className='bg-[#844FCF]'>
+          <DynamicHeader businessCategorydata={businessCategorydata} />
         </div>
+        <div className='bg-[#F4F8FB]'>
+          {isInfoPage ? (
+            <>
+              <CommonBreadCrumbComponent
+                link1={'/bank-accounts'}
+                link1Name='Bank Accounts'
+                link2={`/bank-accounts/${categoryUrl}`}
+                link2Name='Info'
+                link3Name={capitalizeFirstLetter(pdpUrl)?.split('-')?.join(' ')}
+                isDetailsPage={true}
+              />
+              <CreditNewsDetails
+                blogUrl={pdpUrl}
+                newsDetailsData={newsDetailsData}
+                newsListData={newsListData}
+                bankPage={true}
+              />
+            </>
+          ) : (
+            <>
+              <CommonBreadCrumbComponent
+                link1={'/bank-accounts'}
+                link1Name='Bank Accounts'
+                link2={`/bank-accounts/${categoryUrl}`}
+                link2Name={capitalizeFirstLetter(categoryUrl)?.split('-')?.join(' ')}
+                link3Name={capitalizeFirstLetter(pdpUrl)?.split('-')?.join(' ')}
+                isDetailsPage={true}
+              />
+              {productDetailsData?.product_details && (
+                <SavingAccountsDetails
+                  productDetailsData={productDetailsData}
+                  longFormData={longFormData}
+                  relatedAccountsData={relatedAccountsData}
+                  reviewsData={reviewsData?.all_review}
+                  overallRatingData={overallRatingData?.data}
+                  serviceTabs={serviceTabs}
+                  CONS_PROS={CONS_PROS}
+                  url_slug={pdpUrl}
+                />
+              )}
+            </>
+          )}
+        </div>
+        <div className='bg-[#F4F8FB]'>
+          <FAQ faqdata={faqData} />
+        </div>
+
       </>
     </div>
   )

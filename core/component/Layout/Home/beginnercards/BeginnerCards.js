@@ -4,13 +4,13 @@ function BeginnerCards() {
   return (
     <>
       <div className='container max-[479px]:hidden max-[1024px]:px-8 mx-auto max-[991px]:max-w-full pb-[100px] max-[576px]:px-6 max-[479px]:py-[30px] max-[375px]:px-4 max-[320px]:px-4'>
-        <h4 className='text-[#212529] head-text font-[faktum] xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[24px] max-[320px]:text-[22px] font-semibold max-[479px]:text-center  w-[78%] mx-auto max-[1440px]:w-[90%] max-[1200px]:w-full max-[479px]:justify-center '>
+        <h4 className='text-[#212529] head-text xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[24px] max-[320px]:text-[22px] font-semibold max-[479px]:text-center  w-[78%] mx-auto max-[1440px]:w-[90%] max-[1200px]:w-full max-[479px]:justify-center '>
           A beginner’s guide to Credit Cards
         </h4>
 
         <div className='w-[78%] mx-auto max-[1440px]:w-[90%] max-[1200px]:w-full max-[479px]:justify-center '>
           <div className='py-6 max-[479px]:text-center'>
-            <h4 className='text-[#212529] head-text font-[faktum] text-2xl font-semibold pb-4 max-[479px]:text-[22px]'>
+            <h4 className='text-[#212529] head-text text-2xl font-semibold pb-4 max-[479px]:text-[22px]'>
               How credit cards work
             </h4>
             <p className='text-[#212529] text-[15px] font-normal pb-6'>
@@ -33,7 +33,7 @@ function BeginnerCards() {
             </p>
           </div>
           <div className='py-6 max-[479px]:text-center'>
-            <h4 className='text-[#212529] head-text font-[faktum] text-2xl font-semibold pb-4 max-[479px]:text-[22px]'>
+            <h4 className='text-[#212529] head-text text-2xl font-semibold pb-4 max-[479px]:text-[22px]'>
               How credit card rewards work
             </h4>
             <p className='text-[#212529] text-[15px] font-normal '>
@@ -50,7 +50,7 @@ function BeginnerCards() {
             </p>
           </div>
           <div className='py-6 max-[479px]:text-center'>
-            <h4 className='text-[#212529] head-text font-[faktum] text-2xl font-semibold pb-4 max-[479px]:text-[22px]'>
+            <h4 className='text-[#212529] head-text text-2xl font-semibold pb-4 max-[479px]:text-[22px]'>
               How credit card interest works
             </h4>
             <p className='text-[#212529] text-[15px] font-normal pb-6'>

@@ -1,10 +1,7 @@
 import dynamic from 'next/dynamic'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
-import { metaInfo } from '@/utils/metaInfo'
-import Head from 'next/head'
 import CommonRoundedBreadcrumb from '@/core/component/common/CommonRoundedBreadcrumb/CommonRoundedBreadcrumb'
 
 const ScoreCreditCards = dynamic(() => import('@/core/component/Layout/scoreCreditCard'), {
@@ -16,9 +13,7 @@ const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 
 export default function Index({ businessmetaheadtag, faqdata, businessCategorydata }) {
 
@@ -35,15 +30,9 @@ export default function Index({ businessmetaheadtag, faqdata, businessCategoryda
           <ScoreCreditCards faqdata={faqdata} longTerm={businessmetaheadtag} metaData={businessmetaheadtag} />
         </div>
       </section>
-      <div>
         <MobileFooter businessCategorydata={businessCategorydata} />
-      </div>
 
-      <DynamicFooter businessCategorydata={businessCategorydata} />
 
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
     </>
   )
 }
@@ -54,7 +43,6 @@ export async function getServerSideProps(context) {
     const lang_id = 1
     const url_slug = context_params
     const page_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
 
     const req1 = {

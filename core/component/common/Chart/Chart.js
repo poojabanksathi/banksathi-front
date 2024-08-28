@@ -1,4 +1,3 @@
-import { BASE_URL, USERSET } from '@/utils/alljsonfile/service'
 import React, { useState, useEffect } from 'react'
 const CREDIT_API = (detail, title) => {
   let data

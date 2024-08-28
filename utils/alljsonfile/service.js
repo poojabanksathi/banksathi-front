@@ -1,6 +1,6 @@
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-export const BASE_URL_TRYMICRO = 'https://trymicroapi.banksathi.com/'
-export const BASE_URL_TRYACT = 'https://tryact.banksathi.com/'
+export const BASE_URL_TRYMICRO = process.env.NEXT_BASE_URL_TRYMICRO
+export const BASE_URL_TRYACT = process.env.NEXT_BASE_URL_TRYMICRO
 
 export const PRODUCTSAPI = {
   TrendingProductCategory: 'api/v1/product/trending_product_based_on_category',
@@ -37,6 +37,10 @@ export const LEADAPPAPI = {
 export const CONTACTAUTH = {
   contactsendotp: 'api/v1/common/send_otp_contact_us',
   contactotpverify: 'api/v1/common/verify_otp_contact_us'
+}
+
+export const ENQUIRYAUTH = {
+  influencerregister: 'api/v1/influencer/register'
 }
 
 export const CIBIL = {
@@ -85,6 +89,14 @@ export const BUSINESSCATEGORY = {
 
 export const multipleSlug = {
   productAllDetails: 'api/v1/product/get_product_all_details'
+}
+
+export const IFSCBANKCODES = {
+  bankList : 'api/v1/common/banks',
+  stateList : 'api/v1/common/states',
+  districtList : 'api/v1/common/districts',
+  branchList  : 'api/v1/common/branches',
+  branchDetails : 'api/v1/common/branch/details'
 }
 
 export const BUSINESSSUBCATEGORY = {

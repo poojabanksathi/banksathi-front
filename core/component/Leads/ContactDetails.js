@@ -47,8 +47,8 @@ export default function ContactDetails(props) {
   const [disbaled, setDisabled] = useState(false)
 
   const today = new Date()
-  const leadId = localStorage.getItem('leadprofileid')
-  const token = localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
 
   const router = useRouter()
 
@@ -715,7 +715,7 @@ export default function ContactDetails(props) {
                 })
               }}
             />
-            {errHrefCompany && <p className='text-[12px] text-[#FF000F] font-no  mt-2'>{ApiMessage?.linkError}</p>}
+            {errHrefCompany && <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>{ApiMessage?.linkError}</p>}
 
             {errorCompany && <p className='text-[12px] text-[#FF000F] font-no'>{ApiMessage?.letterNameErr}</p>}
           </div>

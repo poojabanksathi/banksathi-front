@@ -15,9 +15,6 @@ const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'
   ssr: false
 })
 
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
@@ -125,11 +122,6 @@ export default function Home({
         </div>
       </div>
 
-      {/* ========= Footer ========= */}
-      <DynamicFooter businessCategorydata={businessCategorydata} />
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
     </>
   )
 }
@@ -137,10 +129,8 @@ export default function Home({
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const url_slug = ''
     const page_id = 1
     const catgeory_slug = 'credit-cards'
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const device_expiry = '24 hours'
     const ref = context?.req?.headers?.referer || ''
 
@@ -167,10 +157,7 @@ export async function getServerSideProps(context) {
     const req4 = {
       lang_id: lang_id
     }
-    const req6 = {
-      website_url: website_url,
-      lang_id: lang_id
-    }
+    
     const req7 = {
       device_id: deviceId,
       ip_address: ip,

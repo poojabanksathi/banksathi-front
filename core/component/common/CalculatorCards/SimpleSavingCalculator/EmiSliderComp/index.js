@@ -113,7 +113,7 @@ const EmiSliderChart = () => {
           <div className='loan-calculator-bg'>
             <div className='flex items-center justify-between'>
               <div>
-                <h3 className='text-[15px] font-semibold'>Initial Deposit </h3>
+                <h3 className='text-[15px] text-[#212529] font-semibold'>Initial Deposit </h3>
               </div>
 
               <div className='bg-[#F4F8FB] w-[150px] flex justify-center gap-[26px] px-3 text-[#212529] items-center h-[40px] rounded font-semibold'>
@@ -142,7 +142,7 @@ const EmiSliderChart = () => {
           <div className='loan-calculator-bg mt-[28px]'>
             <div className='flex items-center justify-between'>
               <div>
-                <h3 className='text-[15px] font-semibold'>Monthly contribution</h3>
+                <h3 className='text-[15px] text-[#212529] font-semibold'>Monthly contribution</h3>
               </div>
               <div className='bg-[#F4F8FB] w-[150px] flex justify-center  px-3 text-[#212529] items-center h-[40px] rounded font-semibold'>
                 <span className='symbole-rupee'>₹</span>
@@ -169,7 +169,7 @@ const EmiSliderChart = () => {
           </div>
 
           <div className='loan-calculator-bg mt-[28px]'>
-            <h3 className='text-[15px] font-semibold'>Over a period of</h3>
+            <h3 className='text-[15px] text-[#212529] font-semibold'>Over a period of</h3>
             <div className='flex justify-between'>
               <div className='flex max-sm:flex-wrap pt-[8px] gap-4'>
                 <div>
@@ -216,7 +216,7 @@ const EmiSliderChart = () => {
           <div className='loan-calculator-bg mt-[28px]'>
             <div className='flex items-center justify-between'>
               <div>
-                <h3 className='text-[15px] font-semibold'>APY (%)</h3>
+                <h3 className='text-[15px] text-[#212529] font-semibold'>APY (%)</h3>
               </div>
               <div className='bg-[#F4F8FB] w-[150px] gap-1 flex justify-between px-3 text-[#212529] items-center h-[40px] rounded font-semibold'>
                 <span className='symbole-rupee text-left'>%</span>

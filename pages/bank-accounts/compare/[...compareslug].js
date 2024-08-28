@@ -2,7 +2,6 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI, multipleSlug } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 import { useRouter } from 'next/router'
 
 const CommonBreadCrumbComponent = dynamic(
@@ -15,9 +14,6 @@ const MobileFooter = dynamic(() => import('../../../core/component/common/Mobile
   ssr: false
 })
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
-  ssr: false
-})
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
   ssr: false
 })
 
@@ -33,7 +29,6 @@ export async function getServerSideProps(context) {
     const context_params = context?.resolvedUrl && context?.resolvedUrl.split('/')[1]
     const lang_id = 1
     const url_slug = ''
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
     const ip = context?.req?.headers?.['x-forwarded-for']?.split(',')?.[0] || ''
     const user_agent = context?.req?.headers?.['user-agent'] || ''
@@ -55,10 +50,6 @@ export async function getServerSideProps(context) {
     const slugThree = {
       lang_id: lang_id,
       url_slug: compareslug?.[2]
-    }
-    const req3 = {
-      search_string: url_slug,
-      lang_id: lang_id
     }
     const req4 = {
       lang_id: lang_id,
@@ -140,19 +131,15 @@ export default function Index({
         />
       ) : (
         <div>
-          <section>
-            <div className=' bg-[#844FCF]'>
-              <DynamicHeader
-                businessCategorydata={businessCategorydata}
-                showCreditScore={false}
-                slug1={slug1}
-                slug2={slug2}
-                slug3={slug3}
-              />
-
-              <div></div>
-            </div>
-          </section>
+          <div className=' bg-[#844FCF]'>
+            <DynamicHeader
+              businessCategorydata={businessCategorydata}
+              showCreditScore={false}
+              slug1={slug1}
+              slug2={slug2}
+              slug3={slug3}
+            />
+          </div>
           <div className='pb-4 bg-[#F4F8FB]'>
             <CommonBreadCrumbComponent
               link1={'/bank-accounts'}
@@ -174,10 +161,7 @@ export default function Index({
             )}
             <MobileFooter />
           </div>
-          <DynamicFooter />
-          <div className='scroll-top'>
-            <ScrollToTop smooth color='#000' />
-          </div>
+       
         </div>
       )}
     </>

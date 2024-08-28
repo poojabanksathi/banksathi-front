@@ -1,7 +1,7 @@
 // ------------------------------------------- OLDER VERSION OF HOMEPAGE -------------------------------------------- //
 
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import ScrollToTop from 'react-scroll-to-top'
@@ -9,27 +9,22 @@ import ScrollToTop from 'react-scroll-to-top'
 const HomePageV2 = dynamic(() => import('@/core/component/Layout/HomepageV2'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
 export default function Index({ businessmetaheadtag, faqdata }) {
+  const [footerLoad, setFooterLoad] = useState(false)
+
+  useEffect(() => {
+    setFooterLoad(true)
+  }, [footerLoad])
+
   return (
     <>
-      <section>
         <HomePageV2 faqdata={faqdata} />
-      </section>
-      <div>
-        <DynamicFooter />
-      </div>
-      <div>
         <MobileFooter />
-      </div>
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
+  
     </>
   )
 }

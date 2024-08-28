@@ -171,46 +171,46 @@ const isMoboile = useWindowSize()
           <Slider {...settings}>
             <div className='swiper-slide border border-[#DCDCDC] p-8 rounded-[16px]'>
               <Image className='w-10 h-full mx-auto' src='/assets/who-1.svg' width={50} height={50} alt='image' />
-              <h3 className='mt-2 text-[20px]'>Loan Agents</h3>
-              <p className='who-details mt-2'>
+              <h3 className='mt-2 text-[#212529] text-[20px]'>Loan Agents</h3>
+              <p className='who-details mt-2 text-[#212529]'>
                 With your extensive knowledge, you can provide valuable advice to individuals seeking the best loan
                 options.
               </p>
             </div>  
             <div className='swiper-slide border border-[#DCDCDC] p-8 rounded-[16px]'>
               <Image className='w-10 h-full mx-auto' src='/assets/logo/who-4.svg' width={50} height={50} alt='image' />
-              <h3 className='mt-2 text-[20px]'>Insurance Advisors</h3>
-              <p className='who-details mt-2 mb-6'>
+              <h3 className='mt-2 text-[#212529] text-[20px]'>Insurance Advisors</h3>
+              <p className='who-details mt-2 text-[#212529] mb-6'>
                 Use your strong network of professionals, diligently start sourcing for all financial products.
               </p>
             </div>
             <div className='swiper-slide border border-[#DCDCDC] p-8 rounded-[16px]'>
               <Image className='w-10 h-full mx-auto' src='/assets/logo/who-2.svg' width={50} height={50} alt='image' />
-              <h3 className='mt-2 text-[20px]'>Ex Bankers</h3>
-              <p className='who-details mt-2'>
+              <h3 className='mt-2 text-[#212529] text-[20px]'>Ex Bankers</h3>
+              <p className='who-details mt-2 text-[#212529]'>
                 You are knowledgeable about current banking market trends & assist individuals in financing their
                 aspirations.
               </p>
             </div>
             <div className='swiper-slide border border-[#DCDCDC] p-8 rounded-[16px]'>
               <Image className='w-10 h-full mx-auto' src='/assets/logo/who-3.svg' width={50} height={50} alt='image' />
-              <h3 className='mt-2 text-[20px] '>Wealth Advisor</h3>
-              <p className='who-details mt-2 mb-6'>
+              <h3 className='mt-2 text-[#212529] text-[20px] '>Wealth Advisor</h3>
+              <p className='who-details mt-2 mb-6 text-[#212529]'>
                 You expertly serve wealthy clients, fulfilling investment needs, and guiding financial goal attainment.
               </p>
             </div>
             <div className='swiper-slide border border-[#DCDCDC] p-8 rounded-[16px]'>
               <Image className='w-10 h-full mx-auto' src='/assets/logo/who-5.svg' width={50} height={50} alt='image' />
-              <h3 className='mt-2 text-[20px]'>BFSI Professionals</h3>
-              <p className='who-details mt-2'>
+              <h3 className='mt-2 text-[#212529] text-[20px]'>BFSI Professionals</h3>
+              <p className='who-details mt-2 text-[#212529]'>
                 {' '}
                 As a finance professional, utilize your skills to offer a variety of financial products and services.
               </p>
             </div>
             <div className='swiper-slide border border-[#DCDCDC] p-8 rounded-[16px]'>
               <Image className='w-10 h-full mx-auto' src='/assets/logo/who-2.svg' width={50} height={50} alt='image' />
-              <h3 className='mt-2 text-[20px]'>Ex Bankers</h3>
-              <p className='who-details mt-2'>
+              <h3 className='mt-2 text-[#212529] text-[20px]'>Ex Bankers</h3>
+              <p className='who-details mt-2 text-[#212529]'>
                 You are knowledgeable about current banking market trends & assist individuals in financing their
                 aspirations.
               </p>

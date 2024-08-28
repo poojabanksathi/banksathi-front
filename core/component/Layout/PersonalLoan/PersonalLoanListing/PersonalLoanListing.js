@@ -246,8 +246,8 @@ const PersonalLoanListing = ({
                           name={isSubCategoryFlow ? item : item?.title}
                           className={
                             checkBoxValues?.includes(item)
-                              ? 'recommendation-category head-text font-[faktum] capitalize'
-                              : 'text-[#212529] head-text font-[faktum] border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-6 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize list-resolov-credit '
+                              ? 'recommendation-category head-text capitalize'
+                              : 'text-[#212529] head-text border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-6 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize list-resolov-credit '
                           }
                           onClick={() => {
                             handleTabClick(item)

@@ -67,7 +67,7 @@ const PersonalForm = ({
             transaction_id: transactionId,
             otp: e,
             mobile_no: String(userInformation?.mobile) || '',
-            type: messageType || localStorage.getItem('auth_type'),
+            type: messageType || typeof window !== 'undefined' && localStorage.getItem('auth_type'),
             is_temp_otp: tempOtp
           },
           { headers: headers }

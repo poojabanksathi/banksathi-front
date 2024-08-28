@@ -209,11 +209,11 @@ const IncomeTaxChart = () => {
                                     <div className='loan-calculator-bg'>
                                       <div className='flex items-center justify-between'>
                                         <div>
-                                          <h3 className='text-[15px] font-nornal'>{taxincome.heading}</h3>
+                                          <h3 className='text-[15px] text-[#212529] font-nornal'>{taxincome.heading}</h3>
                                         </div>
                                         <div className='bg-[#F4F8FB] w-[150px] max-sm:w-[100px]  flex justify-end p-[14px] gap-[36px] text-[#212529] items-center h-[40px] rounded font-semibold'>
                                           <input
-                                            className='m-0 w-full outline-none bg-[#F4F8FB] text-right'
+                                            className='m-0 w-full outline-none text-[#212529] bg-[#F4F8FB] text-right'
                                             name={taxincome.name}
                                             onChange={(e) => handleChange(e)}
                                           />
@@ -233,11 +233,11 @@ const IncomeTaxChart = () => {
                                     <div className='loan-calculator-bg'>
                                       <div className='flex items-center justify-between'>
                                         <div>
-                                          <h3 className='text-[15px] font-nornal'>{taxincome.heading}</h3>
+                                          <h3 className='text-[15px] text-[#212529] font-nornal'>{taxincome.heading}</h3>
                                         </div>
                                         <div className='bg-[#F4F8FB] w-[150px] max-sm:w-[100px]  flex justify-end p-[14px] gap-[36px] text-[#212529] items-center h-[40px] rounded font-semibold'>
                                           <input
-                                            className='m-0 w-full outline-none bg-[#F4F8FB] text-right'
+                                            className='m-0 w-full text-[#212529] outline-none bg-[#F4F8FB] text-right'
                                             name={taxincome.name}
                                             onChange={(e) => handleChange(e)}
                                           />
@@ -257,11 +257,11 @@ const IncomeTaxChart = () => {
                                     <div className='loan-calculator-bg'>
                                       <div className='flex items-center justify-between'>
                                         <div>
-                                          <h3 className='text-[15px] font-nornal'>{taxincome.heading}</h3>
+                                          <h3 className='text-[15px] text-[#212529] font-nornal'>{taxincome.heading}</h3>
                                         </div>
                                         <div className='bg-[#F4F8FB] w-[150px] max-sm:w-[100px]  flex justify-end p-[14px] gap-[36px] text-[#212529] items-center h-[40px] rounded font-semibold'>
                                           <input
-                                            className='m-0 w-full outline-none bg-[#F4F8FB] text-right'
+                                            className='m-0 w-full outline-none bg-[#F4F8FB] text-[#212529] text-right'
                                             name={taxincome.name}
                                             onChange={(e) => handleChange(e)}
                                           />
@@ -272,7 +272,7 @@ const IncomeTaxChart = () => {
                                 )
                               })}
                               <div>
-                                <h3 className='text-[15px] font-nornal'>Do you live in a metro city?</h3>
+                                <h3 className='text-[15px] text-[#212529] font-nornal'>Do you live in a metro city?</h3>
                                 <div>
                                   <div>
                                     <div className='flex pt-[8px] gap-4'>
@@ -310,7 +310,7 @@ const IncomeTaxChart = () => {
         <div className='py-[20px]'>
           <button
             onClick={calculateIncomeTax}
-            className='head-text cursor-pointer font-[faktum] md:block h-[50px] max-[820px]:text-[14px] text-[#212529] font-semibold max-[771px]:text-[12px] items-center  bg-[#49D49D] border-0 py-2 px-3 focus:outline-none  rounded-lg text-base max-[991px]:text-sm md:mt-0  head-login-btn w-[180px] mx-auto'>
+            className='head-text cursor-pointer md:block h-[50px] max-[820px]:text-[14px] text-[#212529] font-semibold max-[771px]:text-[12px] items-center  bg-[#49D49D] border-0 py-2 px-3 focus:outline-none  rounded-lg text-base max-[991px]:text-sm md:mt-0  head-login-btn w-[180px] mx-auto'>
             Calculate
           </button>
         </div>

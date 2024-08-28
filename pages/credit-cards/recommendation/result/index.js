@@ -1,8 +1,7 @@
-import { BASE_URL, BUSINESSCATEGORY, COMMON } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
-import ScrollToTop from 'react-scroll-to-top'
 import RecommendationResult from '@/core/component/Layout/RecommendationJourney/RecommendationResult/RecommendationResult'
 import { useRouter } from 'next/router'
 
@@ -12,9 +11,7 @@ const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const CommonBreadCrumbComponent = dynamic(
   () => import('@/core/component/common/CommonList/CommonBreadCrumbComponent'),
   {
@@ -28,7 +25,6 @@ export async function getServerSideProps(context) {
     const { resolvedUrl, req } = context
     const url_slug = resolvedUrl?.split('/')?.pop()
     const referer = req?.headers?.referer || null
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const h = context?.query?.h || ''
     const ip = context?.req?.headers?.['x-forwarded-for']?.split(',')?.[0] || ''
     const user_agent = context?.req?.headers?.['user-agent'] || ''
@@ -93,7 +89,7 @@ const RecommendationResultIndex = ({ businessCategoryData, leftMenuFilterData })
         router?.push('/credit-cards/recommendation')
       }
     }
-  }, [])
+  }, [router])
 
   return (
     <div>
@@ -101,35 +97,28 @@ const RecommendationResultIndex = ({ businessCategoryData, leftMenuFilterData })
         <DynamicHeader businessCategorydata={businessCategoryData} />
       </div>
       <div className='bg-[#F4F8FB]'>
-        <>
-          <div className='container max-[1200px]:px-0 max-[1024px]:px-0 mx-auto max-[991px]:max-w-full'>
-            <CommonBreadCrumbComponent
-              link1={'/credit-cards'}
-              link1Name='Credit Cards'
-              link2={'/credit-cards/recommendation'}
-              link2Name='Recommendation'
-              link3={`/credit-cards/recommendation/result`}
-              link3Name='Result'
-            />
-          </div>
-          <RecommendationResult
-            formInfo={formInfo}
-            filteredList={filteredList}
-            leftMenuFilterData={leftMenuFilterData}
+        <div className='container max-[1200px]:px-0 max-[1024px]:px-0 mx-auto max-[991px]:max-w-full'>
+          <CommonBreadCrumbComponent
+            link1={'/credit-cards'}
+            link1Name='Credit Cards'
+            link2={'/credit-cards/recommendation'}
+            link2Name='Recommendation'
+            link3={`/credit-cards/recommendation/result`}
+            link3Name='Result'
           />
-        </>
+        </div>
+        <RecommendationResult
+          formInfo={formInfo}
+          filteredList={filteredList}
+          leftMenuFilterData={leftMenuFilterData}
+        />
         <div>
         </div>
         <div>
           <MobileFooter businessCategorydata={businessCategoryData} />
         </div>
       </div>
-      <div>
-        <DynamicFooter businessCategorydata={businessCategoryData} />
-        <div className='scroll-top'>
-          <ScrollToTop smooth color='#000' />
-        </div>
-      </div>
+
     </div>
   )
 }

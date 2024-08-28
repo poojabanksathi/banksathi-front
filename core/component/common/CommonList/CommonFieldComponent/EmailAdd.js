@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 
 const CommonEmailInput = ({
   handleChange,
-  disabled,
   value,
   alt,
   className,
@@ -49,7 +48,7 @@ const CommonEmailInput = ({
           }}
           onFocus={onFocus}
         />
-        {errorHrefEmail && <p className='text-[12px] text-[#FF000F] font-no  mt-2'>{ApiMessage?.linkError}</p>}
+        {errorHrefEmail && <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>{ApiMessage?.linkError}</p>}
         {errorEmail && <p className='text-[12px] text-[#FF000F] font-no'>{ApiMessage?.EmailValidError}</p>}
       </div>
     </>

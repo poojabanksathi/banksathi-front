@@ -18,7 +18,7 @@ function EasyStepScore() {
             className={` bg-[#fff] w-[91%] max-[1200px]:w-[90%] max-[834px]:w-full max-[479px]:gap-4 text-[#212529] relative bottom-24 max-[771px]:bottom-36 max-sm:bottom-[5rem] h-auto items-center rounded-xl  max-[771px]:px-8 px-8 py-8 max-[1024px]:px-8 max-[576px]:h-full max-[576px]:flex-col max-[576px]:gap-8  max-[576px]:py-8 max-[479px]:px-4 max-[479px]:py-6 max-[375px]:px-4 max-[320px]:px-4 z-[1] mx-auto ${
               scrollY > 0 ? 'score-banner-top' : 'score-banner-bottom'
             }`}>
-            <p className='head-text font-[faktum] story-text text-[#212529] pb-2 text-[24px] max-[320px]:text-[20px] mb-4 relative text-center'>
+            <p className='head-text story-text text-[#212529] pb-2 text-[24px] max-[320px]:text-[20px] mb-4 relative text-center'>
               In just 3 easy steps
             </p>
             <div className='grid grid-cols-3 max-[1200px]:gap-4 max-[576px]:grid-cols-1 font-[Poppins] gap-12 max-[1440px]:gap-8 max-[834px]:gap-4'>

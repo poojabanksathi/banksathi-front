@@ -259,7 +259,7 @@ const CommonOtpComponent = ({ setOtpOpen, isDesktop, customerDetails, otpOpen, c
                       inputType='tel'
                       renderInput={(props) => <input {...props} />}
                     />
-                    {errOtp && <p className='text-[12px] text-[#FF000F] font-no mt-2'>{ApiMessage?.otpValidError}</p>}
+                    {errOtp && <p className='text-[12px] text-[#FF000F] font-normal mt-2'>{ApiMessage?.otpValidError}</p>}
                   </div>
                 </div>
                 <p className='font-normal  pt-5 max-[479px]:text-center text-[#212529]'></p>
@@ -271,7 +271,7 @@ const CommonOtpComponent = ({ setOtpOpen, isDesktop, customerDetails, otpOpen, c
                     <SubmitFormBtn
                       name='Resend'
                       onClick={getOtpApiCall}
-                      className={`head-text font-medium font-[faktum] w-[25vw] h-[50px] text-center bg-[#49D49D] !text-[#212529] rounded-lg text-[15px]  mx-auto flex items-center justify-center gap-4 relative bottom-[16px] ${
+                      className={`head-text font-medium w-[25vw] h-[50px] text-center bg-[#49D49D] !text-[#212529] rounded-lg text-[15px]  mx-auto flex items-center justify-center gap-4 relative bottom-[16px] ${
                         resendOtp ? '' : 'disableClassBtn'
                       }`}
                     />
@@ -279,7 +279,7 @@ const CommonOtpComponent = ({ setOtpOpen, isDesktop, customerDetails, otpOpen, c
                     <SubmitFormBtn
                       name='Verify'
                       onClick={() => {}}
-                      className={`head-text font-medium font-[faktum] w-[25vw] h-[50px] text-center bg-[#49D49D] !text-[#212529] rounded-lg text-[15px]  mx-auto flex items-center justify-center gap-4 relative bottom-[16px] ${
+                      className={`head-text font-medium w-[25vw] h-[50px] text-center bg-[#49D49D] !text-[#212529] rounded-lg text-[15px]  mx-auto flex items-center justify-center gap-4 relative bottom-[16px] ${
                         otpdata?.length === 4 ? '' : 'disableClassBtn'
                       }`}
                     />

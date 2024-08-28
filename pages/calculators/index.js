@@ -1,6 +1,5 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import CommonRoundedBreadcrumb from '@/core/component/common/CommonRoundedBreadcrumb/CommonRoundedBreadcrumb'
@@ -18,9 +17,6 @@ const CalulatorBanner = dynamic(() => import('@/core/component/Layout/Calculator
   ssr: false
 })
 
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
 
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
@@ -37,29 +33,25 @@ export default function Index({
 }) {
   return (
     <>
-      <div>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader businessCategorydata={businessCategorydata} />
-        </div>
-        <div className='bg-[#F4F8FB]'>
-          <div className='px-2 pt-4'>
-            <CommonRoundedBreadcrumb link1={'/calculators'} link1Name={'Calculators'} highlight1={true} />
-          </div>
-          <CalulatorBanner metaData={businessmetaheadtag} cal_head={true} />
-        </div>
-        <div className='bg-[#F4F8FB] h-auto'>
-          <CalculatorCards />
-          <div className='container bg-[#F4F8FB] mx-auto max-[991px]:max-w-full max-md:px-8  max-[479px]:px-0  max-[375px]:px-0 max-[320px]:px-0 h-auto  pt-[20px] pb-[60px] justify-around max-[576px]:pt-[10px] max-[576px]:pb-[30px] max-[479px]:pt-4 max-[479px]:pb-10 max-[479px]:h-auto'>
-            <CalculatorBeginnerCard longTerm={businessmetaheadtag} />
-          </div>
-          <FAQ faqdata={faqdata} />
-        </div>
-        <div className='bg-[#fff]'>
-          <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
-        </div>
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader businessCategorydata={businessCategorydata} />
       </div>
-      <ScrollToTop smooth color='#000' />
+      <div className='bg-[#F4F8FB]'>
+        <div className='px-2 pt-4'>
+          <CommonRoundedBreadcrumb link1={'/calculators'} link1Name={'Calculators'} highlight1={true} />
+        </div>
+        <CalulatorBanner metaData={businessmetaheadtag} cal_head={true} />
+      </div>
+      <div className='bg-[#F4F8FB] h-auto'>
+        <CalculatorCards />
+        <div className='container bg-[#F4F8FB] mx-auto max-[991px]:max-w-full max-md:px-8  max-[479px]:px-0  max-[375px]:px-0 max-[320px]:px-0 h-auto  pt-[20px] pb-[60px] justify-around max-[576px]:pt-[10px] max-[576px]:pb-[30px] max-[479px]:pt-4 max-[479px]:pb-10 max-[479px]:h-auto'>
+          <CalculatorBeginnerCard longTerm={businessmetaheadtag} />
+        </div>
+        <FAQ faqdata={faqdata} />
+      </div>
+      <div className='bg-[#fff]'>
+        <MobileFooter businessCategorydata={businessCategorydata} />
+      </div>
     </>
   )
 }
@@ -67,7 +59,6 @@ export default function Index({
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const last_url = context?.resolvedUrl && context?.resolvedUrl.split('/')
     const context_params = last_url?.[last_url?.length - 1]
     const ref = context?.req?.headers?.referer || ''

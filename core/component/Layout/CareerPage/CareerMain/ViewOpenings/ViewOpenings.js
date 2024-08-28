@@ -34,7 +34,7 @@ const ViewOpenings = () => {
               </div>
             </div>
           </div>
-          <div className='head-text font-[faktum] text-center bg-[#49D49D] !text-[#212529] py-2 pl-2 pr-2 rounded-lg text-lg w-[210px] h-[56px] mx-auto flex items-center justify-center gap-4 max-sm:w-[160px] max-sm:h-[40px] max-sm:text-[12px]'>
+          <div className='head-text text-center bg-[#49D49D] !text-[#212529] py-2 pl-2 pr-2 rounded-lg text-lg w-[210px] h-[56px] mx-auto flex items-center justify-center gap-4 max-sm:w-[160px] max-sm:h-[40px] max-sm:text-[12px]'>
             <button className=' cursor-pointer'>View Openings</button>
             <Image
               src={rightArrow}

@@ -59,8 +59,8 @@ function EligibleProductCards({
       }
     }
   }
-  const leadId = localStorage.getItem('leadprofileid')
-  const token = localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
 
   const router = useRouter()
 
@@ -200,7 +200,7 @@ function EligibleProductCards({
             </div>
           ) : (
             <div className='h-full flex justify-center items-center'>
-              <p className='align-item-center-p text-[20px] text-center max-[479px]:text-[18px] max-[479px]:px-4'>
+              <p className='align-item-center-p text-[20px] text-[#212529] text-center max-[479px]:text-[18px] max-[479px]:px-4'>
                 No eligible product available Please click here to{' '}
                 <Link href='/credit-cards/eligibility' prefetch={false}>check eligibility</Link>
               </p>
@@ -268,7 +268,7 @@ function EligibleProductCards({
                         return (
                           <>
                             <p
-                              className={`text-center cursor-pointer head-text font-[faktum]  font-semibold text-[15px] h-full flex justify-center items-center max-[479px]:text-[14px]  max-[375px]:text-[14px] max-[360px]:text-[13px] max-[320px]:text-[14px] max-[320px]:px-0 mt-0 rounded-full  max-[280px]:text-[12px] ${
+                              className={`text-center cursor-pointer head-text font-semibold text-[15px] h-full flex justify-center items-center max-[479px]:text-[14px]  max-[375px]:text-[14px] max-[360px]:text-[13px] max-[320px]:text-[14px] max-[320px]:px-0 mt-0 rounded-full  max-[280px]:text-[12px] ${
                                 index == selectProductsActivity ? 'bg-[#844FCF] text-white' : 'text-[#212529]'
                               }`}
                               onClick={() => {
@@ -454,7 +454,7 @@ function EligibleProductCards({
             </div>
           ) : (
             <div className='h-full flex justify-center items-center '>
-              <p className='align-item-center-p text-[20px] text-center max-[479px]:text-[18px] max-[479px]:px-4'>
+              <p className='align-item-center-p text-[20px] text-[#212529] text-center max-[479px]:text-[18px] max-[479px]:px-4'>
                 No available product available Please click here to{' '}
                 <Link href='/credit-cards/eligibility' prefetch={false}>check eligibility</Link>
               </p>

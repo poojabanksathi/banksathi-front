@@ -58,7 +58,7 @@ const B2bVerifyCustomer = ({ customerDetails }) => {
             // setOtpOpen(true)
             setCallApi(true)
           }}
-          className={`head-text font-medium  font-[faktum] w-[328px] h-[50px] text-center bg-[#49D49D] !text-[#212529] py-2 pl-2 pr-2 rounded-lg text-[15px]  mx-auto flex items-center justify-center gap-4 max-sm:w-[127px] max-sm:h-[40px] max-sm:text-[12px] ${
+          className={`head-text font-medium  w-[328px] h-[50px] text-center bg-[#49D49D] !text-[#212529] py-2 pl-2 pr-2 rounded-lg text-[15px]  mx-auto flex items-center justify-center gap-4 max-sm:w-[127px] max-sm:h-[40px] max-sm:text-[12px] ${
             !disableButton ? '' : 'disableClassBtn'
           }`}>
           Generate OTP

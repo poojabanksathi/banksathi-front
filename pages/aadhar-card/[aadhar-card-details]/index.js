@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, BLOG } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import { getBlogDetailsBreadCrumb } from '@/utils/util'
@@ -11,9 +10,7 @@ const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
 
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
@@ -26,6 +23,12 @@ const CommonBreadCrumbComponent = dynamic(
 )
 const CreditNewsDetails = dynamic(
   () => import('@/core/component/Layout/CreditNews/CreditNewsDetails/CreditNewsDetails'),
+  {
+    ssr: false
+  }
+)
+const KnowledgebaseBreadcrumb = dynamic(
+  () => import('@/core/component/Layout/knowledgeBaseDetail/KnowledgebreadCrumb/KnowledgebreadCrumb'),
   {
     ssr: false
   }
@@ -126,13 +129,9 @@ const Index = ({ businessCategorydata, newsDetailsData, blogUrl, newsListData })
           <DynamicHeader businessCategorydata={businessCategorydata} />
         </div>
         <div className='bg-[#F4F8FB] h-auto'>
-          <CommonBreadCrumbComponent
-            link1='/aadhar-card'
-            link1Name='Aadhar Cards Blog'
-            link2={`/aadhar-card/${breadCrumSlug}`}
-            link2Name={breadCrumSlug}
-            title='Aadhar Card Details'
-          />
+          <div className='bg-[#F4F8FB] pl-4'>
+            <KnowledgebaseBreadcrumb />
+          </div>
           <CreditNewsDetails
             blogUrl={blogUrl}
             newsDetailsData={newsDetailsData}
@@ -143,7 +142,6 @@ const Index = ({ businessCategorydata, newsDetailsData, blogUrl, newsListData })
         </div>
         <div className='bg-[#fff]'>
           <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
           {mobileSize && showComponent && (
         <div className='fixed bottom-0 left-0 z-[999] h-[53px] w-full justify-between items-center'>
           <div className='text-center'>
@@ -157,7 +155,6 @@ const Index = ({ businessCategorydata, newsDetailsData, blogUrl, newsListData })
        )}
         </div>
       </div>
-      <ScrollToTop smooth color='#000' />
     </>
   )
 }

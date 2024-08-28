@@ -8,12 +8,10 @@ export default function index({ businessCategorydata }) {
     ssr: false
   })
   return (
-    <div className="bg-[#F4F8FB]">
-      <section>
+    <div className="bg-[#F4F8FB] text-[#212529]">
         <div className=' bg-[#844FCF]'>
           <DynamicHeader businessCategorydata={businessCategorydata} />
         </div>
-      </section>
       <div className=' container h-full py-4  mx-auto max-[991px]:max-w-full max-[834px]:py-[35px] max-[576px]:py-[52px] max-[479px]:py-[20px] max-[1024px]:px-8 max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4'>
         <PrivacyHeaderText title="Terms & Conditions" />
         <p className='text-[16px] max-[820px]:text-[15px] max-md:text-[15px] leading-[28px] tracking-[0.2px] text-justify font-normal	mb-2 pt-5 '>

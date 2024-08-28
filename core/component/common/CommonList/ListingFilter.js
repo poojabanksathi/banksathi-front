@@ -139,8 +139,8 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
   const starCount = 5
   const size = useWindowSize()
   const router = useRouter()
-  const token = localStorage.getItem('token')
-  const leadId = localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
 
   const windowSize = useMemo(() => {
     return size?.width
@@ -650,7 +650,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
     setIsLoading(false)
   }
 
-  const [visibleItems, setVisibleItems] = useState(10) 
+  const [visibleItems, setVisibleItems] = useState(10)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -665,7 +665,6 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
       window.removeEventListener('scroll', handleScroll)
     }
   }, [visibleItems, filteredData?.length])
-
 
   useEffect(() => {
     if (checkboxValues?.length === 0) {
@@ -782,7 +781,6 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                           <Link href={`/${alldata?.url_slug}`} prefetch={false}>
                             <h2
                               id={` +${index} + 'cc'`}
-                              
                               className='text-[20px] max-[425px]:text-[15px] font-bold max-[991px]:text-[18px] text-[#212529] leading-7 pb-2'>
                               {alldata.card_name}
                             </h2>
@@ -838,30 +836,26 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                     </div>
                   </div>
                 </div>
-                <div id='comp-8-aply-btn' className='flex items-center gap-4 mt-6 px-4  max-[280px]:!px-2 listing-apply'>
+                <div
+                  id='comp-8-aply-btn'
+                  className='flex items-center gap-4 mt-6 px-4  max-[280px]:!px-2 listing-apply'>
                   <ApplyNowButton
                     userData={getdatauser}
                     data={alldata}
                     category={'credit-cards'}
                     pos='12'
                     position={index}
-                    className="max-[771px]:text-[13px]"
-                    disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                    className='max-[771px]:text-[13px]'
+                    disabled={!alldata?.is_apply_now}
                   />
 
                   {filteredDataCard(alldata?.url_slug) == 'Eligible' ? (
                     <button
                       id={`+${index}+'cc-btn'`}
-                      className='flex items-center gap-2 justify-center cursor-pointer business-right-text max-[771px]:text-[13px] w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                      className='flex items-center gap-2 justify-center cursor-pointer business-right-text max-[771px]:text-[13px] w-full lg:w-[160px] md:w-full  text-[#212529] font-faktum font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
                       {' '}
                       {filteredDataCard(alldata?.url_slug)}
-                      <Image
-                        src={successBgIcon}
-                        alt='img'
-                        width={20}
-                        height={20}
-                        className=''
-                      />
+                      <Image src={successBgIcon} alt='img' width={20} height={20} className='' />
                     </button>
                   ) : (
                     <button
@@ -869,7 +863,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                       onClick={() => {
                         router.push(`/credit-cards/eligibility?eligible=${alldata?.url_slug.split('/')[2]}`)
                       }}
-                      className='py-3 w-full lg:w-[160px] md:w-full rounded-lg text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                      className='py-3 w-full lg:w-[160px] font-faktum md:w-full rounded-lg text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
                       {filteredDataCard(alldata?.url_slug)}
                     </button>
                   )}
@@ -938,233 +932,10 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                   </div>
                 </div>
                 <div className='grid grid-cols-2 py-4 gap-4 px-4 items-center'>
-                                  <div className='custom-max-content'>
-                                      <label className=' text-gray-500 font-bold flex items-center'>
-                                        <input
-                                          className='mr-2 leading-tight w-[16px] h-[16px]'
-                                          type='checkbox'
-                                          id={alldata.product_id}
-                                          disabled={
-                                            size?.width <= 991
-                                              ? selectedData.length >= 2 && !selectedData?.includes(alldata)
-                                              : selectedData.length >= 3 && !selectedData?.includes(alldata)
-                                          }
-                                          onChange={(e) => handlecompareModal(e, alldata)}
-                                          checked={selectedData.some(
-                                            (selectedItem) => selectedItem.product_id === alldata.product_id
-                                          )}
-                                        />
-                                        <p className='text-[15px] font-semibold  text-[#212529] business-right-text cursor-pointer'>
-                                          {ListingfilterData.compare}
-                                        </p>
-                                      </label>
-                                    </div>
-                                    <div
-                                      id='accordionExample'
-                                      data-active-classes='bg-none'
-                                      data-inactive-classes='text-[#212529]'
-                                      className='h-[25px]'>
-                                      {(alldata?.features || alldata?.welcome_offer) && (
-                                        <div className='  relative  duration-300 h-full'>
-                                          <h3 id='accordion-flush-heading-1' className="h-full">
-                                            <button
-                                              id={` + ${index} +'cc-btn'`}
-                                              onClick={() => handleViewMoreAccordion(index)}
-                                              type='button'
-                                              className='text-[#212529] h-full list-none font-semibold relative text-[15px] gap-3 max-[375px]:text-[15px] cursor-pointer faq-quation-title flex items-center justify-end w-full text-left'
-                                              data-accordion-target='#accordion-flush-body-1'
-                                              aria-expanded='true'
-                                              aria-controls='accordion-flush-body-1'>
-                                              {ListingfilterData.view_more}
-
-                                              {vieMoreIndex?.includes(index) ? (
-                                                <Image
-                                                  src={accordionArrowall}
-                                                  alt='down'
-                                                  width={24}
-                                                  height={24}
-                                                  priority={true}
-                                                  className='rotate-180 w-6 h-6 shrink-0'
-                                                />
-                                              ) : (
-                                                <Image
-                                                  src={accordionArrowall}
-                                                  alt='down'
-                                                  width={24}
-                                                  height={24}
-                                                  priority={true}
-                                                  className='w-6 h-6 shrink-0'
-                                                />
-                                              )}
-                                            </button>
-                                          </h3>
-                                          
-                                        </div>
-                                      )}
-                                    </div>
-                                    
-                                  </div>
-                                  <div className="px-6 pb-4">
-                                  {vieMoreIndex?.includes(index) && (
-                                            <div aria-labelledby='accordion-flush-heading-1'>
-                                              {alldata?.features && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold '>{ListingfilterData.features}</p>
-                                                  <div className='mt-4'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.features}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
-                                              {alldata?.welcome_offer && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold'>{ListingfilterData.welcomeoffer}</p>
-
-                                                  <div className='mt-4'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.welcome_offer}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
-                                            </div>
-                                          )}
-                                  </div>
-              </div>
-            </div>
-          )
-        })}
-      </>
-    ) : (
-      <>
-        {(filteredData?.length ? filteredData : productlistdata?.product_list)
-          .map((alldata, index) => {
-            return (
-              <div key={index}>
-                <div className='pt-6 bg-white  rounded-3xl   h-full  filter-card-box duration-300'>
-                  <div className='flex gap-3 !px-6 max-[768px]:!px-4 max-[280px]:!px-2'>
-                    <div className=''>
-                      <div
-                        id={`+${index} +'cc-img'`}
-                        onClick={() => sendGAProductClick(alldata, index)}
-                        className='w-[160px] max-[771px]:w-[100px] max-[768px]:w-[120px] max-[425px]:w-[120px] max-[360px]:w-[100px] max-[320px]:!w-[84px] mobile-card-crdit'>
-                        <Image
-                          src={`${Img_URL}/${alldata?.product_image}`}
-                          alt='card image'
-                          width={200}
-                          height={160}
-                          className='xl:w-full md:w-full'
-                          unoptimized={true}
-                        />
-                      </div>
-                    </div>
-                    <div className=' xl:w-[100%] '>
-                      <div className=' grid grid-cols-1'>
-                        <div className='text-[#212529]'>
-                          <div onClick={() => sendGAProductClick(alldata, index)}>
-                            <Link href={`/${alldata?.url_slug}`} prefetch={false}>
-                              <h2
-                                id={`+ ${index} +'cc'`}
-                                className='text-[20px] max-[425px]:text-[15px] font-bold max-[991px]:text-[18px] text-[#212529] leading-7 pb-2'>
-                                {alldata.card_name}
-                              </h2>
-                            </Link>
-                          </div>
-                          <span
-                            className='text-[14px] comparebox-card-text pb-3 text-[#212529]'
-                            data-tooltip-target='tooltip-light'
-                            data-tooltip-style='light'
-                            data-te-toggle='tooltip'
-                            title={`${alldata?.welcome_benefits?.replace(/["']/g, ' ')}`}>
-                            {alldata?.welcome_benefits?.replace(/["']/g, ' ')}
-                          </span>
-
-                          <p className=' text-[13px] font-semibold text-[#212529] pt-6 max-[771px]:pt-2'>
-                            {ListingfilterData.ratingtitle}
-                          </p>
-
-                          <div className='flex items-center gap-2 mt-2 max-[360px]:gap-1'>
-                            <div>
-                              <Image
-                                src={ListingfilterData.logoimg}
-                                alt='img'
-                                width={45}
-                                height={50}
-                                className=' border rounded-full p-2 w-[36px] h-[36px]'
-                              />
-                            </div>
-
-                            <Link href='#' className='text-[#212529]' prefetch={false}>
-                              {alldata?.rating === 0 ? (
-                                'NA'
-                              ) : (
-                                <div className='border rounded-full py-1 px-4 flex gap-2 items-center  max-[771px]:px-2 max-[360px]:gap-1'>
-                                  <p className='xl:text-[18px] md:text-[14px] font-semibold max-[479px]:text-[14px] text-[15px] text-[#212529] max-[280px]:text-[11px]'>
-                                    {alldata?.rating}/5
-                                  </p>
-                                  <div className='mobile-rating'>
-                                    <StarRatings
-                                      rating={alldata?.rating}
-                                      starRatedColor='#49d49d'
-                                      numberOfStars={starCount}
-                                      name='rating'
-                                      starDimension='24px'
-                                      starSpacing='0'
-                                    />
-                                  </div>
-                                </div>
-                              )}
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div id='comp-8-aply-btn' className='flex items-center gap-4 mt-6 px-4  max-[280px]:!px-2'>
-                    <ApplyNowButton
-                      userData={getdatauser}
-                      data={alldata}
-                      category={'credit-cards'}
-                      pos='13'
-                      position={index}
-                      disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
-
-                    />
-
-                    {filteredDataCard(alldata?.url_slug) == 'Eligible' ? (
-                      <button
-                        id={`+${index}+'cc-btn'`}
-                        className='flex items-center gap-2 justify-center cursor-pointer business-right-text  w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
-                        {' '}
-                        {filteredDataCard(alldata?.url_slug)}
-                        <Image
-                          src={successBgIcon}
-                          alt='img'
-                          width={20}
-                          height={20}
-                          className=''
-                        />
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          router.push(`/credit-cards/eligibility?eligible=${alldata?.url_slug.split('/')[2]}`)
-                        }}
-                        className='py-3 w-full lg:w-[160px] md:w-full rounded-lg text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
-                        {filteredDataCard(alldata?.url_slug)}
-                      </button>
-                    )}
-                  </div>
-
-                  <div className='py-5 px-4 border-b max-[280px]:!px-2'>
-                    <label className='text-gray-500 font-bold flex items-center'>
+                  <div className='custom-max-content'>
+                    <label className=' text-gray-500 font-bold flex items-center'>
                       <input
-                        className='mr-2 leading-tight  w-[16px] h-[16px]'
+                        className='mr-2 leading-tight w-[16px] h-[16px]'
                         type='checkbox'
                         id={alldata.product_id}
                         disabled={
@@ -1175,183 +946,386 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                         onChange={(e) => handlecompareModal(e, alldata)}
                         checked={selectedData.some((selectedItem) => selectedItem.product_id === alldata.product_id)}
                       />
-                      <p className='text-[15px] font-semibold  text-[#212529] '>{ListingfilterData.compare}</p>
+                      <p className='text-[15px] font-semibold  text-[#212529] business-right-text cursor-pointer'>
+                        {ListingfilterData.compare}
+                      </p>
                     </label>
                   </div>
+                  <div
+                    id='accordionExample'
+                    data-active-classes='bg-none'
+                    data-inactive-classes='text-[#212529]'
+                    className='h-[25px]'>
+                    {(alldata?.features || alldata?.welcome_offer) && (
+                      <div className='  relative  duration-300 h-full'>
+                        <h3 id='accordion-flush-heading-1' className='h-full'>
+                          <button
+                            id={` + ${index} +'cc-btn'`}
+                            onClick={() => handleViewMoreAccordion(index)}
+                            type='button'
+                            className='text-[#212529] h-full list-none font-semibold relative text-[15px] gap-3 max-[375px]:text-[15px] cursor-pointer faq-quation-title flex items-center justify-end w-full text-left'
+                            data-accordion-target='#accordion-flush-body-1'
+                            aria-expanded='true'
+                            aria-controls='accordion-flush-body-1'>
+                            {ListingfilterData.view_more}
 
-                  <div className='px-4  py-6 border-b text-[#212529] max-[280px]:!px-2'>
-                    <div className='pb-4'>
-                      <p className='text-[13px] font-normal'>{ListingfilterData.fees}</p>
-                      {alldata.annual_fee == 0 ? (
-                        <div className='flex flex-col'>
-                          <p className='text-[15px] font-semibold pt-1'>Free</p>
-                          <span className='font-normal text-[12px] mt-[1px]'>*Applicable Taxes</span>
-                        </div>
-                      ) : (
-                        <div className='flex flex-col'>
-                          <p className='text-[15px] font-semibold pt-1 symbole-rupee'>
-                            &#8377; {alldata.annual_fee} /-
-                          </p>
-                          <span className='font-normal text-[12px] mt-[1px]'>*Applicable Taxes</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className='pb-4'>
-                      <p className='text-[13px] font-normal'>{ListingfilterData.joiningfees}</p>
-                      {alldata.joining_fee == 0 ? (
-                        <div className='flex flex-col'>
-                          <p className='text-[15px] font-semibold pt-1'>Free</p>
-                          <span className='font-normal text-[12px] mt-[1px]'>*Applicable Taxes</span>
-                        </div>
-                      ) : (
-                        <div className='flex flex-col'>
-                          <p className='text-[15px] font-semibold pt-1 symbole-rupee'>
-                            &#8377; {alldata.joining_fee} /-
-                          </p>
-                          <span className='font-normal text-[12px] mt-[1px]'>*Applicable Taxes</span>
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      <p className='text-[13px] font-normal'>{ListingfilterData?.recommended}</p>
-                      <div className='flex items-center gap-2'>
-                        {alldata?.min_credit_score !== null && (
-                          <>
-                            <p className='text-[15px] font-semibold pt-1'>{alldata?.min_credit_score}</p>
-                          </>
-                        )}
-                        <div className='tooltip'>
-                          {alldata?.min_credit_score !== null && alldata?.max_credit_score && (
-                            <>
+                            {vieMoreIndex?.includes(index) ? (
                               <Image
-                                src={ListingfilterData?.helpimg}
-                                className='w-5 h-5'
-                                alt='img'
-                                width={20}
-                                height={20}
+                                src={accordionArrowall}
+                                alt='down'
+                                width={24}
+                                height={24}
+                                priority={true}
+                                className='rotate-180 w-6 h-6 shrink-0'
                               />
-                              <span className='tooltiptext'>
-                                Having a credit score within or above the recommended range increases your likelihood of
-                                approval for various financial applications, but it does not provide an absolute
-                                guarantee.
-                              </span>
-                            </>
-                          )}
-                        </div>
+                            ) : (
+                              <Image
+                                src={accordionArrowall}
+                                alt='down'
+                                width={24}
+                                height={24}
+                                priority={true}
+                                className='w-6 h-6 shrink-0'
+                              />
+                            )}
+                          </button>
+                        </h3>
                       </div>
-                      <div onClick={() => clickPromotion(index)}>
-                        <Link
-                          href='/cibil-credit-score-check'
-                          className='text-[15px] pt-3  !underline text-[#5a5add] hover:!text-[#5a5add]'
-                          prefetch={false}>
-                          Check free credit score
-                        </Link>
+                    )}
+                  </div>
+                </div>
+                <div className='px-6 pb-4'>
+                  {vieMoreIndex?.includes(index) && (
+                    <div aria-labelledby='accordion-flush-heading-1'>
+                      {alldata?.features && (
+                        <div className='mt-4 text-[#212529]'>
+                          <p className='text-[15px] font-semibold '>{ListingfilterData.features}</p>
+                          <div className='mt-4'>
+                            <div
+                              className='list-disc  space-y-2 text-[14px] product-list-data'
+                              dangerouslySetInnerHTML={{
+                                __html: `<div>${alldata?.features}</div>`
+                              }}></div>
+                          </div>
+                        </div>
+                      )}
+                      {alldata?.welcome_offer && (
+                        <div className='mt-4 text-[#212529]'>
+                          <p className='text-[15px] font-semibold'>{ListingfilterData.welcomeoffer}</p>
+
+                          <div className='mt-4'>
+                            <div
+                              className='list-disc  space-y-2 text-[14px] product-list-data'
+                              dangerouslySetInnerHTML={{
+                                __html: `<div>${alldata?.welcome_offer}</div>`
+                              }}></div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </>
+    ) : (
+      <>
+        {(filteredData?.length ? filteredData : productlistdata?.product_list).map((alldata, index) => {
+          return (
+            <div key={index}>
+              <div className='pt-6 bg-white  rounded-3xl   h-full  filter-card-box duration-300'>
+                <div className='flex gap-3 !px-6 max-[768px]:!px-4 max-[280px]:!px-2'>
+                  <div className=''>
+                    <div
+                      id={`+${index} +'cc-img'`}
+                      onClick={() => sendGAProductClick(alldata, index)}
+                      className='w-[160px] max-[771px]:w-[100px] max-[768px]:w-[120px] max-[425px]:w-[120px] max-[360px]:w-[100px] max-[320px]:!w-[84px] mobile-card-crdit'>
+                      <Image
+                        src={`${Img_URL}/${alldata?.product_image}`}
+                        alt='card image'
+                        width={200}
+                        height={160}
+                        className='xl:w-full md:w-full'
+                        unoptimized={true}
+                      />
+                    </div>
+                  </div>
+                  <div className=' xl:w-[100%] '>
+                    <div className=' grid grid-cols-1'>
+                      <div className='text-[#212529]'>
+                        <div onClick={() => sendGAProductClick(alldata, index)}>
+                          <Link href={`/${alldata?.url_slug}`} prefetch={false}>
+                            <h2
+                              id={`+ ${index} +'cc'`}
+                              className='text-[20px] max-[425px]:text-[15px] font-bold max-[991px]:text-[18px] text-[#212529] leading-7 pb-2'>
+                              {alldata.card_name}
+                            </h2>
+                          </Link>
+                        </div>
+                        <span
+                          className='text-[14px] comparebox-card-text pb-3 text-[#212529]'
+                          data-tooltip-target='tooltip-light'
+                          data-tooltip-style='light'
+                          data-te-toggle='tooltip'
+                          title={`${alldata?.welcome_benefits?.replace(/["']/g, ' ')}`}>
+                          {alldata?.welcome_benefits?.replace(/["']/g, ' ')}
+                        </span>
+
+                        <p className=' text-[13px] font-semibold text-[#212529] pt-6 max-[771px]:pt-2'>
+                          {ListingfilterData.ratingtitle}
+                        </p>
+
+                        <div className='flex items-center gap-2 mt-2 max-[360px]:gap-1'>
+                          <div>
+                            <Image
+                              src={ListingfilterData.logoimg}
+                              alt='img'
+                              width={45}
+                              height={50}
+                              className=' border rounded-full p-2 w-[36px] h-[36px]'
+                            />
+                          </div>
+
+                          <Link href='#' className='text-[#212529]' prefetch={false}>
+                            {alldata?.rating === 0 ? (
+                              'NA'
+                            ) : (
+                              <div className='border rounded-full py-1 px-4 flex gap-2 items-center  max-[771px]:px-2 max-[360px]:gap-1'>
+                                <p className='xl:text-[18px] md:text-[14px] font-semibold max-[479px]:text-[14px] text-[15px] text-[#212529] max-[280px]:text-[11px]'>
+                                  {alldata?.rating}/5
+                                </p>
+                                <div className='mobile-rating'>
+                                  <StarRatings
+                                    rating={alldata?.rating}
+                                    starRatedColor='#49d49d'
+                                    numberOfStars={starCount}
+                                    name='rating'
+                                    starDimension='24px'
+                                    starSpacing='0'
+                                  />
+                                </div>
+                              </div>
+                            )}
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
+                </div>
+                <div id='comp-8-aply-btn' className='flex items-center gap-4 mt-6 px-4  max-[280px]:!px-2'>
+                  <ApplyNowButton
+                    userData={getdatauser}
+                    data={alldata}
+                    category={'credit-cards'}
+                    pos='13'
+                    position={index}
+                    disabled={!alldata?.is_apply_now}
+                  />
 
-                  <div className='grid grid-cols-2 py-4 gap-4 px-4 items-center'>
-                                  <div className='custom-max-content'>
-                                      <label className=' text-gray-500 font-bold flex items-center'>
-                                        <input
-                                          className='mr-2 leading-tight w-[16px] h-[16px]'
-                                          type='checkbox'
-                                          id={alldata.product_id}
-                                          disabled={
-                                            size?.width <= 991
-                                              ? selectedData.length >= 2 && !selectedData?.includes(alldata)
-                                              : selectedData.length >= 3 && !selectedData?.includes(alldata)
-                                          }
-                                          onChange={(e) => handlecompareModal(e, alldata)}
-                                          checked={selectedData.some(
-                                            (selectedItem) => selectedItem.product_id === alldata.product_id
-                                          )}
-                                        />
-                                        <p className='text-[15px] font-semibold  text-[#212529] business-right-text cursor-pointer'>
-                                          {ListingfilterData.compare}
-                                        </p>
-                                      </label>
-                                    </div>
-                                    <div
-                                      id='accordionExample'
-                                      data-active-classes='bg-none'
-                                      data-inactive-classes='text-[#212529]'
-                                      className='h-[25px]'>
-                                      {(alldata?.features || alldata?.welcome_offer) && (
-                                        <div className='  relative  duration-300 h-full'>
-                                          <h3 id='accordion-flush-heading-1' className="h-full">
-                                            <button
-                                              id={` + ${index} +'cc-btn'`}
-                                              onClick={() => handleViewMoreAccordion(index)}
-                                              type='button'
-                                              className='text-[#212529] h-full list-none font-semibold relative text-[15px] gap-3 max-[375px]:text-[15px] cursor-pointer faq-quation-title flex items-center justify-end w-full text-left'
-                                              data-accordion-target='#accordion-flush-body-1'
-                                              aria-expanded='true'
-                                              aria-controls='accordion-flush-body-1'>
-                                              {ListingfilterData.view_more}
+                  {filteredDataCard(alldata?.url_slug) == 'Eligible' ? (
+                    <button
+                      id={`+${index}+'cc-btn'`}
+                      className='flex items-center gap-2 justify-center cursor-pointer business-right-text font-faktum  w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                      {' '}
+                      {filteredDataCard(alldata?.url_slug)}
+                      <Image src={successBgIcon} alt='img' width={20} height={20} className='' />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        router.push(`/credit-cards/eligibility?eligible=${alldata?.url_slug.split('/')[2]}`)
+                      }}
+                      className='py-3 w-full lg:w-[160px] md:w-full rounded-lg text-[#212529] border border-[#000] font-faktum font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                      {filteredDataCard(alldata?.url_slug)}
+                    </button>
+                  )}
+                </div>
 
-                                              {vieMoreIndex?.includes(index) ? (
-                                                <Image
-                                                  src={accordionArrowall}
-                                                  alt='down'
-                                                  width={24}
-                                                  height={24}
-                                                  priority={true}
-                                                  className='rotate-180 w-6 h-6 shrink-0'
-                                                />
-                                              ) : (
-                                                <Image
-                                                  src={accordionArrowall}
-                                                  alt='down'
-                                                  width={24}
-                                                  height={24}
-                                                  priority={true}
-                                                  className='w-6 h-6 shrink-0'
-                                                />
-                                              )}
-                                            </button>
-                                          </h3>
-                                          
-                                        </div>
-                                      )}
-                                    </div>
-                                    
-                                  </div>
-                                  <div className="px-6 pb-4">
-                                  {vieMoreIndex?.includes(index) && (
-                                            <div aria-labelledby='accordion-flush-heading-1'>
-                                              {alldata?.features && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold '>{ListingfilterData.features}</p>
-                                                  <div className='mt-4'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.features}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
-                                              {alldata?.welcome_offer && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold'>{ListingfilterData.welcomeoffer}</p>
+                <div className='py-5 px-4 border-b max-[280px]:!px-2'>
+                  <label className='text-gray-500 font-bold flex items-center'>
+                    <input
+                      className='mr-2 leading-tight  w-[16px] h-[16px]'
+                      type='checkbox'
+                      id={alldata.product_id}
+                      disabled={
+                        size?.width <= 991
+                          ? selectedData.length >= 2 && !selectedData?.includes(alldata)
+                          : selectedData.length >= 3 && !selectedData?.includes(alldata)
+                      }
+                      onChange={(e) => handlecompareModal(e, alldata)}
+                      checked={selectedData.some((selectedItem) => selectedItem.product_id === alldata.product_id)}
+                    />
+                    <p className='text-[15px] font-semibold  text-[#212529] '>{ListingfilterData.compare}</p>
+                  </label>
+                </div>
 
-                                                  <div className='mt-4'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.welcome_offer}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
-                                            </div>
-                                          )}
-                                  </div>
+                <div className='px-4  py-6 border-b text-[#212529] max-[280px]:!px-2'>
+                  <div className='pb-4'>
+                    <p className='text-[13px] font-normal'>{ListingfilterData.fees}</p>
+                    {alldata.annual_fee == 0 ? (
+                      <div className='flex flex-col'>
+                        <p className='text-[15px] font-semibold pt-1'>Free</p>
+                        <span className='font-normal text-[12px] mt-[1px]'>*Applicable Taxes</span>
+                      </div>
+                    ) : (
+                      <div className='flex flex-col'>
+                        <p className='text-[15px] font-semibold pt-1 symbole-rupee'>&#8377; {alldata.annual_fee} /-</p>
+                        <span className='font-normal text-[12px] mt-[1px]'>*Applicable Taxes</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className='pb-4'>
+                    <p className='text-[13px] font-normal'>{ListingfilterData.joiningfees}</p>
+                    {alldata.joining_fee == 0 ? (
+                      <div className='flex flex-col'>
+                        <p className='text-[15px] font-semibold pt-1'>Free</p>
+                        <span className='font-normal text-[12px] mt-[1px]'>*Applicable Taxes</span>
+                      </div>
+                    ) : (
+                      <div className='flex flex-col'>
+                        <p className='text-[15px] font-semibold pt-1 symbole-rupee'>&#8377; {alldata.joining_fee} /-</p>
+                        <span className='font-normal text-[12px] mt-[1px]'>*Applicable Taxes</span>
+                      </div>
+                    )}
+                  </div>
+                  <div>
+                    <p className='text-[13px] font-normal'>{ListingfilterData?.recommended}</p>
+                    <div className='flex items-center gap-2'>
+                      {alldata?.min_credit_score !== null && (
+                        <>
+                          <p className='text-[15px] font-semibold pt-1'>{alldata?.min_credit_score}</p>
+                        </>
+                      )}
+                      <div className='tooltip'>
+                        {alldata?.min_credit_score !== null && alldata?.max_credit_score && (
+                          <>
+                            <Image
+                              src={ListingfilterData?.helpimg}
+                              className='w-5 h-5'
+                              alt='img'
+                              width={20}
+                              height={20}
+                            />
+                            <span className='tooltiptext'>
+                              Having a credit score within or above the recommended range increases your likelihood of
+                              approval for various financial applications, but it does not provide an absolute
+                              guarantee.
+                            </span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                    <div onClick={() => clickPromotion(index)}>
+                      <Link
+                        href='/cibil-credit-score-check'
+                        className='text-[15px] pt-3  !underline text-[#5a5add] hover:!text-[#5a5add]'
+                        prefetch={false}>
+                        Check free credit score
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                <div className='grid grid-cols-2 py-4 gap-4 px-4 items-center'>
+                  <div className='custom-max-content'>
+                    <label className=' text-gray-500 font-bold flex items-center'>
+                      <input
+                        className='mr-2 leading-tight w-[16px] h-[16px]'
+                        type='checkbox'
+                        id={alldata.product_id}
+                        disabled={
+                          size?.width <= 991
+                            ? selectedData.length >= 2 && !selectedData?.includes(alldata)
+                            : selectedData.length >= 3 && !selectedData?.includes(alldata)
+                        }
+                        onChange={(e) => handlecompareModal(e, alldata)}
+                        checked={selectedData.some((selectedItem) => selectedItem.product_id === alldata.product_id)}
+                      />
+                      <p className='text-[15px] font-semibold  text-[#212529] business-right-text cursor-pointer'>
+                        {ListingfilterData.compare}
+                      </p>
+                    </label>
+                  </div>
+                  <div
+                    id='accordionExample'
+                    data-active-classes='bg-none'
+                    data-inactive-classes='text-[#212529]'
+                    className='h-[25px]'>
+                    {(alldata?.features || alldata?.welcome_offer) && (
+                      <div className='  relative  duration-300 h-full'>
+                        <h3 id='accordion-flush-heading-1' className='h-full'>
+                          <button
+                            id={` + ${index} +'cc-btn'`}
+                            onClick={() => handleViewMoreAccordion(index)}
+                            type='button'
+                            className='text-[#212529] h-full list-none font-semibold relative text-[15px] gap-3 max-[375px]:text-[15px] cursor-pointer faq-quation-title flex items-center justify-end w-full text-left'
+                            data-accordion-target='#accordion-flush-body-1'
+                            aria-expanded='true'
+                            aria-controls='accordion-flush-body-1'>
+                            {ListingfilterData.view_more}
+
+                            {vieMoreIndex?.includes(index) ? (
+                              <Image
+                                src={accordionArrowall}
+                                alt='down'
+                                width={24}
+                                height={24}
+                                priority={true}
+                                className='rotate-180 w-6 h-6 shrink-0'
+                              />
+                            ) : (
+                              <Image
+                                src={accordionArrowall}
+                                alt='down'
+                                width={24}
+                                height={24}
+                                priority={true}
+                                className='w-6 h-6 shrink-0'
+                              />
+                            )}
+                          </button>
+                        </h3>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className='px-6 pb-4'>
+                  {vieMoreIndex?.includes(index) && (
+                    <div aria-labelledby='accordion-flush-heading-1'>
+                      {alldata?.features && (
+                        <div className='mt-4 text-[#212529]'>
+                          <p className='text-[15px] font-semibold '>{ListingfilterData.features}</p>
+                          <div className='mt-4'>
+                            <div
+                              className='list-disc  space-y-2 text-[14px] product-list-data'
+                              dangerouslySetInnerHTML={{
+                                __html: `<div>${alldata?.features}</div>`
+                              }}></div>
+                          </div>
+                        </div>
+                      )}
+                      {alldata?.welcome_offer && (
+                        <div className='mt-4 text-[#212529]'>
+                          <p className='text-[15px] font-semibold'>{ListingfilterData.welcomeoffer}</p>
+
+                          <div className='mt-4'>
+                            <div
+                              className='list-disc  space-y-2 text-[14px] product-list-data'
+                              dangerouslySetInnerHTML={{
+                                __html: `<div>${alldata?.welcome_offer}</div>`
+                              }}></div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
-            )
-          })}
+            </div>
+          )
+        })}
       </>
     )
   }
@@ -1420,10 +1394,10 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
             onMouseOver={() => setOpenSortBy(true)}
             className={`xl:w-[225px] lg:w-[230px] shadow-md flex flex-row justify-between px-[15px] items-start ${
               !openSortBy
-              ? 'border border-[#212529] rounded-[5px]'
-              : 'border border-[#212529] border-b-0 rounded-t-[5px]'
-              } md:h-[50px] h-auto cursor-pointer bg-white text-center text-[14px] font-medium md:py-[14px] max-[628px]:py-[12px] relative`}>
-            <div className='hover:text-[14px] font-medium '>{selectedSortOption}</div>
+                ? 'border border-[#212529] rounded-[5px]'
+                : 'border border-[#212529] border-b-0 rounded-t-[5px]'
+            } md:h-[50px] h-auto cursor-pointer bg-white text-center text-[14px] font-medium md:py-[14px] max-[628px]:py-[12px] relative`}>
+            <div className='hover:text-[14px] text-[#212529] font-medium '>{selectedSortOption}</div>
             <div type='button'>
               <Image
                 src={accordionArrowall}
@@ -1440,18 +1414,18 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
               <div
                 className={`border-t-0 border border-[#212529] shadow-md rounded-b-[5px] xl:w-[225px] lg:w-[230px] px-[14px] h-auto  bg-white flex flex-col gap-[12px] items-start justify-start absolute ${
                   scrollValue === 0
-                  ? readMoreOpen === 'true'
-                    ? 'top-[547px]'
-                    : 'top-[515px]'
-                  : readMoreOpen === 'true'
-                    ? 'top-[500px]'
-                    : 'top-[460px]'
-                  }`}>
+                    ? readMoreOpen === 'true'
+                      ? 'top-[547px]'
+                      : 'top-[515px]'
+                    : readMoreOpen === 'true'
+                      ? 'top-[500px]'
+                      : 'top-[460px]'
+                }`}>
                 {sortingOptions?.map((item) => {
                   return (
                     <div key={item?.id} className='last:pb-4 first:pt-2'>
                       <div
-                        className='hover:text-[#a882dd] cursor-pointer hover:text-[14px]'
+                        className='hover:text-[#a882dd] text-[#212529] cursor-pointer hover:text-[14px]'
                         onClick={() => handleSortingOptionClick(item?.name)}>
                         {item?.name}
                       </div>
@@ -1633,8 +1607,8 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                               onClick={() => setrCategoryactive(toplist?.url_slug)}
                               className={
                                 categoryactive == toplist?.url_slug
-                                  ? ' recommendation-category head-text font-[faktum] capitalize  '
-                                  : 'text-[#212529] head-text font-[faktum] border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-4 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize list-resolov-credit '
+                                  ? ' recommendation-category head-text capitalize  '
+                                  : 'text-[#212529] head-text border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-4 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize list-resolov-credit '
                               }
                             />
                           </Link>
@@ -1645,8 +1619,8 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                               onClick={() => setrCategoryactive(toplist?.url_slug)}
                               className={
                                 categoryactive == toplist?.url_slug
-                                  ? ' recommendation-category head-text font-[faktum] capitalize  '
-                                  : 'text-[#212529] head-text font-[faktum] border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-4 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize list-resolov-credit '
+                                  ? ' recommendation-category head-text capitalize  '
+                                  : 'text-[#212529] head-text border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-4 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize list-resolov-credit '
                               }
                             />
                           </Link>
@@ -1756,12 +1730,12 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                           aprRange?.max !== maxAprData ||
                           creditScore !== minCreditScoreData ||
                           ratingstar != null) && (
-                            <button
-                              onClick={clearallfunc}
-                              className='text-[#49D49D] cursor-pointer font-bold text-[18px] ml-32'>
-                              Clear All
-                            </button>
-                          )}
+                          <button
+                            onClick={clearallfunc}
+                            className='text-[#49D49D] cursor-pointer font-bold text-[18px] ml-32'>
+                            Clear All
+                          </button>
+                        )}
                       </div>
                     </div>
                     <div
@@ -1770,9 +1744,9 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                         checkboxValues?.length == 0 &&
                         cardNetworkCheck?.length == 0 &&
                         ratingstar == null
-                        ? ''
-                        : 'pb-[5rem]'
-                        }`}>
+                          ? ''
+                          : 'pb-[5rem]'
+                      }`}>
                       {productlistdata?.product_list.length > 0 && (
                         <>
                           <div className='pb-4 border-b'>
@@ -2172,25 +2146,25 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                   creditScoreRange?.min !== 0 ||
                   cardNetworkCheck?.length !== 0 ||
                   ratingstar != null) && (
-                    <>
-                      <div className='fixed bottom-0 z-[9999] left-0 w-full py-4 px-5 bg-white grid grid-cols-2 justify-between items-center md:px-8 modal-sticky-clear'>
-                        <button
-                          onClick={(e) => {
-                            setModal(false)
-                          }}
-                          className='text-[#212529] cursor-pointer font-bold text-[15px] text-left'>
-                          Close
-                        </button>
-                        <button
-                          onClick={(e) => {
-                            setModal(false)
-                          }}
-                          className=' py-3 w-full lg:w-[160px] cursor-pointer md:w-full  rounded-lg text-[#212529] bg-[#49D49D] max-[320px]:text-[14px]'>
-                          Apply Filters
-                        </button>
-                      </div>
-                    </>
-                  )}
+                  <>
+                    <div className='fixed bottom-0 z-[9999] left-0 w-full py-4 px-5 bg-white grid grid-cols-2 justify-between items-center md:px-8 modal-sticky-clear'>
+                      <button
+                        onClick={(e) => {
+                          setModal(false)
+                        }}
+                        className='text-[#212529] cursor-pointer font-bold text-[15px] text-left'>
+                        Close
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          setModal(false)
+                        }}
+                        className=' py-3 w-full lg:w-[160px] cursor-pointer md:w-full  rounded-lg text-[#212529] bg-[#49D49D] max-[320px]:text-[14px]'>
+                        Apply Filters
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </>
@@ -2217,7 +2191,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
               id='modal'>
               <div className='flex items-center justify-center min-height-100vh  px-4  text-center sm:block sm:p-0'>
                 <div className=' 2xl:px-40 xl:px-30 xl:py-10 lg:px-20 md:px-14 p-4 py-8 max-[479px]:py-4 '>
-                  <div className='flex max-[1820px]:flex  items-center justify-center gap-12 max-[1600px]:gap-4   max-xl:justify-center  items-center add-comapre-modal'>
+                  <div className='flex max-[1820px]:flex justify-center gap-12 max-[1600px]:gap-4   max-xl:justify-center  items-center add-comapre-modal'>
                     <>
                       <div className='flex gap-7 max-[1200px]:flex-wrap  max-[991px]:flex-nowrap  max-[1200px]:gap-4 max-md:justify-between max-[576px]:justify-center add-comapre-card max-[320px]:gap-2'>
                         {selectedData.length <= 3 &&
@@ -2247,7 +2221,14 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                         ...selectedData.filter((item) => item.product_id !== data.product_id)
                                       ])
                                     }}>
-                                    <Image src={CloseIcon} alt='img' className='  w-[12px] h-[12px]' height={12} width={12} priority={true} />
+                                    <Image
+                                      src={CloseIcon}
+                                      alt='img'
+                                      className='  w-[12px] h-[12px]'
+                                      height={12}
+                                      width={12}
+                                      priority={true}
+                                    />
                                   </div>
                                 </div>
                               </div>
@@ -2291,13 +2272,12 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
           ''
         )}
         {size.width >= 992 ? (
-          <div className=''>
             <div className='grid 2xl:gap-8 2xl:grid-cols-5 xl:grid-cols-5  md:grid-cols-5 lg:grid-cols-5 gap-4 mt-6'>
               <div className='2xl:col-span-1 xl:col-span-1 md:col-span-1 bg-none  relative'>
                 <div
                   className={`xl:py-8  lg:py-4  border border-[#C2CACF] border-l-0 filter-credit sticky  filter-resolution ${
                     moreleftmenucredit?.more_way_to_browse?.length > 3 ? ' filter-left-sticky' : 'credit-left-filter'
-                    }`}>
+                  }`}>
                   <div className='flex items-center justify-between pb-2 xl:pr-[17px] lg:pr-4 md:pr-4'>
                     <p className='font-bold text-[18px] text-[#212529] uppercase'>Filters</p>
 
@@ -2309,10 +2289,10 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                       aprRange?.min !== minAprData ||
                       creditScore !== minCreditScoreData ||
                       ratingstar != null) && (
-                        <button onClick={clearallfunc} className='text-[#49D49D] cursor-pointer font-bold text-[15px]'>
-                          Clear All
-                        </button>
-                      )}
+                      <button onClick={clearallfunc} className='text-[#49D49D] cursor-pointer font-bold text-[15px]'>
+                        Clear All
+                      </button>
+                    )}
                   </div>
 
                   {productlistdata?.product_list.length > 0 && (
@@ -2795,7 +2775,6 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                                 starSpacing='0'
                                               />
                                             </div>
-                                            
                                           </div>
                                         </div>
 
@@ -2808,13 +2787,12 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                             category={'credit-cards'}
                                             pos='10'
                                             position={index}
-                                            disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
-
+                                            disabled={!alldata?.is_apply_now}
                                           />
                                           {filteredDataCard(alldata?.url_slug) == 'Eligible' ? (
                                             <button
                                               id={`+${index}+'cc-btn'`}
-                                              className='flex items-center gap-2 justify-center cursor-pointer business-right-text  w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                                              className='flex items-center gap-2 justify-center cursor-pointer business-right-text font-faktum  w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
                                               {' '}
                                               {filteredDataCard(alldata?.url_slug)}
                                               <Image
@@ -2829,11 +2807,12 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                             <button
                                               onClick={() => {
                                                 router.push(
-                                                  `/credit-cards/eligibility?eligible=${alldata?.url_slug.split('/')[2]
+                                                  `/credit-cards/eligibility?eligible=${
+                                                    alldata?.url_slug.split('/')[2]
                                                   }`
                                                 )
                                               }}
-                                              className=' business-right-text py-3 w-full lg:w-[160px] md:w-full rounded-lg text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                                              className=' business-right-text py-3 w-full lg:w-[160px] md:w-full rounded-lg font-faktum text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
                                               {filteredDataCard(alldata?.url_slug)}
                                             </button>
                                           )}
@@ -2916,7 +2895,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                     </div>
                                   </div>
                                   <div className='grid grid-cols-2 pt-4 gap-4 px-6'>
-                                  <div className='custom-max-content'>
+                                    <div className='custom-max-content'>
                                       <label className=' text-gray-500 font-bold flex items-center'>
                                         <input
                                           className='mr-2 leading-tight w-[16px] h-[16px]'
@@ -2944,7 +2923,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                       className='h-[25px]'>
                                       {(alldata?.features || alldata?.welcome_offer) && (
                                         <div className='  relative  duration-300 h-full'>
-                                          <h3 id='accordion-flush-heading-1' className="h-full">
+                                          <h3 id='accordion-flush-heading-1' className='h-full'>
                                             <button
                                               id={` + ${index} +'cc-btn'`}
                                               onClick={() => handleViewMoreAccordion(index)}
@@ -2976,42 +2955,42 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                               )}
                                             </button>
                                           </h3>
-                                          
                                         </div>
                                       )}
                                     </div>
-                                    
                                   </div>
-                                  <div className="px-6">
-                                  {vieMoreIndex?.includes(index) && (
-                                            <div aria-labelledby='accordion-flush-heading-1'>
-                                              {alldata?.features && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold '>{ListingfilterData.features}</p>
-                                                  <div className='mt-4'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.features}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
-                                              {alldata?.welcome_offer && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold'>{ListingfilterData.welcomeoffer}</p>
-
-                                                  <div className='mt-4'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.welcome_offer}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
+                                  <div className='px-6'>
+                                    {vieMoreIndex?.includes(index) && (
+                                      <div aria-labelledby='accordion-flush-heading-1'>
+                                        {alldata?.features && (
+                                          <div className='mt-4 text-[#212529]'>
+                                            <p className='text-[15px] font-semibold '>{ListingfilterData.features}</p>
+                                            <div className='mt-4'>
+                                              <div
+                                                className='list-disc  space-y-2 text-[14px] product-list-data'
+                                                dangerouslySetInnerHTML={{
+                                                  __html: `<div>${alldata?.features}</div>`
+                                                }}></div>
                                             </div>
-                                          )}
+                                          </div>
+                                        )}
+                                        {alldata?.welcome_offer && (
+                                          <div className='mt-4 text-[#212529]'>
+                                            <p className='text-[15px] font-semibold'>
+                                              {ListingfilterData.welcomeoffer}
+                                            </p>
+
+                                            <div className='mt-4'>
+                                              <div
+                                                className='list-disc  space-y-2 text-[14px] product-list-data'
+                                                dangerouslySetInnerHTML={{
+                                                  __html: `<div>${alldata?.welcome_offer}</div>`
+                                                }}></div>
+                                            </div>
+                                          </div>
+                                        )}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>
@@ -3139,14 +3118,13 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                             category={'credit-cards'}
                                             pos='11'
                                             position={index}
-                                            disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
-
+                                            disabled={!alldata?.is_apply_now}
                                           />
 
                                           {filteredDataCard(alldata?.url_slug) == 'Eligible' ? (
                                             <button
                                               id={`+${index}+'cc-btn'`}
-                                              className='flex items-center gap-2 justify-center cursor-pointer business-right-text  w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                                              className='flex items-center gap-2 justify-center cursor-pointer business-right-text font-faktum  w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
                                               {' '}
                                               {filteredDataCard(alldata?.url_slug)}
                                               <Image
@@ -3162,11 +3140,12 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                               id={`+${index}+'cc-btn'`}
                                               onClick={() => {
                                                 router.push(
-                                                  `/credit-cards/eligibility?eligible=${alldata?.url_slug.split('/')[2]
+                                                  `/credit-cards/eligibility?eligible=${
+                                                    alldata?.url_slug.split('/')[2]
                                                   }`
                                                 )
                                               }}
-                                              className=' business-right-text py-3 w-full lg:w-[160px] md:w-full rounded-lg text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                                              className=' business-right-text py-3 w-full lg:w-[160px] md:w-full rounded-lg font-faktum text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
                                               {filteredDataCard(alldata?.url_slug)}
                                             </button>
                                           )}
@@ -3251,7 +3230,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                     </div>
                                   </div>
                                   <div className='grid grid-cols-2 pt-4 gap-4 px-6'>
-                                  <div className='custom-max-content'>
+                                    <div className='custom-max-content'>
                                       <label className=' text-gray-500 font-bold flex items-center'>
                                         <input
                                           className='mr-2 leading-tight w-[16px] h-[16px]'
@@ -3279,7 +3258,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                       className='h-[25px]'>
                                       {(alldata?.features || alldata?.welcome_offer) && (
                                         <div className='  relative  duration-300 h-full'>
-                                          <h3 id='accordion-flush-heading-1' className="h-full">
+                                          <h3 id='accordion-flush-heading-1' className='h-full'>
                                             <button
                                               id={` + ${index} +'cc-btn'`}
                                               onClick={() => handleViewMoreAccordion(index)}
@@ -3311,42 +3290,42 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                               )}
                                             </button>
                                           </h3>
-                                          
                                         </div>
                                       )}
                                     </div>
-                                    
                                   </div>
-                                  <div className="px-6">
-                                  {vieMoreIndex?.includes(index) && (
-                                            <div aria-labelledby='accordion-flush-heading-1'>
-                                              {alldata?.features && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold '>{ListingfilterData.features}</p>
-                                                  <div className='mt-4'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.features}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
-                                              {alldata?.welcome_offer && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold'>{ListingfilterData.welcomeoffer}</p>
-
-                                                  <div className='mt-4'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.welcome_offer}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
+                                  <div className='px-6'>
+                                    {vieMoreIndex?.includes(index) && (
+                                      <div aria-labelledby='accordion-flush-heading-1'>
+                                        {alldata?.features && (
+                                          <div className='mt-4 text-[#212529]'>
+                                            <p className='text-[15px] font-semibold '>{ListingfilterData.features}</p>
+                                            <div className='mt-4'>
+                                              <div
+                                                className='list-disc  space-y-2 text-[14px] product-list-data'
+                                                dangerouslySetInnerHTML={{
+                                                  __html: `<div>${alldata?.features}</div>`
+                                                }}></div>
                                             </div>
-                                          )}
+                                          </div>
+                                        )}
+                                        {alldata?.welcome_offer && (
+                                          <div className='mt-4 text-[#212529]'>
+                                            <p className='text-[15px] font-semibold'>
+                                              {ListingfilterData.welcomeoffer}
+                                            </p>
+
+                                            <div className='mt-4'>
+                                              <div
+                                                className='list-disc  space-y-2 text-[14px] product-list-data'
+                                                dangerouslySetInnerHTML={{
+                                                  __html: `<div>${alldata?.welcome_offer}</div>`
+                                                }}></div>
+                                            </div>
+                                          </div>
+                                        )}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>
@@ -3382,21 +3361,20 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                 )}
               </div>
             </div>
-          </div>
         ) : (
-          <div className=''>
+          <div>
             {filteredData?.length > 0 ? (
               <>
                 {size.width < 992 && size.width > 576 ? (
                   <>
                     {' '}
-                    <div className='grid 2xl:grid-cols-4 xl:mt-8 xl:gap-2 xl:grid-cols-3 xl:gap-4 lg:grid-cols-3 lg:gap-2 md:grid-cols-2 md:mt-0 grid-cols-1 md:gap-8 sm:mt-4  sm:gap-[30px] gap-4 mt-4 max-[479px]:mt-0 lg:px-16 max-[479px]:gap-[30px]'>
+                    <div className='grid 2xl:grid-cols-4 xl:mt-8 xl:gap-2 xl:grid-cols-3 lg:grid-cols-3 lg:gap-2 md:grid-cols-2 md:mt-0 grid-cols-1 md:gap-8 sm:mt-4  sm:gap-[30px] gap-4 mt-4 max-[479px]:mt-0 lg:px-16 max-[479px]:gap-[30px]'>
                       {getTabletListing()}
                     </div>
                   </>
                 ) : size.width <= 576 ? (
                   <>
-                    <div className='grid 2xl:grid-cols-4 xl:mt-8 xl:gap-2 xl:grid-cols-3 xl:gap-4 lg:grid-cols-3 lg:gap-2 md:grid-cols-2 md:mt-0 grid-cols-1 md:gap-8 sm:mt-4  sm:gap-[30px] gap-4 mt-4 max-[479px]:mt-0 lg:px-16 max-[479px]:gap-[30px]'>
+                    <div className='grid 2xl:grid-cols-4 xl:mt-8 xl:grid-cols-3 xl:gap-4 lg:grid-cols-3 lg:gap-2 md:grid-cols-2 md:mt-0 grid-cols-1 md:gap-8 sm:mt-4  sm:gap-[30px] gap-4 mt-4 max-[479px]:mt-0 lg:px-16 max-[479px]:gap-[30px]'>
                       {filteredData?.map((alldata, index) => {
                         return (
                           <div
@@ -3410,16 +3388,10 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                 {filteredDataCard(alldata?.url_slug) == 'Eligible' && (
                                   <button
                                     id={`+${index}+'cc-btn'`}
-                                    className='flex items-center px-6 gap-2 justify-end pb-4 cursor-pointer business-right-text  w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[375px]:text-[13px]  max-[280px]:text-[11px]'>
+                                    className='flex items-center px-6 gap-2 justify-end pb-4 cursor-pointer business-right-text font-faktum  w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[375px]:text-[13px]  max-[280px]:text-[11px]'>
                                     {' '}
                                     {filteredDataCard(alldata?.url_slug)}
-                                    <Image
-                                      src={successBgIcon}
-                                      alt='img'
-                                      width={20}
-                                      height={20}
-                                      className=''
-                                    />
+                                    <Image src={successBgIcon} alt='img' width={20} height={20} className='' />
                                   </button>
                                 )}
                               </div>
@@ -3428,7 +3400,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                   <div
                                     id={` +${index} + 'cc'`}
                                     onClick={() => sendGAProductClick(alldata, index)}
-                                    className='w-[160px] max-[771px]:w-[100px] max-[768px]:w-[120px] max-[425px]:w-[120px] max-[360px]:w-[100px] max-[320px]:!w-[84px] mobile-card-crdit'>
+                                    className='w-[160px] max-[771px]:w-[100px] max-[768px]:w-[120px] font-faktum max-[425px]:w-[120px] max-[360px]:w-[100px] max-[320px]:!w-[84px] mobile-card-crdit'>
                                     <Image
                                       src={`${Img_URL}/${alldata?.product_image}`}
                                       //
@@ -3448,8 +3420,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                           <h2
                                             id={`+ ${index} + 'cc'`}
                                             //
-                                            className='text-[20px] whitespace-nowrap overflow-ellipsis overflow-hidden max-[425px]:text-[15px] font-bold max-[991px]:text-[18px] text-[#212529] leading-7 pb-2'
-                                          >
+                                            className='text-[20px] whitespace-nowrap overflow-ellipsis overflow-hidden max-[425px]:text-[15px] font-bold max-[991px]:text-[18px] text-[#212529] leading-7 pb-2'>
                                             {alldata?.card_name}
                                           </h2>
                                         </Link>
@@ -3513,8 +3484,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                   category={'credit-cards'}
                                   pos='14'
                                   position={index}
-                                  disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
-
+                                  disabled={!alldata?.is_apply_now}
                                 />
 
                                 {filteredDataCard(alldata?.url_slug) !== 'Eligible' && (
@@ -3525,7 +3495,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                         `/credit-cards/eligibility?eligible=${alldata?.url_slug.split('/')[2]}`
                                       )
                                     }}
-                                    className='py-3 w-full lg:w-[160px] md:w-full rounded-lg text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                                    className='py-3 w-full lg:w-[160px] md:w-full rounded-lg text-[#212529] font-faktum border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
                                     {filteredDataCard(alldata?.url_slug)}
                                   </button>
                                 )}
@@ -3544,9 +3514,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                         <p className='text-[15px] font-semibold pt-1 symbole-rupee'>
                                           &#8377; {alldata.annual_fee} /-
                                         </p>
-                                        <span className='font-normal text-[12px] mt-[1px]'>
-                                          *Applicable Taxes
-                                        </span>
+                                        <span className='font-normal text-[12px] mt-[1px]'>*Applicable Taxes</span>
                                       </div>
                                     )}
                                   </div>
@@ -3563,9 +3531,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                                         <p className='text-[15px] font-semibold pt-1 symbole-rupee'>
                                           &#8377; {alldata.joining_fee} /-
                                         </p>
-                                        <span className='font-normal text-[12px] mt-[1px]'>
-                                          *Applicable Taxes
-                                        </span>
+                                        <span className='font-normal text-[12px] mt-[1px]'>*Applicable Taxes</span>
                                       </div>
                                     )}
                                   </div>
@@ -3609,103 +3575,105 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
                               </div>
 
                               <div className='grid grid-cols-2 py-4 gap-4 px-4 items-center'>
-                                  <div className='custom-max-content'>
-                                      <label className=' text-gray-500 font-bold flex items-center'>
-                                        <input
-                                          className='mr-2 leading-tight w-[16px] h-[16px]'
-                                          type='checkbox'
-                                          id={alldata.product_id}
-                                          disabled={
-                                            size?.width <= 991
-                                              ? selectedData.length >= 2 && !selectedData?.includes(alldata)
-                                              : selectedData.length >= 3 && !selectedData?.includes(alldata)
-                                          }
-                                          onChange={(e) => handlecompareModal(e, alldata)}
-                                          checked={selectedData.some(
-                                            (selectedItem) => selectedItem.product_id === alldata.product_id
-                                          )}
-                                        />
-                                        <p className='text-[15px] font-semibold  text-[#212529] business-right-text max-[375px]:text-[14px] max-[320px]:text-[12px] cursor-pointer'>
-                                          {ListingfilterData.compare}
-                                        </p>
-                                      </label>
-                                    </div>
-                                    <div
-                                      id='accordionExample'
-                                      data-active-classes='bg-none'
-                                      data-inactive-classes='text-[#212529]'
-                                      className='h-[25px]'>
-                                      {(alldata?.features || alldata?.welcome_offer) && (
-                                        <div className='  relative  duration-300 h-full'>
-                                          <h3 id='accordion-flush-heading-1' className="h-full">
-                                            <button
-                                              id={` + ${index} +'cc-btn'`}
-                                              onClick={() => handleViewMoreAccordion(index)}
-                                              type='button'
-                                              className='text-[#212529] h-full list-none font-semibold relative text-[15px] gap-3 max-[375px]:text-[14px] max-[320px]:text-[12px] cursor-pointer faq-quation-title flex items-center justify-end w-full text-left'
-                                              data-accordion-target='#accordion-flush-body-1'
-                                              aria-expanded='true'
-                                              aria-controls='accordion-flush-body-1'>
-                                              {ListingfilterData.view_more}
-
-                                              {vieMoreIndex?.includes(index) ? (
-                                                <Image
-                                                  src={accordionArrowall}
-                                                  alt='down'
-                                                  width={24}
-                                                  height={24}
-                                                  priority={true}
-                                                  className='rotate-180 w-6 h-6 shrink-0'
-                                                />
-                                              ) : (
-                                                <Image
-                                                  src={accordionArrowall}
-                                                  alt='down'
-                                                  width={24}
-                                                  height={24}
-                                                  priority={true}
-                                                  className='w-6 h-6 shrink-0'
-                                                />
-                                              )}
-                                            </button>
-                                          </h3>
-                                          
-                                        </div>
+                                <div className='custom-max-content'>
+                                  <label className=' text-gray-500 font-bold flex items-center'>
+                                    <input
+                                      className='mr-2 leading-tight w-[16px] h-[16px]'
+                                      type='checkbox'
+                                      id={alldata.product_id}
+                                      disabled={
+                                        size?.width <= 991
+                                          ? selectedData.length >= 2 && !selectedData?.includes(alldata)
+                                          : selectedData.length >= 3 && !selectedData?.includes(alldata)
+                                      }
+                                      onChange={(e) => handlecompareModal(e, alldata)}
+                                      checked={selectedData.some(
+                                        (selectedItem) => selectedItem.product_id === alldata.product_id
                                       )}
-                                    </div>
-                                    
-                                  </div>
-                                  <div className="px-6 pb-4">
-                                  {vieMoreIndex?.includes(index) && (
-                                            <div aria-labelledby='accordion-flush-heading-1'>
-                                              {alldata?.features && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold max-[375px]:text-[14px] '>{ListingfilterData.features}</p>
-                                                  <div className='mt-4 max-[375px]:mt-2'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.features}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
-                                              {alldata?.welcome_offer && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold max-[375px]:text-[14px] '>{ListingfilterData.welcomeoffer}</p>
+                                    />
+                                    <p className='text-[15px] font-semibold  text-[#212529] business-right-text max-[375px]:text-[14px] max-[320px]:text-[12px] cursor-pointer'>
+                                      {ListingfilterData.compare}
+                                    </p>
+                                  </label>
+                                </div>
+                                <div
+                                  id='accordionExample'
+                                  data-active-classes='bg-none'
+                                  data-inactive-classes='text-[#212529]'
+                                  className='h-[25px]'>
+                                  {(alldata?.features || alldata?.welcome_offer) && (
+                                    <div className='  relative  duration-300 h-full'>
+                                      <h3 id='accordion-flush-heading-1' className='h-full'>
+                                        <button
+                                          id={` + ${index} +'cc-btn'`}
+                                          onClick={() => handleViewMoreAccordion(index)}
+                                          type='button'
+                                          className='text-[#212529] h-full list-none font-semibold relative text-[15px] gap-3 max-[375px]:text-[14px] max-[320px]:text-[12px] cursor-pointer faq-quation-title flex items-center justify-end w-full text-left'
+                                          data-accordion-target='#accordion-flush-body-1'
+                                          aria-expanded='true'
+                                          aria-controls='accordion-flush-body-1'>
+                                          {ListingfilterData.view_more}
 
-                                                  <div className='mt-4 max-[375px]:mt-2'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.welcome_offer}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
-                                            </div>
+                                          {vieMoreIndex?.includes(index) ? (
+                                            <Image
+                                              src={accordionArrowall}
+                                              alt='down'
+                                              width={24}
+                                              height={24}
+                                              priority={true}
+                                              className='rotate-180 w-6 h-6 shrink-0'
+                                            />
+                                          ) : (
+                                            <Image
+                                              src={accordionArrowall}
+                                              alt='down'
+                                              width={24}
+                                              height={24}
+                                              priority={true}
+                                              className='w-6 h-6 shrink-0'
+                                            />
                                           )}
+                                        </button>
+                                      </h3>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                              <div className='px-6 pb-4'>
+                                {vieMoreIndex?.includes(index) && (
+                                  <div aria-labelledby='accordion-flush-heading-1'>
+                                    {alldata?.features && (
+                                      <div className='mt-4 text-[#212529]'>
+                                        <p className='text-[15px] font-semibold max-[375px]:text-[14px] '>
+                                          {ListingfilterData.features}
+                                        </p>
+                                        <div className='mt-4 max-[375px]:mt-2'>
+                                          <div
+                                            className='list-disc  space-y-2 text-[14px] product-list-data'
+                                            dangerouslySetInnerHTML={{
+                                              __html: `<div>${alldata?.features}</div>`
+                                            }}></div>
+                                        </div>
+                                      </div>
+                                    )}
+                                    {alldata?.welcome_offer && (
+                                      <div className='mt-4 text-[#212529]'>
+                                        <p className='text-[15px] font-semibold max-[375px]:text-[14px] '>
+                                          {ListingfilterData.welcomeoffer}
+                                        </p>
+
+                                        <div className='mt-4 max-[375px]:mt-2'>
+                                          <div
+                                            className='list-disc  space-y-2 text-[14px] product-list-data'
+                                            dangerouslySetInnerHTML={{
+                                              __html: `<div>${alldata?.welcome_offer}</div>`
+                                            }}></div>
+                                        </div>
+                                      </div>
+                                    )}
                                   </div>
+                                )}
+                              </div>
                             </div>
                           </div>
                         )

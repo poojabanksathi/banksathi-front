@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from 'react'
-import '@/styles/globals.css'
-import '@/styles/style.css'
+import '../styles/globals.css';
+import '../styles/footer.css';
+import '../styles/style.css'
+import '../styles/leadsStyle.css'
 import 'react-datepicker/dist/react-datepicker.css'
-import '@/styles/leadsStyle.css'
-import { Poppins } from 'next/font/google'
 import ErrorBoundary from '@/core/ErrorBoundary/ErrorBoundary'
 import TagManager from 'react-gtm-module'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
-import { setHash } from '@/utils/util'
+import { is_webengage_event_enabled, setHash } from '@/utils/util'
 import { v4 as uuidv4 } from 'uuid'
 import HeaderComp from '@/core/component/common/HeaderComp/HeaderComp'
 import NextNProgress from 'nextjs-progressbar'
+import ScrollToTop from 'react-scroll-to-top';
+import dynamic from 'next/dynamic';
+import NotFound from '@/core/layout/PageNotFound';
 
-const poppins = Poppins({
-  weight: ['100', '200', '300', '400', '500', '600', '700'],
-  subsets: ['latin']
+const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
+  ssr: false
 })
 
 export default function App({ Component, pageProps }) {
+
   const [value, setValue] = useState()
   const router = useRouter()
+  const [footerLoad, setFooterLoad] = useState(false)
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFooterLoad(true)
+    }, 500);
+  }, [footerLoad])
 
   const isLandingPage = router.asPath?.includes('landing')
   const tryFrontUrl = process.env.NEXT_PUBLIC_WEBSITE_URL
@@ -31,7 +42,7 @@ export default function App({ Component, pageProps }) {
       deviceId = uuidv4()
       if (typeof window !== 'undefined') {
         Cookies.set('deviceId', deviceId, {
-          expires: 365, 
+          expires: 365,
           secure: true
         })
       }
@@ -81,31 +92,39 @@ export default function App({ Component, pageProps }) {
     }
   }, [router?.query?.h])
 
-  const handleGTM = () => {
-    const currentDate = new Date();
-    const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
-    const pageUrl = router?.asPath.split('?')[0];
-
-    window.dataLayer.push({
-      dataLayer: {
-        event: 'page_view',
-        page_url: pageUrl,
-        date: formattedDate,
-      },
-    });
-  };
-
   useEffect(() => {
+    const handleGTM = () => {
+      const currentDate = new Date();
+      const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
+      const pageUrl = router?.asPath.split('?')[0];
+
+      window.dataLayer.push({
+        dataLayer: {
+          event: 'page_view',
+          page_url: pageUrl,
+          date: formattedDate,
+        },
+      });
+    };
+
     handleGTM();
   }, [router.asPath]);
 
   useEffect(() => {
-    if (pageProps?.leadsParams) {
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('leadsParams', JSON.stringify(pageProps?.leadsParams))
-      }
+    const currentDate = new Date();
+    const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
+    const pageUrl = router?.asPath.split('?')[0];
+    if (is_webengage_event_enabled && typeof window !== 'undefined') {
+      window.webengage?.init('in~~c2ab3714');
+
+      window.webengage?.track('page_view', {
+        page_url: pageUrl,
+        date: formattedDate,
+      });
+
     }
-  }, [pageProps?.leadsParams])
+  }, [router.asPath]);
+
 
   useEffect(() => {
     const disablePinchZoom = (event) => {
@@ -119,13 +138,39 @@ export default function App({ Component, pageProps }) {
     }
   }, [])
 
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register('/svc.js', { scope: '/' }).then(
+          function (registration) {
+            console.log(
+              "Service Worker registration successful with scope: ",
+              registration.scope
+            );
+          },
+          function (err) {
+            console.log("Service Worker registration failed: ", err);
+          }
+        );
+      });
+    }
+  }, []);
+
+
+
   return (
     <>
       <ErrorBoundary>
-        <main className={poppins.className}>
+        <main className="font-[poppins]">
           {!isLandingPage && <HeaderComp metaData={pageProps?.businessmetaheadtag} />}
           <NextNProgress color='#49D49D' height={3} />
           <Component {...pageProps} />
+          {!isLandingPage && footerLoad && (
+            <>
+              <DynamicFooter businessCategorydata={pageProps?.businessCategorydata} />
+              <ScrollToTop smooth color='#000' />
+            </>
+          )}
         </main>
       </ErrorBoundary>
     </>

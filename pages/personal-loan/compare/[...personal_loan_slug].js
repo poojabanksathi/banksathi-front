@@ -1,8 +1,7 @@
-import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI, multipleSlug } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY, FAQAPI, multipleSlug } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import dynamic from 'next/dynamic'
 import React from 'react'
-import ScrollToTop from 'react-scroll-to-top'
 import { useRouter } from 'next/router'
 
 const CommonBreadCrumbComponent = dynamic(
@@ -18,9 +17,7 @@ const MobileFooter = dynamic(() => import('../../../core/component/common/Mobile
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 
 const PersonalLoanCompare = dynamic(
   () => import('@/core/component/Layout/PersonalLoan/PersonalLoanCompare/PersonalLoanCompare'),
@@ -40,7 +37,6 @@ export async function getServerSideProps(context) {
     const context_params = context?.resolvedUrl && context?.resolvedUrl.split('/')[1]
     const lang_id = 1
     const url_slug = ''
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
 
     const req1 = {
@@ -146,17 +142,15 @@ const PersonalLoanComparePage = ({
     />
   ) : (
     <div>
-      <section>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader
-            businessCategorydata={businessCategorydata}
-            showCreditScore={false}
-            slug1={slug1Data}
-            slug2={slug2Data}
-            slug3={slug3Data}
-          />
-        </div>
-      </section>
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader
+          businessCategorydata={businessCategorydata}
+          showCreditScore={false}
+          slug1={slug1Data}
+          slug2={slug2Data}
+          slug3={slug3Data}
+        />
+      </div>
       <div className='pb-4 bg-[#F4F8FB]'>
         <CommonBreadCrumbComponent
           link1={'/personal-loan'}
@@ -176,10 +170,7 @@ const PersonalLoanComparePage = ({
         />
         <MobileFooter />
       </div>
-      <DynamicFooter />
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
+    
     </div>
   )
 }

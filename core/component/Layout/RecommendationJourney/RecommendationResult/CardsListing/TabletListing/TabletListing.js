@@ -109,7 +109,7 @@ const TabletListing = ({
                         category='credit cards'
                         pos='23'
                         position={index}
-                        disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                        disabled={!alldata?.is_apply_now}
                       />
                     </div>
                     <div className='py-5 px-4 border-b max-[280px]:!px-2'>

@@ -342,7 +342,7 @@ const CompareCreditCardNew = ({ route, faqdata, slug1, slug2, slug3, productcomp
                     userData={userData}
                     pos='4'
                     position='1'
-                    disabled={MobileSlugArray?.[0]?.product_details?.bank_name === "KOTAK MAHINDRA BANK"}
+                    disabled={!MobileSlugArray?.[0]?.product_details?.is_apply_now}
                   />
                 </div>
               </div>
@@ -405,7 +405,7 @@ const CompareCreditCardNew = ({ route, faqdata, slug1, slug2, slug3, productcomp
                     userData={userData}
                     pos='5'
                     position='2'
-                    disabled={MobileSlugArray?.[1]?.product_details?.bank_name === "KOTAK MAHINDRA BANK"}
+                    disabled={!MobileSlugArray?.[1]?.product_details?.is_apply_now}
                   />
                 </div>
               </div>
@@ -744,7 +744,7 @@ const CompareCreditCardNew = ({ route, faqdata, slug1, slug2, slug3, productcomp
                             userData={userData}
                             pos='6'
                             position='1'
-                            disabled={slugsArray?.[0]?.product_details?.bank_name === "KOTAK MAHINDRA BANK"}
+                            disabled={!slugsArray?.[0]?.product_details?.is_apply_now}
                           />
                         </div>
                       </div>
@@ -812,7 +812,7 @@ const CompareCreditCardNew = ({ route, faqdata, slug1, slug2, slug3, productcomp
                             userData={userData || productcomparedata}
                             pos='7'
                             position={'2'}
-                            disabled={slugsArray?.[1]?.product_details?.bank_name === "KOTAK MAHINDRA BANK"}
+                            disabled={!slugsArray?.[1]?.product_details?.is_apply_now}
                             
                           />
                         </div>
@@ -882,7 +882,7 @@ const CompareCreditCardNew = ({ route, faqdata, slug1, slug2, slug3, productcomp
                           userData={userData || productcomparedata}
                           pos='9'
                           position={'3'}
-                          disabled={slugsArray?.[2]?.product_details?.bank_name === "KOTAK MAHINDRA BANK"}
+                          disabled={!slugsArray?.[2]?.product_details?.is_apply_now}
                         />
                       </div>
                     </div>

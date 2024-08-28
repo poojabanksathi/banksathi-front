@@ -10,7 +10,7 @@ function InsuranceOffers() {
     <>
       <div className='insurance-offer-card'>
         <div className='pb-4'>
-          <p className='text-[#212529] head-text font-[faktum] xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] font-semibold max-[479px]:text-center '>
+          <p className='text-[#212529] head-text xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] font-semibold max-[479px]:text-center '>
             Insurance Offers
           </p>
         </div>

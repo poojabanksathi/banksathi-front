@@ -96,7 +96,7 @@ const EmiSliderChart = ({ loanname }) => {
           <div className='loan-calculator-bg'>
             <div className='flex items-center justify-between'>
               <div>
-                <h3 className='text-[15px] font-semibold'>Loan Amount </h3>
+                <h3 className='text-[15px] text-[#212529] font-semibold'>Loan Amount </h3>
               </div>
               <div className='bg-[#F4F8FB] w-[200px] flex justify-center gap-[26px] px-3 text-[#212529] items-center h-[40px] rounded font-semibold'>
                 <Input
@@ -129,7 +129,7 @@ const EmiSliderChart = ({ loanname }) => {
           <div className='loan-calculator-bg mt-[28px]'>
             <div className='flex items-center justify-between'>
               <div>
-                <h3 className='text-[15px] font-semibold'>Rate of Interest (p.a)</h3>
+                <h3 className='text-[15px] text-[#212529] font-semibold'>Rate of Interest (p.a)</h3>
               </div>
               <div className='bg-[#F4F8FB] w-[150px] flex justify-center  px-3 text-[#212529] items-center h-[40px] rounded font-semibold'>
                 <Input
@@ -159,7 +159,7 @@ const EmiSliderChart = ({ loanname }) => {
           <div className='loan-calculator-bg mt-[28px]'>
             <div className='flex items-center justify-between'>
               <div>
-                <h3 className='text-[15px] font-semibold'>Tenure (Months)</h3>
+                <h3 className='text-[15px] text-[#212529] font-semibold'>Tenure (Months)</h3>
               </div>
               <div className='bg-[#F4F8FB] w-[150px] gap-1 flex justify-center px-3 text-[#212529] items-center h-[40px] rounded font-semibold'>
  
@@ -189,16 +189,16 @@ const EmiSliderChart = ({ loanname }) => {
           </div>
           <div className='pt-[65px]'>
             <div className='flex justify-between my-2'>
-              <p className='text-[15px] font-normal'>Monthly EMI</p>
-              <p className='text-[15px] font-semibold mt-0 symbole-rupee'>₹ {EMI.toLocaleString('en-US', {
+              <p className='text-[15px] text-[#212529] font-normal'>Monthly EMI</p>
+              <p className='text-[15px] text-[#212529] font-semibold mt-0 symbole-rupee'>₹ {EMI.toLocaleString('en-US', {
                
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 0,
                 })}</p>
             </div>
             <div className='flex justify-between my-2'>
-              <p className='text-[15px] font-normal'>Loan Amount</p>
-              <p className='text-[15px] font-semibold mt-0 symbole-rupee'>
+              <p className='text-[15px] text-[#212529] font-normal'>Loan Amount</p>
+              <p className='text-[15px] text-[#212529] font-semibold mt-0 symbole-rupee'>
               ₹ {Principle.toLocaleString('en-US', {
                    
                   minimumFractionDigits: 0,
@@ -207,8 +207,8 @@ const EmiSliderChart = ({ loanname }) => {
               </p>
             </div>
             <div className='flex justify-between my-2'>
-              <p className='text-[15px] font-normal'>Total Interest Payable</p>
-              <p className='text-[15px] font-semibold mt-0 symbole-rupee'>
+              <p className='text-[15px] text-[#212529] font-normal'>Total Interest Payable</p>
+              <p className='text-[15px] text-[#212529] font-semibold mt-0 symbole-rupee'>
               ₹ {totalInterest.toLocaleString('en-US', {
                   
                   minimumFractionDigits: 0,
@@ -217,8 +217,8 @@ const EmiSliderChart = ({ loanname }) => {
               </p>
             </div>
             <div className='flex justify-between my-2'>
-              <p className='text-[15px] font-normal'>Total Amount Payable</p>
-              <p className='text-[15px] font-semibold mt-0 symbole-rupee'>
+              <p className='text-[15px] text-[#212529] font-normal'>Total Amount Payable</p>
+              <p className='text-[15px] text-[#212529] font-semibold mt-0 symbole-rupee'>
               ₹ {totalPayment.toLocaleString('en-US', {
                   
                   minimumFractionDigits: 0,

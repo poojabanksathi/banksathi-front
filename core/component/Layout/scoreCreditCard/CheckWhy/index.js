@@ -5,7 +5,7 @@ import React from 'react'
 function CheckWhy() {
   return (
     <div>
-      <h1 className='pb-10 text-[#212529] head-text font-[faktum] max-[834px]:leading-[50px] max-[479px]:leading-10 text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[32px] max-[479px]:text-[26px] max-[375px]:text-[26px] max-[320px]:text-[22px] leading-[50.4px] w-[48%] max-[1440px]:w-[60%] max-[1200px]:w-[76%] max-[576px]:w-full font-semibold text-center mx-auto emproving-title'>
+      <h1 className='pb-10 text-[#212529] head-text max-[834px]:leading-[50px] max-[479px]:leading-10 text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[32px] max-[479px]:text-[26px] max-[375px]:text-[26px] max-[320px]:text-[22px] leading-[50.4px] w-[48%] max-[1440px]:w-[60%] max-[1200px]:w-[76%] max-[576px]:w-full font-semibold text-center mx-auto emproving-title'>
         Why check Credit Score with Banksathi?
       </h1>
       <div className='grid grid-cols-4 max-[771px]:grid-cols-2 max-[479px]:grid-cols-1  max-[1200px]:gap-4 px-20 gap-[30px] max-[1200px]:px-0'>

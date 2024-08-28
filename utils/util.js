@@ -169,6 +169,23 @@ export const getHash = () => {
     return h
   }
 }
+export const formatName = (str) => {
+  return str
+  ?.split('-')
+  ?.map(word => word.toUpperCase())
+  ?.join(' ');
+};
+export const formatNameLowecase = (str) => {
+  return str
+  ?.split('-')
+  ?.map(word => word.toLowerCase())
+  ?.join(' ');
+
+//  return str
+//     ?.toLowerCase()  // Convert the entire string to lowercase
+//     ?.replace(/-/g, ' ');  // Replace all hyphens with spaces
+
+};
 export const checkIfHasAllMandatoryFields = (params) => {
   const {
     url_slug,
@@ -559,3 +576,4 @@ export const getBlogDetailsBreadCrumb = (url) => {
   const breadCrumSlug = upperCase?.join(' ')
   return breadCrumSlug
 }
+export const is_webengage_event_enabled = true;

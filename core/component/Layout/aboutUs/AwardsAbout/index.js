@@ -17,7 +17,7 @@ export default function AwardsAbout() {
             <div>
               <div className='card-left'>
                 <div className='mt-4'>
-                  <h4 className='head-text text-[#212529] font-[faktum] text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] leading-[64.4px]  font-semibold  pb-5 max-[1200px]:w-[90%] max-[479px]:w-full max-[479px]:leading-10 text-center mx-auto'>
+                  <h4 className='head-text text-[#212529] text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] leading-[64.4px]  font-semibold  pb-5 max-[1200px]:w-[90%] max-[479px]:w-full max-[479px]:leading-10 text-center mx-auto'>
                     Awards & Achievements
                   </h4>
                   <div className='grid grid-cols-3  gap-12 max-[1200px]:gap-8 max-[834px]:gap-4 py-14 max-[834px]:gap-10  max-[834px]:grid-cols-2  max-[576px]:grid-cols-1 max-[576px]:gap-10 max-[479px]:grid-cols-1  max-[479px]:pt-5 award-resolv'>

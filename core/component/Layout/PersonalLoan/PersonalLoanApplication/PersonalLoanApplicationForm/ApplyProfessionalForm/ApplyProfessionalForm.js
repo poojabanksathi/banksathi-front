@@ -22,11 +22,10 @@ const ApplyProfessionalForm = ({
   productDetailsData,
   isEligible
 }) => {
-  console.log("🚀 ~ userInformation:", userInformation)
   const isSalaried = userInformation?.occupation === 'Salaried'
 
-  const category_url = productDetailsData?.product_details?.url_slug?.split('/')[0]
-  const category_name = productDetailsData?.product_details?.card_name
+  const product_url = productDetailsData?.product_details?.url_slug?.split('/')[0]
+  const product_name = productDetailsData?.product_details?.card_name
 
   const incomeValue = isSalaried ? userInformation?.monthly_salary : userInformation?.itr_amount
 
@@ -45,7 +44,7 @@ const ApplyProfessionalForm = ({
   const handlePincodeChange = () => setVisible(true)
 
   const getData = async () => {
-    const url = BASE_URL + COMMON.pinCodeVerify
+        const url = BASE_URL + COMMON.pinCodeVerify
     await axios
       .post(
         url,
@@ -55,11 +54,16 @@ const ApplyProfessionalForm = ({
         { headers: headers }
       )
       .then((response) => {
-        if (response?.data?.data?.pincode_data?.pincodes?.length <= 0) {
+                if (response?.data?.data?.pincode_data?.pincodes?.length <= 0) {
           setPinCode([])
           setVisible(false)
           setPinCodeError(true)
           handleGTM()
+          handleWebEngageEvent('applied_card', {
+            product_category: product_url,
+            product_name: product_name,
+            eligible_status: isEligible,
+          });
         } else {
           setPinCodeError(false)
           setPinCode(response.data.data.pincode_data?.pincodes)
@@ -77,16 +81,6 @@ const ApplyProfessionalForm = ({
     }
   }, [userInformation?.pin_code?.length])
 
-  const handleGTM = () => {
-    TagManager?.dataLayer({
-      dataLayer: {
-        event: 'applied_card',
-        product_category: category_url,
-        product_name: category_name,
-        eligible_status: isEligible,
-      },
-    });
-  }
 
 
   return (
@@ -109,7 +103,7 @@ const ApplyProfessionalForm = ({
           onInput={(e) => {
             e.target.value = removeNonAlphaNumeric(e)
           }}
-          // onFocus={() => ScrollToTop(nameRef, mobileView)}
+// onFocus={() => ScrollToTop(nameRef, mobileView)}
           placeholder='Enter your name according to pan'
         />
         {errorNameLast && <p className='text-[12px] text-[#FF000F] font-no'>{ApiMessage?.letterNameErr}</p>}

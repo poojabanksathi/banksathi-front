@@ -89,7 +89,7 @@ function HomePathSucess() {
           Your Path to Financial Success
         </p>
         <div className='grid lg:grid-cols-2 gap-x-12 lg:gap-y-10 gap-6 mt-10 why-cards'>
-          <div className='bg-white hover:bg-[#14363D] transition-all hover:text-white lg:p-6 p-3 lg:py-6 py-4 flex items-center rounded-[16px] why-grid'>
+          <div className='bg-white hover:bg-[#14363D] transition-all hover:text-white text-[#212529] lg:p-6 p-3 lg:py-6 py-4 flex items-center rounded-[16px] why-grid'>
             <div className='w-[120px] lg:p-4 p-2'>
               <Image src='/assets/transfer.svg' className='w-full h-full' alt='image' width={80} height={80} />
             </div>
@@ -100,7 +100,7 @@ function HomePathSucess() {
               </p>
             </div>
           </div>
-          <div className='bg-white lg:p-6 p-3 lg:py-6 py-4 transition-all hover:bg-[#14363D] hover:text-white flex items-center rounded-[16px]'>
+          <div className='bg-white lg:p-6 p-3 lg:py-6 py-4 transition-all hover:bg-[#14363D] hover:text-white text-[#212529] flex items-center rounded-[16px]'>
             <div className='w-[120px] lg:p-4 p-2'>
               <Image src='/assets/product.svg' className='w-full h-full' alt='image' width={80} height={80} />
             </div>
@@ -111,7 +111,7 @@ function HomePathSucess() {
               </p>
             </div>
           </div>
-          <div className='bg-white lg:p-6 p-3 hover:bg-[#14363D] transition-all hover:text-white lg:py-6 py-4 flex items-center rounded-[16px]'>
+          <div className='bg-white lg:p-6 p-3 hover:bg-[#14363D] transition-all hover:text-white text-[#212529] lg:py-6 py-4 flex items-center rounded-[16px]'>
             <div className='w-[120px] lg:p-4 p-2'>
               <Image src='/assets/zero.svg' className='w-full h-full' alt='image' width={80} height={80} />
             </div>
@@ -122,7 +122,7 @@ function HomePathSucess() {
               </p>
             </div>
           </div>
-          <div className='bg-white lg:p-6 p-3 hover:bg-[#14363D] transition-all hover:text-white lg:py-6 py-4 flex items-center rounded-[16px]'>
+          <div className='bg-white lg:p-6 p-3 hover:bg-[#14363D] transition-all hover:text-white text-[#212529] lg:py-6 py-4 flex items-center rounded-[16px]'>
             <div className='w-[120px] lg:p-4 p-2'>
               <Image src='/assets/training.svg' className='w-full h-full' alt='image' width={80} height={80} />
             </div>

@@ -48,7 +48,7 @@ const InformCustomer = ({ isDesktop, isChecked, otpOpen, setOtpOpen, setCallApi,
                   setCallApi(true)
                 }}
                 disabled={disableButton}
-                className={`head-text font-medium font-[faktum] w-[85vw] h-[50px] text-center bg-[#49D49D] !text-[#212529] rounded-lg text-[15px]  mx-auto flex items-center justify-center gap-4 relative bottom-[16px] ${
+                className={`head-text font-medium w-[85vw] h-[50px] text-center bg-[#49D49D] !text-[#212529] rounded-lg text-[15px]  mx-auto flex items-center justify-center gap-4 relative bottom-[16px] ${
                   !disableButton ? '' : 'disableClassBtn'
                 }`}>
                 Generate OTP

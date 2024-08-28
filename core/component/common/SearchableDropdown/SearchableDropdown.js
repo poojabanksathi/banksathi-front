@@ -35,7 +35,7 @@ const SearchableDropdown = ({ options, label, id, selectedVal, handleChange, pla
   return (
     <div className='dropdown'>
       <div className='control'>
-        <div className='selected-value text-neutral-800 text-[12px] font-semibold font-["Poppins"] flex items-center justify-center'>
+        <div className='selected-value text-neutral-800 text-[12px] font-semibold font-[poppins] flex items-center justify-center'>
           <input
             ref={inputRef}
             type='text'

@@ -15,10 +15,6 @@ const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
 
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
-
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
@@ -36,8 +32,6 @@ const FAQ = dynamic(() => import('@/core/component/common/FAQ/FAQ'), {
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
-
     const { req } = context
     const ref = req?.headers?.referer || ''
     const categoryUrl = 'loan-eligibility'
@@ -115,10 +109,8 @@ const index = ({ businessCategorydata, businessmetaheadtag, faqdata, metaRespons
         </div>
         <CreditBeginnerCard longTerm={businessmetaheadtag} />
         <FAQ faqdata={faqdata} />
-
         <div className='bg-[#fff]'>
           <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
         </div>
       </div>
     </div>

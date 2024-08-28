@@ -17,7 +17,6 @@ import SearchableDropdown from '@/core/component/common/SearchableDropdown/Searc
 import { useRouter } from 'next/router'
 import LoanMobileCompareTable from './LoanMobileCompareTable/LoanMobileCompareTable'
 import Link from 'next/link'
-import CreditCardTrobleHaving from '../../compareCard/cardTrobleHaving/CreditCardTrobleHaving'
 
 const PersonalLoanCompare = ({ slug1Data, slug2Data, slug3Data, productcomparedata, isPdfPage }) => {
   const placeHolder = 'Select lender'
@@ -412,11 +411,11 @@ const PersonalLoanCompare = ({ slug1Data, slug2Data, slug3Data, productcompareda
           </div>
         )}
       </div>
-      {!isPdfPage && (
+      {/* {!isPdfPage && (
         <div className='py-4'>
           <CreditCardTrobleHaving position={'2'} />
         </div>
-      )}
+      )} */}
     </div>
   )
 }

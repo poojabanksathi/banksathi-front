@@ -1,6 +1,5 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import HomeRupee from '../../../public/assets/home-loan-cal.svg'
@@ -12,9 +11,7 @@ const FAQ = dynamic(() => import('@/core/component/common/FAQ/FAQ'), {
     ssr: false
 })
 
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
-    ssr: false
-})
+
 
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
     ssr: false
@@ -35,22 +32,17 @@ export default function Index({
 
     return (
         <>
-            <div>
-                <div className=' bg-[#844FCF]'>
-                    <DynamicHeader businessCategorydata={businessCategorydata} />
-                </div>
-                <div className='bg-[#F4F8FB] h-auto'>
-                    <BredcrumbCalculator />
-                    <PersonalLoanCalculator metaData={businessmetaheadtag} loanIconSrc={HomeRupee} calculatorName={'Axis Bank Personal Loan EMI Calculator'} info={'Plan Your Loans, Control Your Future'} loanname={'axis-bank-loan'} />
-                    <FAQ faqdata={faqdata} />
-                </div>
-                <div className='bg-[#fff]'>
-                    <MobileFooter businessCategorydata={businessCategorydata} />
-
-                    <DynamicMobileFooter businessCategorydata={businessCategorydata} />
-                </div>
+            <div className=' bg-[#844FCF]'>
+                <DynamicHeader businessCategorydata={businessCategorydata} />
             </div>
-            <ScrollToTop smooth color='#000' />
+            <div className='bg-[#F4F8FB] h-auto'>
+                <BredcrumbCalculator />
+                <PersonalLoanCalculator metaData={businessmetaheadtag} loanIconSrc={HomeRupee} calculatorName={'Axis Bank Personal Loan EMI Calculator'} info={'Plan Your Loans, Control Your Future'} loanname={'axis-bank-loan'} />
+                <FAQ faqdata={faqdata} />
+            </div>
+            <div className='bg-[#fff]'>
+                <MobileFooter businessCategorydata={businessCategorydata} />
+            </div>
         </>
     )
 }
@@ -58,8 +50,6 @@ export default function Index({
 export async function getServerSideProps(context) {
     try {
         const lang_id = 1
-        const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
-        const url_slug = ''
         const last_url = context?.resolvedUrl && context?.resolvedUrl.split('/')
         const context_params = last_url?.[last_url?.length - 1]
         const ref = context?.req?.headers?.referer || ''
@@ -72,10 +62,6 @@ export async function getServerSideProps(context) {
         const req2 = {
             lang_id: lang_id,
             url_slug: context_params
-        }
-        const req5 = {
-            search_string: url_slug,
-            lang_id: lang_id
         }
         const req6 = {
             lang_id: lang_id,

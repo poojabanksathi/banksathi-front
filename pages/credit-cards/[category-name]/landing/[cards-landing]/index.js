@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import React, { useRef } from 'react'
+import React from 'react'
 import { BASE_URL, BUSINESSCATEGORY, multipleSlug } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import Link from "next/link";
@@ -24,7 +24,6 @@ export default function Index({
   const isMobile = size?.width <= 576
   return (
     <>
-      <section>
         <div className='bg-[#fff]'>
         <div className='p-4 landing-header'>
           <Link href="/">
@@ -46,10 +45,6 @@ export default function Index({
           </div>
         </div>
         }
-     
-      </section>
-
-
     </>
   )
 }
@@ -59,7 +54,6 @@ export async function getServerSideProps(context) {
     const productDetails = context?.params?.['cards-landing']
     const lang_id = 1
     const categoryUrl = context?.params?.['category-name'] || ''
-
     const cookies = context?.req?.headers?.cookie?.split(';')
     const device_id = getDeviceIdCookie(cookies)
     
@@ -80,11 +74,9 @@ export async function getServerSideProps(context) {
       return { data: null }
     })
 
-
     const [data1, data2] = await Promise.all([
       response1,
       response2,
-     
     ]).then((responses) => responses.map((response) => response.data))
 
     return {

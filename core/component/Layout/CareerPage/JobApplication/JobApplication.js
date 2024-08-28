@@ -140,7 +140,7 @@ const JobApplication = () => {
 
                   <div className='flex items-center justify-center w-full'>
                     <label
-                      for='dropzone-file'
+                      htmlFor='dropzone-file'
                       className='flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-slate-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 mb-[3px]'>
                       <div className='flex flex-col items-center justify-center pt-5 pb-6'>
                         <Image src={UploadIcon} width={24} height={24} alt='upload' className='mb-[8px]' />
@@ -161,7 +161,7 @@ const JobApplication = () => {
           <div className='flex items-center justify-center mb-[41px] max-sm:mb-[41px]'>
             <button
               onClick={() => {}}
-              className='head-text font-[faktum] text-center bg-[#49D49D] !text-[#212529] py-2 pl-2 pr-2 rounded-lg text-[15px] w-[101px] h-[48px] mx-auto flex items-center justify-center gap-4 max-sm:w-[127px] max-sm:h-[40px] max-sm:text-[12px] md:w-[127px] md:h-[40px] md:text-[12px]'>
+              className='head-text text-center bg-[#49D49D] !text-[#212529] py-2 pl-2 pr-2 rounded-lg text-[15px] w-[101px] h-[48px] mx-auto flex items-center justify-center gap-4 max-sm:w-[127px] max-sm:h-[40px] max-sm:text-[12px] md:w-[127px] md:h-[40px] md:text-[12px]'>
               <Link href='' prefetch={false} passHref>
                 Submit
               </Link>

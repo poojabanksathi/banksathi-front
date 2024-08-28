@@ -17,7 +17,7 @@ function BankSecurityCards() {
                 alt="img"
               />
               <div className="mt-6 text-center max-[375px]:mt-4 font-[Poppins]">
-                <p className=" head-text font-[faktum] pb-2 text-[24px] font-semibold  max-[576px]:text-[24px] text-[#212529]">
+                <p className=" head-text pb-2 text-[24px] font-semibold  max-[576px]:text-[24px] text-[#212529]">
                   Security
                 </p>
                 <p className="text-[#212529] text-[16px] max-[479px]:text-[14px]">
@@ -33,7 +33,7 @@ function BankSecurityCards() {
                 alt="img"
               />
               <div className="mt-6 text-center max-[375px]:mt-4 font-[Poppins]">
-                <p className=" head-text font-[faktum] text-[24px] font-semibold pb-2 max-[576px]:text-[24px] text-[#212529]">
+                <p className=" head-text text-[24px] font-semibold pb-2 max-[576px]:text-[24px] text-[#212529]">
                   Data Privacy
                 </p>
                 <p className=" text-[#212529] text-[16px] max-[479px]:text-[14px]">

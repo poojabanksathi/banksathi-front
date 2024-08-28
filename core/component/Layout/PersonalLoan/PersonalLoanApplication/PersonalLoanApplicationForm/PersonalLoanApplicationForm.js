@@ -7,10 +7,11 @@ import ApplyPersonalForm from './ApplyPersonalForm/ApplyPersonalForm'
 import ApplyProfessionalForm from './ApplyProfessionalForm/ApplyProfessionalForm'
 import { BASE_URL, LEADAPPAPI } from '@/utils/alljsonfile/service'
 import axios from 'axios'
-import { emailRegex, errorHandling, getHash, mobileNumberRegex, panRegex } from '@/utils/util'
+import { emailRegex, errorHandling, getHash, is_webengage_event_enabled, mobileNumberRegex, panRegex } from '@/utils/util'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 import toast, { Toaster } from 'react-hot-toast'
+import TagManager from 'react-gtm-module'
 
 const PersonalLoanApplicationForm = ({ productDetailsData, url_slug }) => {
   const size = useWindowSize()
@@ -57,6 +58,11 @@ const PersonalLoanApplicationForm = ({ productDetailsData, url_slug }) => {
   const [pinCodeError, setPinCodeError] = useState(false)
   const [emailValid, setEmailValid] = useState(true)
   const [zeroNumberValidation, setZeroNumberValidation] = useState(false)
+  const product_url = productDetailsData?.product_details?.url_slug?.split('/')[0]
+  const product_name = productDetailsData?.product_details?.card_name
+  const finalArray = localUserData?.eligible_product?.credit_cards
+  const finalData = productDetailsData?.product_details?.url_slug.split('/').pop();
+  const isEligible = finalArray?.includes(finalData);   
 
   const isSalaried = userInformation?.occupation === 'Salaried'
   const isSelfEmployed = userInformation?.occupation === 'Self-employed'
@@ -114,6 +120,23 @@ const PersonalLoanApplicationForm = ({ productDetailsData, url_slug }) => {
     else setZeroNumberValidation(false)
   }
   // ------------------------------ADD LEADS API CALL --------------------- //
+
+  const handleGTM = () => {
+    TagManager?.dataLayer({
+  dataLayer: {
+    event: 'applied_card',
+    product_category: product_url,
+    product_name: product_name,
+    eligible_status: isEligible,
+  },
+});
+}
+  const handleWebEngageEvent = (eventName, eventData) => {
+    if (is_webengage_event_enabled && typeof window !== 'undefined' && window.webengage) {
+      window.webengage.track(eventName, eventData);
+    }
+  }
+
   const callApplyNowApi = () => {
     setShowLoader(true)
     let params = {
@@ -151,6 +174,12 @@ const PersonalLoanApplicationForm = ({ productDetailsData, url_slug }) => {
         setShowLoader(false)
         if (response?.data?.data?.url) {
           router.push(response?.data?.data?.url)
+          handleGTM()
+            handleWebEngageEvent('applied_card', {
+              product_category: product_url,
+              product_name: product_name,
+              eligible_status: isEligible,
+            });
         }
         if (response?.data?.message === 'failed') {
           if (response?.data?.reason || response?.data?.data) {
@@ -165,11 +194,8 @@ const PersonalLoanApplicationForm = ({ productDetailsData, url_slug }) => {
         errorHandling(error)
       })
   }
-
-  const finalArray = localUserData?.eligible_product?.credit_cards
-  const finalData = productDetailsData?.product_details?.url_slug.split('/').pop();
-  const isEligible = finalArray?.includes(finalData);   
-
+  
+  
   return (
     <>
       <Toaster />

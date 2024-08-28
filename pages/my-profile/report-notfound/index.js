@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 import React from 'react'
-import { BASE_URL, BUSINESSCATEGORY, COMMON } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import ScrollToTop from 'react-scroll-to-top'
 import { metaInfo } from '@/utils/metaInfo'
@@ -15,11 +15,9 @@ const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
 
-export default function Index({ businessmetaheadtag,  businessCategorydata }) {
+
+export default function Index({ businessmetaheadtag, businessCategorydata }) {
   const getOgUrl = typeof window !== 'undefined' && window?.location?.href
   const modifiedUrl = typeof window !== 'undefined' && window.location.origin + window.location.pathname
   const CDN_URL = process.env.NEXT_PUBLIC_BASE_IMG_CDN_URL
@@ -27,7 +25,7 @@ export default function Index({ businessmetaheadtag,  businessCategorydata }) {
   return (
     <>
       <Head>
-        <title>{businessmetaheadtag?.h1_paragraph?.meta_title || metaInfo?.pageTitle }</title>
+        <title>{businessmetaheadtag?.h1_paragraph?.meta_title || metaInfo?.pageTitle}</title>
         <link rel='canonical' href={modifiedUrl} />
         <meta name='description' content={businessmetaheadtag?.h1_paragraph?.meta_description || metaInfo?.pageDescription} />
         {process.env.NEXT_PUBLIC_WEBSITE_URL == 'www.banksathi.com' ? (
@@ -75,26 +73,17 @@ export default function Index({ businessmetaheadtag,  businessCategorydata }) {
         <link rel='icon' sizes='192x192' href='/favicon.ico' prefetch={false} />
         <link rel='apple-touch-icon' href='/favicon.ico' prefetch={false}></link>
       </Head>
-      
-      <section>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader
-            businessCategorydata={businessCategorydata}
-          />
-        </div>
-        <div className='bg-white'>
-          <NoReportFound />
-        </div>
-      </section>
-      <div>
-        <MobileFooter businessCategorydata={businessCategorydata} />
-      </div>
 
-      <DynamicFooter businessCategorydata={businessCategorydata} />
-
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader
+          businessCategorydata={businessCategorydata}
+        />
       </div>
+      <div className='bg-white'>
+        <NoReportFound />
+      </div>
+      <MobileFooter businessCategorydata={businessCategorydata} />
+
     </>
   )
 }
@@ -105,9 +94,7 @@ export async function getServerSideProps(context) {
 
     const lang_id = 1
     const url_slug = context_params
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
-    const ref=context?.req?.headers?.referer || '';
-
+    const ref = context?.req?.headers?.referer || '';
 
     const req1 = {
       lang_id: lang_id,
@@ -125,7 +112,7 @@ export async function getServerSideProps(context) {
       return { data: 'notFound' }
     })
 
-    const [data1,  data3] = await Promise.all([response1,  response3]).then(
+    const [data1, data3] = await Promise.all([response1, response3]).then(
       (responses) => responses.map((response) => response.data)
     )
 
@@ -133,7 +120,7 @@ export async function getServerSideProps(context) {
       props: {
         businessmetaheadtag: data1?.h1_paragraph || null,
         businessCategorydata: data3,
-        referer:ref,
+        referer: ref,
       }
     }
   } catch (error) {

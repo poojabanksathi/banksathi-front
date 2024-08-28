@@ -27,13 +27,13 @@ export default function Otp(props) {
   const [isLoadingOtp, setLoadingOtp] = useState(false)
   const [transactionids, setTransactionId] = useState([])
   const [resendingOtp, setResendingOtp] = useState(false)
-  const LeadMobile = localStorage.getItem('LeadMobile')
-  const transactionid = localStorage.getItem('transaction_id')
-  const messagetype = localStorage.getItem('auth_type')
-  const istempotpData = localStorage.getItem('istempotp')
+  const LeadMobile = typeof window !== 'undefined' && localStorage.getItem('LeadMobile')
+  const transactionid = typeof window !== 'undefined' && localStorage.getItem('transaction_id')
+  const messagetype = typeof window !== 'undefined' && localStorage.getItem('auth_type')
+  const istempotpData = typeof window !== 'undefined' && localStorage.getItem('istempotp')
   const [dataOtp, setdataOtp] = useState([])
-  const leadId = localStorage.getItem('leadprofileid')
-  const token = localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
   const referer = props.referer
   const leadsField = props.leadsField
   const [fieldValue, setFieldValue] = useState()
@@ -274,7 +274,7 @@ export default function Otp(props) {
                   name='otp'
                   renderInput={(props) => <input {...props} />}
                 />
-                {errOtp && <p className='text-[12px] text-[#FF000F] font-no mt-2'>{ApiMessage?.otpValidError}</p>}
+                {errOtp && <p className='text-[12px] text-[#FF000F] font-normal mt-2'>{ApiMessage?.otpValidError}</p>}
               </div>
             </div>
             {/* <div className='text-center'>

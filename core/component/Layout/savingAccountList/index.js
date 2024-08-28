@@ -1,12 +1,7 @@
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { Suspense } from 'react'
 
-const CreditCardTrobleHaving = dynamic(
-  () => import('@/core/component/Layout/compareCard/cardTrobleHaving/CreditCardTrobleHaving'),
-  {
-    ssr: false
-  }
-)
+
 // const BreadcrumbSavingAccount = dynamic(
 //   () => import('@/core/component/Layout/savingAccountList/BreadcrumbSavingAccount'),
 //   {
@@ -52,6 +47,12 @@ function SavingAccountList({
   const imageUrl = sub_cat_image
     ? `${Img_URL}/${businessmetaheadtag?.sub_category_image}`
     : `${Img_URL}/${businessmetaheadtag?.product_image}`
+
+
+    const SkeletonLoader = () => (
+      <div className='bg-gray-200 min-h-[200px] w-full'></div>
+    );
+
   return (
     <div className='bg-[#F4F8FB]'>
       {/* <SavingAccountBanner businessmetaheadtag={businessmetaheadtag} /> */}
@@ -69,7 +70,9 @@ function SavingAccountList({
         />
       </div>
       <VedioCheck productDetailsData={bankAccountsData} />
-      <CreditCardTrobleHaving position={'4'} />
+      <Suspense fallback={SkeletonLoader}>
+      {/* <CreditCardTrobleHaving position={'4'} /> */}
+      </Suspense>
       <CreditBeginnerCard longTerm={longFormData} />
       <div className='max-sm:mx-0 container mx-auto'>
         <ServiceTabs serviceTabs={serviceTabs} position={'5'} />

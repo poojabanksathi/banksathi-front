@@ -9,9 +9,9 @@ export const partnerBrandAll = [
     brandlogo: '/assets/kotak-brand.svg'
   },
 
-  {
-    brandlogo: '/assets/standerd-brand.svg'
-  },
+  // {
+  //   brandlogo: '/assets/standerd-brand.svg'
+  // },
   {
     brandlogo: '/assets/sbi.svg'
   },
@@ -145,9 +145,9 @@ export const partnerBrandCredit = [
   {
     brandlogo: '/assets/icici-brand.svg'
   },
-  {
-    brandlogo: '/assets/standerd-brand.svg'
-  }
+  // {
+  //   brandlogo: '/assets/standerd-brand.svg'
+  // }
 ]
 
 export const partnerBrandLoan = [
@@ -166,9 +166,9 @@ export const partnerBrandLoan = [
   {
     brandlogo: '/assets/icici-brand.svg'
   },
-  {
-    brandlogo: '/assets/standerd-brand.svg'
-  },
+  // {
+  //   brandlogo: '/assets/standerd-brand.svg'
+  // },
   {
     brandlogo: '/assets/sbi.svg'
   },
@@ -208,9 +208,9 @@ export const partnerBrandPersonalLoan = [
   {
     brandlogo: '/assets/icici-brand.svg'
   },
-  {
-    brandlogo: '/assets/standerd-brand.svg'
-  },
+  // {
+  //   brandlogo: '/assets/standerd-brand.svg'
+  // },
   {
     brandlogo: '/assets/sbi.svg'
   },
@@ -244,9 +244,9 @@ export const partnerBrandBanking = [
   {
     brandlogo: '/assets/icici-brand.svg'
   },
-  {
-    brandlogo: '/assets/standerd-brand.svg'
-  },
+  // {
+  //   brandlogo: '/assets/standerd-brand.svg'
+  // },
   {
     brandlogo: '/assets/sarswat-brand.svg'
   },
@@ -262,9 +262,9 @@ export const partnerBrandInvastment = [
   {
     brandlogo: '/assets/icici-brand.svg'
   },
-  {
-    brandlogo: '/assets/standerd-brand.svg'
-  },
+  // {
+  //   brandlogo: '/assets/standerd-brand.svg'
+  // },
   {
     brandlogo: '/assets/sbi.svg'
   },
@@ -310,9 +310,9 @@ export const partnerBrandDematAccount = [
   {
     brandlogo: '/assets/icici-brand.svg'
   },
-  {
-    brandlogo: '/assets/standerd-brand.svg'
-  },
+  // {
+  //   brandlogo: '/assets/standerd-brand.svg'
+  // },
   {
     brandlogo: '/assets/sbi.svg'
   },
@@ -382,9 +382,9 @@ export const firstFive = [
     brandlogo: '/assets/kotak-brand.svg'
   },
 
-  {
-    brandlogo: '/assets/standerd-brand.svg'
-  },
+  // {
+  //   brandlogo: '/assets/standerd-brand.svg'
+  // },
   {
     brandlogo: '/assets/sbi.svg'
   }

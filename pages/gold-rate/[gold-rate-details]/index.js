@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
-import { BASE_URL, BUSINESSCATEGORY, COMMON, BLOG } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY, BLOG } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import { getBlogDetailsBreadCrumb } from '@/utils/util'
 import { useWindowSize } from '@/hooks/useWindowSize'
@@ -11,9 +10,6 @@ const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
 
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
@@ -33,7 +29,6 @@ const CreditNewsDetails = dynamic(
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
     const blog_url_slug = context?.params?.['gold-rate-details']
     const goldRateSlug = 'gold-rate'
@@ -110,51 +105,47 @@ const Index = ({ businessCategorydata, newsDetailsData, blogUrl, newsListData })
       }
       setLastScrollTop(currentScrollTop);
     };
-  
+
     window.addEventListener('scroll', handleScroll);
-  
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [lastScrollTop]);
   return (
     <>
-      <div>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader businessCategorydata={businessCategorydata} />
-        </div>
-        <div className='bg-[#F4F8FB] h-auto'>
-          <CommonBreadCrumbComponent
-            link1='/gold-rate'
-            link1Name='Gold Rate Blog'
-            link2Name={breadCrumSlug}
-            title='Gold Rate Blog Details'
-          />
-          <CreditNewsDetails
-            blogUrl={blogUrl}
-            newsDetailsData={newsDetailsData}
-            newsListData={newsListData}
-            infoPage={true}
-            goldRatePage={true}
-          />
-        </div>
-        <div className='bg-[#fff]'>
-          <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
-          {mobileSize && showComponent && (
-        <div className='fixed bottom-0 left-0 z-[999] h-[53px] w-full justify-between items-center'>
-          <div className='text-center'>
-                          <Link href='/credit-cards/eligibility' prefetch={false}>
-                            <button className='bg-[#49D49D] w-full py-[18px] lg:w-[240px]  max-[240px]:w-full  font-faktum font-semibold text-[14px] leading-[18px] tracking-wide text-[#212529]'>
-                            Check Credit Card Eligibility 
-                            </button>
-                          </Link>
-                        </div>
-        </div>
-       )}
-        </div>
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader businessCategorydata={businessCategorydata} />
       </div>
-      <ScrollToTop smooth color='#000' />
+      <div className='bg-[#F4F8FB] h-auto'>
+        <CommonBreadCrumbComponent
+          link1='/gold-rate'
+          link1Name='Gold Rate Blog'
+          link2Name={breadCrumSlug}
+          title='Gold Rate Blog Details'
+        />
+        <CreditNewsDetails
+          blogUrl={blogUrl}
+          newsDetailsData={newsDetailsData}
+          newsListData={newsListData}
+          infoPage={true}
+          goldRatePage={true}
+        />
+      </div>
+      <div className='bg-[#fff]'>
+        <MobileFooter businessCategorydata={businessCategorydata} />
+        {mobileSize && showComponent && (
+          <div className='fixed bottom-0 left-0 z-[999] h-[53px] w-full justify-between items-center'>
+            <div className='text-center'>
+              <Link href='/credit-cards/eligibility' prefetch={false}>
+                <button className='bg-[#49D49D] w-full py-[18px] lg:w-[240px]  max-[240px]:w-full  font-faktum font-semibold text-[14px] leading-[18px] tracking-wide text-[#212529]'>
+                  Check Credit Card Eligibility
+                </button>
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
     </>
   )
 }

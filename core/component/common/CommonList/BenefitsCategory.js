@@ -24,20 +24,20 @@ function BenefitsCategory() {
     <>
       <div className='py-[80px] max-[576px]:py-[40px] max-[393px]:pb-[60px]'>
         <div className='pb-8'>
-          <h2 className='head-text text-[#212529] font-[faktum] text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[25px]  max-[375px]:text-[22px] max-[320px]:text-[21px] text-center font-semibold max-[479px]:leading-6 max-[320px]:leading-8 max-[280px]:text-[18px]'>
+          <h2 className='head-text text-[#212529] text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[25px]  max-[375px]:text-[22px] max-[320px]:text-[21px] text-center font-semibold max-[479px]:leading-6 max-[320px]:leading-8 max-[280px]:text-[18px]'>
             Benefits of using BankSathi
           </h2>
         </div>
         <div className='w-[31%]  max-[1440px]:w-[38%] max-[1200px]:w-[46%] max-[1024px]:w-[50%] max-[820px]:w-[56%] max-[771px]:w-[68%]  max-[576px]:w-[92%]  grid grid-cols-2 gap-2 bg-white py-2 px-2 mx-auto justify-between rounded-full items-center  max-[479px]:w-full benefit-tabs'>
           <p
-            className={`text-center cursor-pointer head-text font-[faktum] px-4 font-semibold text-[15px] py-4 max-[479px]:text-[12px] max-[479px]:px-2 max-[375px]:text-[12px] max-[320px]:text-[10px] max-[320px]:px-0 mt-0 rounded-full ${
+            className={`text-center cursor-pointer head-text px-4 font-semibold text-[15px] py-4 max-[479px]:text-[12px] max-[479px]:px-2 max-[375px]:text-[12px] max-[320px]:text-[10px] max-[320px]:px-0 mt-0 rounded-full ${
               tabs == 0 ? 'bg-[#844FCF] text-white' : 'text-[#212529]'
             }`}
             onClick={() => settab(0)}>
             Credit Products
           </p>
           <p
-            className={`text-center cursor-pointer head-text font-[faktum] text-[15px] font-semibold rounded-full max-[479px]:text-[12px] max-[479px]:px-2 py-4 px-4 max-[375px]:text-[12px] max-[360px]:text-[11px] max-[320px]:text-[10px] max-[320px]:px-0 mt-0 max-[280px]:text-[9px] ${
+            className={`text-center cursor-pointer head-text text-[15px] font-semibold rounded-full max-[479px]:text-[12px] max-[479px]:px-2 py-4 px-4 max-[375px]:text-[12px] max-[360px]:text-[11px] max-[320px]:text-[10px] max-[320px]:px-0 mt-0 max-[280px]:text-[9px] ${
               tabs == 1 ? 'bg-[#844FCF]  text-white' : ' text-[#212529]'
             }`}
             onClick={() => settab(1)}>

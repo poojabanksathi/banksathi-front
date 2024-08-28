@@ -33,7 +33,7 @@ const ScoreSupport = ({ SelectSupportTabs, setSelectSupportTabs, faqdata }) => {
       )}
       <div>
         <div className='pb-[30px] flex justify-between max-[479px]:px-4 items-center max-[479px]:flex-col-reverse max-[479px]:gap-5'>
-          <p className='head-text font-[faktum] text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[24px] max-[375px]:text-[24px] max-[320px]:text-[22px] font-semibold  text-[#212529]  max-[576px]:w-full leading-[64.4px] max-[576px]:leading-[50.2px] max-[479px]:leading-10'>
+          <p className='head-text text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[24px] max-[375px]:text-[24px] max-[320px]:text-[22px] font-semibold  text-[#212529]  max-[576px]:w-full leading-[64.4px] max-[576px]:leading-[50.2px] max-[479px]:leading-10'>
             {SelectSupportTabs === 0 && 'FAQs'}
             {SelectSupportTabs === 1 && 'Contact Us'}
           </p>
@@ -42,7 +42,7 @@ const ScoreSupport = ({ SelectSupportTabs, setSelectSupportTabs, faqdata }) => {
               return (
                 <>
                   <p
-                    className={`text-center cursor-pointer head-text font-[faktum]  font-semibold text-[15px] h-full flex justify-center items-center max-[479px]:text-[14px]  max-[375px]:text-[14px] max-[360px]:text-[13px] max-[320px]:text-[14px] max-[320px]:px-0 mt-0 rounded-full  max-[280px]:text-[12px] ${
+                    className={`text-center cursor-pointer head-text font-semibold text-[15px] h-full flex justify-center items-center max-[479px]:text-[14px]  max-[375px]:text-[14px] max-[360px]:text-[13px] max-[320px]:text-[14px] max-[320px]:px-0 mt-0 rounded-full  max-[280px]:text-[12px] ${
                       index == SelectSupportTabs ? 'bg-[#844FCF] text-white' : 'text-[#212529]'
                     }`}
                     onClick={() => handleClick(index)}>
@@ -68,7 +68,7 @@ const ScoreSupport = ({ SelectSupportTabs, setSelectSupportTabs, faqdata }) => {
                 
 
                 <p
-                  className='text-center cursor-pointer head-text font-[faktum]  font-semibold text-[15px] max-[479px]:text-[12px] max-[479px]:px-2 max-[375px]:px-0 max-[375px]:text-[12px] max-[320px]:text-[10px] max-[320px]:px-0 mt-0
+                  className='text-center text-[#212529] cursor-pointer head-text font-semibold text-[15px] max-[479px]:text-[12px] max-[479px]:px-2 max-[375px]:px-0 max-[375px]:text-[12px] max-[320px]:text-[10px] max-[320px]:px-0 mt-0
             '>
                   Credit Card
                 </p>
@@ -84,7 +84,7 @@ const ScoreSupport = ({ SelectSupportTabs, setSelectSupportTabs, faqdata }) => {
                
 
                 <p
-                  className='text-center cursor-pointer  font-[faktum]  font-semibold text-[15px] max-[479px]:text-[12px] max-[479px]:px-2 max-[375px]:text-[12px] max-[320px]:text-[10px] max-[320px]:px-0 mt-0 
+                  className='text-center text-[#212529] cursor-pointer  font-[faktum]  font-semibold text-[15px] max-[479px]:text-[12px] max-[479px]:px-2 max-[375px]:text-[12px] max-[320px]:text-[10px] max-[320px]:px-0 mt-0 
             '>
                   Credit Score
                 </p>

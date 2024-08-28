@@ -169,7 +169,7 @@ const MyApplicationList = ({ headersAuth, token, leadId }) => {
       )}
       <div>
         <div className='pb-4 flex justify-between gap-4 max-[479px]:px-4 items-center max-[479px]:flex-col-reverse max-[479px]:gap-5'>
-          <p className=' whitespace-nowrap text-[#212529] head-text font-[faktum] xl:text-3xl lg:text-3xl md:text-3xl  max-[576px]:text-[28px] max-[479px]:text-[22px] font-semibold max-[479px]:text-left max-[479px]:w-full '>
+          <p className=' whitespace-nowrap text-[#212529] head-text xl:text-3xl lg:text-3xl md:text-3xl  max-[576px]:text-[28px] max-[479px]:text-[22px] font-semibold max-[479px]:text-left max-[479px]:w-full '>
             My Application
           </p>
 
@@ -180,7 +180,7 @@ const MyApplicationList = ({ headersAuth, token, leadId }) => {
             {statusArray?.map((item) => {
               return (
                 <p
-                  className={`w-full whitespace-nowrap flex p-[10px] text-center cursor-pointer head-text font-[faktum] font-semibold text-[13px] h-full justify-center items-center max-[479px]:text-[12px]  max-[375px]:text-[12px] max-[360px]:text-[13px] max-[320px]:text-[12px] max-[320px]:px-2 mt-0 rounded-full  max-[280px]:text-[12px] ${
+                  className={`w-full whitespace-nowrap flex p-[10px] text-center cursor-pointer head-text font-semibold text-[13px] h-full justify-center items-center max-[479px]:text-[12px]  max-[375px]:text-[12px] max-[360px]:text-[13px] max-[320px]:text-[12px] max-[320px]:px-2 mt-0 rounded-full  max-[280px]:text-[12px] ${
                     activeTab === item ? 'bg-[#844FCF] text-white' : 'text-[#212529]'
                   }`}
                   onClick={() => {

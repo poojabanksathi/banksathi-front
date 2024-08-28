@@ -187,7 +187,7 @@ const SavingAccountsDetails = ({
           isPdp={true}
           pos='31'
           position={'1'}
-          disabled={productDetailsData?.product_details?.bank_name === "KOTAK MAHINDRA BANK"}
+          disabled={!productDetailsData?.product_details?.is_apply_now}
         />
       </div>
     )
@@ -511,9 +511,10 @@ const SavingAccountsDetails = ({
                       </div>
                     </div>
                     {productDetailsData?.product_details?.cashback_offer && (
-                      <>
+                      <div className='flex-col justify-start items-start gap-0.5 flex'>
+
                         {' '}
-                        <div className="text-neutral-800 text-[15px] font-medium font-['Poppins'] mb-[6px] mt-[20px]">
+                        <div className="text-neutral-800 text-[15px] font-medium font-['Poppins'] ">
                           Cashback Offer
                         </div>
                         <div className='text-neutral-800 text-[15px] font-normal font-[Poppins] leading-relaxed'>
@@ -523,7 +524,7 @@ const SavingAccountsDetails = ({
                               __html: `<div>${productDetailsData?.product_details?.cashback_offer}</div>`
                             }}></div>
                         </div>
-                      </>
+                      </div>
                     )}
                   </div>
                   <div>

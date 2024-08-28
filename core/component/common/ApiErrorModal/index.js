@@ -13,7 +13,7 @@ function ApiErrorModal() {
             className='mx-auto max-[771px]:w-3/6 max-[576px]:w-3/4 max-[375px]:w-full'
           />
         </div>
-        <div className='tetx-center px-6'>
+        <div className='tetx-center px-6 text-[#212529]'>
           <p className='font-bold text-[35px] max-[576px]:text-[30px] max-[425px]:text-[26px] text-center mt-3 '>
             We’ll be back soon!
           </p>

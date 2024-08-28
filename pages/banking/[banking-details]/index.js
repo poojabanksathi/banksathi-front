@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, BLOG } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import { getBlogDetailsBreadCrumb } from '@/utils/util'
@@ -10,9 +9,7 @@ import Link from 'next/link'
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
@@ -139,7 +136,6 @@ const Index = ({ businessCategorydata, newsDetailsData, blogUrl, newsListData })
         </div>
         <div className='bg-[#fff]'>
           <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
           {mobileSize && showComponent && (
         <div className='fixed bottom-0 left-0 z-[999] h-[53px] w-full justify-between items-center'>
           <div className='text-center'>
@@ -153,7 +149,6 @@ const Index = ({ businessCategorydata, newsDetailsData, blogUrl, newsListData })
        )}
         </div>
       </div>
-      <ScrollToTop smooth color='#000' />
     </>
   )
 }

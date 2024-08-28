@@ -1,7 +1,6 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
-import { BASE_URL, BUSINESSCATEGORY, COMMON } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
@@ -28,7 +27,6 @@ export default function Index({ businessCategorydata }) {
           <MobileFooter businessCategorydata={businessCategorydata} />
         </div>
       </div>
-      <ScrollToTop smooth color='#000' />
     </>
   )
 }
@@ -36,13 +34,8 @@ export default function Index({ businessCategorydata }) {
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
 
-    const req1 = {
-      website_url: website_url,
-      lang_id: lang_id
-    }
     const req2 = {
       lang_id: lang_id
     }

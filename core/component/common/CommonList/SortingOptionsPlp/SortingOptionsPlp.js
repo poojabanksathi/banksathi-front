@@ -83,8 +83,6 @@ const SortingOptionsPlp = ({ arrowImage, filteredData, setFilteredData, initialL
     }
   }, [sortedList?.length])
 
-  console.log(sortedList)
-
   return (
     <div className='flex flex-row items-center justify-start gap-8 px-2'>
       <div className="text-center text-neutral-800 text-[17px] font-semibold font-['Poppins']">SORT BY :</div>

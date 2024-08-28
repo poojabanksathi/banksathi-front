@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import CreditCardTrobleHaving from '../../compareCard/cardTrobleHaving/CreditCardTrobleHaving'
 import FAQ from '@/core/component/common/FAQ/FAQ'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -253,6 +252,7 @@ const CompareSavingsCard = ({ faqdata, slug1, slug2, slug3, productcomparedata }
     documentTitle: 'banks-compare-report'
   })
 
+
   return (
     <div>
       <div className='bg-[#F4F8FB]'>
@@ -357,7 +357,7 @@ const CompareSavingsCard = ({ faqdata, slug1, slug2, slug3, productcomparedata }
                           Apply Now
                         </button> */}
                         <ApplyNowButton data={slug1} position='1' userData={userData} pos='28'
-                          disabled={slug1?.bank_name === "KOTAK MAHINDRA BANK"}
+                          disabled={!slug1?.is_apply_now}
                         />
                       </div>
                     </div>
@@ -424,7 +424,7 @@ const CompareSavingsCard = ({ faqdata, slug1, slug2, slug3, productcomparedata }
                           className=' py-3 cursor-pointer w-full md:w-[230px] lg:w-[200px] xl:w-[230px] rounded-lg text-[#212529] bg-[#49D49D] font-semibold '>
                           Apply Now
                         </button> */}
-                        <ApplyNowButton data={slug2} userData={userData} pos='29' position={'2'} disabled={slug2?.bank_name === "KOTAK MAHINDRA BANK"}/>
+                        <ApplyNowButton data={slug2} userData={userData} pos='29' position={'2'} disabled={!slug2?.is_apply_now}/>
                       </div>
                     </div>
                   </div>
@@ -488,7 +488,7 @@ const CompareSavingsCard = ({ faqdata, slug1, slug2, slug3, productcomparedata }
                           className=' py-3 cursor-pointer w-full md:w-[230px] lg:w-[200px] xl:w-[230px]  rounded-lg text-[#212529] bg-[#49D49D] font-semibold '>
                           Apply Now
                         </button> */}
-                        <ApplyNowButton data={slug3} userData={userData} pos='30' position='3' disabled={slug3?.bank_name === "KOTAK MAHINDRA BANK"}/>
+                        <ApplyNowButton data={slug3} userData={userData} pos='30' position='3' disabled={!slug3?.is_apply_now}/>
                       </div>
                     </div>
                   </div>
@@ -563,7 +563,7 @@ const CompareSavingsCard = ({ faqdata, slug1, slug2, slug3, productcomparedata }
             </Link>
           </div>
         </div>
-        <CreditCardTrobleHaving position={'2'} />
+        {/* <CreditCardTrobleHaving position={'2'} /> */}
         <FAQ faqdata={faqdata} />
       </div>
     </div>

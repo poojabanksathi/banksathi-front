@@ -1592,7 +1592,7 @@ export default function CreditInsights({
             <>
               <div className='flex items-end justify-end pr-4'>
                 <button
-                  className='rounded-[5px] flex items-center justify-center text-[#212529] head-text text-[18px] font-[faktum] border border-[#212529] bg-transparent w-[180px] py-[10px] cursor-pointer hover:shadow-md'
+                  className='rounded-[5px] flex items-center justify-center text-[#212529] head-text text-[18px] border border-[#212529] bg-transparent w-[180px] py-[10px] cursor-pointer hover:shadow-md'
                   onClick={() => router.push('/my-profile/my-offer')}>
                   View more
                 </button>

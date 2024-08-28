@@ -412,10 +412,10 @@ const RecommendationJourney = ({ topMenuCategories, creditCardsList }) => {
     selfEmployed && setSelfEmployed(true)
 
     // Remove localstorageData
-    if (localStorage.getItem('listData')) {
+    if ( typeof window !== 'undefined' && localStorage.getItem('listData')) {
       localStorage.removeItem('listData')
     }
-    if (localStorage.getItem('subCategories')) {
+    if (typeof window !== 'undefined' && localStorage.getItem('subCategories')) {
       localStorage.removeItem('subCategories')
     }
   }, [])

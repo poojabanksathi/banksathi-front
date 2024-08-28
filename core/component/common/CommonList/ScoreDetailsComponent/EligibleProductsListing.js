@@ -403,7 +403,7 @@ const EligibleProductsListing = ({
                               category={'credit-cards'}
                               pos='15'
                               position={index}
-                              disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                              disabled={!alldata?.is_apply_now}
                             />
                             <div>
                               <label className=' text-gray-500 font-bold flex items-center'>
@@ -441,7 +441,7 @@ const EligibleProductsListing = ({
                             category={'credit-cards'}
                             pos='17'
                             position={index}
-                            disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                            disabled={!alldata?.is_apply_now}
                           />
                         </div>
                         <div className='mt-4'>
@@ -641,7 +641,7 @@ const EligibleProductsListing = ({
                                 category={'credit-cards'}
                                 pos='15'
                                 position={index}
-                                disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                                disabled={!alldata?.is_apply_now}
                               />
                               <div>
                                 <label className=' text-gray-500 font-bold flex items-center'>
@@ -679,7 +679,7 @@ const EligibleProductsListing = ({
                               category={'credit-cards'}
                               pos='17'
                               position={index}
-                              disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                              disabled={!alldata?.is_apply_now}
                             />
                           </div>
                           <div className='mt-4'>
@@ -768,7 +768,7 @@ const EligibleProductsListing = ({
           {filteredDataCard?.length > 10 && (
             <div className='flex items-end justify-end pr-4'>
               <button
-                className='rounded-[5px] flex items-center justify-center text-[#212529] head-text text-[18px] font-[faktum] border border-[#212529] bg-transparent w-[180px] py-[10px] cursor-pointer hover:shadow-md'
+                className='rounded-[5px] flex items-center justify-center text-[#212529] head-text text-[18px] border border-[#212529] bg-transparent w-[180px] py-[10px] cursor-pointer hover:shadow-md'
                 onClick={() => setShowRestCreditCards(!showRestCreditCards)}>
                 {showRestCreditCards ? 'View less' : 'View More'}
               </button>
@@ -892,7 +892,7 @@ const EligibleProductsListing = ({
                               category={'bank-accounts'}
                               pos='19'
                               position={index}
-                              disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                              disabled={!alldata?.is_apply_now}
                             />
                             <div></div>
                           </div>
@@ -910,6 +910,8 @@ const EligibleProductsListing = ({
                             category={'bank-accounts'}
                             pos='20'
                             position={index}
+                            disabled={!alldata?.is_apply_now}
+
                           />
                         </div>
                         <div className='mt-4'></div>
@@ -1057,7 +1059,7 @@ const EligibleProductsListing = ({
                                 category={'bank-accounts'}
                                 pos='19'
                                 position={index}
-                                disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                                disabled={!alldata?.is_apply_now}
                               />
                               <div></div>
                             </div>
@@ -1075,6 +1077,7 @@ const EligibleProductsListing = ({
                               category={'bank-accounts'}
                               pos='20'
                               position={index}
+                              disabled={!alldata?.is_apply_now}
                             />
                           </div>
                           <div className='mt-4'></div>
@@ -1117,7 +1120,7 @@ const EligibleProductsListing = ({
           {filteredBankAccountsData?.length > 10 && (
             <div className='flex items-end justify-end pr-4'>
               <button
-                className='rounded-[5px] flex items-center justify-center text-[#212529] head-text text-[18px] font-[faktum] border border-[#212529] bg-transparent w-[180px] py-[10px] cursor-pointer hover:shadow-md'
+                className='rounded-[5px] flex items-center justify-center text-[#212529] head-text text-[18px] border border-[#212529] bg-transparent w-[180px] py-[10px] cursor-pointer hover:shadow-md'
                 onClick={() => setShowRestBanks(!showRestBanks)}>
                 {showRestBanks ? 'View less' : 'View More'}
               </button>
@@ -1163,7 +1166,7 @@ const EligibleProductsListing = ({
             {eligiblePersonalLoans?.length > 10 && (
               <div className='flex items-end justify-end pr-4  mt-2'>
                 <button
-                  className='rounded-[5px] flex items-center justify-center text-[#212529] head-text text-[18px] font-[faktum] border border-[#212529] bg-transparent w-[180px] py-[10px] cursor-pointer hover:shadow-md'
+                  className='rounded-[5px] flex items-center justify-center text-[#212529] head-text text-[18px] border border-[#212529] bg-transparent w-[180px] py-[10px] cursor-pointer hover:shadow-md'
                   onClick={() => setShowRestLoans(!showRestLoans)}>
                   {showRestLoans ? 'View less' : 'View More'}
                 </button>

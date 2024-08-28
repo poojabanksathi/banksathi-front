@@ -7,8 +7,8 @@ function SavingAccountBanner() {
     <>
       <div className='container h-full  mx-auto max-[991px]:max-w-full  max-[1024px]:px-8 max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4'>
         <div className='pt-[50px] container px-20  pb-0 max-[1200px]:px-0 max-[1024px]:px-8  max-[479px]:px-4  max-[479px]:py-[30px] max-[280px]:px-0'>
-          <div className='text-[#212529] head-text font-[faktum] xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[20px] max-[320px]:text-[19px] font-semibold  max-[479px]:!leading-10  !leading-[50.4px] max-[1440px]:w-[74%] max-[834px]:w-[84%] mx-auto pb-[40px] max-[576px]:w-full'>
-            <h1 className='text-[#212529] head-text font-[faktum] xl:text-4xl lg:text-3xl md:text-2xl leading-[50.4px] max-[576px]:text-[24px] max-[479px]:text-[24px] max-[479px]:!leading-[33.6px]  font-semibold max-[479px]:text-center max-[771px]:w-[90%] max-[479px]:w-full '>
+          <div className='text-[#212529] head-text xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[20px] max-[320px]:text-[19px] font-semibold  max-[479px]:!leading-10  !leading-[50.4px] max-[1440px]:w-[74%] max-[834px]:w-[84%] mx-auto pb-[40px] max-[576px]:w-full'>
+            <h1 className='text-[#212529] head-text xl:text-4xl lg:text-3xl md:text-2xl leading-[50.4px] max-[576px]:text-[24px] max-[479px]:text-[24px] max-[479px]:!leading-[33.6px]  font-semibold max-[479px]:text-center max-[771px]:w-[90%] max-[479px]:w-full '>
               Explore the Best online savings accounts you can apply for:
             </h1>
           </div>

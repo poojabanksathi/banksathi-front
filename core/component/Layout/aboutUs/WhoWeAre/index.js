@@ -19,11 +19,13 @@ export default function WhoWeAre() {
             src={Whoweare}
             className='absolute  z-[-1] left-[7%] top-[-3%] max-[1440px]:top-0 max-[1200px]:left-[7%]  w-2/4  max-[771px]:w-3/5 max-[771px]:left-[8%] max-[576px]:w-3/4 max-[576px]:left-[5%] max-[576px]:top-[-1%] max-[479px]:top-[-1%] max-[479px]:left-[12%]'
             alt='img'
+            priority={true}
+
           />
 
           <div className='py-10  w-full max-w-[86%] mx-auto max-[1200px]:w-[85%] max-[991px]:w-[90%] max-[576px]:w-full max-[576px]:py-0 centric-customer'>
             <div className=' pb-10 max-[479px]:pb-5 w-[64%] mr-auto max-[1440px]:w-[76%] max-[1200px]:w-[80%] max-[1024px]:w-[88%] max-[576px]:w-full'>
-              <h1 className='head-text font-[faktum] xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] max-[320px]:text-[20px] font-semibold mx-auto max-[479px]:text-center !leading-[50.4px] weare-title text-[#212529]  max-[991px]:!leading-10'>
+              <h1 className='head-text xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] max-[320px]:text-[20px] font-semibold mx-auto max-[479px]:text-center !leading-[50.4px] weare-title text-[#212529]  max-[991px]:!leading-10'>
                 We are customer-centric platform that utilizes AI technology to empower individuals to achieve financial
                 empowerment.
               </h1>

@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
-
-import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI, PRODUCTSAPI, multipleSlug } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY, FAQAPI, PRODUCTSAPI, multipleSlug } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 import { useRouter } from 'next/router'
-import { metaInfo } from '@/utils/metaInfo'
 import Head from 'next/head'
 import { getDeviceIdCookie } from '@/utils/util'
 
@@ -16,13 +13,10 @@ const DetailsCategoryCard = dynamic(
     ssr: false
   }
 )
-
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 
 export default function Index({
   faqdata,
@@ -94,11 +88,9 @@ export default function Index({
           <script type='application/ld+json' key='app-ld-json' dangerouslySetInnerHTML={productDetailJson} />
         </Head>
       )}
-      <section>
         <div className=' bg-[#844FCF]'>
           <DynamicHeader businessCategorydata={businessCategorydata} />
         </div>
-      </section>
       <div>
         <DetailsCategoryCard
           faqdata={faqdata}
@@ -110,14 +102,8 @@ export default function Index({
           categoryUrl={categoryUrl}
           productDetailsUrl={productDetailsUrl}
         />
-
       </div>
-
-      <DynamicFooter businessCategorydata={businessCategorydata} />
-
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
+     
     </>
   )
 }
@@ -134,7 +120,6 @@ export async function getServerSideProps(context) {
     const offset = 0
     const limitdata = 5
     const url_slug = cleanUrlContext
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
     const ip = context?.req?.headers?.['x-forwarded-for']?.split(',')?.[0] || ''
     const user_agent = context?.req?.headers?.['user-agent'] || ''

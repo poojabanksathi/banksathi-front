@@ -104,7 +104,15 @@ function HomeBanner() {
         </div>
       </div>
       <div className='sm:px-24 px-10'>
-        <Image className='mt-10 w-full h-full' src='/assets/Web Gif (1).gif' width={60} height={60} alt='web gif' />
+        <Image
+      src='/assets/Web Gif (1).gif'
+      width={800}
+      height={600} 
+      alt='web gif'
+      className='mt-10'
+      style={{ width: '100%', height: 'auto' }}
+    />
+        {/* <Image className='mt-10 w-full h-full' src='/assets/Web Gif (1).gif' width={60} height={60} alt='web gif' /> */}
         {/* <div className="flex w-full justify-center relative mt-10 bg-red-400">
             <div className="w-[100%] relative"></div>
             <div className="w-[100%] relative  left-[-100px]"></div>

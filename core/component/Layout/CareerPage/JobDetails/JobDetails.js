@@ -43,7 +43,7 @@ const JobDetails = () => {
       <div className='flex items-center justify-center mb-[30px] max-sm:mb-0'>
         <button
           onClick={() => navigateToApplication()}
-          className='head-text font-[faktum] text-center bg-[#49D49D] text-[#212529] py-2 pl-2 pr-2 rounded-lg text-lg w-[127px] h-[48px] mx-auto flex items-center justify-center gap-4 max-sm:w-[127px] max-sm:h-[40px] max-sm:text-[12px] md:w-[127px] md:h-[40px] md:text-[12px]'>
+          className='head-text text-center bg-[#49D49D] text-[#212529] py-2 pl-2 pr-2 rounded-lg text-lg w-[127px] h-[48px] mx-auto flex items-center justify-center gap-4 max-sm:w-[127px] max-sm:h-[40px] max-sm:text-[12px] md:w-[127px] md:h-[40px] md:text-[12px]'>
           <Link href='' prefetch={false} passHref>
             Apply Now
           </Link>
@@ -59,7 +59,7 @@ const JobDetails = () => {
           world of opportunities. We would love to hear from target-oriented, focused, energetic and organised freaks
           with a flair of creativity and have exceptional communication skills.
         </div>
-        <div className='flex items-center ext-neutral-800 text-2xl font-semibold leading-[33.60px] mb-[12px] max-sm:text-[18px] max-sm:leading-[24px] md:text-[18px] md:leading-[24px]'>
+        <div className='flex items-center text-neutral-800 text-2xl font-semibold leading-[33.60px] mb-[12px] max-sm:text-[18px] max-sm:leading-[24px] md:text-[18px] md:leading-[24px]'>
           Roles & Responsibilities
         </div>
         <div>
@@ -91,7 +91,7 @@ const JobDetails = () => {
         <div className='flex items-center justify-items-start max-sm:mb-[30px]'>
           <button
             onClick={() => navigateToApplication()}
-            className='flex head-text font-[faktum] text-center bg-[#49D49D] text-[#212529] py-2 pl-2 pr-2 rounded-lg text-lg w-[127px] h-[48px] mx-auto gap-4 max-sm:w-[127px] max-sm:h-[40px] max-sm:text-[15px] items-center justify-center'>
+            className='flex head-text text-center bg-[#49D49D] text-[#212529] py-2 pl-2 pr-2 rounded-lg text-lg w-[127px] h-[48px] mx-auto gap-4 max-sm:w-[127px] max-sm:h-[40px] max-sm:text-[15px] items-center justify-center'>
             <Link href='' prefetch={false} passHref>
               Apply Now
             </Link>

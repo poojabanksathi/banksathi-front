@@ -63,7 +63,7 @@ function ContactUsV2Banner() {
           }`}>
           <div className=''>
             <div>
-              <h1 className='head-text font-[faktum] md:p-[12px] xl:!leading-tight font-semibold xl:!text-[50px] lg:!text-[50px] md:text-[40px] sm:text-[38px] !leading-[66px] max-[475px]:text-[24px] text-white max-[479px]:!leading-8  max-[479px]:text-[24px]  max-[576px]:!leading-10  max-[576px]:text-[32px] relative text-center'>
+              <h1 className='head-text md:p-[12px] xl:!leading-tight font-semibold xl:!text-[50px] lg:!text-[50px] md:text-[40px] sm:text-[38px] !leading-[66px] max-[475px]:text-[24px] text-white max-[479px]:!leading-8  max-[479px]:text-[24px]  max-[576px]:!leading-10  max-[576px]:text-[32px] relative text-center'>
                 Hello! need assistance?
               </h1>
               <p className='text-white text-center text-[18px] max-[479px]:text-[16px]'>

@@ -107,8 +107,8 @@ function PersonaliseOffer({ querySlug, productList }) {
   const filteredDataCard = productList?.product_list?.filter((obj) =>
     profileformData?.url_slug?.includes(obj.url_slug.split('/').pop())
   )
-  const leadId = localStorage.getItem('leadprofileid')
-  const token = localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
 
   const router = useRouter()
 
@@ -211,7 +211,7 @@ useEffect(()=>{
       <div className={querySlug === 'others' ? 'py-0' : 'py-10'}>
       <div>
         <div className='pb-4 flex justify-between max-[479px]:px-4'>
-          <p className='text-[#212529] head-text font-[faktum] xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] font-semibold max-[479px]:text-center '>
+          <p className='text-[#212529] head-text xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] font-semibold max-[479px]:text-center '>
             Personalised Offers
           </p>
           {querySlug === 'credit-reports' || querySlug === 'credit-insights' ? (

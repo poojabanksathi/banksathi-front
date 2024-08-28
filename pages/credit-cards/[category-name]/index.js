@@ -5,11 +5,9 @@ import {
   BUSINESSCATEGORY,
   BUSINESSSUBCATEGORY,
   BrowseServices,
-  COMMON,
   FAQAPI
 } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 import { useRouter } from 'next/router'
 import { capitalizeFirstLetter } from '@/utils/util'
 
@@ -23,14 +21,10 @@ const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
 
 const CreditListingBanner = dynamic(() => import('@/core/component/Layout/creditCardList/CreditListingBanner'), {
   ssr: false
 })
-
 const CommonBreadCrumbComponent = dynamic(
   () => import('@/core/component/common/CommonList/CommonBreadCrumbComponent'),
   {
@@ -85,7 +79,7 @@ export default function Index({
               link2Name={capitalizeFirstLetter(url_slug)?.split('-')?.join(' ')}
             />
           </div>
-          <div className='container px-20  max-[1024px]:px-8 max-[576px]:px-4 max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4'>
+          <div className='container px-20 max-[1024px]:px-8 max-[576px]:px-4 max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4'>
           </div>
           <CreditListingBanner
             businessmetaheadtag={businessmetaheadtag}
@@ -111,10 +105,7 @@ export default function Index({
         />
         <div ref={bottomRefs}>
           <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicFooter businessCategorydata={businessCategorydata} />
-          <div className='scroll-top'>
-            <ScrollToTop smooth color='#000' />
-          </div>
+      
         </div>
       </div>
     </>
@@ -131,7 +122,6 @@ export async function getServerSideProps(context) {
 
     const lang_id = 1
     const url_slug = context_params
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
     const ip = context?.req?.headers?.['x-forwarded-for']?.split(',')?.[0] || ''
     const user_agent = context?.req?.headers?.['user-agent'] || ''
@@ -150,7 +140,6 @@ export async function getServerSideProps(context) {
       offset: page,
       limit: 20
     }
-
     const req1 = {
       lang_id: lang_id,
       business_category_url_slug: url_slug

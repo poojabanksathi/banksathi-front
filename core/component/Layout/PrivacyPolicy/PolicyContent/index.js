@@ -220,6 +220,11 @@ function PolicyContent() {
                       The information is collected for the End Customers to explore and apply for Products listed on the
                       website.
                     </li>
+                    <li className='text-[16px] max-[820px]:text-[15px] max-md:text-[15px] relative pl-[2%] max-md:pl-[4%] max-md:pb-[2%] max-sm:pb-[4%] max-sm:pl-[8%] pb-[1%] leading-[28px]'>
+                      To send promotional messages about our products via SMS.
+                    </li>
+
+                    
                   </ol>
                 </li>
               </ol>

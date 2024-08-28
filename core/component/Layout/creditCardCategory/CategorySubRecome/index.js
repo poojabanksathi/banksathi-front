@@ -17,9 +17,6 @@ const CreditBeginnerCard = dynamic(() => import('../CreditBeginnerCard'), {
   ssr: false
 })
 
-const CreditCardTrobleHaving = dynamic(() => import('../../compareCard/cardTrobleHaving/CreditCardTrobleHaving'), {
-  ssr: false
-})
 
 const DetailBredcrumb = dynamic(() => import('@/core/component/common/CommonList/DetailBredcrumb'), {
   ssr: false
@@ -41,16 +38,16 @@ function CategorySubRecome({
   bottomRefs,
   sub_cat_url
 }) {
-  const [categoryactive, setrCategoryactive] = useState('All')
+    const [categoryactive, setrCategoryactive] = useState('All')
   const size = useWindowSize()
   const bottomCompRefs = useRef(null)
   const isInViewPort = useIsInViewport(bottomRefs || bottomCompRefs)
 
   return (
     <div className='bg-[#F4F8FB]'>
-      {productlistdataSub && (
+       {productlistdataSub ? (
         <div className='container min-h-[500px] max-[1024px]:px-8 mx-auto max-[991px]:max-w-full pt-[50px] pb-[100px] max-[479px]:px-4 max-[479px]:py-[30px] max-[375px]:px-4 max-[320px]:px-4'>
-          
+
           <ListingFilterSubData
             productlistdataSub={productlistdataSub}
             categorytopmenulistsub={categorytopmenulistsub}
@@ -62,10 +59,14 @@ function CategorySubRecome({
             sub_cat_url={sub_cat_url}
           />
         </div>
-      )}
+      ) :
+        <p className='font-semibold text-[24px] max-[576px]:text-[24px] max-[425px]:text-[24px] max-[320px]:text-[22px] text-center pt-3 text-[#212529]'>
+          Results not found
+        </p>
+      }
       <div ref={bottomCompRefs}>
         <VedioCheck productDetailsData={businessmetaheadtag?.h1_paragraph} />
-        <CreditCardTrobleHaving position={'3'} />
+        {/* <CreditCardTrobleHaving position={'3'} /> */}
        
         <CreditBeginnerCard longTermSub={longTermSub} />
         {serviceTabs && (

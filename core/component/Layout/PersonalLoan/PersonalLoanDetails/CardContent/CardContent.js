@@ -18,6 +18,7 @@ const CardContent = ({ productDetailsData, url_slug }) => {
   const personalProductDetails = productDetailsData?.product_details
   const starCount = 5
   const isMobile = size?.width <= 576
+  const maxAmount = personalProductDetails?.loan_amount_max
 
   const creditScoreText =
     'Having a credit score within or above the recommended range increases your likelihood of approval for various financial applications, but it does not provide an absolute guarantee. Having a credit score within or above the recommended range increases your likelihood of approval for various financial applications, but it does not provide an absolute guarantee.'
@@ -59,6 +60,7 @@ const CardContent = ({ productDetailsData, url_slug }) => {
               cardName={personalProductDetails?.card_name}
               cardHref={personalProductDetails?.url_slug}
               detailsPage={true}
+              personalProductDetails={personalProductDetails}
             />
           ) : (
             // DESKTOP
@@ -140,13 +142,13 @@ const CardContent = ({ productDetailsData, url_slug }) => {
           <div className='flex flex-col gap-1 items-start'>
             <div className="text-neutral-800 text-sm font-normal font-['Poppins'] leading-tight">Interest Rate</div>
             <div className="text-neutral-800 text-[15px] font-semibold font-['Poppins'] leading-[21px]">
-              {getInterestRate(personalProductDetails?.interest_rate_min, personalProductDetails?.interest_rate_max)}
+              {`Starts from ${getInterestRate(personalProductDetails?.interest_rate_min)} - Up to ${getInterestRate(personalProductDetails?.interest_rate_max)}`}
             </div>
           </div>
           <div className='flex flex-col gap-1 items-start'>
             <div className="text-neutral-800 text-sm font-normal font-['Poppins'] leading-tight">Loan Amount</div>
             <div className="text-neutral-800 text-[15px] font-semibold font-['Poppins'] leading-[21px] symbole-rupee">
-              {getLoanAmount(personalProductDetails?.loan_amount_min, personalProductDetails?.loan_amount_max)}
+              {`${getLoanAmount(personalProductDetails?.loan_amount_min)} - Up to ${getLoanAmount(maxAmount)}`}
             </div>
           </div>
           <div className='flex flex-col gap-1 items-start'>

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React, { useEffect } from 'react'
 import ProductSection from './ProductSection/ProductSection'
 import PersonalLoanApplicationForm from './PersonalLoanApplicationForm/PersonalLoanApplicationForm'
-import { capitalizeFirstLetter } from '@/utils/util'
+import { capitalizeFirstLetter, is_webengage_event_enabled } from '@/utils/util'
 import TagManager from 'react-gtm-module'
 
 const PersonalLoanApplication = ({ productDetailsData, url_slug }) => {
@@ -10,22 +10,39 @@ const PersonalLoanApplication = ({ productDetailsData, url_slug }) => {
     ? capitalizeFirstLetter(productDetailsData?.product_details?.card_name?.toLowerCase())
     : ''
 
-    const category_url = productDetailsData?.product_details?.url_slug?.split('/')[0]
-    const category_name = productDetailsData?.product_details?.card_name
+    const product_url = productDetailsData?.product_details?.url_slug?.split('/')[0]
+    const product_name = productDetailsData?.product_details?.card_name
 
     const handleGTM = () => {
       TagManager?.dataLayer({
         dataLayer: {
           event: 'apply_card',
-          product_category: category_url,
-          product_name: category_name,
+          product_category: product_url,
+          product_name: product_name,
+          product_link : ""
+
         },
       });
+    }
+
+    const handleWebEngageEvent = (eventName, eventData) => {
+      if (is_webengage_event_enabled && typeof window !== 'undefined' && window.webengage) {
+        window.webengage.track(eventName, eventData);
+      }
     }
   
     useEffect(() => {
       handleGTM();
     }, []);
+
+    useEffect(() => {
+      handleWebEngageEvent('apply_card', {
+          product_category: product_url,
+          product_name: product_name || "",
+          product_link : ""
+
+      });
+  }, [product_url, product_name]);
 
   return (
     <div className='pb-[30px] container h-full mx-auto px-14 max-[1440px]:px-14 max-[1200px]:px-0 max-[1024px]:px-8 max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4 max-[991px]:max-w-full mt-[20px]'>

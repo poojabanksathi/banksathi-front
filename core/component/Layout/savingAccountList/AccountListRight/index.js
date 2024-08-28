@@ -389,7 +389,7 @@ function AccountListRight({
                           category={isSubCategoryFlow ? `bank ${url_slug}` : 'bank accounts'}
                           pos='23'
                           position={index}
-                          disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                          disabled={!alldata?.is_apply_now}
                         />
                       </div>
 
@@ -718,7 +718,7 @@ function AccountListRight({
                                   category={isSubCategoryFlow ? `bank ${url_slug}` : 'bank accounts'}
                                   pos='25'
                                   position={index}
-                                  disabled={allListdata?.bank_name === "KOTAK MAHINDRA BANK"}
+                                  disabled={!allListdata?.is_apply_now}
 
                                 />
                                 <div>
@@ -755,7 +755,7 @@ function AccountListRight({
                                     category={isSubCategoryFlow ? `bank ${url_slug}` : 'bank accounts'}
                                     pos='26'
                                     position={index}
-                                    disabled={allListdata?.bank_name === "KOTAK MAHINDRA BANK"}
+                                    disabled={!allListdata?.is_apply_now}
 
                                   />
                                 </div>
@@ -1011,7 +1011,7 @@ function AccountListRight({
                               category={isSubCategoryFlow ? `bank ${url_slug}` : 'bank accounts'}
                               pos='27'
                               position={index}
-                              disabled={allListdata?.bank_name === "KOTAK MAHINDRA BANK"}
+                              disabled={!allListdata?.is_apply_now}
 
 
 

@@ -89,7 +89,7 @@ function ScoreBanner({ getAllBlog }) {
     <>
       {blogListData?.length > 0 && (
         <div>
-          <h1 className='head-text font-[faktum] text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px]  max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] text-center font-semibold pt-[30px] text-[#212529] max-[576px]:leading-10]  '>
+          <h1 className='head-text text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px]  max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] text-center font-semibold pt-[30px] text-[#212529] max-[576px]:leading-10]  '>
             BankSathi Blog
           </h1>
         </div>

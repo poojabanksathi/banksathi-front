@@ -55,7 +55,7 @@ const CommonPicodeInput = ({
         placeholder={placeholder ? placeholder : 'Pin Code'}
         autoComplete='off'
       />
-      {pinCodeError && <p className='text-[12px] text-[#FF000F] font-no mt-2'>Please enter a valid pin code</p>}
+      {pinCodeError && <p className='text-[12px] text-[#FF000F] font-normal mt-2'>Please enter a valid pin code</p>}
     </>
   )
 }

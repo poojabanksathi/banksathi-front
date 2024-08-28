@@ -7,7 +7,7 @@ import PersonalLoanOverallRating from './PersonalLoanOverallRating/PersonalLoanO
 import VedioCheck from '@/core/component/common/VedioCheck'
 import CreditScoreDesktop from '@/core/component/common/CommonList/CreditScoreDesktop/CreditScoreDesktop'
 import HowToApplyDetail from '@/core/component/common/CommonList/HowToApplyDetail'
-import HelpLineComp from './HelpLineComp /HelpLineComp'
+// import HelpLineComp from './HelpLineComp/HelpLineComp'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import CheckCibilCard from '@/core/component/common/CheckCibilCard/CheckCibilCard'
 import { scoreData } from '@/utils/alljsonfile/checkCibilCardList'
@@ -163,9 +163,9 @@ const PersonalLoanDetails = ({
           </div>
         </div>
       </div>
-      <div className='mt-[30px]'>
+      {/* <div className='mt-[30px]'>
         <HelpLineComp productDetailsData={productDetailsData?.product_details} />
-      </div>
+      </div> */}
       <div className='mt-[80px]' ref={videoRef}>
         <VedioCheck productDetailsData={longFormData} title={'Know everything about SBI Personal Loan'} />
       </div>
@@ -211,4 +211,4 @@ const PersonalLoanDetails = ({
   )
 }
 
-export default PersonalLoanDetails
+export default memo(PersonalLoanDetails);

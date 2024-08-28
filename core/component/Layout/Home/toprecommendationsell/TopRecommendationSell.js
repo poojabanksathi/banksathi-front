@@ -102,7 +102,7 @@ function TopRecommendationSell({ RecomendedTopselling }) {
     <>
       {RecomendedTopselling?.productInfo?.length ? (
         <div className='pb-[140px] pt-[70px] max-[771px]:pb-[100px] max-[479px]:pb-[50px] max-[375px]:pb-[70px] top-product-box max-[576px]:pt-0'>
-          <h2 className='head-text font-[faktum] font-semibold text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] text-left text-[#212529] w-[87%] max-[1440px]:w-[90%] mx-auto pb-5 max-[1200px]:w-full max-[479px]:leading-[33px] max-[280px]:pb-2 max-[393px]:pb-3 top-title-recome'>
+          <h2 className='head-text font-semibold text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] text-left text-[#212529] w-[87%] max-[1440px]:w-[90%] mx-auto pb-5 max-[1200px]:w-full max-[479px]:leading-[33px] max-[280px]:pb-2 max-[393px]:pb-3 top-title-recome'>
             Top Recommended & Best Selling Products
           </h2>
           <div className=' top-sliderContainer relative gap-4  list-t w-[87%]  mx-auto max-[1440px]:w-[90%] max-[1200px]:w-full  top-recome-slider'>
@@ -154,7 +154,7 @@ function TopRecommendationSell({ RecomendedTopselling }) {
                           <div className='text-center '>
                             <button
                               onClick={() => router.push(`/${selproduct.url_slug}`)}
-                              className='!text-[#212529] cursor-pointer hover:!text-[#212529] head-text font-[faktum] py-3 px-8 bg-white rounded-lg border border-[#000] text-[14px] max-[576px]:text-[16px] font-semibold recome-card-btn'>
+                              className='!text-[#212529] cursor-pointer hover:!text-[#212529] head-text py-3 px-8 bg-white rounded-lg border border-[#000] text-[14px] max-[576px]:text-[16px] font-semibold recome-card-btn'>
                               Know More
                             </button>
                           </div>

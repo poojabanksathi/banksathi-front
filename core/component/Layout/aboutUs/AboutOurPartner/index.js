@@ -15,7 +15,7 @@ function AboutOurPartner() {
     <div className='bg-[#F4F8FB]'>
       <div className='container  min-h-[500px] max-[1024px]:px-8 mx-auto max-[991px]:max-w-full py-[100px] max-[834px]:py-[50px] max-[576px]:px-6 max-[576px]:py-[30px] max-[479px]:py-[30px] max-[375px]:px-4 max-[320px]:px-4 about-partener-resol'>
         <div>
-          <h1 className='head-text text-[#212529] font-[faktum] text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] leading-[64.4px] w-[48%] font-semibold text-center mx-auto pb-[60px] max-[1200px]:w-[90%] max-[479px]:w-full  max-[479px]:leading-10 max-[479px]:pb-8 partner-title-about'>
+          <h1 className='head-text text-[#212529] text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] leading-[64.4px] w-[48%] font-semibold text-center mx-auto pb-[60px] max-[1200px]:w-[90%] max-[479px]:w-full  max-[479px]:leading-10 max-[479px]:pb-8 partner-title-about'>
             Our partners from Leading Financial Industries
           </h1>
          

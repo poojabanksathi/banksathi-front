@@ -44,7 +44,7 @@ function CategoryTabsHome({ businessCategorydata, isDesktop }) {
                       />
                       {catdata.title && (
                         <p
-                          className={`category-tab-title head-text font-[faktum] text-[17px] max-[1024px]:text-[16px]  max-[991px]:text-[15px] max-[479px]:text-[13px]  ${
+                          className={`category-tab-title head-text text-[17px] max-[1024px]:text-[16px]  max-[991px]:text-[15px] max-[479px]:text-[13px]  ${
                             creditTab == catdata?.url_slug
                               ? 'text-white relative max-[771px]:before:absolute max-[771px]:before:w-full max-[771px]:before:left-0 max-[771px]:before:bottom-[-1.1rem] tabs-credit-line'
                               : 'text-[#BB98EC]'
@@ -75,7 +75,7 @@ function CategoryTabsHome({ businessCategorydata, isDesktop }) {
               <div className='grid grid-cols-2 py-6 px-20 max-[1024px]:px-8 items-center max-[576px]:grid-cols-1 max-[576px]:gap-8 max-[576px]:py-8 max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4 tabs-sub-sec max-[479px]:pb-0'>
                 <div>
                   <div>
-                    <p className='head-text font-[faktum] text-[28px] max-[479px]:text-[22px] max-[375px]:text-[20px] text-white pb-2 font-semibold max-[479px]:pb-2 '>
+                    <p className='head-text text-[28px] max-[479px]:text-[22px] max-[375px]:text-[20px] text-white pb-2 font-semibold max-[479px]:pb-2 '>
                       {filterData[0]?.title}
                     </p>
                     {filterData[0]?.short_description && (
@@ -89,7 +89,7 @@ function CategoryTabsHome({ businessCategorydata, isDesktop }) {
                   <div className='flex flex-col gap-5 mt-8'>
                     {filterData[0]?.button_two_name && (
                       <Link href={getHref(filterData[0]?.button_two_name)} prefetch={false}>
-                        <button className='head-text cursor-pointer font-[faktum] p-4 border text-[16px] max-[771px]:text-[14px] max-[479px]:!text-[13px] max-[320px]:!text-[12px] max-[280px]:!text-[10px] border-white rounded-md text-white w-[72%] max-[1200px]:w-[86%] max-[820px]:w-full  hover:text-white hover:shadow-xl duration-200 font-semibold b'>
+                        <button className='head-text cursor-pointer p-4 border text-[16px] max-[771px]:text-[14px] max-[479px]:!text-[13px] max-[320px]:!text-[12px] max-[280px]:!text-[10px] border-white rounded-md text-white w-[72%] max-[1200px]:w-[86%] max-[820px]:w-full  hover:text-white hover:shadow-xl duration-200 font-semibold b'>
                           {filterData[0]?.button_two_name}
                         </button>
                       </Link>
@@ -97,7 +97,7 @@ function CategoryTabsHome({ businessCategorydata, isDesktop }) {
 
                     {filterData[0]?.button_one_name && (
                       <Link href={`${filterData[0]?.url_slug}`} prefetch={false}>
-                        <button className='head-text  cursor-pointer font-[faktum] p-4 border text-[16px] max-[479px]:!text-[13px] max-[320px]:!text-[12px] max-[280px]:!text-[10px] border-white  rounded-md text-[#212529] bg-white  w-[72%] max-[1200px]:w-[86%] max-[820px]:w-full hover:bg-[#844FCF] hover:text-white hover:shadow-xl duration-200 font-semibold perfect-btn-tabs'>
+                        <button className='head-text  cursor-pointer p-4 border text-[16px] max-[479px]:!text-[13px] max-[320px]:!text-[12px] max-[280px]:!text-[10px] border-white  rounded-md text-[#212529] bg-white  w-[72%] max-[1200px]:w-[86%] max-[820px]:w-full hover:bg-[#844FCF] hover:text-white hover:shadow-xl duration-200 font-semibold perfect-btn-tabs'>
                           {filterData[0]?.button_one_name}
                         </button>
                       </Link>

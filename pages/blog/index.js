@@ -1,8 +1,7 @@
 import dynamic from 'next/dynamic'
 import React from 'react'
-import { BASE_URL, BLOG, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
+import { BASE_URL, BLOG, BUSINESSCATEGORY, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 
 const KnowledgeBaseDetail = dynamic(() => import('@/core/component/Layout/knowledgeBaseDetail'), {
   ssr: false
@@ -19,36 +18,24 @@ const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 
 
 
 export default function Index({ businessmetaheadtag, faqdata, businessCategorydata, getAllBlog }) {
   return (
     <>
-      <section>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader businessCategorydata={businessCategorydata} />
-        </div>
-        <div className='bg-[#F4F8FB]'>
-          <KnowledgebaseBreadcrumb />
-        </div>
-        <div className='bg-[#F4F8FB]'>
-          <KnowledgeBaseDetail faqdata={faqdata} getAllBlog={getAllBlog} />
-        </div>
-      </section>
-      <div>
-        <MobileFooter businessCategorydata={businessCategorydata} />
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader businessCategorydata={businessCategorydata} />
       </div>
-
-      {/* ========= Footer ========= */}
-      <DynamicFooter businessCategorydata={businessCategorydata} />
-
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
+      <div className='bg-[#F4F8FB]'>
+        <KnowledgebaseBreadcrumb />
       </div>
+      <div className='bg-[#F4F8FB]'>
+        <KnowledgeBaseDetail faqdata={faqdata} getAllBlog={getAllBlog} />
+      </div>
+      <MobileFooter businessCategorydata={businessCategorydata} />
+  
     </>
   )
 }
@@ -56,13 +43,12 @@ export default function Index({ businessmetaheadtag, faqdata, businessCategoryda
 export async function getServerSideProps(context) {
   try {
     const context_params = context?.resolvedUrl && context?.resolvedUrl.split('/')[1]
-    const ref=context?.req?.headers?.referer || '';
+    const ref = context?.req?.headers?.referer || '';
 
     const lang_id = 1
     const url_slug = context_params
     const page_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
-        const pagedata = {
+    const pagedata = {
       offset: 0,
       limit: 9
     }
@@ -123,7 +109,7 @@ export async function getServerSideProps(context) {
         businessCategorydata: data7,
         moreleftmenucredit: data8,
         getAllBlog: data10,
-        referer:ref,
+        referer: ref,
       }
     }
   } catch (error) {

@@ -65,7 +65,6 @@ const CardsListing = ({ cardsList, checkBoxValues, setCheckBoxValues, setCardsLi
       setCompareSlug((prevSelectedSlugs) => prevSelectedSlugs?.filter((selectedSlug) => selectedSlug !== slugurl))
     }
   }
-  console.log(selectedData)
   const getFrozenCompareComp = () => {
     const disable = selectedData?.length < 2 || selectedData?.length == 4
 
@@ -399,7 +398,7 @@ const CardsListing = ({ cardsList, checkBoxValues, setCheckBoxValues, setCardsLi
                                 category={'credit-cards'}
                                 pos='25'
                                 position={index}
-                                disabled={item?.bank_name === "KOTAK MAHINDRA BANK"}
+                                disabled={!item?.is_apply_now}
                                 
                               />
                               <div>
@@ -436,7 +435,7 @@ const CardsListing = ({ cardsList, checkBoxValues, setCheckBoxValues, setCardsLi
                                   category={'credit-cards'}
                                   pos='26'
                                   position={index}
-                                  disabled={item?.bank_name === "KOTAK MAHINDRA BANK"}
+                                  disabled={!item?.is_apply_now}
                                 />
                               </div>
                               <div>
@@ -705,7 +704,7 @@ const CardsListing = ({ cardsList, checkBoxValues, setCheckBoxValues, setCardsLi
                             category={'credit-cards'}
                             pos='27'
                             position={index}
-                            disabled={item?.bank_name === "KOTAK MAHINDRA BANK"}
+                            disabled={!item?.is_apply_now}
                           />
                         </div>
                         <div className='py-5 px-4 border-b max-[280px]:!px-2'>

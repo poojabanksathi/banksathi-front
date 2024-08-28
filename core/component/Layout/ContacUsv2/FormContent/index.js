@@ -40,8 +40,8 @@ function FormContent() {
   const [errorHrefName, setErrorHrefName] = useState(false)
   const [errorHrefEmail, setErrorHrefEmail] = useState(false)
 
-  const token = localStorage?.getItem('token')
-  const leadId = localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage?.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
 
   const router = useRouter()
 
@@ -350,7 +350,7 @@ function FormContent() {
             className={` bg-[#fff] max-[479px]:gap-4 text-[#212529] relative bottom-20 max-sm:bottom-[20rem] h-auto items-center rounded-xl  max-[771px]:px-8 px-20 py-8 max-[1024px]:px-8 max-[576px]:h-full max-[576px]:flex-col max-[576px]:gap-8  max-[576px]:py-8 max-[479px]:px-4 max-[479px]:py-6 max-[375px]:px-4 max-[479px]:mx-4 max-[320px]:px-4 z-[1] ${
               scrollY > 0 ? 'contact-banner-top' : 'contact-banner-bottom'
             }`}>
-            <p className='head-text font-[faktum] story-text text-[#212529] pb-2 text-[24px] max-[320px]:text-[20px] mb-4 relative text-center'>
+            <p className='head-text story-text text-[#212529] pb-2 text-[24px] max-[320px]:text-[20px] mb-4 relative text-center'>
               Write us what you think!
             </p>
 
@@ -377,7 +377,7 @@ function FormContent() {
                       e.target.value = removeNonAlphaNumeric(e)
                     }}
                   />
-                  {errorHrefName && <p className='text-[12px] text-[#FF000F] font-no  mt-2'>{ApiMessage?.linkError}</p>}
+                  {errorHrefName && <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>{ApiMessage?.linkError}</p>}
 
                   {errorMessage && <p className='text-[12px] text-[#FF000F] font-no'>{ApiMessage?.letterNameErr}</p>}
                 </div>
@@ -446,7 +446,7 @@ function FormContent() {
                   placeholder='Your message here'
                   value={formData?.enquiry}
                   onChange={(e) => handleChange(e)}></textarea>
-                {errorHref && <p className='text-[12px] text-[#FF000F] font-no  mt-2'>{ApiMessage?.linkError}</p>}
+                {errorHref && <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>{ApiMessage?.linkError}</p>}
               </div>
               <div className='text-center'>
                
@@ -514,7 +514,7 @@ function FormContent() {
                         name='otp'
                         renderInput={(props) => <input {...props} />}
                       />
-                      {errOtp && <p className='text-[12px] text-[#FF000F] font-no mt-2'>{ApiMessage?.otpValidError}</p>}
+                      {errOtp && <p className='text-[12px] text-[#FF000F] font-normal mt-2'>{ApiMessage?.otpValidError}</p>}
                     </div>
                   </div>
                   <p className='font-normal text-center pt-5 text-[#212529]'>Resend OTP in 00:{formatTime(time)} Sec</p>

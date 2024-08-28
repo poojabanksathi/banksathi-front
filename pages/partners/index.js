@@ -8,9 +8,7 @@ import Axios from 'axios'
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const Partners = dynamic(() => import('@/core/component/Partners/PartnersMain/Partners'), {
   ssr: false
 })
@@ -18,7 +16,6 @@ const Partners = dynamic(() => import('@/core/component/Partners/PartnersMain/Pa
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
     const page_url_slug = context?.resolvedUrl?.split('/')?.pop() || 'partners'
 
@@ -60,19 +57,14 @@ const PartnersPage = ({ businessCategorydata, businessmetaheadtag }) => {
   return (
     <>
       <div className={`w-fit ${size?.width > 1700 ? ' container mx-auto' : ''}`}>
-        <section>
-          <div className='bg-[#844FCF]'>
-            <DynamicHeader
-              businessCategorydata={businessCategorydata}
-              showFull={size?.width > 2440 ? false : true}
-            />
-          </div>
-        </section>
-        <Partners />
-        <DynamicFooter businessCategorydata={businessCategorydata} />
-        <div className='scroll-top'>
-          <ScrollToTop smooth color='#000' />
+        <div className='bg-[#844FCF]'>
+          <DynamicHeader
+            businessCategorydata={businessCategorydata}
+            showFull={size?.width > 2440 ? false : true}
+          />
         </div>
+        <Partners />
+     
       </div>
     </>
   )

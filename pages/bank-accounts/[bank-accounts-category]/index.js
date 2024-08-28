@@ -12,7 +12,6 @@ import axios from 'axios'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import ScrollToTop from 'react-scroll-to-top'
 
 const CreditNews = dynamic(() => import('@/core/component/Layout/CreditNews/CreditNews'), {
   ssr: false
@@ -23,9 +22,7 @@ const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const SavingAccountList = dynamic(() => import('@/core/component/Layout/savingAccountList'), {
   ssr: false
 })
@@ -206,6 +203,7 @@ const BankAccountsSubCategory = ({
   newsList
 }) => {
   const router = useRouter()
+ 
 
   const isInfoPage = url_slug === 'i'
 
@@ -270,16 +268,8 @@ const BankAccountsSubCategory = ({
           </div>
         </>
       )}
-
-      <div>
-        <MobileFooter businessCategorydata={businessCategoryData} />
-      </div>
-
-      <DynamicFooter />
-
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
+      <MobileFooter businessCategorydata={businessCategoryData} />
+    
     </>
   )
 }

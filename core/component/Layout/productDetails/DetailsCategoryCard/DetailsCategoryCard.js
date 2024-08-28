@@ -54,7 +54,7 @@ function DetailsCategoryCard({
           <HowToApplyDetail productLongformcon={productLongformcon} /> */}
         </div>
       )}
-      <FAQ faqdata={faqdata} />
+      {/* <FAQ faqdata={faqdata} /> */}
     </div>
   )
 }

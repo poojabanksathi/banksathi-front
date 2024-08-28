@@ -1,51 +1,59 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Link from 'next/link'
-import { mockData } from './data'
-import { useRouter } from 'next/router'
+import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
+import Link from 'next/link';
+import { mockData } from './data';
+import { useRouter } from 'next/router';
 
-import { getPromotionObject, sendEventToGTM } from '@/utils/util'
-import { useIsInViewport } from '@/hooks/useIsInViewport'
+import { getPromotionObject, sendEventToGTM } from '@/utils/util';
+import { useIsInViewport } from '@/hooks/useIsInViewport';
 
-const ServiceTabs = ({ size, serviceTabs, position, hidePadding = false }) => {
-  const router = useRouter()
-  const serviceTabsRef = useRef(null)
-  const isInViewPort = useIsInViewport(serviceTabsRef)
+const ServiceTabs = React.memo(({ size, serviceTabs, position, hidePadding = false }) => {
+  const router = useRouter();
+  const serviceTabsRef = useRef(null);
+  const isInViewPort = useIsInViewport(serviceTabsRef);
 
-  const [isHover, setIsHover] = useState(false)
-  const [isLoanHover, setIsLoanHover] = useState(false)
-  const [isBankHover, setIsBankHover] = useState(false)
+  const [isHover, setIsHover] = useState(false);
+  const [isLoanHover, setIsLoanHover] = useState(false);
+  const [isBankHover, setIsBankHover] = useState(false);
 
-  const pageRoute = router?.asPath
-  const data = { eventName: 'select_promotion', title: 'Browse Services', position: position, route: pageRoute }
+  const pageRoute = router?.asPath;
+  const data = useMemo(() => ({
+    eventName: 'select_promotion',
+    title: 'Browse Services',
+    position: position,
+    route: pageRoute,
+  }), [position, pageRoute]);
 
-  const callPromotionViewEvent = () => {
-    const data = { eventName: 'view_promotion', title: 'Browse Services', position: position, route: pageRoute }
-    sendEventToGTM(getPromotionObject(data))
-  }
+  const callPromotionViewEvent = useCallback(() => {
+    const data = {
+      eventName: 'view_promotion',
+      title: 'Browse Services',
+      position: position,
+      route: pageRoute,
+    };
+    sendEventToGTM(getPromotionObject(data));
+  }, [position, pageRoute]);
 
   useEffect(() => {
     if (isInViewPort) {
-      callPromotionViewEvent()
+      callPromotionViewEvent();
     }
-  }, [isInViewPort])
+  }, [isInViewPort, callPromotionViewEvent]);
 
-  // Function to get a random subset of tabs that include "Accounts"
-  const getRandomAccountTabs = (tabsArray, count) => {
-    const accountTabs = tabsArray.filter((tab) => tab?.title?.toLowerCase().includes('account'))
-    const shuffledTabs = accountTabs.sort(() => Math.random() - 0.5)
-    return shuffledTabs.slice(0, count)
-  }
+  const getRandomAccountTabs = useCallback((tabsArray, count) => {
+    const accountTabs = tabsArray.filter((tab) => tab?.title?.toLowerCase().includes('account'));
+    const shuffledTabs = accountTabs.sort(() => Math.random() - 0.5);
+    return shuffledTabs.slice(0, count);
+  }, []);
 
-  // Function to get a random subset of tabs that include "Card"
-  const getRandomCreditCardTabs = (tabsArray, count) => {
-    const creditCardTabs = tabsArray.filter((tab) => tab?.title?.toLowerCase().includes('card'))
-    const shuffledTabs = creditCardTabs.sort(() => Math.random() - 0.5)
-    return shuffledTabs.slice(0, count)
-  }
+  const getRandomCreditCardTabs = useCallback((tabsArray, count) => {
+    const creditCardTabs = tabsArray.filter((tab) => tab?.title?.toLowerCase().includes('card'));
+    const shuffledTabs = creditCardTabs.sort(() => Math.random() - 0.5);
+    return shuffledTabs.slice(0, count);
+  }, []);
 
-  const randomBankAccounts = getRandomAccountTabs(serviceTabs?.data?.bank_accounts || [], 6)
-  const randomCreditCards = getRandomCreditCardTabs(serviceTabs?.data?.credit_cards || [], 6)
-  const personalTabs = serviceTabs?.data?.personal_loan
+  const randomBankAccounts = useMemo(() => getRandomAccountTabs(serviceTabs?.data?.bank_accounts || [], 6), [serviceTabs, getRandomAccountTabs]);
+  const randomCreditCards = useMemo(() => getRandomCreditCardTabs(serviceTabs?.data?.credit_cards || [], 6), [serviceTabs, getRandomCreditCardTabs]);
+  const personalTabs = useMemo(() => serviceTabs?.data?.personal_loan, [serviceTabs]);
 
   return (
     <div
@@ -68,12 +76,11 @@ const ServiceTabs = ({ size, serviceTabs, position, hidePadding = false }) => {
           </h3>
           <div className='flex gap-[30px] rounded-lg max-sm:gap-[16px] items-center max-[320px]:justify-center flex-wrap py-[20px]'>
             {randomBankAccounts?.slice(0, 4).map((item) => (
-              <Link href={`/bank-accounts/${item?.url_slug}`} key=''>
+              <Link href={`/bank-accounts/${item?.url_slug}`} key={item?.url_slug}>
                 <button
                   onMouseEnter={() => setIsBankHover(true)}
                   onClick={() => sendEventToGTM(getPromotionObject(data))}
-                  key=''
-                  className={`h-auto hover:border-[#844FCF] !hover:text-[#844FCF] hover:shadow-md rounded-lg border w-[240px] max-sm:w-[180px] max-[375px]:w-[143px] max-[320px]:w-[233px]  bg-white px-[16px] max-sm:p-[12px] py-[19px] text-var(--Text-Dark, #212529) text-center font-poppins text-base font-medium leading-normal max-sm:text-[12px] ${
+                  className={`h-auto hover:border-[#844FCF] !hover:text-[#844FCF] hover:shadow-md rounded-lg border w-[240px] max-sm:w-[180px] max-[375px]:w-[143px] max-[320px]:w-[233px] bg-white px-[16px] max-sm:p-[12px] py-[19px] text-var(--Text-Dark, #212529) text-center font-poppins text-base font-medium leading-normal max-sm:text-[12px] ${
                     size?.width <= 375 ? 'w-[143px]' : ''
                   }`}>
                   <h4
@@ -95,12 +102,11 @@ const ServiceTabs = ({ size, serviceTabs, position, hidePadding = false }) => {
           </h3>
           <div className='flex gap-[30px]  max-sm:gap-[16px] items-center max-[320px]:justify-center flex-wrap py-[20px]'>
             {randomCreditCards?.slice(0, 4)?.map((item) => (
-              <Link href={`/credit-cards/${item?.url_slug}`} key=''>
+              <Link href={`/credit-cards/${item?.url_slug}`} key={item?.url_slug}>
                 <button
                   onMouseEnter={() => setIsHover(true)}
                   onClick={() => sendEventToGTM(getPromotionObject(data))}
-                  key=''
-                  className={`h-auto hover:border-[#844FCF] !hover:text-[#844FCF]  hover:shadow-md border rounded-lg w-[240px] max-sm:w-[180px] max-[375px]:w-[143px] max-[320px]:w-[233px] bg-white px-[16px] max-sm:p-[12px] py-[19px] text-var(--Text-Dark, #212529) text-center font-poppins text-base font-medium leading-normal max-sm:text-[12px] ${
+                  className={`h-auto hover:border-[#844FCF] !hover:text-[#844FCF] hover:shadow-md border rounded-lg w-[240px] max-sm:w-[180px] max-[375px]:w-[143px] max-[320px]:w-[233px] bg-white px-[16px] max-sm:p-[12px] py-[19px] text-var(--Text-Dark, #212529) text-center font-poppins text-base font-medium leading-normal max-sm:text-[12px] ${
                     size?.width <= 375 ? 'w-[143px]' : ''
                   }`}>
                   <h4
@@ -122,18 +128,17 @@ const ServiceTabs = ({ size, serviceTabs, position, hidePadding = false }) => {
           </h3>
           <div className='flex gap-[30px]  max-sm:gap-[16px] items-center max-[320px]:justify-center flex-wrap py-[20px]'>
             {personalTabs?.slice(0, 4)?.map((item) => (
-              <Link href={`/personal-loan/${item?.url_slug}`} key=''>
+              <Link href={`/personal-loan/${item?.url_slug}`} key={item?.url_slug}>
                 <button
                   onMouseEnter={() => setIsLoanHover(true)}
                   onClick={() => sendEventToGTM(getPromotionObject(data))}
-                  key=''
-                  className={`h-auto hover:border-[#844FCF] !hover:text-[#844FCF]  hover:shadow-md border rounded-lg w-[240px] max-sm:w-[180px] max-[375px]:w-[143px] max-[320px]:w-[233px] bg-white px-[16px] max-sm:p-[12px] py-[19px] text-var(--Text-Dark, #212529) text-center font-poppins text-base font-medium leading-normal max-sm:text-[12px] ${
+                  className={`h-auto hover:border-[#844FCF] !hover:text-[#844FCF] hover:shadow-md border rounded-lg w-[240px] max-sm:w-[180px] max-[375px]:w-[143px] max-[320px]:w-[233px] bg-white px-[16px] max-sm:p-[12px] py-[19px] text-var(--Text-Dark, #212529) text-center font-poppins text-base font-medium leading-normal max-sm:text-[12px] ${
                     size?.width <= 375 ? 'w-[143px]' : ''
                   }`}>
                   <h4
                     className={`text-[#212529] truncate ${
                       isLoanHover ? 'hover:text-[#844FCF]' : ''
-                    } text-center font-poppins text-base font-medium leading-normal max-sm:text-[12px]`}>
+                    } font-poppins text-base font-medium leading-normal max-sm:text-[12px]`}>
                     {item?.title}
                   </h4>
                 </button>
@@ -143,7 +148,10 @@ const ServiceTabs = ({ size, serviceTabs, position, hidePadding = false }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+});
 
-export default ServiceTabs
+ServiceTabs.displayName = 'ServiceTabs';
+
+export default ServiceTabs;
+

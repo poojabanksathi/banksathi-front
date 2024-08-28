@@ -9,7 +9,7 @@ function BankDifferentitor() {
     <>
       <div className='pb-[80px] max-[576px]:!pb-[40px] max-[479px]:!pb-[30px] different-bank'>
         <div className='pb-4'>
-          <h2 className='head-text font-[faktum] text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[24px] max-[375px]:text-[24px] max-[320px]:text-[22px] text-center font-semibold  text-[#212529] max-[479px]:leading-8 w-[50%]  max-[1440px]:w-[54%] max-[1200px]:w-[80%] max-[576px]:w-full mx-auto leading-[64.4px] max-[576px]:leading-[50.2px] max-[479px]:leading-10 bankdifferent-title'>
+          <h2 className='head-text text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[24px] max-[375px]:text-[24px] max-[320px]:text-[22px] text-center font-semibold  text-[#212529] max-[479px]:leading-8 w-[50%]  max-[1440px]:w-[54%] max-[1200px]:w-[80%] max-[576px]:w-full mx-auto leading-[64.4px] max-[576px]:leading-[50.2px] max-[479px]:leading-10 bankdifferent-title'>
             BankSathi’s Differentiator: Providing consumers with best deals for wealth creation.
           </h2>
           <p className='text-[18px] font-[Poppins] w-[40%] mx-auto text-center pt-4 max-[1600px]:text-[16px] max-[1200px]:w-3/6 max-[576px]:w-[85%] max-[479px]:w-full max-[479px]:text-[15px] text-[#212529]'>

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BASE_URL, BUSINESSCATEGORY, BrowseServices, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import ScrollToTop from 'react-scroll-to-top'
@@ -12,9 +12,7 @@ const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const SavingAccountList = dynamic(() => import('@/core/component/Layout/savingAccountList'))
 
 const FAQ = dynamic(() => import('@/core/component/common/FAQ/FAQ'), {
@@ -26,7 +24,6 @@ export async function getServerSideProps(context) {
     const { query, resolvedUrl, req } = context
     const url_slug = query ? resolvedUrl?.split('?')?.[0]?.replace('/', '') : resolvedUrl?.split('/')?.pop()
     const referer = req?.headers?.referer || null
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const h = context?.query?.h || ''
     const ip = context?.req?.headers?.['x-forwarded-for']?.split(',')?.[0] || ''
     const user_agent = context?.req?.headers?.['user-agent'] || ''
@@ -105,7 +102,7 @@ export async function getServerSideProps(context) {
       .catch((error) => {
         return { data: null }
       })
-    
+
     // LEFT MENU FILTERS
     const leftMenuFilterData = await Axios.post(BASE_URL + BUSINESSCATEGORY.moreleftmenufilter, req1)
       .then((res) => {
@@ -167,13 +164,12 @@ const SavingsAccount = ({
     }
   }, [bankAccountsData, router])
 
+
   return (
     <>
-      <section>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader businessCategorydata={businessCategoryData} />
-        </div>
-      </section>
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader businessCategorydata={businessCategoryData} />
+      </div>
       <div className='bg-[#F4F8FB]'>
         <CommonBreadCrumbComponent link1={'/bank-accounts'} link1Name='Bank Accounts' />
       </div>
@@ -193,15 +189,8 @@ const SavingsAccount = ({
       <div className='bg-[#F4F8FB]'>
         <FAQ faqdata={faqData} />
       </div>
-      <div>
-        <MobileFooter businessCategorydata={businessCategoryData} />
-      </div>
-
-      <DynamicFooter />
-
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
+      <MobileFooter businessCategorydata={businessCategoryData} />
+      
     </>
   )
 }

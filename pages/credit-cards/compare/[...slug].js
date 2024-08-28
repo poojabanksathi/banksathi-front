@@ -1,19 +1,13 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI, multipleSlug } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY, FAQAPI, multipleSlug } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 import { useRouter } from 'next/router'
 
 const FAQ = dynamic(() => import('@/core/component/common/FAQ/FAQ'), {
   ssr: false
 })
-const CreditCardTrobleHaving = dynamic(
-  () => import('../../../core/component/Layout/compareCard/cardTrobleHaving/CreditCardTrobleHaving'),
-  {
-    ssr: false
-  }
-)
+
 const CompareCreditCardNew = dynamic(() => import('../../../core/component/common/CommonList/CompareCreditCard'), {
   ssr: false
 })
@@ -26,9 +20,7 @@ const MobileFooter = dynamic(() => import('../../../core/component/common/Mobile
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 
 export default function Index({
   faqdata,
@@ -60,16 +52,14 @@ export default function Index({
           />
         ) : (
           <>
-            <section>
-              <div className=' bg-[#844FCF]'>
-                <DynamicHeader
-                  slug1={slug1}
-                  slug2={slug2}
-                  slug3={slug3}
-                  businessCategorydata={businessCategorydata}
-                />
-              </div>
-            </section>
+            <div className=' bg-[#844FCF]'>
+              <DynamicHeader
+                slug1={slug1}
+                slug2={slug2}
+                slug3={slug3}
+                businessCategorydata={businessCategorydata}
+              />
+            </div>
 
             <div>
               {productcomparedata && (
@@ -84,15 +74,11 @@ export default function Index({
               )}
             </div>
             <div className='bg-[#F4F8FB] '>
-              <CreditCardTrobleHaving creditCompare={true} position={'3'} />
-
+              {/* <CreditCardTrobleHaving creditCompare={true} position={'3'} /> */}
               <FAQ faqdata={faqdata} />
               <MobileFooter businessCategorydata={businessCategorydata} />
             </div>
-            <DynamicFooter businessCategorydata={businessCategorydata} />
-            <div className='scroll-top'>
-              <ScrollToTop smooth color='#000' />
-            </div>
+          
           </>
         )}{' '}
       </div>
@@ -107,7 +93,6 @@ export async function getServerSideProps(context) {
     const route = context?.resolvedUrl
     const lang_id = 1
     const url_slug = ''
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
     const ip = context?.req?.headers?.['x-forwarded-for']?.split(',')?.[0] || ''
     const user_agent = context?.req?.headers?.['user-agent'] || ''
@@ -130,7 +115,7 @@ export async function getServerSideProps(context) {
       lang_id: lang_id,
       url_slug: slug[2]
     }
-    
+
     const req4 = {
       lang_id: lang_id,
       business_category_url_slug: context_params

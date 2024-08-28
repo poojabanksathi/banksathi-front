@@ -25,7 +25,7 @@ function GetMobileApp() {
           <div className='grid grid-cols-2 max-[820px]:grid-cols-1  w-[78%] mx-auto max-[1440px]:w-[90%] max-[1200px]:w-full get-banksathi-mobile'>
             <div>
               <div className='pb-14'>
-                <h2 className='head-text font-[faktum] text-[65px] max-[1440px]:text-[62px] max-[1024px]:text-[56px] max-[820px]:w-[70%] max-[991px]:text-[54px] w-[96%] max-[771px]:w-[80%] max-[576px]:w-full leading-[78px] text-white pb-8 font-semibold max-[479px]:text-center max-[479px]:text-[30px] max-[479px]:leading-10 max-[479px]:pb-4 get-mobile-title'>
+                <h2 className='head-text text-[65px] max-[1440px]:text-[62px] max-[1024px]:text-[56px] max-[820px]:w-[70%] max-[991px]:text-[54px] w-[96%] max-[771px]:w-[80%] max-[576px]:w-full leading-[78px] text-white pb-8 font-semibold max-[479px]:text-center max-[479px]:text-[30px] max-[479px]:leading-10 max-[479px]:pb-4 get-mobile-title'>
                   Get the <span className='text-[#49D49D]'>BankSathi</span> mobile app
                 </h2>
                 <p className='text-[24px] text-white  max-[479px]:text-center'>
@@ -55,7 +55,7 @@ function GetMobileApp() {
           <div className='grid grid-cols-2 max-[771px]:grid-cols-1  w-[78%] mx-auto max-[1440px]:w-[90%] max-[1200px]:w-full'>
             <div>
               <div className='pb-14 max-[576px]:pb-8'>
-                <h2 className='head-text font-[faktum] text-[65px] max-[1024px]:text-[56px] max-[991px]:text-[54px] w-[96%] max-[771px]:w-[80%] max-[576px]:w-full leading-[78px] text-white pb-8 font-semibold max-[479px]:text-center max-[479px]:text-[30px] max-[479px]:leading-10 max-[479px]:pb-4'>
+                <h2 className='head-text text-[65px] max-[1024px]:text-[56px] max-[991px]:text-[54px] w-[96%] max-[771px]:w-[80%] max-[576px]:w-full leading-[78px] text-white pb-8 font-semibold max-[479px]:text-center max-[479px]:text-[30px] max-[479px]:leading-10 max-[479px]:pb-4'>
                   Get the <span className='text-[#49D49D]'>BankSathi</span> mobile app
                 </h2>
                 <p className='text-[18px] text-white w-[65%] max-[1200px]:w-full max-[479px]:text-center max-[479px]:text-[12px]'>

@@ -1,4 +1,5 @@
 import { ListingfilterData } from '@/utils/alljsonfile/listingfilterdata'
+import { getInterestRate, getLoanAmount } from '@/utils/util'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -17,8 +18,10 @@ const CardTopCommonContent = ({
   forClosureCharge,
   cardHref,
   cardName,
-  bestOfName
+  bestOfName,
+  personalProductDetails
 }) => {
+  const maxAmount = personalProductDetails?.loan_amount_max
   return (
     <div className='flex flex-col gap-y-[15px]'>
       <div className='flex flex-row items-start justify-start gap-x-[14px]'>
@@ -64,13 +67,13 @@ const CardTopCommonContent = ({
             Interest Rate
           </div>
           <div className="text-neutral-800 lg:text-[15px] font-semibold font-['Poppins'] leading-normal max-sm:text-[12px] md:text-[12px]">
-            {interestRate}
+            {`Starts from ${getInterestRate(personalProductDetails?.interest_rate_min)} - Up to ${getInterestRate(personalProductDetails?.interest_rate_max)}`}
           </div>
         </div>
         <div className='flex flex-col items-start justify-center'>
           <div className="text-neutral-800 lg:text-[15px] font-normal font-['Poppins'] leading-normal">Loan Amount</div>
           <div className="text-neutral-800 lg:text-[15px] font-semibold font-['Poppins'] leading-normal max-sm:text-[12px] md:text-[12px] symbole-rupee">
-            {loanAmount}
+            {`${getLoanAmount(personalProductDetails?.loan_amount_min)} - Up to ${getLoanAmount(maxAmount)}`}
           </div>
           <div className="text-neutral-800 text-xs font-normal font-['Poppins'] leading-tight">{loanTenure}</div>
         </div>

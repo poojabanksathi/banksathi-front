@@ -51,8 +51,8 @@ function HomeFeatured() {
                          <Link href={'/credit-cards'} prefetch={false}>
                 <div className='flex items-center justify-center h-full'>
                   <div>
-                    <h3 className='lg:text-[24px] text-[20px] '>Credit Cards</h3>
-                    <p className='pop lg:text-[16px] text-[14px] lg:w-[100%] w-[90%] mt-2'>
+                    <h3 className='lg:text-[24px] text-[#212529] text-[20px] '>Credit Cards</h3>
+                    <p className='pop lg:text-[16px] text-[#212529] text-[14px] lg:w-[100%] w-[90%] mt-2'>
                       Unlock Limitless Possibilities with our Credit Cards
                     </p>
                   </div>
@@ -68,8 +68,8 @@ function HomeFeatured() {
                          categ-bg-two'>
                 <div className='flex items-center justify-center h-full'>
                   <div>
-                    <h3 className='lg:text-[24px] text-[20px] '>Bank Accounts </h3>
-                    <p className='pop lg:text-[16px] text-[14px] lg:w-[100%] w-[90%] mt-2'>
+                    <h3 className='lg:text-[24px] text-[#212529] text-[20px] '>Bank Accounts </h3>
+                    <p className='pop lg:text-[16px] text-[#212529] text-[14px] lg:w-[100%] w-[90%] mt-2'>
                       Seamlessly Manage Your Finances with Bank Accounts
                     </p>
                   </div>
@@ -81,8 +81,8 @@ function HomeFeatured() {
                          categ-bg-three'>
                 <div className='flex items-center justify-center h-full'>
                   <div>
-                    <h3 className='lg:text-[24px] text-[20px]'>Personal Loans </h3>
-                    <p className='categ-details w-[ 60%] mt-2'>Achieve Your Dreams with Easy and Flexible Loans</p>
+                    <h3 className='lg:text-[24px] text-[#212529] text-[20px]'>Personal Loans </h3>
+                    <p className='categ-details text-[#212529] w-[ 60%] mt-2'>Achieve Your Dreams with Easy and Flexible Loans</p>
                   </div>
                 </div>
               </div>
@@ -92,8 +92,8 @@ function HomeFeatured() {
                          categ-bg-four'>
                 <div className='flex items-center justify-center h-full'>
                   <div>
-                    <h3 className='lg:text-[24px] text-[20px]'>Demat Accounts </h3>
-                    <p className='categ-details w-[ 60%] mt-2'>Dive into the World of Investments with Demat Accounts</p>
+                    <h3 className='lg:text-[24px] text-[#212529] text-[20px]'>Demat Accounts </h3>
+                    <p className='categ-details w-[ 60%] text-[#212529] mt-2'>Dive into the World of Investments with Demat Accounts</p>
                   </div>
                 </div>
               </div>

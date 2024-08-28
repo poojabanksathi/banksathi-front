@@ -1,6 +1,5 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 
@@ -8,10 +7,6 @@ const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
 const FAQ = dynamic(() => import('@/core/component/common/FAQ/FAQ'), {
-  ssr: false
-})
-
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
   ssr: false
 })
 
@@ -29,30 +24,22 @@ const InterestCalculator = dynamic(
   }
 )
 
-export default function Index({ businessCategorydata, faqdata, businessmetaheadtag}) {
+export default function Index({ businessCategorydata, faqdata, businessmetaheadtag }) {
   return (
     <>
-      <div>
-      
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader businessCategorydata={businessCategorydata} />
-        </div>
-        <div className='bg-[#F4F8FB] h-auto'>
-          <BredcrumbCalculator />
-          <div className='h-auto'>
-          <InterestCalculator title={'Interest Calculator'} metaData={businessmetaheadtag}/>
-          </div>
-        
-          <FAQ faqdata={faqdata} />
-        </div>
-
-        <div className='bg-[#fff]'>
-          <MobileFooter businessCategorydata={businessCategorydata} />
-
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
-        </div>
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader businessCategorydata={businessCategorydata} />
       </div>
-      <ScrollToTop smooth color='#000' />
+      <div className='bg-[#F4F8FB] h-auto'>
+        <BredcrumbCalculator />
+        <div className='h-auto'>
+          <InterestCalculator title={'Interest Calculator'} metaData={businessmetaheadtag} />
+        </div>
+        <FAQ faqdata={faqdata} />
+      </div>
+      <div className='bg-[#fff]'>
+        <MobileFooter businessCategorydata={businessCategorydata} />
+      </div>
     </>
   )
 }
@@ -60,11 +47,9 @@ export default function Index({ businessCategorydata, faqdata, businessmetaheadt
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
-    const url_slug = ''
     const last_url = context?.resolvedUrl && context?.resolvedUrl.split('/')
-    const context_params = last_url?.[last_url?.length-1]
-    const ref=context?.req?.headers?.referer || '';
+    const context_params = last_url?.[last_url?.length - 1]
+    const ref = context?.req?.headers?.referer || '';
     const ip = context?.req?.headers?.['x-forwarded-for']?.split(',')?.[0] || ''
     const user_agent = context?.req?.headers?.['user-agent'] || ''
     const leadsParams = { user_agent, ip }
@@ -73,7 +58,7 @@ export async function getServerSideProps(context) {
     }
     const req2 = {
       lang_id: lang_id,
-      url_slug:context_params
+      url_slug: context_params
     }
     const req6 = {
       lang_id: lang_id,
@@ -109,8 +94,8 @@ export async function getServerSideProps(context) {
         faqdata: data2,
         productList: data5,
         businessmetaheadtag: data6?.data || {},
-        referer:ref,
-        leadsParams:leadsParams
+        referer: ref,
+        leadsParams: leadsParams
       }
     }
   } catch (error) {

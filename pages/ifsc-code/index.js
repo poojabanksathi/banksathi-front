@@ -1,104 +1,127 @@
-import React from 'react'
-import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
-import { BASE_URL, BUSINESSCATEGORY, COMMON, BLOG } from '@/utils/alljsonfile/service'
-import Axios from 'axios'
-import CommonBreadCrumbComponent from '@/core/component/common/CommonList/CommonBreadCrumbComponent'
+import dynamic from 'next/dynamic';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
+import { useRouter } from 'next/router';
+import { BASE_URL, BUSINESSCATEGORY, BrowseServices, FAQAPI } from '@/utils/alljsonfile/service';
+import Axios from 'axios';
 
-const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
-  ssr: false
-})
+// Dynamically import components with React.memo to optimize rendering
+const IfscCodeCatagoty = React.memo(dynamic(() => import('@/core/component/Layout/IfscCode/IfscCodeCatagoty'), { ssr: false }));
+const MobileFooter = React.memo(dynamic(() => import('@/core/component/common/MobileFooter'), { ssr: false }));
+const DynamicHeader = React.memo(dynamic(() => import('@/core/component/common/Header'), { ssr: false }));
+const IfscCodeBanner = React.memo(dynamic(() => import('@/core/component/Layout/IfscCode/IfscCodeBanner'), { ssr: false }));
+const CommonBreadCrumbComponent = React.memo(dynamic(() => import('@/core/component/common/CommonList/CommonBreadCrumbComponent'), { ssr: false }));
 
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
-const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
-  ssr: false
-})
-const CreditNews = dynamic(() => import('@/core/component/Layout/CreditNews/CreditNews'), {
-  ssr: false
-})
+const Index = ({
+  businessmetaheadtag,
+  faqdata,
+  longTerm,
+  businessCategorydata,
+  leadsParams,
+  serviceTabs,
+  h
+}) => {
+  const Img_URL = process.env.NEXT_PUBLIC_BASE_IMG_CDN_URL;
 
-export async function getServerSideProps(context) {
-  try {
-    const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
-    const url_slug = context?.resolvedUrl?.split('/')?.pop()
-    const ref = context?.req?.headers?.referer || ''
-    const blog_url_slug = context?.resolvedUrl?.split('/')?.[1]
+  const mobileFooterRef = useRef(null);
 
-    const metaDetailsParams = {
-      lang_id: lang_id,
-      page_url_slug: url_slug
-    }
-    const bussinessCatParam = {
-      lang_id: lang_id
-    }
-    const newsReq = {
-      blog_url_slug: blog_url_slug,
-      identifier: 'category',
-      offset: 0,
-      limit: 10
-    }
-
-    const response1 = Axios.post(BASE_URL + BUSINESSCATEGORY.productCategoryLanguage, bussinessCatParam).catch(
-      (error) => {
-        return null
-      }
-    )
-    const response5 = Axios.post(BASE_URL + COMMON?.metaDetailPage, metaDetailsParams).catch((error) => {
-      return { data: null }
-    })
-    const response7 = Axios.post(BASE_URL + BLOG.newsList, newsReq).catch((error) => {
-      return { data: null }
-    })
-
-    const [data1, data7, metaTagsData] = await Promise.all([response1, response7, response5]).then(
-      (responses) => responses.map((response) => response?.data)
-    )
-
-    return {
-      props: {
-        businessCategorydata: data1,
-        referer: ref,
-        CreditNewsList: data7,
-        businessmetaheadtag: metaTagsData?.data || null
+  useEffect(() => {
+    if (leadsParams) {
+      if (typeof window !== 'undefined') {
+        sessionStorage?.setItem('leadsParams', JSON.stringify(leadsParams));
       }
     }
-  } catch (error) {
-    return {
-      props: {
-        notFound: false
-      }
-    }
-  }
-}
-const GoldRatePage = ({ businessCategorydata, CreditNewsList }) => {
+  }, [leadsParams]);
+
+
   return (
     <>
       <div>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader businessCategorydata={businessCategorydata} />
-        </div>
-        {CreditNewsList && (
-          <div className='bg-[#F4F8FB] h-auto'>
-            <CommonBreadCrumbComponent
-              link1='/ifsc-code'
-              link1Name='IFSC Code'
-              link2Name='IFSC Code Blogs'
-              title='IFSC Code Blogs'
-            />
-            <CreditNews CreditNewsList={CreditNewsList} pageTitle='IFSC Code Blogs' ifscPage={true} />
+        <section>
+          <div className='bg-[#844FCF]'>
+            <DynamicHeader businessCategorydata={businessCategorydata} />
           </div>
-        )}
-        <div className='bg-[#fff]'>
-          <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
+          <div className='bg-[#F4F8FB] pb-4'>
+            <CommonBreadCrumbComponent link1={'/ifsc-code'} link1Name='Ifsc Code' />
+          </div>
+          <div className='bg-[#F4F8FB]'>
+            <IfscCodeBanner
+              businessmetaheadtag={businessmetaheadtag}
+              src={`${Img_URL}/${businessmetaheadtag?.product_image}`}
+              linesToShow={2}
+              paddingTop={true}
+            />
+          </div>
+        </section>
+        <div>
+          <IfscCodeCatagoty
+            faqdata={faqdata}
+            longTerm={longTerm}
+              serviceTabs={serviceTabs}
+          />
+          <div ref={mobileFooterRef}>
+            <MobileFooter businessCategorydata={businessCategorydata} />
+          </div>
         </div>
       </div>
-      <ScrollToTop smooth color='#000' />
+  
     </>
-  )
-}
+  );
+};
 
-export default GoldRatePage
+export default Index;
+
+export async function getServerSideProps(context) {
+  try {
+    const { query, req } = context;
+    const context_params = context?.resolvedUrl?.split('/')[1] || '';
+    const url_slug = query.page === '' ? context_params : context?.resolvedUrl?.split('?')[0]?.split('/')[1];
+    const ref = req?.headers?.referer || '';
+    const h = query?.h || '';
+    const ip = req?.headers?.['x-forwarded-for']?.split(',')?.[0] || '';
+    const user_agent = req?.headers?.['user-agent'] || '';
+    const leadsParams = { user_agent, ip };
+    const page = query.page ? query.page - 1 : 0;
+
+
+    const req1 = {
+      lang_id: 1,
+       business_category_url_slug: url_slug
+    }
+    const req2 = {
+      lang_id: 1,
+      url_slug: url_slug
+    }
+    const req3 = {
+      lang_id: 1,
+    }
+    const req4 = {
+      lang_id: 1,
+       business_category_url_slug: ''
+    }
+
+    const [data3, data4, data5, data7, data10] = await Promise.all([
+      Axios.post(BASE_URL + BUSINESSCATEGORY.CategoryParagraphTag, req1).then(res => res.data),
+      Axios.post(BASE_URL + FAQAPI.productFaq, req2).then(res => res.data),
+      Axios.post(BASE_URL + BUSINESSCATEGORY.formLongcontent, req1).then(res => res.data),
+      Axios.post(BASE_URL + BUSINESSCATEGORY.productCategoryLanguage, req3).then(res => res.data),
+      Axios.post(BASE_URL + BrowseServices.serviceTabs, req4).then(res => res.data)
+    ]);
+
+    return {
+      props: {
+        businessmetaheadtag: data3?.h1_paragraph || null,
+        businessCategorydata: data7,
+        faqdata: data4,
+        longTerm: data5,
+        serviceTabs: data10,
+        referer: ref,
+        leadsParams: leadsParams,
+        url_slug: url_slug,
+        h: h
+      }
+    };
+  } catch (error) {
+    console.error('Error in getServerSideProps:', error);
+    return { props: {} };
+  }
+}

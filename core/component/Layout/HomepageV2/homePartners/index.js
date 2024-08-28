@@ -181,7 +181,7 @@ function HomePartners() {
                       unoptimized
                     />
                   </div>
-                  <div className='!w-[90%] flex items-center bg-white p-4'>
+                  {/* <div className='!w-[90%] flex items-center bg-white p-4'>
                     <Image
                       src='/assets/logo/brand/image 457.png'
                       className='w-[174px] h-[30px]  object-contain '
@@ -190,7 +190,7 @@ function HomePartners() {
                       alt='img'
                       unoptimized
                     />
-                  </div>
+                  </div> */}
                   <div className='!w-[90%] flex items-center bg-white p-4'>
                     <Image
                       src='/assets/logo/brand/2560px-Aubank.svg.png'
@@ -329,7 +329,7 @@ function HomePartners() {
                       unoptimized
                     />
                   </div>
-                  <div className='w-[200px] flex items-center bg-white p-4'>
+                  {/* <div className='w-[200px] flex items-center bg-white p-4'>
                     <Image
                       src='/assets/logo/brand/image 457.png'
                       className='w-[174px]  object-contain '
@@ -338,7 +338,7 @@ function HomePartners() {
                       alt='img'
                       unoptimized
                     />
-                  </div>
+                  </div> */}
                   <div className='w-[200px] flex items-center bg-white p-4'>
                     <Image
                       src='/assets/logo/brand/2560px-Aubank.svg.png'

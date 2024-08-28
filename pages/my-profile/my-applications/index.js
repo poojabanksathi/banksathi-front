@@ -1,6 +1,5 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 
@@ -12,10 +11,6 @@ const MyApllication = dynamic(() => import('@/core/component/Layout/scoreCreditC
   ssr: false
 })
 
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
-
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
@@ -23,21 +18,15 @@ const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'
 export default function Index({ businessCategorydata, faqdata, businessmetaheadtag }) {
   return (
     <>
-      <div>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader businessCategorydata={businessCategorydata} />
-        </div>
-        <div className='bg-[#F4F8FB] h-auto'>
-          <MyApllication faqdata={faqdata} />
-        </div>
-
-        <div className='bg-[#fff]'>
-          <MobileFooter businessCategorydata={businessCategorydata} />
-
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
-        </div>
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader businessCategorydata={businessCategorydata} />
       </div>
-      <ScrollToTop smooth color='#000' />
+      <div className='bg-[#F4F8FB] h-auto'>
+        <MyApllication faqdata={faqdata} />
+      </div>
+      <div className='bg-[#fff]'>
+        <MobileFooter businessCategorydata={businessCategorydata} />
+      </div>
     </>
   )
 }
@@ -45,7 +34,6 @@ export async function getServerSideProps(context) {
   try {
     const lang_id = 1
     const page_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
 
     const req3 = {

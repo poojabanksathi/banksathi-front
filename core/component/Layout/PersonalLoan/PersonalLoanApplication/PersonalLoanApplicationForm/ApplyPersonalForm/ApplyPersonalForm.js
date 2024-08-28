@@ -66,7 +66,7 @@ const ApplyPersonalForm = ({
             transaction_id: transactionId,
             otp: e,
             mobile_no: String(userInformation?.mobile) || '',
-            type: messageType || localStorage.getItem('auth_type'),
+            type: messageType || typeof window !== 'undefined' && localStorage.getItem('auth_type'),
             is_temp_otp: tempOtp
           },
           { headers: headers }
@@ -215,7 +215,7 @@ const ApplyPersonalForm = ({
 
   useEffect(() => {
     if (typeof window !== 'undefined' && localStorage.getItem('loanAmount')) {
-      const amount = localStorage.getItem('loanAmount')
+      const amount = typeof window !== 'undefined' && localStorage.getItem('loanAmount')
       const filter = loanAmountsOptions?.filter((item) => item?.valueToMatch === amount)
       if (filter) {
         setSelectedAmount(filter?.[0]?.name)

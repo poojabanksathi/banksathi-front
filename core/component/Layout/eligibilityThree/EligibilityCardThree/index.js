@@ -5,13 +5,13 @@ import { useWindowSize } from '@/hooks/useWindowSize'
 
 function EligibilityCardThree({ isNotEligible }) {
   const size = useWindowSize()
-  const input_slug = localStorage.getItem('@inputSlug')
+  const input_slug = typeof window !== 'undefined' && localStorage.getItem('@inputSlug')
 
   const alternat_product =
     typeof window !== 'undefined' &&
     (localStorage.getItem('@alternatdata') ? JSON.parse(localStorage.getItem('@alternatdata')) : '')
 
-  const eligible_product = localStorage.getItem('@eligibleproduct')
+  const eligible_product = typeof window !== 'undefined' && localStorage.getItem('@eligibleproduct')
 
   return (
     <>

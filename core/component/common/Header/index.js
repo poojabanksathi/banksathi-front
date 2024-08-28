@@ -5,10 +5,8 @@ import User from '../../../../public/assets/user.svg'
 import UserScroll from '../../../../public/assets/user-logo-new.svg'
 import axios from 'axios'
 import { BASE_URL } from '@/utils/alljsonfile/service'
-import LogoWhite from '../../../../public/assets/BankSathi-Logo-white.svg'
 import logoMobile from '../../../../public/assets/header-logo-mobile.svg'
-import logoSticky from '../../../../public/assets/logo-sticky.svg'
-import mobileLogoSticky from '../../../../public/assets/mobile-logo-sticky.svg'
+import FooterLogo from '../../../../public/assets/footer-Logo.svg'
 import SearchIcon from '../../../../public/assets/searchIcon.svg'
 import SearchIconWhite from '../../../../public/assets/searchiconwhite.svg'
 import accordionArrowall from '../../../../public/assets/accordion-down.svg'
@@ -276,33 +274,25 @@ export default function Header({
               </>
             ) : (
               <div className='container max-[991px]:max-w-full h-[52px] py-[12px] mx-auto  max-[1024px]:px-8  flex justify-between max-[767px]:!py-4 items-center max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4 header '>
-                <div className='w-[16%] py-3 max-[1440px]:w-[18%] max-[1200px]:w-[20%] max-[820px]:w-[18%] max-[771px]:w-[22%] max-[576px]:w-[44%]'>
-                  <Link
-                    href='/'
-                    className='flex md:block hidden title-font font-medium  text-gray-900 md:mb-0  mt-0  w-full items-center focus:outline-none destop-logo-head'
-                    prefetch={false}>
-                    <Image src={logoSticky} alt='img_text' className='w-full' priority={true}/>
-                  </Link>
-                  <div className='flex flex-row items-center gap-[10px]'>
+                <div className='w-[16%] flex flex-row items-center gap-[10px] py-3 max-[1440px]:w-[18%] max-[1200px]:w-[20%] max-[820px]:w-[18%] max-[771px]:w-[22%] max-[576px]:w-[44%]'>
                     <div
                       onClick={handleMenuOpen}
-                      className='flex max-md:block hidden title-font font-medium items-center text-gray-900 md:mb-0  mt-0  w-full   max-[576px]:w-[18%] focus:outline-none mobile-logo-head'
+                      className='max-md:block hidden title-font font-medium items-center text-gray-900 md:mb-0  mt-0  w-full   max-[576px]:w-[18%] focus:outline-none mobile-logo-head'
                       prefetch={false}>
-                      <Image src={menuImage} alt='img_text' className='w-3/6 max-[834px]:w-2/5 max-[576px]:w-full' priority={true}/>
+                      <Image src={menuImage} alt='BankSathi' className='w-3/6 max-[834px]:w-2/5 max-[576px]:w-full' priority={true}/>
                     </div>
-                    <Link
-                      href=''
-                      className='flex max-md:flex gap-2 hidden title-font font-medium items-center text-gray-900 md:mb-0  mt-0  w-full  focus:outline-none mobile-logo-head'
+                  <Link
+                      href='/'
+                      className='flex gap-[0.3rem] title-font font-medium items-center text-gray-900 md:mb-0  mt-0  w-full  focus:outline-none mobile-logo-head'
                       prefetch={false}>
                       <Image
-                        src={mobileLogoSticky}
-                        alt='img_text'
+                        src={FooterLogo}
+                        alt='BankSathi logo'
                         priority={true}
-                        className='w-3/6 max-[834px]:w-2/5 max-[576px]:w-[18%] max-[479px]:w-[18%]'
+                        className='w-[18%] max-[834px]:w-[22%] max-[576px]:w-[18%] max-[479px]:w-[18%]'
                       />
-                    <p className="text-black text-[faktum] font-semibold text-center text-[20px] max-[479px]:text-[16px]">BankSathi</p>
+                    <p className="text-[#14363d] font-[faktum] font-bold text-center text-[38px] tracking-[-1.5px] leading-7 max-[1200px]:text-[34px] max-[1024px]:text-[32px]  max-[991px]:text-[30px] max-[834px]:text-[26px]  max-[576px]:text-[20px] max-[479px]:text-[16px] max-[479px]:tracking-[0px]">BankSathi</p>
                     </Link>
-                  </div>
                 </div>
                 <div>
                   <nav className='md:ml-auto md:flex items-center text-base justify-center hidden gap-5 max-[820px]:gap-4 menu-mobile'>
@@ -311,7 +301,7 @@ export default function Header({
                         <Link
                           href='#'
                           onMouseOver={() => sethoverClose(false)}
-                          className='head-text font-[faktum] max-[1600px]:text-[16px] text-[16px] !text-[#212529] hover:!text-[#212529] no-underline font-semibold text-lg max-[820px]:text-[15px] max-[834px]:text-[15px] head-menu'
+                          className='head-text max-[1600px]:text-[16px] text-[16px] !text-[#212529] hover:!text-[#212529] no-underline font-semibold text-lg max-[820px]:text-[15px] max-[834px]:text-[15px] head-menu'
                           prefetch={false}>
                           All Products
                         </Link>
@@ -323,7 +313,7 @@ export default function Header({
                       <li className='nav__menu-item'>
                         <Link
                           href='#'
-                          className='head-text font-[faktum] max-[1600px]:text-[16px] text-[16px]  !text-[#212529] hover:!text-[#212529] no-underline font-semibold text-lg max-[820px]:text-[15px] max-[834px]:text-[15px] head-menu'
+                          className='head-text max-[1600px]:text-[16px] text-[16px]  !text-[#212529] hover:!text-[#212529] no-underline font-semibold text-lg max-[820px]:text-[15px] max-[834px]:text-[15px] head-menu'
                           prefetch={false}>
                           Resources
                         </Link>
@@ -336,7 +326,7 @@ export default function Header({
                       <li className='nav__menu-item'>
                         <Link
                           href='#'
-                          className='head-text font-[faktum] max-[1600px]:text-[16px] text-[16px]  !text-[#212529] hover:!text-[#212529] no-underline font-semibold text-lg max-[820px]:text-[15px] max-[834px]:text-[15px] head-menu'
+                          className='head-text max-[1600px]:text-[16px] text-[16px]  !text-[#212529] hover:!text-[#212529] no-underline font-semibold text-lg max-[820px]:text-[15px] max-[834px]:text-[15px] head-menu'
                           prefetch={false}>
                           Tools
                           <ToolsSubmenu
@@ -352,7 +342,7 @@ export default function Header({
                           <Link
                             href='#'
                             onMouseOver={() => setShowPartnersSubmenu(true)}
-                            className='head-text font-[faktum] max-[1600px]:text-[16px] text-[16px] !text-[#212529]
+                            className='head-text max-[1600px]:text-[16px] text-[16px] !text-[#212529]
                             hover:!text-[#212529] no-underline font-semibold text-lg max-[820px]:text-[15px]
                             max-[834px]:text-[15px] head-menu'
                             prefetch={false}>
@@ -433,8 +423,8 @@ export default function Header({
                         onClick={(e) => handleLogin(e)}
                         className={
                           searchmodal
-                            ? `head-text font-[faktum] cursor-pointer hidden md:block h-[36px] inline-flex max-[820px]:text-[14px] !text-[#212529] font-semibold max-[771px]:text-[12px] items-center bg-[#49D49D]  border-0  px-3 focus:outline-none  rounded-lg text-base max-[991px]:text-sm md:mt-0  head-login-btn`
-                            : `head-text font-[faktum] cursor-pointer hidden md:block h-[36px] inline-flex max-[820px]:text-[14px] text-[#212529] font-semibold max-[771px]:text-[12px] items-center  bg-[#49D49D] border-0  px-3 focus:outline-none  rounded-lg text-base max-[991px]:text-sm md:mt-0  head-login-btn`
+                            ? `head-text cursor-pointer hidden md:block h-[36px] inline-flex max-[820px]:text-[14px] !text-[#212529] font-semibold max-[771px]:text-[12px] items-center bg-[#49D49D]  border-0  px-3 focus:outline-none  rounded-lg text-base max-[991px]:text-sm md:mt-0  head-login-btn`
+                            : `head-text cursor-pointer hidden md:block h-[36px] inline-flex max-[820px]:text-[14px] text-[#212529] font-semibold max-[771px]:text-[12px] items-center  bg-[#49D49D] border-0  px-3 focus:outline-none  rounded-lg text-base max-[991px]:text-sm md:mt-0  head-login-btn`
                         }>
                         Login or Sign up
                       </button>
@@ -692,27 +682,24 @@ export default function Header({
           ) : (
             <div ref={wrapperRef} className='text-gray-600 body-font  z-[100] hover-header-hidden'>
               <div className='container h-[52px] py-[12px] max-[991px]:max-w-full mx-auto  max-[1024px]:px-8  max-[767px]:!py-4  flex justify-between items-center  max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4 header relative'>
-                <div className='w-[16%] items-center py-3 max-[1440px]:w-[18%] max-[1200px]:w-[20%] max-[820px]:w-[18%] max-[771px]:w-[22%] max-[576px]:w-[44%]'>
-                  <Link
-                    href='/'
-                    className='flex md:block hidden title-font font-medium !text-[#FFFFFF] md:mb-0  mt-0  items-center focus:outline-none destop-logo-head '
-                    prefetch={false}>
-                    <Image src={LogoWhite} alt='BankSathi' className='w-[100%] ' priority={true}/>
-                  </Link>
-                  <div className='flex flex-row items-center gap-[10px]'>
-                    <div
-                      className='flex max-md:block hidden title-font font-medium items-center text-gray-900 md:mb-0  mt-0  w-full   max-[576px]:w-[15%] focus:outline-none mobile-logo-head'
-                      onClick={handleMenuOpen}>
-                      <Image src={menuImage} alt='BankSathiMenu' className='max-[576px]:w-full' priority={true}/>
-                    </div>
-                    <Link
-                      href='/'
-                      className='flex basis-1/2 hidden max-md:flex gap-2 title-font font-medium items-center !text-[#FFFFFF] md:mb-0  mt-0 focus:outline-none mobile-logo-head'
+                <div className='w-[16%] flex flex-row items-center gap-[10px] py-3 max-[1440px]:w-[18%] max-[1200px]:w-[20%] max-[820px]:w-[18%] max-[771px]:w-[22%] max-[576px]:w-[44%]'>
+                  <div
+                      onClick={handleMenuOpen}
+                      className='max-md:block hidden title-font font-medium items-center text-gray-900 md:mb-0  mt-0  w-full   max-[576px]:w-[18%] focus:outline-none mobile-logo-head'
                       prefetch={false}>
-                      <Image src={logoMobile} alt='BankSathi' className='w-3/6 max-[834px]:w-2/5 max-[576px]:w-[26%]' priority={true}/>
-                      <p className="text-white text-[faktum] font-semibold text-center text-xl max-[479px]:text-base">BankSathi</p>
+                      <Image src={menuImage} alt='BankSathi' className='w-3/6 max-[834px]:w-2/5 max-[576px]:w-full' priority={true}/>
+                    </div>
+                  <Link
+                      href='/'
+                      className='flex gap-[0.3rem] title-font font-medium items-center text-gray-900 md:mb-0  mt-0  w-full  focus:outline-none mobile-logo-head'
+                      prefetch={false}>
+                      <Image
+                        src={logoMobile}
+                        alt='BankSathi'
+                        className='w-[18%]  max-[834px]:w-[22%] max-[576px]:w-[18%] max-[479px]:w-[18%]'
+                      />
+                    <p className="text-[#ECFEF7] font-[faktum] font-bold text-center text-[38px] tracking-[-1.5px] leading-7 max-[1200px]:text-[34px] max-[1024px]:text-[32px]  max-[991px]:text-[30px] max-[834px]:text-[26px]  max-[576px]:text-[20px] max-[479px]:text-[16px] max-[479px]:tracking-[0px]">BankSathi</p>
                     </Link>
-                  </div>
                 </div>
                 <div>
                   <nav className='md:ml-auto md:flex items-center text-base justify-center hidden gap-5 max-[820px]:gap-4 menu-mobile'>
@@ -721,7 +708,7 @@ export default function Header({
                         <Link
                           href='#'
                           onMouseOver={() => sethoverClose(false)}
-                          className=' head-text font-[faktum] text-[16px] max-[1600px]:text-[18px] !text-[#FFFFFF] hover:!text-[#FFFFFF]  font-semibold text-lg max-[820px]:text-[14px] max-[771px]:text-[15px] head-menu'
+                          className=' head-text text-[16px] max-[1600px]:text-[18px] !text-[#FFFFFF] hover:!text-[#FFFFFF]  font-semibold text-lg max-[820px]:text-[14px] max-[771px]:text-[15px] head-menu'
                           prefetch={false}>
                           All Products
                         </Link>
@@ -733,7 +720,7 @@ export default function Header({
                       <li className='nav__menu-item py-5'>
                         <Link
                           href='#'
-                          className=' head-text font-[faktum] max-[1600px]:text-[18px] text-[16px] !text-[#FFFFFF] hover:!text-[#FFFFFF] font-semibold text-lg max-[820px]:text-[14px] max-[771px]:text-[15px] head-menu'
+                          className=' head-text max-[1600px]:text-[18px] text-[16px] !text-[#FFFFFF] hover:!text-[#FFFFFF] font-semibold text-lg max-[820px]:text-[14px] max-[771px]:text-[15px] head-menu'
                           prefetch={false}>
                           Resources
                         </Link>
@@ -746,7 +733,7 @@ export default function Header({
                       <li className='nav__menu-item py-5'>
                         <Link
                           href='#'
-                          className=' head-text font-[faktum] max-[1600px]:text-[18px] text-[16px] !text-[#FFFFFF] hover:!text-[#FFFFFF]  font-semibold text-lg max-[820px]:text-[14px] max-[771px]:text-[15px] head-menu'
+                          className=' head-text max-[1600px]:text-[18px] text-[16px] !text-[#FFFFFF] hover:!text-[#FFFFFF]  font-semibold text-lg max-[820px]:text-[14px] max-[771px]:text-[15px] head-menu'
                           prefetch={false}>
                           Tools
                         </Link>
@@ -762,7 +749,7 @@ export default function Header({
                           <Link
                             href='#'
                             onMouseOver={() => setShowPartnersSubmenu(true)}
-                            className='head-text font-[faktum] max-[1600px]:text-[18px] text-[16px] !text-[#FFFFFF] hover:!text-[#FFFFFF]  font-semibold text-lg max-[820px]:text-[14px] max-[771px]:text-[15px] head-menu'
+                            className='head-text max-[1600px]:text-[18px] text-[16px] !text-[#FFFFFF] hover:!text-[#FFFFFF]  font-semibold text-lg max-[820px]:text-[14px] max-[771px]:text-[15px] head-menu'
                             prefetch={false}>
                             Partner with us
                           </Link>
@@ -831,7 +818,7 @@ export default function Header({
                     </>
                   ) : (
                     <Link href='/login' className='!text-[#212529]' prefetch={false}>
-                      <button className='!text-[#212529] h-[36px] cursor-pointer head-text font-[faktum] hidden md:block  inline-flex max-[820px]:text-[14px] max-[771px]:text-[12px]  bg-gray-100 border-0  items-center px-[10px] focus:outline-none hover:bg-gray-200 rounded-lg text-base max-[991px]:text-sm md:mt-0 head-login-btn'>
+                      <button className='!text-[#212529] h-[36px] cursor-pointer head-text hidden md:block  inline-flex max-[820px]:text-[14px] max-[771px]:text-[12px]  bg-gray-100 border-0  items-center px-[10px] focus:outline-none hover:bg-gray-200 rounded-lg text-base max-[991px]:text-sm md:mt-0 head-login-btn'>
                         Login or Sign up
                       </button>
                     </Link>

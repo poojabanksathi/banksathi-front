@@ -5,7 +5,6 @@ import Link from 'next/link'
 
 const CareerBanner = () => {
   const handleScrollEvent = () => {
-    // add scroll into view
   }
   return (
     <>
@@ -44,7 +43,7 @@ const CareerBanner = () => {
                 onClick={() => {
                   handleScrollEvent
                 }}
-                className='!text-[#212529] cursor-pointer head-text font-[faktum] md:block h-[50px] inline-flex max-[820px]:text-[14px] max-[771px]:text-[12px] items-center bg-gray-100 border-0 py-2 px-3 rounded-lg text-base max-[991px]:text-sm md:mt-0'>
+                className='!text-[#212529] cursor-pointer head-text md:block h-[50px] inline-flex max-[820px]:text-[14px] max-[771px]:text-[12px] items-center bg-gray-100 border-0 py-2 px-3 rounded-lg text-base max-[991px]:text-sm md:mt-0'>
                 <Link href='' prefetch={false} passHref>
                   Job Opennings
                 </Link>

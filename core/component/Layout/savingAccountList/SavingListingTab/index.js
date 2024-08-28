@@ -469,7 +469,7 @@ const SavingListingTab = ({
         <div className='flex flex-col items-center justify-center md:gap-0' onMouseLeave={() => setOpenSortBy(false)}>
           <div
             onMouseOver={() => setOpenSortBy(true)}
-            className={` w-[300px] flex flex-row justify-between shadow-md px-2 items-start ${
+            className={` w-[300px] flex flex-row justify-between shadow-md px-2 text-[#212529] items-start ${
               !openSortBy
                 ? 'border border-[#212529] rounded-[5px]'
                 : 'border border-[#212529] border-b-0 rounded-t-[5px]'
@@ -496,7 +496,7 @@ const SavingListingTab = ({
                   return (
                     <div key={item?.id} className='last:pb-4 first:pt-2'>
                       <div
-                        className='hover:text-[#a882dd] cursor-pointer hover:text-[13px] text-[13px] w-[300px]'
+                        className='hover:text-[#a882dd] text-[#212529] cursor-pointer hover:text-[13px] text-[13px] w-[300px]'
                         onClick={() => handleSortingOptionClick(item?.name)}>
                         {item?.name}
                       </div>
@@ -613,8 +613,8 @@ const SavingListingTab = ({
                             }}
                             className={
                               categoryActive?.includes(filterTab)
-                                ? 'recommendation-category head-text font-[faktum] capitalize'
-                                : 'text-[#212529] head-text font-[faktum] border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-6 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize list-resolov-credit '
+                                ? 'recommendation-category head-text capitalize'
+                                : 'text-[#212529] head-text border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-6 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize list-resolov-credit '
                             }
                           />
                         </div>
@@ -632,8 +632,8 @@ const SavingListingTab = ({
                             }}
                             className={
                               categoryActive?.includes(filterTab)
-                                ? 'recommendation-category head-text font-[faktum] capitalize'
-                                : 'text-[#212529] head-text font-[faktum] border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-6 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize list-resolov-credit '
+                                ? 'recommendation-category head-text capitalize'
+                                : 'text-[#212529] head-text border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-6 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize list-resolov-credit '
                             }
                           />
                         </div>
@@ -1385,7 +1385,6 @@ const SavingListingTab = ({
                                 {data.slug === 'topPick' && (
                                   <>
                                     {topPicks?.map((balance, index) => {
-                                      console.log(balance)
                                       return (
                                         <div key={index}>
                                           <div className='flex pb-1'>

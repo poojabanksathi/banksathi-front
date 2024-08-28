@@ -74,9 +74,9 @@ export default function CreditProfile() {
     }
   }
 
-  const leadId = localStorage.getItem('leadprofileid')
-  const token = localStorage.getItem('token')
-  const ValidPan = localStorage.getItem('ValidPan')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
+  const ValidPan = typeof window !== 'undefined' && localStorage.getItem('ValidPan')
 
   useEffect(() => {
     if (token) {
@@ -465,7 +465,7 @@ export default function CreditProfile() {
       )}
       <div className='profile-card'>
         <div className='pb-6'>
-          <p className='text-[#212529] head-text font-[faktum] xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] font-semibold max-[479px]:text-center '>
+          <p className='text-[#212529] head-text xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] font-semibold max-[479px]:text-center '>
             My Profile
           </p>
         </div>

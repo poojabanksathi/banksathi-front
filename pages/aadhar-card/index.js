@@ -1,23 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, BLOG } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import CommonBreadCrumbComponent from '@/core/component/common/CommonList/CommonBreadCrumbComponent'
+import Link from 'next/link'
+import { useWindowSize } from '@/hooks/useWindowSize'
 
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
+const AadharDetails = dynamic(() => import('@/core/component/Layout/AadharDetails'), {
   ssr: false
 })
+
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
 const CreditNews = dynamic(() => import('@/core/component/Layout/CreditNews/CreditNews'), {
   ssr: false
 })
+const KnowledgebaseBreadcrumb = dynamic(
+  () => import('@/core/component/Layout/knowledgeBaseDetail/KnowledgebreadCrumb/KnowledgebreadCrumb'),
+  {
+    ssr: false
+  }
+)
 
 export async function getServerSideProps(context) {
   try {
@@ -32,10 +38,6 @@ export async function getServerSideProps(context) {
       page_url_slug: url_slug
     }
     const bussinessCatParam = {
-      lang_id: lang_id
-    }
-    const topmenuParam = {
-      website_url: website_url,
       lang_id: lang_id
     }
     const newsReq = {
@@ -84,7 +86,28 @@ export async function getServerSideProps(context) {
     }
   }
 }
-const AadharCardPage = ({ businessCategorydata, CreditNewsList }) => {
+const AadharCardPage = ({ businessCategorydata, CreditNewsList, businessmetaheadtag }) => {
+  const size = useWindowSize()
+  const mobileSize = size?.width <= 576
+  const [showComponent, setShowComponent] = useState(false);
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScrollTop > lastScrollTop && currentScrollTop > window.innerHeight / 1.2) {
+        setShowComponent(true);
+      } else if (currentScrollTop <= window.innerHeight / 1.2) {
+        setShowComponent(false);
+      }
+      setLastScrollTop(currentScrollTop);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollTop]);
   return (
     <>
       <div>
@@ -92,20 +115,30 @@ const AadharCardPage = ({ businessCategorydata, CreditNewsList }) => {
           <DynamicHeader businessCategorydata={businessCategorydata} />
         </div>
         <div className='bg-[#F4F8FB] h-auto'>
-          <CommonBreadCrumbComponent
-            link1='/aadhar-card'
-            link1Name='Aadhar Card'
-            link2Name='News'
-            title='Aadhar Card Blogs'
-          />
+
+          <div className='bg-[#F4F8FB] pl-4'>
+            <KnowledgebaseBreadcrumb />
+          </div>
+          <AadharDetails businessmetaheadtag={businessmetaheadtag} />
           <CreditNews CreditNewsList={CreditNewsList} pageTitle='Aadhar Card Blogs' aadharPage={true} />
         </div>
         <div className='bg-[#fff]'>
           <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
+          <div className='reletive'>
+            {mobileSize && showComponent && (
+              <div className='fixed bottom-0 left-0 z-[999] h-[53px] w-full justify-between items-center'>
+                <div className='text-center'>
+                  <Link href='/credit-cards/eligibility' prefetch={false}>
+                    <button className='bg-[#49D49D] w-full py-[18px] lg:w-[240px]  max-[240px]:w-full  font-faktum font-semibold text-[14px] leading-[18px] tracking-wide text-[#212529]'>
+                      Check Credit Card Eligibility
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      <ScrollToTop smooth color='#000' />
     </>
   )
 }

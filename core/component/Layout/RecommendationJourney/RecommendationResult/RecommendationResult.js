@@ -8,7 +8,7 @@ import { CardNetwork, FilaterData, ProviderFilter } from '@/utils/alljsonfile/fi
 import InputRange from 'react-input-range'
 import ReactStars from 'react-stars'
 import accordionArrowall from '../../../../../public/assets/accordion-down.svg'
-import { getKeyValueInfo, removeDuplicates } from '@/utils/util'
+import { getKeyValueInfo, is_webengage_event_enabled, removeDuplicates } from '@/utils/util'
 import CardsListing from './CardsListing/CardsListing'
 import FilterIcon from '../../../../../public/assets/filter-icon.svg'
 import MobileFilter from './MobileFilter/MobileFilter'
@@ -567,22 +567,46 @@ const RecommendationResult = ({ filteredList, formInfo, leftMenuFilterData }) =>
   }, [filteredList?.length])
 
 
+const handleWebEngageEvent = (eventName, eventData) => {
+    if (is_webengage_event_enabled && typeof window !== 'undefined' && window.webengage) {
+      window.webengage.track(eventName, eventData);
+    }
+  }
+
+
   const handleGTM = () => {
     const currentDate = new Date();
     const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
     const list = localStorage.getItem('listData') ? JSON.parse(localStorage.getItem('listData')) : {}
+    const productNames = list?.map(card => card.card_name);
+    // const finalProductCSV = productNames.join(',');
+
 
       TagManager?.dataLayer({
         dataLayer: {
           event: 'card_recommend_checked',
-          recommend_product_list: list,
+          recommend_product_list: productNames,
           date: formattedDate,
         },
       });
     }
 
+    const handleWebEngage = () => {
+      const currentDate = new Date();
+    const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
+    const list = localStorage.getItem('listData') ? JSON.parse(localStorage.getItem('listData')) : {}
+    const productNames = list?.map(card => card.card_name);
+    // const finalProductCSV = productNames.join(',');
+
+      handleWebEngageEvent('card_recommend_checked', {
+        recommend_product_list: productNames,
+        date: formattedDate,
+      });
+    }
+
   useEffect(() => {
     handleGTM();
+    handleWebEngage();
   }, []);
 
 

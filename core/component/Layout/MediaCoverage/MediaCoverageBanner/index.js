@@ -26,7 +26,7 @@ function CalulatorBanner() {
         <div className='grid grid-cols-2 px-20 max-[1440px]:px-12 max-[1200px]:px-0 max-[1024px]:px-0 items-center max-[576px]:grid-cols-1 max-[576px]:gap-8 max-[479px]:px-0  credit-list-banner'>
           <div>
             <div className=''>
-              <p className='credit-list-title head-text font-[faktum] text-[46px] max-[1440px]:text-[42px] max-[1280px]:text-[37px] max-[834px]:text-[28px] max-[834px]:leading-9 max-[771px]:text-[27px] max-[576px]:text-[34px] max-[479px]:text-[24px] max-[375px]:text-[24px] max-[320px]:text-[20px] max-[576px]:text-center text-white mb-[20px] max-[479px]:mb-[12px] font-semibold leading-[50px] max-[771px]:!leading-[40px] max-[393px]:!leading-8'>
+              <p className='credit-list-title head-text text-[46px] max-[1440px]:text-[42px] max-[1280px]:text-[37px] max-[834px]:text-[28px] max-[834px]:leading-9 max-[771px]:text-[27px] max-[576px]:text-[34px] max-[479px]:text-[24px] max-[375px]:text-[24px] max-[320px]:text-[20px] max-[576px]:text-center text-white mb-[20px] max-[479px]:mb-[12px] font-semibold leading-[50px] max-[771px]:!leading-[40px] max-[393px]:!leading-8'>
                 Media Coverage
               </p>
               <p className='text-[24px] max-[1024px]:text-[22px] max-[834px]:text-[18px] max-[771px]:text-[17px] max-[479px]:text-[16px] max-[375px]:text-[15px] mt-0 text-white  font-normal max-[576px]:text-center list-banner-sub'>

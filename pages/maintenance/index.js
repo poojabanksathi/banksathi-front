@@ -1,16 +1,12 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { metaInfo } from '@/utils/metaInfo'
 import Head from 'next/head'
 
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-
 
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
@@ -23,7 +19,6 @@ const DynamicErrorModal = dynamic(() => import('../../core/component/common/ApiE
 export default function Index({ businessCategorydata }) {
   const getOgUrl = typeof window !== 'undefined' && window?.location?.href
   const modifiedUrl = typeof window !== 'undefined' && window.location.origin + window.location.pathname
-  const CDN_URL = process.env.NEXT_PUBLIC_BASE_IMG_CDN_URL
   return (
     <>
       <div>
@@ -62,15 +57,11 @@ export default function Index({ businessCategorydata }) {
         </div>
         <div className='bg-[#fff]'>
           <DynamicErrorModal />
-
           <MobileFooter />
-          <DynamicFooter businessCategorydata={businessCategorydata} />
+     
         </div>
       </div>
 
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
     </>
   )
 }

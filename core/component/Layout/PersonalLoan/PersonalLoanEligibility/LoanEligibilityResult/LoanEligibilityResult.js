@@ -27,9 +27,9 @@ const LoanEligibilityResult = ({ productList, alternetRelatedproduct }) => {
       const alt = localStorage.getItem('loan-alternate-products')
         ? JSON.parse(localStorage.getItem('loan-alternate-products'))
         : null
-      const eligible = localStorage.getItem('loan-eligible-product')
-      const slug = localStorage.getItem('loan-input-slug')
-      const value = localStorage.getItem('particularLoanEligibility')
+      const eligible = typeof window !== 'undefined' && localStorage.getItem('loan-eligible-product')
+      const slug = typeof window !== 'undefined' && localStorage.getItem('loan-input-slug')
+      const value = typeof window !== 'undefined' && localStorage.getItem('particularLoanEligibility')
       setIsForParticularLoan(Boolean(value))
       setInputSlug(slug)
       setEligibleProduct(eligible ? JSON.parse(eligible) : '')

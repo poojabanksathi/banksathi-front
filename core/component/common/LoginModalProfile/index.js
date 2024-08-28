@@ -1,6 +1,6 @@
 import { ApiMessage } from '@/utils/alljsonfile/apimessage'
 import { BASE_URL, USERSET } from '@/utils/alljsonfile/service'
-import { handleRemoveLocalstorage } from '@/utils/util'
+import { handleRemoveLocalstorage, is_webengage_event_enabled } from '@/utils/util'
 import axios from 'axios'
 import jwt from 'jwt-decode'
 import Link from 'next/link'
@@ -16,6 +16,14 @@ function LoginModalProfile() {
   const leadprofileid = localStorage?.getItem('leadprofileid')
   const userData = localStorage?.getItem('userData')
 
+  const handleWebEngageEvent = (eventName, eventData) => {
+    if (is_webengage_event_enabled && typeof window !== 'undefined' && window.webengage) {
+      window.webengage.track(eventName, eventData);
+      window.webengage.user.logout();
+
+    }
+  }
+
   const handleLogout = () => {
     handleRemoveLocalstorage()
     router.reload()
@@ -24,9 +32,18 @@ function LoginModalProfile() {
     TagManager?.dataLayer({
       dataLayer: {
         event: 'user_logout',
-        lead_profile_id: leadprofileid,
+        user_id: leadprofileid,
         name: userData?.full_name
       },
+    });
+
+    handleWebEngageEvent('user_logout', {
+      user_id: leadprofileid,
+      ...(userData?.full_name && (() => {
+          return {
+            name: userData?.full_name
+          };
+      })()),
     });
   }
 
@@ -41,8 +58,8 @@ function LoginModalProfile() {
     }
   }, [])
   const [scoreData, setScoreData] = useState()
-  const token = localStorage.getItem('token')
-  const leadId = localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
 
   useEffect(() => {
     if (token) {

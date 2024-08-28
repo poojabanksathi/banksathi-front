@@ -1,6 +1,6 @@
 import { ListingfilterData } from '@/utils/alljsonfile/listingfilterdata'
 import { BASE_URL, LEADAPPAPI } from '@/utils/alljsonfile/service'
-import { errorHandling, getHash, sendEventToGTM } from '@/utils/util'
+import { errorHandling, getHash, is_webengage_event_enabled, sendEventToGTM } from '@/utils/util'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
@@ -8,7 +8,18 @@ import React, { useEffect, useId, useState } from 'react'
 import LoaderComponent from '../../Partners/LoaderComponent/LoaderComponent'
 import TagManager from 'react-gtm-module'
 
-const ApplyNowButton = ({ data, userData, addMargin = false, pdpImpressionObj, isPdp, category, position, pos , className , disabled}) => {
+const ApplyNowButton = ({
+  data,
+  userData,
+  addMargin = false,
+  pdpImpressionObj,
+  isPdp,
+  category,
+  position,
+  pos,
+  className,
+  disabled
+}) => {
   const id = useId()
   const router = useRouter()
 
@@ -20,7 +31,7 @@ const ApplyNowButton = ({ data, userData, addMargin = false, pdpImpressionObj, i
   const refOutSide = typeof window !== 'undefined' && sessionStorage?.getItem('refererOutside')
   const leadsParams = typeof window !== 'undefined' && sessionStorage?.getItem('leadsParams')
   const deviceId = typeof window !== 'undefined' && Cookies.get('deviceId')
-  const category_url = data?.url_slug?.split('/')[0]
+  const product_url = data?.url_slug?.split('/')[0]
 
   const h = getHash()
   const leadIPData = leadsParams && JSON?.parse(leadsParams)
@@ -35,10 +46,17 @@ const ApplyNowButton = ({ data, userData, addMargin = false, pdpImpressionObj, i
     TagManager?.dataLayer({
       dataLayer: {
         event: 'apply_card',
-        product_category: category_url,
-        product_name: data?.card_name || "",
-      },
-    });
+        product_category: product_url,
+        product_name: data?.card_name || '',
+        product_link: ''
+      }
+    })
+  }
+
+  const handleWebEngageEvent = (eventName, eventData) => {
+    if (is_webengage_event_enabled && typeof window !== 'undefined' && window.webengage) {
+      window.webengage.track(eventName, eventData)
+    }
   }
 
   useEffect(() => {
@@ -202,7 +220,7 @@ const ApplyNowButton = ({ data, userData, addMargin = false, pdpImpressionObj, i
     }
   }
   //apply now btn click
- 
+
   const handleApplyNow = (item) => {
     if (!isPdp) {
       // pdp impression
@@ -232,6 +250,11 @@ const ApplyNowButton = ({ data, userData, addMargin = false, pdpImpressionObj, i
     }
     sendEventToGTM(sendCheckout)
     handleGTM()
+    handleWebEngageEvent('apply_card', {
+      product_category: product_url,
+      product_name: data?.card_name || '',
+      product_link: ''
+    })
     if (userData) {
       callAddLeadDetails(item)
     } else if (!userData) {
@@ -239,6 +262,7 @@ const ApplyNowButton = ({ data, userData, addMargin = false, pdpImpressionObj, i
     }
   }
   const positionID = position || pos
+  console.log(ListingfilterData.apllynow)
   return (
     <>
       {loading && <LoaderComponent />}
@@ -247,7 +271,7 @@ const ApplyNowButton = ({ data, userData, addMargin = false, pdpImpressionObj, i
         key={data?.id}
         disabled={disabled}
         onClick={() => handleApplyNow(data)}
-        className={`text-[#212529] px-4 cursor-pointer business-right-text py-3 w-full lg:w-[160px] md:w-full rounded-lg  bg-[#49D49D] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px] ${disabled && "bg-[#d5d7d8]"} ${
+        className={`text-[#212529] px-4 cursor-pointer business-right-text py-3 w-full lg:w-[160px] md:w-full font-faktum rounded-lg  bg-[#49D49D] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px] ${disabled && 'bg-[#d5d7d8]'} ${
           addMargin ? 'mr-[12px]' : ''
         } ${className}`}>
         {ListingfilterData.apllynow}

@@ -139,7 +139,7 @@ export default function CreditSubmenu({ footerMobileShow, sethoverClose, hovercl
                   <p className='text-[#212529] font-medium text-[18px] max-[1200px]:text-[16px] max-[834px]:text-[16px]'>
                     Finding the ideal credit card is simple by reviewing our tailored suggestions.
                   </p>
-                  <div className='head-text font-[faktum] flex gap-4 px-5 py-2 max-[820px]:px-4 bg-white rounded-lg max-[771px]:px-3 w-auto max-[479px]:justify-center'>
+                  <div className='head-text flex gap-4 px-5 py-2 max-[820px]:px-4 bg-white rounded-lg max-[771px]:px-3 w-auto max-[479px]:justify-center'>
                     <Link
                       href='/credit-cards'
                       className='head-text text-[#212529] hover:!text-[#212529] font-semibold text-[18px] max-[1200px]:text-[16px] max-[834px]:text-[14px]'
@@ -220,7 +220,7 @@ export function ResourceSubmenu({ footerMobileShow, sethoverClose, hoverclose, b
               <p className='text-[#212529] font-medium text-[18px] max-[1200px]:text-[16px] max-[834px]:text-[16px]'>
                 Finding the ideal credit card is simple by reviewing our tailored suggestions.
               </p>
-              <div className='head-text font-[faktum] flex gap-4 px-5 py-2 max-[820px]:px-4 bg-white rounded-lg max-[771px]:px-3 w-auto max-[479px]:justify-center'>
+              <div className='head-text flex gap-4 px-5 py-2 max-[820px]:px-4 bg-white rounded-lg max-[771px]:px-3 w-auto max-[479px]:justify-center'>
                 <Link
                   href='/credit-cards'
                   className='head-text text-[#212529] hover:!text-[#212529] font-semibold text-[18px] max-[1200px]:text-[16px] max-[834px]:text-[14px]'
@@ -303,7 +303,7 @@ export function ToolsSubmenu({ footerMobileShow, sethoverClose, hoverclose }) {
               <p className='text-[#212529] font-medium text-[18px] max-[1200px]:text-[16px] max-[834px]:text-[16px]'>
                 Finding the ideal credit card is simple by reviewing our tailored suggestions.
               </p>
-              <div className='head-text font-[faktum] flex gap-4 px-5 py-2 max-[820px]:px-4 bg-white rounded-lg max-[771px]:px-3 w-auto max-[479px]:justify-center'>
+              <div className='head-text flex gap-4 px-5 py-2 max-[820px]:px-4 bg-white rounded-lg max-[771px]:px-3 w-auto max-[479px]:justify-center'>
                 <Link
                   href='/credit-cards'
                   className='head-text text-[#212529] hover:!text-[#212529] font-semibold text-[18px] max-[1200px]:text-[16px] max-[834px]:text-[14px]'

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
-import { BASE_URL, BUSINESSCATEGORY, COMMON, BLOG } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY, BLOG } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import { useRouter } from 'next/router'
 
@@ -9,13 +8,9 @@ const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
 
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
-
 const CommonBreadCrumbComponent = dynamic(
   () => import('@/core/component/common/CommonList/CommonBreadCrumbComponent'),
   {
@@ -32,7 +27,6 @@ const CreditNewsDetails = dynamic(
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
     const blog_url_slug = context?.params?.['news-details']
     const credit_url_slug = context?.resolvedUrl?.split('/')?.[1]
@@ -110,7 +104,6 @@ const NewsDetails = ({ businessCategorydata, newsDetailsData, blogUrl, newsListD
 
   return (
     <>
-      <div>
         <div className=' bg-[#844FCF]'>
           <DynamicHeader businessCategorydata={businessCategorydata} />
         </div>
@@ -128,10 +121,7 @@ const NewsDetails = ({ businessCategorydata, newsDetailsData, blogUrl, newsListD
         </div>
         <div className='bg-[#fff]'>
           <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
         </div>
-      </div>
-      <ScrollToTop smooth color='#000' />
     </>
   )
 }

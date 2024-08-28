@@ -5,13 +5,6 @@ const CompareCardBoxed = dynamic(() => import('../../Layout/compareCard/cardBox/
   ssr: false
 })
 
-const CreditCardTrobleHaving = dynamic(
-  () => import('../../Layout/compareCard/cardTrobleHaving/CreditCardTrobleHaving'),
-  {
-    ssr: false
-  }
-)
-
 const FAQ = dynamic(() => import('../FAQ/FAQ'), {
   ssr: false
 })
@@ -36,7 +29,7 @@ function CompareCardComponent({ faqdata, slug1, slug2, slug3, productcomparedata
           }`}>
         <CompareCardBoxed slug1={slug1} slug2={slug2} slug3={slug3} productcomparedata={productcomparedata} />
       </div>
-      <CreditCardTrobleHaving  position={'2'}/>
+      {/* <CreditCardTrobleHaving  position={'2'}/> */}
       <FAQ faqdata={faqdata} />
     </div>
   )

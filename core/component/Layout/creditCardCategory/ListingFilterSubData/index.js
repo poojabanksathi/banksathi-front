@@ -193,8 +193,8 @@ function ListingFilterSubData({
   const starCount = 5
 
   const { query } = router
-  const token = localStorage.getItem('token')
-  const leadId = localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
 
   useEffect(() => {
     if (token) {
@@ -826,7 +826,7 @@ function ListingFilterSubData({
                 ? 'border border-[#212529] rounded-[5px]'
                 : 'border border-[#212529] border-b-0 rounded-t-[5px]'
             } md:h-[50px] h-auto cursor-pointer bg-white text-center text-[14px] font-medium md:py-[14px] max-[628px]:py-[12px] relative`}>
-            <div className='hover:text-[14px] font-medium '>{selectedSortOption}</div>
+            <div className='hover:text-[14px] text-[#212529] font-medium '>{selectedSortOption}</div>
             <div type='button' onClick={() => setOpenSortBy(!openSortBy)}>
               <Image
                 src={accordionArrowall}
@@ -862,7 +862,7 @@ function ListingFilterSubData({
                   return (
                     <div key={item?.id} className='last:pb-4 first:pt-2'>
                       <div
-                        className='hover:text-[#a882dd] cursor-pointer hover:text-[14px]'
+                        className='hover:text-[#a882dd] text-[#212529] cursor-pointer hover:text-[14px]'
                         onClick={() => handleSortingOptionClick(item?.name)}>
                         {item?.name}
                       </div>
@@ -1205,8 +1205,8 @@ function ListingFilterSubData({
                           onClick={() => filterwithbank(data)}
                           className={
                             filterBankSub?.includes(data)
-                              ? ' recommendation-category head-text font-[faktum] capitalize  '
-                              : 'text-[#212529] head-text font-[faktum] border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-4 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize list-resolov-credit'
+                              ? ' recommendation-category head-text capitalize  '
+                              : 'text-[#212529] head-text border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-4 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize list-resolov-credit'
                           }
                         />
                       </div>
@@ -1233,8 +1233,8 @@ function ListingFilterSubData({
                             onClick={() => filterwelcomebenefits(toplist)}
                             className={
                               filterdata?.includes(toplist)
-                                ? ' recommendation-category head-text font-[faktum] capitalize  '
-                                : 'text-[#212529] head-text font-[faktum] border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-4 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize  list-resolov-credit'
+                                ? ' recommendation-category head-text capitalize  '
+                                : 'text-[#212529] head-text border border-[#212529] bg-transparent xl:py-3  xl:px-4 md:py-3 md:px-4 sm:py-3 sm:px-4 px-4 py-3 text-[15px] max-[1440px]:text-[14px] rounded-[5px] hover:bg-[#844FCF] hover:border-[#844FCF] hover:text-white capitalize  list-resolov-credit'
                             }
                           />
                         </div>
@@ -1763,7 +1763,14 @@ function ListingFilterSubData({
                                         ...selectedData.filter((item) => item.product_id !== data.product_id)
                                       ])
                                     }}>
-                                    <Image src={CloseIcon} alt='img' height={12} width={12} priority={true} className='  w-[12px] h-[12px]' />
+                                    <Image
+                                      src={CloseIcon}
+                                      alt='img'
+                                      height={12}
+                                      width={12}
+                                      priority={true}
+                                      className='  w-[12px] h-[12px]'
+                                    />
                                   </div>
                                 </div>
                               </div>
@@ -2286,21 +2293,15 @@ function ListingFilterSubData({
                                           pos='21'
                                           position={index}
                                           category={`credit cards ${url_slug}`}
-                                          disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                                          disabled={!alldata?.is_apply_now}
                                         />
                                         {filteredDataCard(alldata?.url_slug) == 'Eligible' ? (
-                                             <button
-                                             id={`${index}+'bank=bt'++`}
-                                             className='flex items-center gap-2 justify-center cursor-pointer business-right-text  w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
-                                             {filteredDataCard(alldata?.url_slug)}
-                                             <Image
-                                               src={successBgIcon}
-                                               alt='img'
-                                               width={20}
-                                               height={20}
-                                               className=''
-                                             />
-                                           </button>
+                                          <button
+                                            id={`${index}+'bank=bt'++`}
+                                            className='flex items-center gap-2 justify-center cursor-pointer business-right-text font-faktum  w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                                            {filteredDataCard(alldata?.url_slug)}
+                                            <Image src={successBgIcon} alt='img' width={20} height={20} className='' />
+                                          </button>
                                         ) : (
                                           <button
                                             id={`${index}+'bank-btn'++`}
@@ -2316,7 +2317,7 @@ function ListingFilterSubData({
                                               //     )
                                               //   : router.push(`/credit-cards/eligibility/`)
                                             }}
-                                            className=' business-right-text cursor-pointer py-3 w-full lg:w-[160px] md:w-full rounded-lg text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                                            className=' business-right-text cursor-pointer py-3 w-full lg:w-[160px] md:w-full font-faktum rounded-lg text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
                                             {filteredDataCard(alldata?.url_slug)}
                                             {/* {ListingfilterData.checkelig} */}
                                           </button>
@@ -2365,9 +2366,7 @@ function ListingFilterSubData({
                                         ) : (
                                           <div className='flex flex-col'>
                                             <span className='symbole-rupee'>₹ {alldata.annual_fee} /-</span>
-                                            <span className='font-normal text-[12px] mt-[4px]'>
-                                            *Applicable Taxes
-                                            </span>
+                                            <span className='font-normal text-[12px] mt-[4px]'>*Applicable Taxes</span>
                                           </div>
                                         )}
                                       </p>
@@ -2385,9 +2384,7 @@ function ListingFilterSubData({
                                         ) : (
                                           <div className='flex flex-col'>
                                             <span className='symbole-rupee'>₹ {alldata.joining_fee} /-</span>
-                                            <span className='font-normal text-[12px] mt-[4px]'>
-                                            *Applicable Taxes
-                                            </span>
+                                            <span className='font-normal text-[12px] mt-[4px]'>*Applicable Taxes</span>
                                           </div>
                                         )}
                                       </p>
@@ -2435,104 +2432,102 @@ function ListingFilterSubData({
                                   </div>
                                 </div>
                                 <div className='grid grid-cols-2 pt-4 gap-4 px-6 items-center'>
-                                <div className='custom-max-content'>
-                                          <label className='block text-gray-500 font-bold flex max-[576px]:gap-1 items-center'>
-                                            <input
-                                              className='mr-2 leading-tight  w-[16px] h-[16px]'
-                                              type='checkbox'
-                                              id={alldata.product_id}
-                                              // checked={selectedData?.includes(alldata)}
-                                              checked={selectedData.some(
-                                                (selectedItem) => selectedItem.product_id === alldata.product_id
-                                              )}
-                                              disabled={
-                                                size?.width <= 991
-                                                  ? selectedData.length >= 2 && !selectedData?.includes(alldata)
-                                                  : selectedData.length >= 3 && !selectedData?.includes(alldata)
-                                              }
-                                              onChange={(e) => handlecompareModal(e, alldata)}
-                                            />
-                                            <p className='text-[15px] font-semibold  text-[#212529] business-right-text'>
-                                              {ListingfilterData.compare}
-                                            </p>
-                                          </label>
-                                        </div>
-                                    <div
-                                      id='accordionExample'
-                                      data-active-classes='bg-none'
-                                      data-inactive-classes='text-[#212529]'
-                                      className='h-[25px]'>
-                                      {(alldata?.features || alldata?.welcome_offer) && (
-                                        <div className='  relative  duration-300 h-full'>
-                                          <h3 id='accordion-flush-heading-1' className="h-full">
-                                            <button
-                                              id={` + ${index} +'cc-btn'`}
-                                              onClick={() => handleViewMoreAccordion(index)}
-                                              type='button'
-                                              className='text-[#212529] h-full list-none font-semibold relative text-[15px] gap-3 max-[375px]:text-[15px] cursor-pointer faq-quation-title flex items-center justify-end w-full text-left'
-                                              data-accordion-target='#accordion-flush-body-1'
-                                              aria-expanded='true'
-                                              aria-controls='accordion-flush-body-1'>
-                                              {ListingfilterData.view_more}
+                                  <div className='custom-max-content'>
+                                    <label className='block text-gray-500 font-bold flex max-[576px]:gap-1 items-center'>
+                                      <input
+                                        className='mr-2 leading-tight  w-[16px] h-[16px]'
+                                        type='checkbox'
+                                        id={alldata.product_id}
+                                        // checked={selectedData?.includes(alldata)}
+                                        checked={selectedData.some(
+                                          (selectedItem) => selectedItem.product_id === alldata.product_id
+                                        )}
+                                        disabled={
+                                          size?.width <= 991
+                                            ? selectedData.length >= 2 && !selectedData?.includes(alldata)
+                                            : selectedData.length >= 3 && !selectedData?.includes(alldata)
+                                        }
+                                        onChange={(e) => handlecompareModal(e, alldata)}
+                                      />
+                                      <p className='text-[15px] font-semibold  text-[#212529] business-right-text'>
+                                        {ListingfilterData.compare}
+                                      </p>
+                                    </label>
+                                  </div>
+                                  <div
+                                    id='accordionExample'
+                                    data-active-classes='bg-none'
+                                    data-inactive-classes='text-[#212529]'
+                                    className='h-[25px]'>
+                                    {(alldata?.features || alldata?.welcome_offer) && (
+                                      <div className='  relative  duration-300 h-full'>
+                                        <h3 id='accordion-flush-heading-1' className='h-full'>
+                                          <button
+                                            id={` + ${index} +'cc-btn'`}
+                                            onClick={() => handleViewMoreAccordion(index)}
+                                            type='button'
+                                            className='text-[#212529] h-full list-none font-semibold relative text-[15px] gap-3 max-[375px]:text-[15px] cursor-pointer faq-quation-title flex items-center justify-end w-full text-left'
+                                            data-accordion-target='#accordion-flush-body-1'
+                                            aria-expanded='true'
+                                            aria-controls='accordion-flush-body-1'>
+                                            {ListingfilterData.view_more}
 
-                                              {vieMoreIndex?.includes(index) ? (
-                                                <Image
-                                                  src={accordionArrowall}
-                                                  alt='down'
-                                                  width={24}
-                                                  height={24}
-                                                  priority={true}
-                                                  className='rotate-180 w-6 h-6 shrink-0'
-                                                />
-                                              ) : (
-                                                <Image
-                                                  src={accordionArrowall}
-                                                  alt='down'
-                                                  width={24}
-                                                  height={24}
-                                                  priority={true}
-                                                  className='w-6 h-6 shrink-0'
-                                                />
-                                              )}
-                                            </button>
-                                          </h3>
-                                          
+                                            {vieMoreIndex?.includes(index) ? (
+                                              <Image
+                                                src={accordionArrowall}
+                                                alt='down'
+                                                width={24}
+                                                height={24}
+                                                priority={true}
+                                                className='rotate-180 w-6 h-6 shrink-0'
+                                              />
+                                            ) : (
+                                              <Image
+                                                src={accordionArrowall}
+                                                alt='down'
+                                                width={24}
+                                                height={24}
+                                                priority={true}
+                                                className='w-6 h-6 shrink-0'
+                                              />
+                                            )}
+                                          </button>
+                                        </h3>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className='px-6'>
+                                  {vieMoreIndex?.includes(index) && (
+                                    <div aria-labelledby='accordion-flush-heading-1'>
+                                      {alldata?.features && (
+                                        <div className='mt-4 text-[#212529]'>
+                                          <p className='text-[15px] font-semibold '>{ListingfilterData.features}</p>
+                                          <div className='mt-4'>
+                                            <div
+                                              className='list-disc  space-y-2 text-[14px] product-list-data'
+                                              dangerouslySetInnerHTML={{
+                                                __html: `<div>${alldata?.features}</div>`
+                                              }}></div>
+                                          </div>
+                                        </div>
+                                      )}
+                                      {alldata?.welcome_offer && (
+                                        <div className='mt-4 text-[#212529]'>
+                                          <p className='text-[15px] font-semibold'>{ListingfilterData.welcomeoffer}</p>
+
+                                          <div className='mt-4'>
+                                            <div
+                                              className='list-disc  space-y-2 text-[14px] product-list-data'
+                                              dangerouslySetInnerHTML={{
+                                                __html: `<div>${alldata?.welcome_offer}</div>`
+                                              }}></div>
+                                          </div>
                                         </div>
                                       )}
                                     </div>
-                                    
-                                  </div>
-                                  <div className="px-6">
-                                  {vieMoreIndex?.includes(index) && (
-                                            <div aria-labelledby='accordion-flush-heading-1'>
-                                              {alldata?.features && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold '>{ListingfilterData.features}</p>
-                                                  <div className='mt-4'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.features}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
-                                              {alldata?.welcome_offer && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold'>{ListingfilterData.welcomeoffer}</p>
-
-                                                  <div className='mt-4'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.welcome_offer}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
-                                            </div>
-                                          )}
-                                  </div>
+                                  )}
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -2581,20 +2576,14 @@ function ListingFilterSubData({
                       ref={index === filtedAfterData?.length - 1 ? lastChildRef : index === 0 ? firstDataRef : null}>
                       <div className='pt-6 bg-white  rounded-2xl   h-full  filter-card-box duration-300'>
                         <div className='px-4 pb-4'>
-                        {size.width <= 576 && filteredDataCard(alldata?.url_slug) == 'Eligible' && (
-                              <button
+                          {size.width <= 576 && filteredDataCard(alldata?.url_slug) == 'Eligible' && (
+                            <button
                               id={`${index}+'bank-gg'++`}
                               className='flex items-center gap-2 justify-end cursor-pointer business-right-text  w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
                               {filteredDataCard(alldata?.url_slug)}
-                              <Image
-                                src={successBgIcon}
-                                alt='img'
-                                width={20}
-                                height={20}
-                                className=''
-                              />
+                              <Image src={successBgIcon} alt='img' width={20} height={20} className='' />
                             </button>
-                          ) }
+                          )}
                         </div>
                         <div className='flex gap-3 !px-6 max-[768px]:!px-4 max-[280px]:!px-2'>
                           <div className=''>
@@ -2687,25 +2676,19 @@ function ListingFilterSubData({
                             pos='22'
                             position={index}
                             category={`credit cards ${url_slug}`}
-                            className="max-[771px]:text-[13px]"
-                            disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                            className='max-[771px]:text-[13px]'
+                            disabled={!alldata?.is_apply_now}
                           />
 
                           {size.width >= 576 && filteredDataCard(alldata?.url_slug) == 'Eligible' && (
-                              <button
+                            <button
                               id={`${index}+'bank-gg'++`}
                               className='flex items-center gap-2 justify-center cursor-pointer business-right-text max-[771px]:text-[13px] w-full lg:w-[160px] md:w-full  text-[#212529] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
                               {filteredDataCard(alldata?.url_slug)}
-                              <Image
-                                src={successBgIcon}
-                                alt='img'
-                                width={20}
-                                height={20}
-                                className=''
-                              />
+                              <Image src={successBgIcon} alt='img' width={20} height={20} className='' />
                             </button>
-                          )} 
-                          
+                          )}
+
                           {filteredDataCard(alldata?.url_slug) !== 'Eligible' && (
                             <button
                               id={`${index}+'bank-bt'++`}
@@ -2815,101 +2798,101 @@ function ListingFilterSubData({
                         </div>
 
                         <div className='grid grid-cols-2 py-4 gap-4 px-4 items-center'>
-                        <div className='custom-max-content'>
-                          <label className='block text-gray-500 font-bold flex max-[576px]:gap-1 items-center'>
-                            <input
-                              className='mr-2 leading-tight  w-[16px] h-[16px]'
-                              type='checkbox'
-                              id={alldata.product_id}
-                              disabled={
-                                size?.width <= 991
-                                  ? selectedData.length >= 2 && !selectedData?.includes(alldata)
-                                  : selectedData.length >= 3 && !selectedData?.includes(alldata)
-                              }
-                              checked={selectedData.some(
-                                (selectedItem) => selectedItem.product_id === alldata.product_id
-                              )}
-                              onChange={(e) => handlecompareModal(e, alldata)}
-                            />
-                            <p className='text-[15px] font-semibold  text-[#212529] max-[771px]:text-[14px]  max-[320px]:text-[12px]'>{ListingfilterData.compare} </p>
-                          </label>
+                          <div className='custom-max-content'>
+                            <label className='block text-gray-500 font-bold flex max-[576px]:gap-1 items-center'>
+                              <input
+                                className='mr-2 leading-tight  w-[16px] h-[16px]'
+                                type='checkbox'
+                                id={alldata.product_id}
+                                disabled={
+                                  size?.width <= 991
+                                    ? selectedData.length >= 2 && !selectedData?.includes(alldata)
+                                    : selectedData.length >= 3 && !selectedData?.includes(alldata)
+                                }
+                                checked={selectedData.some(
+                                  (selectedItem) => selectedItem.product_id === alldata.product_id
+                                )}
+                                onChange={(e) => handlecompareModal(e, alldata)}
+                              />
+                              <p className='text-[15px] font-semibold  text-[#212529] max-[771px]:text-[14px]  max-[320px]:text-[12px]'>
+                                {ListingfilterData.compare}{' '}
+                              </p>
+                            </label>
+                          </div>
+                          <div
+                            id='accordionExample'
+                            data-active-classes='bg-none'
+                            data-inactive-classes='text-[#212529]'
+                            className='h-[25px]'>
+                            {(alldata?.features || alldata?.welcome_offer) && (
+                              <div className='  relative  duration-300 h-full'>
+                                <h3 id='accordion-flush-heading-1' className='h-full'>
+                                  <button
+                                    id={` + ${index} +'cc-btn'`}
+                                    onClick={() => handleViewMoreAccordion(index)}
+                                    type='button'
+                                    className='text-[#212529] h-full list-none font-semibold relative text-[15px] gap-3 max-[375px]:text-[14px] max-[320px]:text-[12px] cursor-pointer faq-quation-title flex items-center justify-end w-full text-left'
+                                    data-accordion-target='#accordion-flush-body-1'
+                                    aria-expanded='true'
+                                    aria-controls='accordion-flush-body-1'>
+                                    {ListingfilterData.view_more}
+
+                                    {vieMoreIndex?.includes(index) ? (
+                                      <Image
+                                        src={accordionArrowall}
+                                        alt='down'
+                                        width={24}
+                                        height={24}
+                                        priority={true}
+                                        className='rotate-180 w-6 h-6 shrink-0'
+                                      />
+                                    ) : (
+                                      <Image
+                                        src={accordionArrowall}
+                                        alt='down'
+                                        width={24}
+                                        height={24}
+                                        priority={true}
+                                        className='w-6 h-6 shrink-0'
+                                      />
+                                    )}
+                                  </button>
+                                </h3>
+                              </div>
+                            )}
+                          </div>
                         </div>
+                        <div className='px-6'>
+                          {vieMoreIndex?.includes(index) && (
+                            <div aria-labelledby='accordion-flush-heading-1'>
+                              {alldata?.features && (
+                                <div className='mt-4 text-[#212529]'>
+                                  <p className='text-[15px] font-semibold '>{ListingfilterData.features}</p>
+                                  <div className='mt-4'>
                                     <div
-                                      id='accordionExample'
-                                      data-active-classes='bg-none'
-                                      data-inactive-classes='text-[#212529]'
-                                      className='h-[25px]'>
-                                      {(alldata?.features || alldata?.welcome_offer) && (
-                                        <div className='  relative  duration-300 h-full'>
-                                          <h3 id='accordion-flush-heading-1' className="h-full">
-                                            <button
-                                              id={` + ${index} +'cc-btn'`}
-                                              onClick={() => handleViewMoreAccordion(index)}
-                                              type='button'
-                                              className='text-[#212529] h-full list-none font-semibold relative text-[15px] gap-3 max-[375px]:text-[14px] max-[320px]:text-[12px] cursor-pointer faq-quation-title flex items-center justify-end w-full text-left'
-                                              data-accordion-target='#accordion-flush-body-1'
-                                              aria-expanded='true'
-                                              aria-controls='accordion-flush-body-1'>
-                                              {ListingfilterData.view_more}
-
-                                              {vieMoreIndex?.includes(index) ? (
-                                                <Image
-                                                  src={accordionArrowall}
-                                                  alt='down'
-                                                  width={24}
-                                                  height={24}
-                                                  priority={true}
-                                                  className='rotate-180 w-6 h-6 shrink-0'
-                                                />
-                                              ) : (
-                                                <Image
-                                                  src={accordionArrowall}
-                                                  alt='down'
-                                                  width={24}
-                                                  height={24}
-                                                  priority={true}
-                                                  className='w-6 h-6 shrink-0'
-                                                />
-                                              )}
-                                            </button>
-                                          </h3>
-                                          
-                                        </div>
-                                      )}
-                                    </div>
-                                    
+                                      className='list-disc  space-y-2 text-[14px] product-list-data'
+                                      dangerouslySetInnerHTML={{
+                                        __html: `<div>${alldata?.features}</div>`
+                                      }}></div>
                                   </div>
-                                  <div className="px-6">
-                                  {vieMoreIndex?.includes(index) && (
-                                            <div aria-labelledby='accordion-flush-heading-1'>
-                                              {alldata?.features && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold '>{ListingfilterData.features}</p>
-                                                  <div className='mt-4'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.features}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
-                                              {alldata?.welcome_offer && (
-                                                <div className='mt-4 text-[#212529]'>
-                                                  <p className='text-[15px] font-semibold'>{ListingfilterData.welcomeoffer}</p>
+                                </div>
+                              )}
+                              {alldata?.welcome_offer && (
+                                <div className='mt-4 text-[#212529]'>
+                                  <p className='text-[15px] font-semibold'>{ListingfilterData.welcomeoffer}</p>
 
-                                                  <div className='mt-4'>
-                                                    <div
-                                                      className='list-disc  space-y-2 text-[14px] product-list-data'
-                                                      dangerouslySetInnerHTML={{
-                                                        __html: `<div>${alldata?.welcome_offer}</div>`
-                                                      }}></div>
-                                                  </div>
-                                                </div>
-                                              )}
-                                            </div>
-                                          )}
+                                  <div className='mt-4'>
+                                    <div
+                                      className='list-disc  space-y-2 text-[14px] product-list-data'
+                                      dangerouslySetInnerHTML={{
+                                        __html: `<div>${alldata?.welcome_offer}</div>`
+                                      }}></div>
                                   </div>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   )

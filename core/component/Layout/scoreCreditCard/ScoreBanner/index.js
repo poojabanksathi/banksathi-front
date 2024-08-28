@@ -13,8 +13,8 @@ import CreditListingBanner from '../../creditCardList/CreditListingBanner'
 
 function KnowledgeCard({ metaData }) {
   const [scoreData, setScoreData] = useState()
-  const token = localStorage.getItem('token')
-  const leadId = localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
 
   const router = useRouter()
 

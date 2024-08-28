@@ -400,7 +400,7 @@ const EligibleProducts = ({
                             category={'credit-cards'}
                             pos='15'
                             position={index}
-                            disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                            disabled={!alldata?.is_apply_now}
                           />
                           <div>
                             <label className=' text-gray-500 font-bold flex items-center'>
@@ -438,7 +438,7 @@ const EligibleProducts = ({
                           category={'credit-cards'}
                           pos='17'
                           position={index}
-                          disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                          disabled={!alldata?.is_apply_now}
                         />
                       </div>
                       <div className='mt-4'>
@@ -637,7 +637,7 @@ const EligibleProducts = ({
                           category={'bank-accounts'}
                           pos='19'
                           position={index}
-                          disabled={alldata?.bank_name === "KOTAK MAHINDRA BANK"}
+                          disabled={!alldata?.is_apply_now}
                         />
                         <div></div>
                       </div>
@@ -655,6 +655,7 @@ const EligibleProducts = ({
                         category={'bank-accounts'}
                         pos='20'
                         position={index}
+                        disabled={!alldata?.is_apply_now}
                       />
                     </div>
                     <div className='mt-4'></div>

@@ -1,6 +1,5 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 
@@ -17,14 +16,9 @@ const SavingCalculatorListing = dynamic(
   }
 )
 
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
-
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
-
 const CommonRoundedBreadcrumb = dynamic(
   () => import('@/core/component/common/CommonRoundedBreadcrumb/CommonRoundedBreadcrumb'),
   {
@@ -46,7 +40,6 @@ export default function Index({
 }) {
   return (
     <>
-      <div>
         <div className=' bg-[#844FCF]'>
           <DynamicHeader businessCategorydata={businessCategorydata} />
         </div>
@@ -72,10 +65,7 @@ export default function Index({
         </div>
         <div className='bg-[#fff]'>
           <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
         </div>
-      </div>
-      <ScrollToTop smooth color='#000' />
     </>
   )
 }
@@ -83,7 +73,6 @@ export async function getServerSideProps(context) {
   try {
     const lang_id = 1
     const page_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const ref = context?.req?.headers?.referer || ''
     const last_url = context?.resolvedUrl && context?.resolvedUrl.split('/')
     const context_params = last_url?.[last_url?.length - 1]

@@ -2,18 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { BASE_URL, multipleSlug } from '@/utils/alljsonfile/service'
-
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 import { MainContext } from '@/core/component/Leads/MainContext.js'
 
 const MobileFooter = dynamic(() => import('../../../core/component/common/MobileFooter'), {
   ssr: false
 })
 
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
@@ -23,7 +18,7 @@ const LeadsArea = dynamic(() => import('@/core/component/Leads'), {
 })
 
 
-export default function Leads({ productData, referer, leadsField, h,}) {
+export default function Leads({ productData, referer, leadsField, h, }) {
 
   const [fieldValue, setFieldValue] = useState()
   const router = useRouter()
@@ -32,7 +27,7 @@ export default function Leads({ productData, referer, leadsField, h,}) {
     if (typeof window !== 'undefined') {
       const refererUrl = localStorage?.getItem('url')
 
-      
+
       const utm_details = refererUrl?.split('?')?.[1]
 
       const updatedLeadsField = {
@@ -46,7 +41,7 @@ export default function Leads({ productData, referer, leadsField, h,}) {
         sessionStorage.setItem('h', h)
       } else sessionStorage.removeItem('h')
     }
-  }, [leadsField,h])
+  }, [leadsField, h])
 
   useEffect(() => {
     if (productData?.product_details == null) {
@@ -56,34 +51,22 @@ export default function Leads({ productData, referer, leadsField, h,}) {
 
   return (
     <>
-      <section>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader />
-        </div>
-       
-        {productData != undefined ? (
-          <>
-            <MainContext.Provider value={productData}>
-              <div className='bg-[#F4F8FB] h-full'>
-                <LeadsArea referer={referer} leadsField={fieldValue} />
-              </div>
-            </MainContext.Provider>
-          </>
-        ) : (
-          <>Loading...</>
-        )}
-      </section>
-      <div>
-     
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader />
       </div>
+      {productData != undefined ? (
+        <MainContext.Provider value={productData}>
+          <div className='bg-[#F4F8FB] h-full'>
+            <LeadsArea referer={referer} leadsField={fieldValue} />
+          </div>
+        </MainContext.Provider>
+      ) : (
+        <>Loading...</>
+      )}
       <div className='bg-[#F4F8FB]'>
         <MobileFooter />
       </div>
-      <DynamicFooter />
 
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
     </>
   )
 }
@@ -120,7 +103,7 @@ export async function getServerSideProps(context) {
       }
     }
 
-   
+
 
     return {
       props: {
@@ -128,7 +111,7 @@ export async function getServerSideProps(context) {
         referer: ref,
         h: h,
         leadsField: { device_id: deviceId, user_agent: user_agent, ip_address: ip },
-    
+
       }
     }
   } catch (error) {

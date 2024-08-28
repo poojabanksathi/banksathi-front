@@ -1,13 +1,9 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
-  ssr: false
-})
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
   ssr: false
 })
 
@@ -30,16 +26,13 @@ export default function Index({ businessCategorydata ,businessmetaheadtag}) {
           <DynamicHeader businessCategorydata={businessCategorydata} />
           <ContacUsv2 />
         </div>
-        <div></div>
         <div className='bg-[#F4F8FB]'>
         <VedioCheck productDetailsData={businessmetaheadtag}/>
         </div>
         <div className='bg-[#fff]'>
           <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
         </div>
       </div>
-      <ScrollToTop smooth color='#000' />
     </>
   )
 }
@@ -47,8 +40,6 @@ export default function Index({ businessCategorydata ,businessmetaheadtag}) {
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const url_slug = ''
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const last_url = context?.resolvedUrl && context?.resolvedUrl.split('/')
     const context_params = last_url?.[last_url?.length-1]
     const ref=context?.req?.headers?.referer || '';

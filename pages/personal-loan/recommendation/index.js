@@ -10,9 +10,7 @@ const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const FAQ = dynamic(() => import('@/core/component/common/FAQ/FAQ'), {
   ssr: false
 })
@@ -34,7 +32,6 @@ export async function getServerSideProps(context) {
     const { resolvedUrl, req } = context
     const url_slug = 'loan-recommendation'
     const referer = req?.headers?.referer || null
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const h = context?.query?.h || ''
     const ip = context?.req?.headers?.['x-forwarded-for']?.split(',')?.[0] || ''
     const user_agent = context?.req?.headers?.['user-agent'] || ''
@@ -159,7 +156,7 @@ const LoanRecommendation = ({
   return (
     <div>
       <div className=' bg-[#844FCF]'>
-        <DynamicHeader businessCategorydata={businessCategorydata} />
+        <DynamicHeader businessCategorydata={businessCategoryData} />
       </div>
       <div className='bg-[#F4F8FB]'>
         <CommonBreadCrumbComponent
@@ -190,12 +187,7 @@ const LoanRecommendation = ({
           <MobileFooter businessCategorydata={businessCategoryData} />
         </div>
       </div>
-      <div>
-        <DynamicFooter businessCategorydata={businessCategoryData} />
-        <div className='scroll-top'>
-          <ScrollToTop smooth color='#000' />
-        </div>
-      </div>
+
     </div>
   )
 }

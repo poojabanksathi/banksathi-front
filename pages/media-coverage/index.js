@@ -1,8 +1,7 @@
 import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
-import { BASE_URL, BUSINESSCATEGORY, COMMON, mediaCoverageApi } from '@/utils/alljsonfile/service'
+import { BASE_URL, BUSINESSCATEGORY, mediaCoverageApi } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 import { useRouter } from 'next/router'
 
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
@@ -12,9 +11,6 @@ const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
 
-const FilterNotFound = dynamic(() => import('@/core/component/common/FilterNotFound'), {
-  ssr: false
-})
 const MediaCoverageBanner = dynamic(() => import('@/core/component/Layout/MediaCoverage/MediaCoverageBanner'), {
   ssr: false
 })
@@ -22,10 +18,6 @@ const MediaCoverageSlider = dynamic(() => import('@/core/component/Layout/MediaC
   ssr: false
 })
 const MediaCoverageNews = dynamic(() => import('@/core/component/Layout/MediaCoverage/MediaCoverageNews'), {
-  ssr: false
-})
-
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
   ssr: false
 })
 
@@ -40,17 +32,15 @@ export default function Index({ businessCategorydata, mediaCoverageData }) {
       router.push('/404')
     }
   }, [mediaCoverageData?.data?.length, router])
- 
+
   return (
     <>
 
-      <section>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader businessCategorydata={businessCategorydata} />
-          <BredcrumbCalculator />
-          <MediaCoverageBanner />
-        </div>
-      </section>
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader businessCategorydata={businessCategorydata} />
+        <BredcrumbCalculator />
+        <MediaCoverageBanner />
+      </div>
 
       {mediaCoverageData?.data?.length !== 0 && (
         <>
@@ -67,11 +57,6 @@ export default function Index({ businessCategorydata, mediaCoverageData }) {
         <MobileFooter businessCategorydata={businessCategorydata} />
       </div>
 
-      <DynamicFooter businessCategorydata={businessCategorydata} />
-
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
     </>
   )
 }
@@ -79,8 +64,7 @@ export default function Index({ businessCategorydata, mediaCoverageData }) {
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
-    const ref=context?.req?.headers?.referer || '';
+    const ref = context?.req?.headers?.referer || '';
 
     const req1 = {
       lang_id: lang_id
@@ -99,7 +83,7 @@ export async function getServerSideProps(context) {
       props: {
         businessCategorydata: data1,
         mediaCoverageData: response4?.data,
-        referer:ref,
+        referer: ref,
       }
     }
   } catch (error) {

@@ -25,7 +25,7 @@ const GetInThouch = () => {
     <>
       <div className=' container  mx-auto max-[991px]:max-w-full md:px-16 px-20 pb-[50px] max-[576px]:pb-0 max-[1440px]:px-12 max-[1200px]:px-0 max-[1024px]:px-8 max-[991px]:px-0 '>
         <div className='company-text relative'>
-          <h2 className='text-[#212529] head-text font-[faktum] xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] max-[320px]:text-[20px] font-semibold text-center  pb-5 '>
+          <h2 className='text-[#212529] head-text xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] max-[320px]:text-[20px] font-semibold text-center  pb-5 '>
             Get in touch with us
           </h2>
         </div>

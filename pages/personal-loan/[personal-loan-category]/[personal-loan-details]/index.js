@@ -14,7 +14,6 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import ScrollToTop from 'react-scroll-to-top'
 
 const CommonBreadCrumbComponent = dynamic(
   () => import('@/core/component/common/CommonList/CommonBreadCrumbComponent'),
@@ -36,9 +35,7 @@ const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 
 const FAQ = dynamic(() => import('@/core/component/common/FAQ/FAQ'), {
   ssr: false
@@ -65,9 +62,6 @@ export const getServerSideProps = async (context) => {
     const device_id = getDeviceIdCookie(cookies)
 
     const reqParams = {
-      lang_id: lang_id
-    }
-    const req1 = {
       lang_id: lang_id
     }
     const metaReq = {
@@ -138,15 +132,6 @@ export const getServerSideProps = async (context) => {
     // BUSINESS CATEGORY
     const businessCategorydata = await axios
       .post(BASE_URL + BUSINESSCATEGORY.productCategoryLanguage, reqParams)
-      .then((res) => {
-        return res
-      })
-      .catch((error) => {
-        return null
-      })
-    // TOPMENU
-    const topMenuData = await axios
-      .post(BASE_URL + BUSINESSCATEGORY.categoryTopMenu, req1)
       .then((res) => {
         return res
       })
@@ -306,9 +291,9 @@ const PersonalLoanDetailsPage = ({
       }
       setLastScrollTop(currentScrollTop);
     };
-  
+
     window.addEventListener('scroll', handleScroll);
-  
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -316,91 +301,83 @@ const PersonalLoanDetailsPage = ({
 
   return (
     <>
-      <div>
-        <section>
-          <div className='bg-[#844FCF]'>
-            <DynamicHeader businessCategorydata={businessCategorydata} />
+      <div className='bg-[#844FCF]'>
+        <DynamicHeader businessCategorydata={businessCategorydata} />
+      </div>
+      <div className='bg-[#F4F8FB]'>
+        {isInfoPage ? (
+          <div className='bg-[#F4F8FB]'>
+            <CommonBreadCrumbComponent
+              link1={'/personal-loan'}
+              link1Name='Personal Loan'
+              link2={`/personal-loan/${categoryUrl}`}
+              link2Name={capitalizeFirstLetter(categoryUrl)?.split('-')?.join(' ')}
+            />
+            <CreditNewsDetails
+              blogUrl={pdpUrl}
+              newsDetailsData={newsDetailsData}
+              newsListData={newsListData}
+              loanPage={true}
+              pathRedirect='/personal-loan/eligibility'
+              personalLoan={true}
+            />
           </div>
-        </section>
-        <div className='bg-[#F4F8FB]'>
-          {isInfoPage ? (
-            <div className='bg-[#F4F8FB]'>
-              <CommonBreadCrumbComponent
-                link1={'/personal-loan'}
-                link1Name='Personal Loan'
-                link2={`/personal-loan/${categoryUrl}`}
-                link2Name={capitalizeFirstLetter(categoryUrl)?.split('-')?.join(' ')}
-              />
-              <CreditNewsDetails
-                blogUrl={pdpUrl}
-                newsDetailsData={newsDetailsData}
-                newsListData={newsListData}
-                loanPage={true}
-                pathRedirect='/personal-loan/eligibility'
-                personalLoan={true}
-              />
-            </div>
-          ) : hasLeads ? (
-            <>
-              <CommonBreadCrumbComponent
-                link1={'/personal-loan'}
-                link1Name='Personal Loan'
-                link2={`/personal-loan/${categoryUrl}`}
-                link2Name={'Leads'}
-              />
-              <PersonalLoanApplication
-                businessmetaheadtag={businessmetaheadtag}
+        ) : hasLeads ? (
+          <>
+            <CommonBreadCrumbComponent
+              link1={'/personal-loan'}
+              link1Name='Personal Loan'
+              link2={`/personal-loan/${categoryUrl}`}
+              link2Name={'Leads'}
+            />
+            <PersonalLoanApplication
+              businessmetaheadtag={businessmetaheadtag}
+              productDetailsData={productDetailsData}
+              url_slug={pdpUrl}
+            />
+          </>
+        ) : (
+          <div className='bg-[#F4F8FB]'>
+            <CommonBreadCrumbComponent
+              link1={'/personal-loan'}
+              link1Name='Personal Loan'
+              link3Name={
+                productDetailsData?.product_details?.card_name || capitalizeFirstLetter(pdpUrl)?.split('-')?.join(' ')
+              }
+              isDetailsPage={true}
+            />
+            {/* PERSONAL LOAN DETAILS PAGE */}
+            <div className='mt-[28px]'>
+              <PersonalLoanDetails
                 productDetailsData={productDetailsData}
+                longFormData={longFormData}
+                relatedAccountsData={relatedAccountsData}
+                reviewsData={reviewsData?.all_review}
+                overallRatingData={overallRatingData}
+                serviceTabs={serviceTabs}
+                CONS_PROS={CONS_PROS}
                 url_slug={pdpUrl}
               />
-            </>
-          ) : (
-            <div className='bg-[#F4F8FB]'>
-              <CommonBreadCrumbComponent
-                link1={'/personal-loan'}
-                link1Name='Personal Loan'
-                link3Name={
-                  productDetailsData?.product_details?.card_name || capitalizeFirstLetter(pdpUrl)?.split('-')?.join(' ')
-                }
-                isDetailsPage={true}
-              />
-              {/* PERSONAL LOAN DETAILS PAGE */}
-              <div className='mt-[28px]'>
-                <PersonalLoanDetails
-                  productDetailsData={productDetailsData}
-                  longFormData={longFormData}
-                  relatedAccountsData={relatedAccountsData}
-                  reviewsData={reviewsData?.all_review}
-                  overallRatingData={overallRatingData}
-                  serviceTabs={serviceTabs}
-                  CONS_PROS={CONS_PROS}
-                  url_slug={pdpUrl}
-                />
-              </div>
-              <FAQ faqdata={faqData} />
             </div>
-          )}
-        </div>
-        <div>
-          {/* <TrobleChoose position={'5'} /> */}
-          <MobileFooter businessCategorydata={businessCategorydata} />
-        </div>
-        <DynamicFooter businessCategorydata={businessCategorydata} />
-        {isInfoPage && mobileSize && showComponent && (
+            <FAQ faqdata={faqData} />
+          </div>
+        )}
+      </div>
+      <div>
+        <MobileFooter businessCategorydata={businessCategorydata} />
+      </div>
+      {isInfoPage && mobileSize && showComponent && (
         <div className='fixed bottom-0 left-0 z-[999] h-[53px] w-full justify-between items-center'>
           <div className='text-center'>
-                          <Link href='/personal-loan/eligibility'>
-                            <button className='bg-[#49D49D] w-full py-[18px] lg:w-[240px]  max-[240px]:w-full  font-faktum font-semibold text-[14px] leading-[18px] tracking-wide text-[#212529]'>
-                            Check Personal Loan Eligibility 
-                            </button>
-                          </Link>
-                        </div>
+            <Link href='/personal-loan/eligibility'>
+              <button className='bg-[#49D49D] w-full py-[18px] lg:w-[240px]  max-[240px]:w-full  font-faktum font-semibold text-[14px] leading-[18px] tracking-wide text-[#212529]'>
+                Check Personal Loan Eligibility
+              </button>
+            </Link>
+          </div>
         </div>
-       )}
-<div className='scroll-top'>
-          <ScrollToTop smooth color='#000' />
-        </div>
-      </div>
+      )}
+ 
     </>
   )
 }

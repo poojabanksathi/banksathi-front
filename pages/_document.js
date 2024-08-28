@@ -92,6 +92,11 @@ export default function Document() {
   return (
     <Html lang='en'>
       <Head>
+     
+        <link rel='preload' href='/fonts/ReneBieder-Faktum.woff2' as='font' type='font/woff2' crossorigin='anonymous' />
+        <link rel='preload' href='/fonts/Roboto-Regular.woff2' as='font' type='font/woff2' crossorigin='anonymous' />
+        <link rel='preload' href='/fonts/Poppins-Regular.woff2' as='font' type='font/woff2' crossorigin='anonymous' />
+        {/* <meta name="theme-color" content="#000000" /> */}
         <Script
           strategy='lazyOnload'
           dangerouslySetInnerHTML={{
@@ -102,7 +107,7 @@ export default function Document() {
           })(window,document,'script','dataLayer','GTM-W9D3PRCF');`
           }}></Script>
         <script type='application/ld+json' key='app-ld-json' dangerouslySetInnerHTML={addOragnisationJsonLd()} />
-        
+
       </Head>
 
       <body>

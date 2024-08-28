@@ -6,11 +6,9 @@ import {
   BUSINESSCATEGORY,
   BUSINESSSUBCATEGORY,
   BrowseServices,
-  COMMON,
   FAQAPI
 } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 import CommonBreadCrumbComponent from '@/core/component/common/CommonList/CommonBreadCrumbComponent'
 import { useRouter } from 'next/router'
 import { capitalizeFirstLetter } from '@/utils/util'
@@ -29,9 +27,7 @@ const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 
 const FAQ = dynamic(() => import('@/core/component/common/FAQ/FAQ'), {
   ssr: false
@@ -41,7 +37,6 @@ export async function getServerSideProps(context) {
     const lang_id = 1
     const url_slug = context?.params?.['personal-loan-category'] || context?.resolvedUrl?.split('/')?.pop()
     const referer = context?.req?.headers?.referer || null
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const h = context?.query?.h || ''
     const page = context?.query?.page ? context?.query?.page - 1 : 0
     const cat_url = context?.resolvedUrl && context?.resolvedUrl.split('/')[1]
@@ -204,11 +199,9 @@ const PersonalLoanCategory = ({
   }, [personalProducts, router, url_slug, isInfoPage])
   return (
     <>
-      <section>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader businessCategorydata={businessCategoryData} />
-        </div>
-      </section>
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader businessCategorydata={businessCategoryData} />
+      </div>
       <div className='bg-[#F4F8FB]'>
         {isInfoPage ? (
           <>
@@ -248,13 +241,8 @@ const PersonalLoanCategory = ({
       <div className='bg-[#F4F8FB]'>
         <FAQ faqdata={faqData} />
       </div>
-      <div>
-        <MobileFooter businessCategorydata={businessCategoryData} />
-      </div>
-      <DynamicFooter />
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
+      <MobileFooter businessCategorydata={businessCategoryData} />
+     
     </>
   )
 }

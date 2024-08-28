@@ -13,7 +13,7 @@ const style = {
 function KeyFactore() {
   return (
     <div>
-      <h1 className=' text-[#212529] head-text font-[faktum] max-[834px]:leading-[50px] max-[479px]:leading-10 text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[32px] max-[479px]:text-[26px] max-[375px]:text-[26px] max-[320px]:text-[22px] leading-[64.4px] w-[48%] max-[1440px]:w-[58%] max-[1200px]:!w-[74%] max-[576px]:!w-full font-semibold text-center mx-auto emproving-title'>
+      <h1 className=' text-[#212529] head-text max-[834px]:leading-[50px] max-[479px]:leading-10 text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[32px] max-[479px]:text-[26px] max-[375px]:text-[26px] max-[320px]:text-[22px] leading-[64.4px] w-[48%] max-[1440px]:w-[58%] max-[1200px]:!w-[74%] max-[576px]:!w-full font-semibold text-center mx-auto emproving-title'>
         Key Factors Impacting Your Credit Score
       </h1>
       <div className='grid grid-cols-4 gap-16 max-[834px]:gap-4 max-[771px]:grid-cols-2 justify-around text-lg pt-[50px] pb-[70px] items-baseline   max-[1200px]:w-full max-[576px]:grid-cols-1 max-[576px]:gap-8 max-[479px]:py-[30px]'>

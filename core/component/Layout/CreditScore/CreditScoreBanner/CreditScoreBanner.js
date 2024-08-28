@@ -677,7 +677,7 @@ const CreditScoreBanner = ({ metaData, isLandingPage }) => {
             {errorName && (
               <p className='text-[12px] text-[#FF000F] font-no'>Please enter a valid name containing only letters.</p>
             )}
-            {errorHrefName && <p className='text-[12px] text-[#FF000F] font-no  mt-2'>Do not enter any link</p>}
+            {errorHrefName && <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>Do not enter any link</p>}
             {nameLengthValidate && (
               <p className='text-[12px] text-[#FF000F] font-no'>Please enter name less than 50 letters.</p>
             )}
@@ -840,7 +840,7 @@ const CreditScoreBanner = ({ metaData, isLandingPage }) => {
                           renderInput={(props) => <input {...props} />}
                         />
                         {errOtp && (
-                          <p className='text-[12px] text-[#FF000F] font-no mt-2'>{ApiMessage?.otpValidError}</p>
+                          <p className='text-[12px] text-[#FF000F] font-normal mt-2'>{ApiMessage?.otpValidError}</p>
                         )}
                       </div>
                     </div>

@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, COMMON, FAQAPI, PRODUCTSAPI } from '@/utils/alljsonfile/service'
-
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 import { MainContext } from '@/core/component/Leads/MainContext.js'
 
 import { useRouter } from 'next/router'
@@ -12,9 +10,6 @@ const MobileFooter = dynamic(() => import('../../core/component/common/MobileFoo
   ssr: false
 })
 
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
@@ -35,27 +30,25 @@ export default function Leads(productData, referer, leadsField, faqData, longFor
 
   useEffect(() => {
     router.push('/404')
-  }, [])
-  
+  }, [router])
+
   return (
     <>
-      <section>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader />
-        </div>
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader />
+      </div>
 
-        {productData != undefined ? (
-          <>
-            <MainContext.Provider value={productData}>
-              <div className='bg-[#F4F8FB]'>
-                <LeadsArea referer={referer} leadsField={leadsField} />
-              </div>
-            </MainContext.Provider>
-          </>
-        ) : (
-          <>Loading...</>
-        )}
-      </section>
+      {productData != undefined ? (
+        <>
+          <MainContext.Provider value={productData}>
+            <div className='bg-[#F4F8FB]'>
+              <LeadsArea referer={referer} leadsField={leadsField} />
+            </div>
+          </MainContext.Provider>
+        </>
+      ) : (
+        <>Loading...</>
+      )}
       <div className='bg-[#F4F8FB] h-auto'>
         <CreditBeginnerCard longTerm={longFormData} />
       </div>
@@ -67,11 +60,7 @@ export default function Leads(productData, referer, leadsField, faqData, longFor
       <div className='bg-[#F4F8FB]'>
         <MobileFooter />
       </div>
-      <DynamicFooter />
-
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
+      
     </>
   )
 }

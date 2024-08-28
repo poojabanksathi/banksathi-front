@@ -25,4 +25,5 @@ export const ApiMessage = {
   termsAndConditionContent: 'By clicking here, I acknowledge that I have reviewed and understood the',
   otpContent: 'Please enter OTP send on your mobile number',
   otpValidError: 'Please enter the valid OTP',
+  MaxCountError: 'Maximum 1000 characters allowed.'
 }

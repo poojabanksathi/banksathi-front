@@ -88,13 +88,13 @@ const CreditNewsDetails = (props) => {
         <div className='bg-[#F4F8FB]'>
           <div className=''>
             <div>
-              <div className='container px-10 max-[1024px]:px-2 mx-auto mb-[60px] max-[991px]:max-w-full mt-[22px] max-[576px]:px-6 max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4'>
+              <div className='container px-10 max-[1024px]:px-2 mx-auto pb-[60px] max-[991px]:max-w-full mt-[22px] max-[576px]:px-6 max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4'>
                 <div className='flex gap-[30px] max-sm:gap-0 md:gap-8'>
                   <div className='flex flex-col w-full'>
                     {newsDetailsData?.data?.title && (
                       <div>
-                        <h1 className='text-[#212529]  max-sm:text-[18px] max-sm:leading-7  head-text font-[faktum] xl:text-[32px] lg:text-[20px] md:text-[24px] leading-[50px] max-[576px]:text-[20px] max-[479px]:text-[20px] font-semibold  max-[479px]:w-full md:leading-[40px] xl:leading-[48px]'>
-                          {/* <h1 className='text-[36px] max-sm:text-[18px] max-sm:leading-7  leading-[50.4px] font-[500] font-[faktum] detail-blog-title'> */}
+                        <h1 className='text-[#212529]  max-sm:text-[18px] max-sm:leading-7  head-text xl:text-[32px] lg:text-[20px] md:text-[24px] leading-[50px] max-[576px]:text-[20px] max-[479px]:text-[20px] font-semibold  max-[479px]:w-full md:leading-[40px] xl:leading-[48px]'>
+                          {/* <h1 className='text-[36px] max-sm:text-[18px] max-sm:leading-7  leading-[50.4px] font-[500]  detail-blog-title'> */}
                           {newsDetailsData?.data?.title}
                         </h1>
                       </div>

@@ -4,9 +4,7 @@ import mainRound from '../../../../../public/assets/main-round.svg'
 import rightArrow from '../../../../../public/assets/rightArrow.svg'
 import dynamic from 'next/dynamic'
 
-const CreditCardTrobleHaving = dynamic(() => import('../../compareCard/cardTrobleHaving/CreditCardTrobleHaving'), {
-  ssr: false
-})
+
 const TopRecommendationSell = dynamic(() => import('../toprecommendationsell/TopRecommendationSell'), {
   ssr: false
 })
@@ -19,7 +17,7 @@ function SteperComponent({ RecomendedTopselling }) {
           <div className='bg-white rounded-full mx-auto w-40 h-32 step-logo-bg mb-5 max-[479px]:mb-[30px] max-[479px]:w-24 max-[479px]:h-16 '>
             <Image src={mainRound} className='mx-auto max-[479px]:w-[100%] step-logo' alt='Logo' />
           </div>
-          <h2 className='emproving-title head-text font-[faktum]  text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[21px] max-[479px]:leading-[30.8px] max-[375px]:text-[21px] max-[320px]:text-[21px] leading-[64.4px] w-[65%] max-[1440px]:w-[78%]  max-[1200px]:w-[90%] max-[479px]:w-full font-semibold text-center mx-auto text-[#212529] max-[280px]:text-[20px]'>
+          <h2 className='emproving-title head-text text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[21px] max-[479px]:leading-[30.8px] max-[375px]:text-[21px] max-[320px]:text-[21px] leading-[64.4px] w-[65%] max-[1440px]:w-[78%]  max-[1200px]:w-[90%] max-[479px]:w-full font-semibold text-center mx-auto text-[#212529] max-[280px]:text-[20px]'>
             Get personalised product recommendations in 3 steps with {"BankSathi's"} smart algorithm.
           </h2>
 
@@ -51,7 +49,7 @@ function SteperComponent({ RecomendedTopselling }) {
               </p>
             </div>
           </div>
-          <div className='head-text font-[faktum] text-center bg-[#49D49D] text-[#212529] py-2 pl-2 pr-2 rounded-lg text-lg w-[190px] h-[56px] mx-auto flex items-center justify-center gap-4'>
+          <div className='head-text text-center bg-[#49D49D] text-[#212529] py-2 pl-2 pr-2 rounded-lg text-lg w-[190px] h-[56px] mx-auto flex items-center justify-center gap-4'>
             <button className=' cursor-pointer'>Get Started</button>
             <Image src={rightArrow} alt='img' className='w-[34px] h-[30px]' height={40} width={50} />
           </div>
@@ -65,9 +63,8 @@ function SteperComponent({ RecomendedTopselling }) {
 
         <TopRecommendationSell RecomendedTopselling={RecomendedTopselling} />
 
-        {/* =========== trouble choosing  ============ */}
 
-        <CreditCardTrobleHaving position={'3'}/>
+        {/* <CreditCardTrobleHaving position={'3'}/> */}
       </div>
     </div>
   )

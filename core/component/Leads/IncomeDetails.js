@@ -43,8 +43,8 @@ export default function IncomeDetails(props) {
 
 
 
-  const leadId = localStorage.getItem('leadprofileid')
-  const token = localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
 
   const router = useRouter()
 

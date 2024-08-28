@@ -6,7 +6,7 @@ function OurInvestor() {
   return (
     <div className='bg-white'>
   <div className='container min-h-[500px] mx-auto max-[1024px]:px-8 py-[100px] invest-sec'>
-    <h2 className='head-text font-[faktum] text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] text-center font-semibold pb-[80px] text-[#212529] pb-[50px] pb-[30px]'>
+    <h2 className='head-text text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] text-center font-semibold pb-[80px] text-[#212529] pb-[50px] pb-[30px]'>
       Our Investors
     </h2>
     <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>

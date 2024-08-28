@@ -23,7 +23,8 @@ import {
   errorHandling,
   panRegex,
   emailRegex,
-  mobileNumberRegex
+  mobileNumberRegex,
+  is_webengage_event_enabled
 } from '@/utils/util'
 import Loader from '@/core/component/Leads/common/Loader'
 import LoaderLogo from '../../../public/assets/logo-loader.gif'
@@ -91,7 +92,7 @@ const LeadApplyNowForm = (props) => {
   const [firstPageInputData, setFirstPageInputData] = useState({})
   const [isValid, setIsValid] = useState(true)
   const productData = useContext(MainContext)
-  const category_url = productData?.product_details?.url_slug?.split('/')[1]
+  const product_url = productData?.product_details?.url_slug?.split('/')[1]
 
   const userData =
     typeof window !== 'undefined' && localStorage?.getItem('userData')
@@ -591,9 +592,9 @@ const LeadApplyNowForm = (props) => {
     fetchPanMobValidData()
     token && setFormDataChange(2)
     if (personalNextBtn && checkELibilityBtn) {
-      LeadeAddGloble()
+    LeadeAddGloble()
     } else {
-      verifyNextBtn && setPanVerifyModal(true)
+    verifyNextBtn && setPanVerifyModal(true)
     }
   }
 
@@ -691,11 +692,18 @@ const LeadApplyNowForm = (props) => {
     TagManager?.dataLayer({
       dataLayer: {
         event: 'applied_card',
-        product_category: category_url,
+        product_category: product_url,
         product_name: productData?.product_details?.card_name,
         eligible_status: isEligible
       },
     });
+  }
+
+
+  const handleWebEngageEvent = (eventName, eventData) => {
+        if (is_webengage_event_enabled && typeof window !== 'undefined' && window.webengage) {
+      window.webengage.track(eventName, eventData);
+    }
   }
 
   const LeadeAddGloble = (e) => {
@@ -763,6 +771,12 @@ const LeadApplyNowForm = (props) => {
           if (typeof window !== 'undefined') {
             localStorage.removeItem('purchaseItem')
           }
+          handleGTM()
+          handleWebEngageEvent('applied_card', {
+            product_category: product_url,
+            product_name: productData?.product_details?.card_name,
+            eligible_status: isEligible
+          });
           router.push(response?.data?.data?.url)
         }
         if (response?.data?.message == 'success') {
@@ -772,7 +786,7 @@ const LeadApplyNowForm = (props) => {
             props.data.page.handlePage('leads')
             props.data.otp.handleOtpCheck(false)
           }
-          handleGTM()
+        
         }
         if (response?.data?.message === 'failed') {
           setLoading(false)
@@ -1139,7 +1153,7 @@ const LeadApplyNowForm = (props) => {
                   }}
                   onFocus={() => ScrollToTop2(data)}
                 />
-                {errHrefCompany && <p className='text-[12px] text-[#FF000F] font-no  mt-2'>{ApiMessage?.linkError}</p>}
+                {errHrefCompany && <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>{ApiMessage?.linkError}</p>}
 
                 {errorCompany && <p className='text-[12px] text-[#FF000F] font-no'>{ApiMessage?.letterNameErr}</p>}
               </div>
@@ -1311,7 +1325,7 @@ const LeadApplyNowForm = (props) => {
                             />
                           )}
                           {errOtp && (
-                            <p className='text-[12px] text-[#FF000F] font-no mt-2'>{ApiMessage?.otpValidError}</p>
+                            <p className='text-[12px] text-[#FF000F] font-normal mt-2'>{ApiMessage?.otpValidError}</p>
                           )}
                         </div>
                       </div>
@@ -1378,7 +1392,7 @@ const LeadApplyNowForm = (props) => {
                   // endAdornment={pancardError || profileformData?.is_pan_verified === '1' ? <SuccessIcon /> : ''}
                 />
                 {!isValid && (
-                  <div className='text-[12px] text-[#FF000F] font-no  mt-2'>Please enter a valid PAN card number</div>
+                  <div className='text-[12px] text-[#FF000F] font-normal  mt-2'>Please enter a valid PAN card number</div>
                 )}
               </div>
             </div>
@@ -1400,12 +1414,12 @@ const LeadApplyNowForm = (props) => {
                   handleChange(e)
                   handleValidation(e)
                 }}
-                pattern='^[A-Za-z]+(?:[ -][A-Za-z]+)*$'
+                pattern='^[A-Za-z]+(?: [A-Za-z]+)*$'
                 onInput={(e) => {
                   e.target.value = removeNonAlphaNumeric(e)
                 }}
               />
-              {errorHrefName && <p className='text-[12px] text-[#FF000F] font-no  mt-2'>{ApiMessage?.linkError}</p>}
+              {errorHrefName && <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>{ApiMessage?.linkError}</p>}
               {errorMessage && <p className='text-[12px] text-[#FF000F] font-no'>{ApiMessage?.letterNameErr}</p>}
             </div>
             <div className='mb-[30px] max-[771px]:!mb-4 max-[479px]:mb-0 '>

@@ -26,8 +26,6 @@ function ScoreDetailBredcrumb({ productDetailsData }) {
   const convertedStringRoute = convertToTitleCase(slug);
   const genralStringRoute = BredcrumbGeneral(slugGeneral);
 
-  console.log("slugslugslug", slug, routebredcrumb, routebredcrumb);
-
 
   return (
     <>

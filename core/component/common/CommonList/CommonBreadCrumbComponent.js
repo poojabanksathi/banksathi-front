@@ -1,32 +1,23 @@
+import React, { useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import Head from 'next/head'
 import accordionArrowall from '../../../../public/assets/accordion-down.svg'
 import HomeIcon from '../../../../public/assets/home-icon.svg'
 import { getLink } from '@/utils/util'
-import Head from 'next/head'
 
-const CommonBreadCrumbComponent = (props) => {
+const CommonBreadCrumbComponent = React.memo(({ link1, link1Name, link2, link2Name, link3Name }) => {
   const secure = 'https:/'
-  const breadCrumbJsonLd = () => {
-    let postionLists = [
+  
+  // Memoize breadcrumb JSON-LD data
+  const breadCrumbJsonLd = useMemo(() => {
+    const postionLists = [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${secure}/${process.env.NEXT_PUBLIC_WEBSITE_URL}` },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: props?.link1Name,
-        item: getLink(`${props?.link1}`)
-      }
+      { '@type': 'ListItem', position: 2, name: link1Name, item: getLink(link1) },
+      ...(link2Name ? [{ '@type': 'ListItem', position: 3, name: link2Name, item: getLink(link2) }] : []),
+      ...(link3Name ? [{ '@type': 'ListItem', position: 4, name: link3Name }] : []),
     ]
-    if (props?.link2Name) {
-      postionLists = [
-        ...postionLists,
-        { '@type': 'ListItem', position: 3, name: props?.link2Name, item: getLink(`${props?.link2}`) }
-      ]
-    }
-    if (props?.link3Name) {
-      postionLists = [...postionLists, { '@type': 'ListItem', position: 4, name: props?.link3Name }]
-    }
+
     const jsonObj = {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
@@ -34,105 +25,74 @@ const CommonBreadCrumbComponent = (props) => {
     }
 
     const jsonBreadCrumb = JSON.stringify(jsonObj)
+
     return {
       __html: jsonBreadCrumb
     }
-  }
+  }, [link1, link1Name, link2, link2Name, link3Name])
 
-  const breadJson = breadCrumbJsonLd()
   return (
     <>
       <Head>
-        <script type='application/ld+json' key='app-ld-json' dangerouslySetInnerHTML={breadJson} />
+        <script type='application/ld+json' key='app-ld-json' dangerouslySetInnerHTML={breadCrumbJsonLd} />
       </Head>
-      <div className='container h-full  mx-auto max-[991px]:max-w-full max-[768px]:px-10 max-[1024px]:px-8 max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4'>
-        <div
-          className={`pt-5 px-12 max-[1440px]:px-12 max-[1200px]:px-0 max-[1024px]:px-0 items-center max-[576px]:grid-cols-1 max-[576px]:gap-8`}>
-          <div className='flex items-center gap-[2px] justify-start max-[479px]:gap-[2px] max-[320px]:gap-0'>
-            <Link href='/' prefetch={false} className='text-[#212529] hover:!text-[#212529]'>
-              <Image
-                src={HomeIcon}
-                width={18}
-                height={18}
-                alt='img'
-                className='max-[479px]:w-[12px] max-[479px]:h-[12px]'
-              />
-            </Link>
-            <div>
-              <Image
-                src={accordionArrowall}
-                width={14}
-                height={14}
-                priority={true}
-                className='w-5 h-5 max-[375px]:w-4 max-[375px]:h-4 rotate-[270deg]'
-                alt='img'
-              />
-            </div>
-            <Link
-              href={props?.link1}
+      <div className='container mx-auto px-4 sm:px-8 md:px-10 lg:px-12'>
+        <div className='pt-5 flex items-center gap-2'>
+          <Link href='/' prefetch={false} className='text-[#212529] hover:text-[#212529]'>
+            <Image src={HomeIcon} width={18} height={18} alt='Home' priority className='w-3.5 h-3.5 sm:w-4 sm:h-4' />
+          </Link>
+          <Image src={accordionArrowall} width={14} height={14} alt='Arrow' className='w-5 h-5 rotate-[270deg]' />
+          <Link
+              href={`${link1}`}
               prefetch={false}
               className='text-[#212529] hover:!text-[#212529] bredcrumb-title-respo'>
               <p className='text-[13px]  max-[771px]:text-[10px]text-[#212529] max-[479px]:text-[10px] max-[430px]:text-[9px] max-[375px]:!text-[8px] max-[320px]:!text-[10px] max-[280px]:text-[8px] '>
-                {props?.link1Name}
+                {link1Name}
               </p>
             </Link>
-
-            {props?.link2Name && (
+            {link2Name && (
               <>
-              {props?.link2 &&
-                <div>
-                  <Image
-                    src={accordionArrowall}
-                    width={14}
-                    height={14}
-                    priority={true}
-                    className='w-5 h-5 max-[375px]:w-4 max-[375px]:h-4 rotate-[270deg]'
-                    alt='img'
-                  />
-                </div>
-              }
-                {props?.link2 ? (
+                {link2 && (
+                  <div>
+                    <Image
+                      src={accordionArrowall}
+                      width={14}
+                      height={14}
+                      priority={true}
+                      className='w-5 h-5 max-[375px]:w-4 max-[375px]:h-4 rotate-[270deg]'
+                      alt='Arrow'
+                    />
+                  </div>
+                )}
+                {link2 ? (
                   <Link
-                    href={props?.link2}
+                    href={`${link2}`}
                     prefetch={false}
                     className='text-[#212529] hover:!text-[#212529] bredcrumb-title-respo'>
-                    <p className='text-[13px] text-[#212529] max-[771px]:text-[13px] hover:!text-[#212529]  max-[479px]:text-[10px] max-[375px]:!text-[8px] max-[320px]:!text-[10px] max-[280px]:text-[8px] capitalize'>
-                      {props?.link2Name}
+                    <p className='text-[13px] max-[771px]:text-[13px] max-[479px]:text-[10px] max-[375px]:!text-[8px] max-[320px]:!text-[10px] max-[280px]:text-[8px] capitalize'>
+                      {link2Name}
                     </p>
                   </Link>
                 ) : (
-                  // <div className='text-[#212529] hover:!text-[#212529] bredcrumb-title-respo'>
-                  //   <p className='text-[13px] text-[#212529] max-[771px]:text-[13px] hover:!text-[#212529]  max-[479px]:text-[10px] max-[375px]:!text-[8px] max-[320px]:!text-[10px] max-[280px]:text-[8px] capitalize'>
-                  //     {props?.link2Name}
-                  //   </p>
-                  // </div>
-                  <></>
+                  <div className='text-[#212529] hover:!text-[#212529] bredcrumb-title-respo'>
+                    <p className='text-[13px] text-[#212529] max-[771px]:text-[13px] hover:!text-[#212529]  max-[479px]:text-[10px] max-[375px]:!text-[8px] max-[320px]:!text-[10px] max-[280px]:text-[8px] capitalize'>
+                      {link2Name}
+                    </p>
+                  </div>
                 )}
               </>
             )}
-
-            {/* {props?.link3Name && (
-              <>
-                <div>
-                  <Image
-                    src={accordionArrowall}
-                    width={14}
-                    height={14}
-                    priority={true}
-                    className='w-5 h-5 max-[375px]:w-4 max-[375px]:h-4 rotate-[270deg]'
-                    alt='img'
-                  />
-                </div>
-                <p className='text-[13px]  max-[771px]:text-[10px]  text-[#212529] font-semibold max-[479px]:text-[10px] max-[375px]:!text-[8px] max-[320px]:!text-[10px] max-[280px]:text-[8px]  bredcrumb-title-respo'>
-                  {props?.link3Name}
-                </p>
-              </>
-            )} */}
-          </div>
+          {/* Uncomment and adapt as needed for link3Name */}
+          {/* {link3Name && (
+            <>
+              <Image src={accordionArrowall} width={14} height={14} alt='Arrow' className='w-5 h-5 rotate-90' />
+              <p className='text-xs sm:text-sm md:text-base font-semibold'>{link3Name}</p>
+            </>
+          )} */}
         </div>
       </div>
     </>
   )
-}
+})
 
 export default CommonBreadCrumbComponent

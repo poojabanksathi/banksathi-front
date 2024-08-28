@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, BLOG } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import CommonBreadCrumbComponent from '@/core/component/common/CommonList/CommonBreadCrumbComponent'
@@ -8,9 +7,7 @@ import CommonBreadCrumbComponent from '@/core/component/common/CommonList/Common
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
 })
-const DynamicMobileFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
@@ -27,28 +24,24 @@ export default function Index({ businessCategorydata, CreditNewsList, initialOff
   }, [initialOffSet])
   return (
     <>
-      <div>
-        <div className=' bg-[#844FCF]'>
-          <DynamicHeader businessCategorydata={businessCategorydata} />
-        </div>
-        {CreditNewsList && (
-          <div className='bg-[#F4F8FB] h-auto'>
-            <CommonBreadCrumbComponent
-              link1={'/advisor'}
-              link1Name='Advisor'
-              link2={'/advisor/blog'}
-              link2Name='Blog'
-              title={'Advisor Blogs'}
-            />
-            <CreditNews CreditNewsList={CreditNewsList} pageTitle={'Advisor Blog'} advisorPage={true} />
-          </div>
-        )}
-        <div className='bg-[#fff]'>
-          <MobileFooter businessCategorydata={businessCategorydata} />
-          <DynamicMobileFooter businessCategorydata={businessCategorydata} />
-        </div>
+      <div className=' bg-[#844FCF]'>
+        <DynamicHeader businessCategorydata={businessCategorydata} />
       </div>
-      <ScrollToTop smooth color='#000' />
+      {CreditNewsList && (
+        <div className='bg-[#F4F8FB] h-auto'>
+          <CommonBreadCrumbComponent
+            link1={'/advisor'}
+            link1Name='Advisor'
+            link2={'/advisor/blog'}
+            link2Name='Blog'
+            title={'Advisor Blogs'}
+          />
+          <CreditNews CreditNewsList={CreditNewsList} pageTitle={'Advisor Blog'} advisorPage={true} />
+        </div>
+      )}
+      <div className='bg-[#fff]'>
+        <MobileFooter businessCategorydata={businessCategorydata} />
+      </div>
     </>
   )
 }
@@ -59,12 +52,12 @@ export async function getServerSideProps(context) {
     const url_slug = context?.resolvedUrl?.split('/')?.pop()
     const ref = context?.req?.headers?.referer || ''
     const blog_url_slug = context?.resolvedUrl?.split('/')?.[1]
-   
+
     const req = {
       lang_id: lang_id,
       page_url_slug: url_slug
     }
-   
+
     const req3 = {
       lang_id: lang_id
     }

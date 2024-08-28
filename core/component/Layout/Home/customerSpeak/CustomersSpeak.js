@@ -112,7 +112,7 @@ function CustomersSpeak({ faqdata }) {
       <div
         style={size?.width <= 576 ? style2 : style}
         className='container  min-h-[730px] max-[1024px]:px-8 mx-auto max-[991px]:max-w-full py-[100px] bg-center bg-no-repeat max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4 max-[576px]:py-[50px]  max-[479px]:pb-[40px] max-[576px]:min-h-[515px] max-[479px]:min-h-[450px] max-[375px]:min-h-[450px] max-[320px]:min-h-[500px] customer-sec'>
-        <p className='head-text font-[faktum] text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] text-center font-semibold  text-[#212529]'>
+        <p className='head-text text-[46px] max-[1024px]:text-[42px] max-[771px]:text-[38px] max-[576px]:text-[34px] max-[479px]:text-[28px] max-[375px]:text-[24px] max-[320px]:text-[22px] text-center font-semibold  text-[#212529]'>
           Our customers speak
         </p>
 

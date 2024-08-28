@@ -102,7 +102,7 @@ const OtpModal = ({
                         inputType='tel'
                         renderInput={(props) => <input {...props} />}
                       />
-                      {errOtp && <p className='text-[12px] text-[#FF000F] font-no mt-2'>{ApiMessage?.otpValidError}</p>}
+                      {errOtp && <p className='text-[12px] text-[#FF000F] font-normal mt-2'>{ApiMessage?.otpValidError}</p>}
                     </div>
                   </div>
                   <p className='font-normal  pt-5 max-[479px]:text-center text-[#212529]'>

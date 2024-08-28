@@ -20,6 +20,7 @@ import {
   emailRegex,
   errorHandling,
   handleRemoveLocalstorage,
+  is_webengage_event_enabled,
   mobileNumberRegex,
   panRegex,
   removeNonAlphaNumeric,
@@ -39,7 +40,7 @@ const IsThatYouComp = dynamic(() => import('@/core/component/common/CommonList/I
   ssr: false
 })
 
-const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) => {
+const EligibilityForm = ({ formDataChange, setFormDataChange, productList }) => {
   const size = useWindowSize()
   const mobileView = size?.width <= 576
   const topRef = useRef(null)
@@ -93,7 +94,7 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
   const [pinCodeError, setPinCodeError] = useState(false)
   const [emailValid, setEmailValid] = useState(true)
   const elegibilitypath = router?.query?.eligible
-  const category_url = router?.pathname?.split('/')[1]
+  const product_url = router?.pathname?.split('/')[1]
 
   const refOutSide = typeof window !== 'undefined' && sessionStorage?.getItem('refererOutside')
   const leadsParams = typeof window !== 'undefined' && sessionStorage?.getItem('leadsParams')
@@ -103,7 +104,7 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
       ? JSON.parse(localStorage.getItem('userData'))
       : null
 
-      const eligible_product = typeof window !== 'undefined' && localStorage.getItem('@eligibleproduct')
+  const eligible_product = typeof window !== 'undefined' && localStorage.getItem('@eligibleproduct')
 
   const data = { ref: topRef || nameRef, isMobile: mobileView }
   //forms
@@ -112,189 +113,184 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
     return (
       <>
         {/* {!personalLocalBtn && ( */}
-          <div>
-            <div className='pb-[25px] '>
-              <h3 className='text-[24px] leading-[30px] max-sm:leading-[25px]  max-[834px]:text-[20px] text-center font-medium max-[479px]:text-[18px] py-2 text-[#212529]'>
-                Best Credit Card in a few clicks
-              </h3>
-              <div ref={topRef}>
-                <NewFormsIcons
-                  stepperData={{
-                    firstTtitle: 'Verification',
-                    secondTitle: 'Personal Info',
-                    thirdTitle: 'Professional Info',
-                    modalStepper: 1
-                  }}
-                />
-              </div>
+        <div>
+          <div className='pb-[25px] '>
+            <h3 className='text-[24px] leading-[30px] max-sm:leading-[25px]  max-[834px]:text-[20px] text-center font-medium max-[479px]:text-[18px] py-2 text-[#212529]'>
+              Best Credit Card in a few clicks
+            </h3>
+            <div ref={topRef}>
+              <NewFormsIcons
+                stepperData={{
+                  firstTtitle: 'Verification',
+                  secondTitle: 'Personal Info',
+                  thirdTitle: 'Professional Info',
+                  modalStepper: 1
+                }}
+              />
             </div>
-            <form className='pb-4 profile-form' action='' method='POST' onSubmit={handleSubmit}>
-              <div className='mb-4'>
-                <p className='   text-[#212529]  max-[1200px]:!pt-0'>Gender</p>
-                <div className='flex pt-[10px] gap-4 '>
-                  <div>
-                    <label
-                      htmlFor='gender'
-                      className={`form-redio flex gap-2 items-center ${
-                        profileFormData?.gender === 'Male' ? 'text-[#212529] font-normal' : 'text-[#808080]'
+          </div>
+          <form className='pb-4 profile-form' action='' method='POST' onSubmit={handleSubmit}>
+            <div className='mb-4'>
+              <p className='   text-[#212529]  max-[1200px]:!pt-0'>Gender</p>
+              <div className='flex pt-[10px] gap-4 '>
+                <div>
+                  <label
+                    htmlFor='gender'
+                    className={`form-redio flex gap-2 items-center ${profileFormData?.gender === 'Male' ? 'text-[#212529] font-normal' : 'text-[#808080]'
                       }`}>
-                      <input
-                        type='radio'
-                        name='gender'
-                        value={profileFormData?.gender === 'Male' ? profileFormData?.gender === 'Male' : 'Male'}
-                        // disabled={profileFormData?.gender ? true : false}
-                        checked={profileFormData?.gender === 'Male'}
-                        onChange={(e) => {
-                          handleChange(e)
-                        }}
-                      />
-                      Male
-                    </label>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor='gender'
-                      className={`form-redio flex gap-2 items-center  ${
-                        profileFormData?.gender === 'Female' ? 'text-[#212529] font-normal' : 'text-[#808080]'
-                      }`}>
-                      <input
-                        type='radio'
-                        name='gender'
-                        // disabled={profileFormData?.gender ? true : false}
-                        value={profileFormData?.gender === 'Female' ? profileFormData?.gender === 'Female' : 'Female'}
-                        checked={profileFormData?.gender === 'Female'}
-                        onChange={(e) => {
-                          handleChange(e)
-                        }}
-                      />
-                      Female
-                    </label>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor='gender'
-                      className={`form-redio flex gap-2 items-center ${
-                        profileFormData?.gender === 'Other' ? 'text-[#212529] font-normal' : 'text-[#808080]'
-                      } `}>
-                      <input
-                        type='radio'
-                        name='gender'
-                        // disabled={profileFormData?.gender ? true : false}
-                        value={profileFormData?.gender === 'Other' ? profileFormData?.gender === 'Other' : 'Other'}
-                        checked={profileFormData?.gender === 'Other'}
-                        onChange={(e) => {
-                          handleChange(e)
-                        }}
-                      />
-                      Other
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className='grid grid-cols-1 gap-4 max-[479px]:grid-cols-1 '>
-                <div className='mb-[30px] max-[771px]:!mb-4 max-[479px]:mb-0 '>
-                  <label className='text-[13px] font-normal text-[#212529]  max-[768px]:text-[12px]' htmlFor='pancard'>
-                    Date of Birth
-                  </label>
-                  <div className='datepicker'>
                     <input
-                      type='date'
-                      showYearDropdown
-                      dropdownMode='select'
-                      dateFormat='dd-MM-yyyy'
-                      placeholderText='DD/MM/YYYY'
-                      name='dob'
-                      // disabled={profileFormData?.dob && token ? true : false}
-                      id='dob'
-                      className='shadow border rounded-lg w-full py-4 px-4 text-[#212529] leading-tight focus:outline-none focus:shadow-outline mt-1 border-[#C2CACF]'
-                      // selected={startDate}
+                      type='radio'
+                      name='gender'
+                      value={profileFormData?.gender === 'Male' ? profileFormData?.gender === 'Male' : 'Male'}
+                      // disabled={profileFormData?.gender ? true : false}
+                      checked={profileFormData?.gender === 'Male'}
                       onChange={(e) => {
-                        selectDateHandler(e)
                         handleChange(e)
                       }}
-                      value={profileFormData?.dob || userInformation?.dob}
-                      max={new Date().toISOString().split('T')[0]}
-                      required
-                      defaultValue={profileFormData?.dob || today}
-                      todayButton={'Today'}
-                      onFocus={() => ScrollToTop2(data)}
                     />
-                  </div>
+                    Male
+                  </label>
+                </div>
+                <div>
+                  <label
+                    htmlFor='gender'
+                    className={`form-redio flex gap-2 items-center  ${profileFormData?.gender === 'Female' ? 'text-[#212529] font-normal' : 'text-[#808080]'
+                      }`}>
+                    <input
+                      type='radio'
+                      name='gender'
+                      // disabled={profileFormData?.gender ? true : false}
+                      value={profileFormData?.gender === 'Female' ? profileFormData?.gender === 'Female' : 'Female'}
+                      checked={profileFormData?.gender === 'Female'}
+                      onChange={(e) => {
+                        handleChange(e)
+                      }}
+                    />
+                    Female
+                  </label>
+                </div>
+                <div>
+                  <label
+                    htmlFor='gender'
+                    className={`form-redio flex gap-2 items-center ${profileFormData?.gender === 'Other' ? 'text-[#212529] font-normal' : 'text-[#808080]'
+                      } `}>
+                    <input
+                      type='radio'
+                      name='gender'
+                      // disabled={profileFormData?.gender ? true : false}
+                      value={profileFormData?.gender === 'Other' ? profileFormData?.gender === 'Other' : 'Other'}
+                      checked={profileFormData?.gender === 'Other'}
+                      onChange={(e) => {
+                        handleChange(e)
+                      }}
+                    />
+                    Other
+                  </label>
                 </div>
               </div>
-
+            </div>
+            <div className='grid grid-cols-1 gap-4 max-[479px]:grid-cols-1 '>
               <div className='mb-[30px] max-[771px]:!mb-4 max-[479px]:mb-0 '>
-                <CommonEmailInput
-                  value={profileFormData?.email || userInformation?.email}
-                  // disabled={checkVerifyEmail && token ? true : false}
-                  handleChange={handleChange}
-                  errorHrefEmail={errorHrefEmail}
-
-                  // onFocus={() => ScrollToTop2(data)}
-                />
-              </div>
-              <div className='relative my-[20px] '>
-                <CommonPicodeInput
-                  value={profileFormData?.pin_code || userInformation?.pin_code}
-                  getData={getData}
-                  handleChange={handleChange}
-                  handlePincodeChange={handlePincodeChange}
-                  pinCodeError={pinCodeError}
-                />
-                {visible && (
-                  <ul className='suggestions pin-suggestion top-[100%] ' ref={wrapperRef}>
-                    {pinCode.map((i, v) => (
-                      <li
-                        className={''}
-                        key={v}
-                        onClick={() => {
-                          setProfileFormData({ ...profileFormData, pin_code: i })
-                          setVisibility(false)
-                        }}>
-                        {i}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              <div className='mt-[20px]'>
-                <label className='text-[13px] font-normal text-[#212529] ' htmlFor='city'>
-                  City
+                <label className='text-[13px] font-normal text-[#212529]  max-[768px]:text-[12px]' htmlFor='pancard'>
+                  Date of Birth
                 </label>
-                <input
-                  className='shadow border rounded-lg w-full py-4 px-4 text-[#000] leading-tight focus:outline-none focus:shadow-outline mt-1 border-[#C2CACF]'
-                  id='city'
-                  name='city'
-                  type='text'
-                  disabled={city || profileFormData?.city}
-                  value={pinCodeError ? '' : city || profileFormData?.city}
-                  placeholder='Enter your city'
-                  onChange={(e) => {
-                    if (!city && e?.target?.value) {
-                      // setCity(e?.target?.value)
-                      setProfileFormData({ ...profileFormData, city: e?.target?.value })
-                    }
-                  }}
-                />
+                <div className='datepicker'>
+                  <input
+                    type='date'
+                    showYearDropdown
+                    dropdownMode='select'
+                    dateFormat='dd-MM-yyyy'
+                    placeholderText='DD/MM/YYYY'
+                    name='dob'
+                    // disabled={profileFormData?.dob && token ? true : false}
+                    id='dob'
+                    className='shadow border rounded-lg w-full py-4 px-4 text-[#212529] leading-tight focus:outline-none focus:shadow-outline mt-1 border-[#C2CACF]'
+                    // selected={startDate}
+                    onChange={(e) => {
+                      selectDateHandler(e)
+                      handleChange(e)
+                    }}
+                    value={profileFormData?.dob || userInformation?.dob}
+                    max={new Date().toISOString().split('T')[0]}
+                    required
+                    defaultValue={profileFormData?.dob || today}
+                    todayButton={'Today'}
+                    onFocus={() => ScrollToTop2(data)}
+                  />
+                </div>
               </div>
-              <div
-                className={` ${
-                  mobileView
-                    ? 'fixed bottom-0 bg-[#FFF] left-0 px-4 py-4 w-full flex justify-between items-center'
-                    : 'pt-4  text-left w-full h-[48px]'
+            </div>
+
+            <div className='mb-[30px] max-[771px]:!mb-4 max-[479px]:mb-0 '>
+              <CommonEmailInput
+                value={profileFormData?.email || userInformation?.email}
+                // disabled={checkVerifyEmail && token ? true : false}
+                handleChange={handleChange}
+                errorHrefEmail={errorHrefEmail}
+
+              // onFocus={() => ScrollToTop2(data)}
+              />
+            </div>
+            <div className='relative my-[20px] '>
+              <CommonPicodeInput
+                value={profileFormData?.pin_code || userInformation?.pin_code}
+                getData={getData}
+                handleChange={handleChange}
+                handlePincodeChange={handlePincodeChange}
+                pinCodeError={pinCodeError}
+              />
+              {visible && (
+                <ul className='suggestions pin-suggestion top-[100%] ' ref={wrapperRef}>
+                  {pinCode.map((i, v) => (
+                    <li
+                      className={''}
+                      key={v}
+                      onClick={() => {
+                        setProfileFormData({ ...profileFormData, pin_code: i })
+                        setVisibility(false)
+                      }}>
+                      {i}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div className='mt-[20px]'>
+              <label className='text-[13px] font-normal text-[#212529] ' htmlFor='city'>
+                City
+              </label>
+              <input
+                className='shadow border rounded-lg w-full py-4 px-4 text-[#000] leading-tight focus:outline-none focus:shadow-outline mt-1 border-[#C2CACF]'
+                id='city'
+                name='city'
+                type='text'
+                disabled={city || profileFormData?.city}
+                value={pinCodeError ? '' : city || profileFormData?.city}
+                placeholder='Enter your city'
+                onChange={(e) => {
+                  if (!city && e?.target?.value) {
+                    // setCity(e?.target?.value)
+                    setProfileFormData({ ...profileFormData, city: e?.target?.value })
+                  }
+                }}
+              />
+            </div>
+            <div
+              className={` ${mobileView
+                  ? 'fixed bottom-0 bg-[#FFF] left-0 px-4 py-4 w-full flex justify-between items-center'
+                  : 'pt-4  text-left w-full h-[48px]'
                 }`}>
-                <button
-                  type='submit'
-                  disabled={!personalNextBtn}
-                  onClick={() => setFormDataChange(3)}
-                  className={`${
-                    personalNextBtn ? 'bg-[#49D49D]' : 'bg-[#d5d7d8]'
+              <button
+                type='submit'
+                disabled={!personalNextBtn}
+                onClick={() => setFormDataChange(3)}
+                className={`${personalNextBtn ? 'bg-[#49D49D]' : 'bg-[#d5d7d8]'
                   }  w-full lg:w-[303px] py-3  text-black  text-[16px] rounded-lg  hover:border-[#49d49d]  hover:border border hover:text-[#212529] font-[500] duration-300 `}>
-                  Next
-                </button>
-              </div>
-            </form>
-          </div>
+                Next
+              </button>
+            </div>
+          </form>
+        </div>
         {/* )} */}
       </>
     )
@@ -308,164 +304,161 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
     return (
       <>
         {/* {!localCheckELibilityBtn && ( */}
-          <div>
-            <div className='pb-[25px] '>
-              <h3 className='text-[24px] leading-[30px] max-sm:leading-[25px]  max-[834px]:text-[20px] text-center font-medium max-[479px]:text-[18px] py-2 text-[#212529]'>
-                Best Credit Card in a few clicks
-              </h3>
-              <div ref={topRef}>
-                <NewFormsIcons
-                  stepperData={{
-                    firstTtitle: 'Verification',
-                    secondTitle: 'Personal Info',
-                    thirdTitle: 'Professional Info',
-                    modalStepper: 2
-                  }}
-                />
+        <div>
+          <div className='pb-[25px] '>
+            <h3 className='text-[24px] leading-[30px] max-sm:leading-[25px]  max-[834px]:text-[20px] text-center font-medium max-[479px]:text-[18px] py-2 text-[#212529]'>
+              Best Credit Card in a few clicks
+            </h3>
+            <div ref={topRef}>
+              <NewFormsIcons
+                stepperData={{
+                  firstTtitle: 'Verification',
+                  secondTitle: 'Personal Info',
+                  thirdTitle: 'Professional Info',
+                  modalStepper: 2
+                }}
+              />
+            </div>
+          </div>
+          <form className='pb-4 profile-form' action='' method='POST' onSubmit={handleSubmit}>
+            <div className='mb-4'>
+              <p className='   text-[#212529]  max-[1200px]:!pt-0'>Occupation</p>
+              <div className='flex pt-[10px] gap-4'>
+                <div>
+                  <label
+                    htmlFor='occupation'
+                    className={`form-redio flex gap-2 items-center ${salariedCondition ? 'text-[#212529] font-normal' : 'text-[#808080]'
+                      }`}>
+                    <input
+                      type='radio'
+                      id='occupation'
+                      checked={salariedCondition}
+                      name='occupation'
+                      value='Salaried'
+                      onChange={(e) => handleChange(e)}
+                    />
+                    Salaried
+                  </label>
+                </div>
+                <div>
+                  <label
+                    htmlFor='occupation'
+                    className={`form-redio flex gap-2 items-center ${selfEmployedCondition ? 'text-[#212529] font-normal' : 'text-[#808080]'
+                      } `}>
+                    <input
+                      type='radio'
+                      id='occupation'
+                      name='occupation'
+                      checked={selfEmployedCondition}
+                      value='Self-employed'
+                      onChange={(e) => handleChange(e)}
+                    />
+                    Self-Employed
+                  </label>
+                </div>
               </div>
             </div>
-            <form className='pb-4 profile-form' action='' method='POST' onSubmit={handleSubmit}>
-              <div className='mb-4'>
-                <p className='   text-[#212529]  max-[1200px]:!pt-0'>Occupation</p>
-                <div className='flex pt-[10px] gap-4'>
-                  <div>
-                    <label
-                      htmlFor='occupation'
-                      className={`form-redio flex gap-2 items-center ${
-                        salariedCondition ? 'text-[#212529] font-normal' : 'text-[#808080]'
-                      }`}>
-                      <input
-                        type='radio'
-                        id='occupation'
-                        checked={salariedCondition}
-                        name='occupation'
-                        value='Salaried'
-                        onChange={(e) => handleChange(e)}
-                      />
-                      Salaried
-                    </label>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor='occupation'
-                      className={`form-redio flex gap-2 items-center ${
-                        selfEmployedCondition ? 'text-[#212529] font-normal' : 'text-[#808080]'
-                      } `}>
-                      <input
-                        type='radio'
-                        id='occupation'
-                        name='occupation'
-                        checked={selfEmployedCondition}
-                        value='Self-employed'
-                        onChange={(e) => handleChange(e)}
-                      />
-                      Self-Employed
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className='grid grid-cols-1 gap-4 max-[479px]:grid-cols-1 '>
-                <div className={errorCompany ? ' border-[#FF000F] mb-[30px]  ' : 'mb-[30px] max-[771px]:!mb-4 '}>
-                  <label className='text-[13px] font-normal text-[#212529]  max-[768px]:text-[12px]' htmlFor='name'>
-                    Company Name
-                  </label>
-                  <input
-                    className='shadow border rounded-lg w-full py-4 px-4 text-[#212529] leading-tight focus:outline-none focus:shadow-outline mt-1 border-[#C2CACF]'
-                    id='company_name'
-                    name='company_name'
-                    type='text'
-                    placeholder='Company Name'
-                    disabled={
-                      (profileFormData?.company_name?.length || userInformation?.company_name?.length) >= 26 && token
-                        ? true
-                        : false
-                    }
-                    value={profileFormData?.company_name || userInformation?.company_name}
-                    onChange={(e) => {
-                      handleChange(e)
-                      handleValidation(e)
-                    }}
-                    onFocus={() => ScrollToTop2(data)}
-                  />
-                  {errHrefCompany && (
-                    <p className='text-[12px] text-[#FF000F] font-no  mt-2'>{ApiMessage?.linkError}</p>
-                  )}
-
-                  {errorCompany && <p className='text-[12px] text-[#FF000F] font-no'>{ApiMessage?.letterNameErr}</p>}
-                </div>
-              </div>
-
-              <div className=' '>
-                <div className='mb-[30px] max-[771px]:!mb-4 max-[479px]:mb-0 '>
-                  <div className='grid grid-cols-1 gap-4 max-[479px]:grid-cols-1'>
-                    {salariedCondition && (
-                      <div className={errorMessage ? ' border-[#FF000F] mb-[30px]  ' : 'mb-[30px] max-[771px]:!mb-0'}>
-                        <label
-                          className='text-[13px] font-normal text-[#212529]  max-[768px]:text-[12px]'
-                          htmlFor='name'>
-                          Monthly Salary
-                        </label>
-                        <input
-                          className='shadow border rounded-lg w-full py-4 px-4 text-[#212529] leading-tight focus:outline-none focus:shadow-outline mt-1 border-[#C2CACF]'
-                          id='salary'
-                          name='monthly_salary'
-                          type='number'
-                          placeholder='Enter your monthly salary'
-                          // disabled={profileFormData?.monthly_salary?.length >= 6 && token ? true : false}
-                          value={profileFormData?.monthly_salary || userInformation?.monthly_salary}
-                          // maxLength={6}
-                          onChange={(e) => {
-                            handleChange(e)
-                            handleMonthlyIncome(e)
-                          }}
-                        />
-                        {monthlyError && (
-                          <p className='text-[12px] text-[#FF000F] font-no'>
-                            Please enter the Income less than or equal to 400000
-                          </p>
-                        )}
-                      </div>
-                    )}
-                    {selfEmployedCondition && (
-                      <div className={'mb-[30px] max-[771px]:!mb-0'}>
-                        <label
-                          className='text-[13px] font-normal text-[#212529]  max-[768px]:text-[12px]'
-                          htmlFor='name'>
-                          ITR (amount)
-                        </label>
-                        <input
-                          className='shadow border rounded-lg w-full py-4 px-4 text-[#212529] leading-tight focus:outline-none focus:shadow-outline mt-1 border-[#C2CACF]'
-                          id='itr_amount'
-                          name='itr_amount'
-                          type='number'
-                          placeholder='Enter your ITR (amount)'
-                          value={profileFormData?.itr_amount || userInformation?.itr_amount}
-                          onChange={(e) => {
-                            handleChange(e)
-                          }}
-                        />
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className={` ${
-                  mobileView
-                    ? 'fixed bottom-0 bg-[#FFF] left-0 px-4 py-4 w-full flex justify-between items-center'
-                    : 'pt-4  text-left w-full h-[48px]'
-                }`}>
-                <SubmitFormBtn
-                  stepperBtn={true}
-                  name={!isLoading ? 'Check Eligibility' : <Loader />}
-                  // disabled={disbaled}
-                  disabled={!checkELibilityBtn}
-                  onClick={EligibilityRegister}
+            <div className='grid grid-cols-1 gap-4 max-[479px]:grid-cols-1 '>
+              <div className={errorCompany ? ' border-[#FF000F] mb-[30px]  ' : 'mb-[30px] max-[771px]:!mb-4 '}>
+                <label className='text-[13px] font-normal text-[#212529]  max-[768px]:text-[12px]' htmlFor='name'>
+                  Company Name
+                </label>
+                <input
+                  className='shadow border rounded-lg w-full py-4 px-4 text-[#212529] leading-tight focus:outline-none focus:shadow-outline mt-1 border-[#C2CACF]'
+                  id='company_name'
+                  name='company_name'
+                  type='text'
+                  placeholder='Company Name'
+                  disabled={
+                    (profileFormData?.company_name?.length || userInformation?.company_name?.length) >= 26 && token
+                      ? true
+                      : false
+                  }
+                  value={profileFormData?.company_name || userInformation?.company_name}
+                  onChange={(e) => {
+                    handleChange(e)
+                    handleValidation(e)
+                  }}
+                  onFocus={() => ScrollToTop2(data)}
                 />
+                {errHrefCompany && (
+                  <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>{ApiMessage?.linkError}</p>
+                )}
+
+                {errorCompany && <p className='text-[12px] text-[#FF000F] font-no'>{ApiMessage?.letterNameErr}</p>}
               </div>
-            </form>
-          </div>
+            </div>
+
+            <div className=' '>
+              <div className='mb-[30px] max-[771px]:!mb-4 max-[479px]:mb-0 '>
+                <div className='grid grid-cols-1 gap-4 max-[479px]:grid-cols-1'>
+                  {salariedCondition && (
+                    <div className={errorMessage ? ' border-[#FF000F] mb-[30px]  ' : 'mb-[30px] max-[771px]:!mb-0'}>
+                      <label
+                        className='text-[13px] font-normal text-[#212529]  max-[768px]:text-[12px]'
+                        htmlFor='name'>
+                        Monthly Salary
+                      </label>
+                      <input
+                        className='shadow border rounded-lg w-full py-4 px-4 text-[#212529] leading-tight focus:outline-none focus:shadow-outline mt-1 border-[#C2CACF]'
+                        id='salary'
+                        name='monthly_salary'
+                        type='number'
+                        placeholder='Enter your monthly salary'
+                        // disabled={profileFormData?.monthly_salary?.length >= 6 && token ? true : false}
+                        value={profileFormData?.monthly_salary || userInformation?.monthly_salary}
+                        // maxLength={6}
+                        onChange={(e) => {
+                          handleChange(e)
+                          handleMonthlyIncome(e)
+                        }}
+                      />
+                      {monthlyError && (
+                        <p className='text-[12px] text-[#FF000F] font-no'>
+                          Please enter the Income less than or equal to 400000
+                        </p>
+                      )}
+                    </div>
+                  )}
+                  {selfEmployedCondition && (
+                    <div className={'mb-[30px] max-[771px]:!mb-0'}>
+                      <label
+                        className='text-[13px] font-normal text-[#212529]  max-[768px]:text-[12px]'
+                        htmlFor='name'>
+                        ITR (amount)
+                      </label>
+                      <input
+                        className='shadow border rounded-lg w-full py-4 px-4 text-[#212529] leading-tight focus:outline-none focus:shadow-outline mt-1 border-[#C2CACF]'
+                        id='itr_amount'
+                        name='itr_amount'
+                        type='number'
+                        placeholder='Enter your ITR (amount)'
+                        value={profileFormData?.itr_amount || userInformation?.itr_amount}
+                        onChange={(e) => {
+                          handleChange(e)
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div
+              className={` ${mobileView
+                  ? 'fixed bottom-0 bg-[#FFF] left-0 px-4 py-4 w-full flex justify-between items-center'
+                  : 'pt-4  text-left w-full h-[48px]'
+                }`}>
+              <SubmitFormBtn
+                stepperBtn={true}
+                name={!isLoading ? 'Check Eligibility' : <Loader />}
+                // disabled={disbaled}
+                disabled={!checkELibilityBtn}
+                onClick={EligibilityRegister}
+              />
+            </div>
+          </form>
+        </div>
         {/* )} */}
       </>
     )
@@ -557,7 +550,7 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
             transaction_id: transactionId,
             otp: e,
             mobile_no: String(userInformation?.mobile) || String(profileFormData?.mobile) || String(mobile),
-            type: messageType || localStorage.getItem('auth_type'),
+            type: messageType || typeof window !== 'undefined' && localStorage.getItem('auth_type'),
             is_temp_otp: tempOtp
           },
           { headers: headers }
@@ -739,8 +732,8 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
     setLoadingOtp(false)
   }
 
-  const leadId = localStorage.getItem('leadprofileid')
-  const token = localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
 
   useEffect(() => {
     if (token) {
@@ -808,8 +801,8 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
 
       TagManager?.dataLayer({
         dataLayer: {
-          event: 'card_eligibility',
-          product_category: category_url,
+          event: 'card_eligibility_started',
+          product_category: product_url,
           product_name: elegibilitypath,
           date: formattedDate,
         },
@@ -817,10 +810,35 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
     } else {
       TagManager?.dataLayer({
         dataLayer: {
-          event: 'cards_eligibility',
-          Source: fieldValue || "",
+          event: 'cards_eligibility_started',
+          // Source: fieldValue || "",
           date: formattedDate,
         },
+      });
+    }
+  };
+
+
+  const handleWebEngageEvent = (eventName, eventData) => {    
+    if (is_webengage_event_enabled && typeof window !== 'undefined' && window.webengage) {
+      window.webengage.track(eventName, eventData);
+    }
+  }
+  const handleWebEngage = () => {
+    const isEligibilityPath = elegibilitypath ? true : false;
+    const currentDate = new Date();
+    const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
+
+    if (isEligibilityPath) {
+      handleWebEngageEvent('card_eligibility_started', {
+        product_category: product_url,
+        product_name: elegibilitypath,
+        date: formattedDate,
+      });
+    } else {
+      handleWebEngageEvent('cards_eligibility_started', {
+        // Source: fieldValue || "",
+        date: formattedDate,
       });
     }
   };
@@ -829,13 +847,16 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
     const currentDate = new Date();
     const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
     const filteredDataCard = productList?.product_list?.filter((obj) =>
-    elegibleData?.credit_cards?.includes(obj.url_slug.split('/').pop())
-  )
+      elegibleData?.credit_cards?.includes(obj.url_slug.split('/').pop())
+    )
+    const finalArray = elegibleData?.credit_cards
+    // const finalArrayCSV = finalArray.join(',');
+    
     if (isEligibilityPath) {
       TagManager?.dataLayer({
         dataLayer: {
           event: 'card_eligibility_checked',
-          product_category: category_url,
+          product_category: product_url,
           product_name: elegibilitypath,
           status: eligible_product ? true : false,
         },
@@ -844,9 +865,33 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
       TagManager?.dataLayer({
         dataLayer: {
           event: 'cards_eligibility_checked',
-          eligibile_produt_list: filteredDataCard || [],
+          eligibile_produt_list: finalArray || [],
           date: formattedDate,
         },
+      });
+    }
+  };
+  const handleCheckedWebEngage = (elegibleData) => {  
+    const isEligibilityPath = elegibilitypath ? true : false;
+    const currentDate = new Date();
+    const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
+    const finalArray = elegibleData?.credit_cards
+    // const finalArrayCSV = finalArray.join(',');  
+
+    const filteredDataCard = productList?.product_list?.filter((obj) =>
+      finalArray?.includes(obj.url_slug.split('/').pop())
+    )
+
+    if (isEligibilityPath) {
+      handleWebEngageEvent('card_eligibility_checked', {
+        product_category: product_url,
+        product_name: elegibilitypath,
+        status: eligible_product ? true : false,
+      });
+    } else {
+      handleWebEngageEvent('cards_eligibility_checked', {
+        eligibile_produt_list: finalArray || [],
+        date: formattedDate,
       });
     }
   };
@@ -994,9 +1039,12 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
             setDisbaled(true)
             setTime(60)
             handleGTM();
-            handleCheckedGTM(response?.data?.data?.eligible_product)
+            handleWebEngage();
+            handleCheckedGTM(response?.data?.data?.eligible_product || response?.data?.data?.alternate_product)
+            handleCheckedWebEngage(response?.data?.data?.eligible_product || response?.data?.data?.alternate_product)
           }
           if (response?.data?.message == 'failed') {
+            handleWebEngage();
             setDisbaled(true)
             setLoading(false)
             toast.error(response?.data?.data)
@@ -1004,6 +1052,7 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
           setLoading(false)
         })
         .catch((error) => {
+          handleWebEngage();
           setDisbaled(false)
           if (error?.response?.data?.message == 'failed') {
             setLoading(false)
@@ -1369,7 +1418,7 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
                             />
                           )} */}
                           {errOtp && (
-                            <p className='text-[12px] text-[#FF000F] font-no mt-2'>{ApiMessage?.otpValidError}</p>
+                            <p className='text-[12px] text-[#FF000F] font-normal mt-2'>{ApiMessage?.otpValidError}</p>
                           )}
                         </div>
                       </div>
@@ -1420,9 +1469,8 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
                   PAN Card
                 </label>
                 <Input
-                  className={`shadow border rounded-lg w-full py-4 px-4 text-[#212529] leading-tight border-[#C2CACF] focus:outline-none focus:shadow-outline mt-1 ${'border-[#C2CACF]'} ${
-                    !pancardError ? 'border-red-500' : 'border-[#C2CACF] '
-                  }`}
+                  className={`shadow border rounded-lg w-full py-4 px-4 text-[#212529] leading-tight border-[#C2CACF] focus:outline-none focus:shadow-outline mt-1 ${'border-[#C2CACF]'} ${!pancardError ? 'border-red-500' : 'border-[#C2CACF] '
+                    }`}
                   id='pan_no'
                   name='pan_no'
                   type='text'
@@ -1433,7 +1481,7 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
                   value={profileFormData?.pan_no || userInformation?.pan_no}
                   onChange={(e) => handleChange(e)}
                   onFocus={() => ScrollToTop2(data)}
-                  // endAdornment={pancardError || panVerifyCondition ? <SuccessIcon /> : ''}
+                // endAdornment={pancardError || panVerifyCondition ? <SuccessIcon /> : ''}
                 />
                 {!pancardError && <p className='text-[12px] text-[#FF000F] font-no'>Please enter valid PAN</p>}
               </div>
@@ -1464,7 +1512,7 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
                   e.target.value = removeNonAlphaNumeric(e)
                 }}
               />
-              {errorHrefName && <p className='text-[12px] text-[#FF000F] font-no  mt-2'>{ApiMessage?.linkError}</p>}
+              {errorHrefName && <p className='text-[12px] text-[#FF000F] font-normal  mt-2'>{ApiMessage?.linkError}</p>}
               {errorMessage && <p className='text-[12px] text-[#FF000F] font-no'>{ApiMessage?.letterNameErr}</p>}
             </div>
             <div className='mb-[30px] max-[771px]:!mb-4 max-[479px]:mb-0 '>
@@ -1487,18 +1535,16 @@ const EligibilityForm = ({ formDataChange, setFormDataChange , productList }) =>
             <CheckAgree checkAgree={checkAgree} setCheckAgree={setCheckAgree} setTermsModal={setTermsModal} />
 
             <div
-              className={` ${
-                !otpModal && !panVerifyModal && mobileView
+              className={` ${!otpModal && !panVerifyModal && mobileView
                   ? 'fixed bottom-0 bg-[#FFF] left-0 px-4 py-4 w-full flex justify-between items-center'
                   : 'pt-4  text-left w-full h-[48px]'
-              }`}>
+                }`}>
               <button
                 type='submit'
                 disabled={!verifyNextBtn}
                 onClick={handleVerifyNextClick}
-                className={`w-full lg:w-[303px] py-3 text-black text-[16px] rounded-lg hover:border border hover:text-[#212529] font-[500] duration-300 ${
-                  verifyNextBtn ? 'bg-[#49D49D] hover:border-[#49d49d]' : 'bg-[#d5d7d8]'
-                }`}>
+                className={`w-full lg:w-[303px] py-3 text-black text-[16px] rounded-lg hover:border border hover:text-[#212529] font-[500] duration-300 ${verifyNextBtn ? 'bg-[#49D49D] hover:border-[#49d49d]' : 'bg-[#d5d7d8]'
+                  }`}>
                 Next
               </button>
             </div>

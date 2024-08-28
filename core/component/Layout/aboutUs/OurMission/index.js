@@ -6,7 +6,7 @@ function OurMission() {
       <div className=' pt-[60px] max-[834px]:pt-[50px] pb-[30px] w-[92%] mx-auto max-[1200px]:w-[85%] max-[991px]:w-[90%] max-[576px]:w-full ourmission-resolution'>
         <div className='grid grid-cols-2  gap-8 max-[479px]:grid-cols-1'>
           <div className='bg-[#ACECD2] rounded-2xl p-14 max-[991px]:p-8 max-[576px]:p-4'>
-            <h4 className='head-text font-[faktum] xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] max-[320px]:text-[20px] font-semibold mx-auto max-[479px]:text-center !leading-[50.4px] weare-title text-[#212529]'>
+            <h4 className='head-text xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] max-[320px]:text-[20px] font-semibold mx-auto max-[479px]:text-center !leading-[50.4px] weare-title text-[#212529]'>
               Our Mission
             </h4>
             <p className='text-[18px] font-[Poppins] text-[#212529] leading-7 pt-4 max-[479px]:text-center'>
@@ -17,7 +17,7 @@ function OurMission() {
           </div>
 
           <div className='bg-[#D2BFED] rounded-2xl p-14 max-[991px]:p-8 max-[576px]:p-4'>
-            <h4 className='head-text font-[faktum] xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] max-[320px]:text-[20px] font-semibold mx-auto max-[479px]:text-center !leading-[50.4px] weare-title text-[#212529]'>
+            <h4 className='head-text xl:text-4xl lg:text-3xl md:text-2xl  max-[576px]:text-[28px] max-[479px]:text-[22px] max-[320px]:text-[20px] font-semibold mx-auto max-[479px]:text-center !leading-[50.4px] weare-title text-[#212529]'>
               Our Vision
             </h4>
             <p className='text-[18px] font-[Poppins] text-[#212529] leading-7 pt-4 max-[479px]:text-center'>

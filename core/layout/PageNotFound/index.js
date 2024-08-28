@@ -3,10 +3,6 @@ import NotFoundImg from '../../../public/assets/new-not-found.svg'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
-const Footer = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
-
 export default function NotFound({errorLog}) {
   return (
     <>
@@ -32,7 +28,6 @@ export default function NotFound({errorLog}) {
         </div>
         <div className='mt-[100px]'></div>
       </div>
-      <Footer />
     </>
   )
 }

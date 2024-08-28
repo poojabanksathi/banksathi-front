@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic'
 import React from 'react'
 import { BASE_URL, BUSINESSCATEGORY, COMMON} from '@/utils/alljsonfile/service'
 import Axios from 'axios'
-import ScrollToTop from 'react-scroll-to-top'
 
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
@@ -13,9 +12,7 @@ const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
 const OurPartner = dynamic(() => import('@/core/component/Layout/aboutUs/AboutOurPartner'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const AboutBanner = dynamic(() => import('@/core/component/Layout/aboutUs/AboutBanner'), {
   ssr: false
 })
@@ -37,6 +34,8 @@ const VedioCheck = dynamic(() => import('@/core/component/common/VedioCheck'), {
 
 
 export default function Index({ businessCategorydata,businessmetaheadtag}) {
+
+
   return (
     <>
      
@@ -56,11 +55,6 @@ export default function Index({ businessCategorydata,businessmetaheadtag}) {
         <MobileFooter businessCategorydata={businessCategorydata}/>
       </div>
 
-      <DynamicFooter businessCategorydata={businessCategorydata} />
-
-      <div className='scroll-top'>
-        <ScrollToTop smooth color='#000' />
-      </div>
     </>
   )
 }

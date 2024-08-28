@@ -12,8 +12,8 @@ const ProfileSet = dynamic(() => import('@/core/component/common/ProfileSet'), {
 })
 
 function SetUpProfile() {
-  const leadId = localStorage.getItem('leadprofileid')
-  const token = localStorage.getItem('token')
+  const leadId = typeof window !== 'undefined' && localStorage.getItem('leadprofileid')
+  const token = typeof window !== 'undefined' && localStorage.getItem('token')
   const router = useRouter()
 
   useEffect(() => {

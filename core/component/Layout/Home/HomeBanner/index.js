@@ -47,7 +47,7 @@ function HomeBanner() {
         }`}>
         <Slider {...settings} className='homebanner-slider z-[1]'>
           <div>
-            <div className='head-text font-[faktum] md:p-[24px] md:!leading-tight  font-semibold xl:text-[50px] lg:text-[50px] max-[991px]:text-[40px] max-[834px]:text-[38px] sm:text-[32px] !leading-[66px]  max-[771px]:!leading-[50px] max-[475px]:text-[24px] text-white max-[479px]:!leading-8  max-[320px]:text-[23px]  max-[576px]:!leading-10  max-[576px]:text-[32px] max-[280px]:text-[20px]'>
+            <div className='head-text md:p-[24px] md:!leading-tight  font-semibold xl:text-[50px] lg:text-[50px] max-[991px]:text-[40px] max-[834px]:text-[38px] sm:text-[32px] !leading-[66px]  max-[771px]:!leading-[50px] max-[475px]:text-[24px] text-white max-[479px]:!leading-8  max-[320px]:text-[23px]  max-[576px]:!leading-10  max-[576px]:text-[32px] max-[280px]:text-[20px]'>
               {size.width <= 576 ? (
                 <>
                   A Personalised <span className='text-[#49D49D] '>Banking Solution</span> Curated Specially for You{' '}
@@ -64,7 +64,7 @@ function HomeBanner() {
             </p>
           </div>
           <div>
-            <div className='head-text font-[faktum] md:p-[24px] md:!leading-tight font-semibold xl:text-[50px] lg:text-[50px] max-[991px]:text-[40px] max-[834px]:text-[38px] sm:text-[32px] !leading-[66px] max-[771px]:!leading-[50px] max-[475px]:text-[24px] text-white max-[479px]:!leading-8  max-[320px]:text-[23px]  max-[576px]:!leading-10  max-[576px]:text-[26px] max-[280px]:text-[20px]'>
+            <div className='head-text md:p-[24px] md:!leading-tight font-semibold xl:text-[50px] lg:text-[50px] max-[991px]:text-[40px] max-[834px]:text-[38px] sm:text-[32px] !leading-[66px] max-[771px]:!leading-[50px] max-[475px]:text-[24px] text-white max-[479px]:!leading-8  max-[320px]:text-[23px]  max-[576px]:!leading-10  max-[576px]:text-[26px] max-[280px]:text-[20px]'>
               Tired of <span className='text-[#49D49D] '>Spam Calls?</span>
               <br /> So are we!{' '}
             </div>
@@ -73,7 +73,7 @@ function HomeBanner() {
             </p>
           </div>
           <div>
-            <div className='head-text font-[faktum] md:p-[24px]  md:!leading-tight font-semibold xl:text-[50px] lg:text-[50px] max-[991px]:text-[40px] max-[834px]:text-[38px] sm:text-[32px] !leading-[66px]  max-[771px]:!leading-[50px] max-[475px]:text-[24px] text-white max-[479px]:!leading-8  max-[320px]:text-[23px]  max-[576px]:!leading-10  max-[576px]:text-[32px] max-[280px]:text-[20px]'>
+            <div className='head-text md:p-[24px]  md:!leading-tight font-semibold xl:text-[50px] lg:text-[50px] max-[991px]:text-[40px] max-[834px]:text-[38px] sm:text-[32px] !leading-[66px]  max-[771px]:!leading-[50px] max-[475px]:text-[24px] text-white max-[479px]:!leading-8  max-[320px]:text-[23px]  max-[576px]:!leading-10  max-[576px]:text-[32px] max-[280px]:text-[20px]'>
               {size.width <= 576 ? (
                 <>
                   Choose the best <span className='text-[#49D49D] '>Financial Products</span> that suit your lifestyle{' '}

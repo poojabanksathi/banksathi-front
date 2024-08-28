@@ -14,7 +14,7 @@ import { ApiMessage } from '@/utils/alljsonfile/apimessage'
 import jwt from 'jwt-decode'
 import toast, { Toaster } from 'react-hot-toast'
 import { useRouter } from 'next/router'
-import { getFormattedDate, handleRemoveLocalstorage } from '@/utils/util'
+import { getFormattedDate, handleRemoveLocalstorage, is_webengage_event_enabled } from '@/utils/util'
 import moment from 'moment'
 import {
   badCreditScoreTitle,
@@ -324,6 +324,12 @@ function ScoreExcellentGarph({ ScoreCurrent, GetScoreHistory }) {
 
   const refreshDisable = isDateWithinLast30Days()
 
+const handleWebEngageEvent = (eventName, eventData) => {
+    if (is_webengage_event_enabled && typeof window !== 'undefined' && window.webengage) {
+      window.webengage.track(eventName, eventData);
+    }
+  }
+
   const handleGTM = () => {
     const currentDate = new Date();
     const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
@@ -339,20 +345,35 @@ function ScoreExcellentGarph({ ScoreCurrent, GetScoreHistory }) {
     } else {
       TagManager?.dataLayer({
         dataLayer: {
-          event: 'credit_score',
+          event: 'credit_score_started',
           Source:  fieldValue || "",
           date: formattedDate,
         },
       });
     }
   };
+  const handleWebEngage = () => {
+    const currentDate = new Date();
+    const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
   
+    if (historyScore < 0) {
+      handleWebEngageEvent('credit_score_checked', {
+        credit_score: creditScoreTitle.split(' ')[0] || 'Na',
+        date: formattedDate,
+      });
+    } else {
+      handleWebEngageEvent('credit_score_started', {
+        Source:  fieldValue || "",
+        date: formattedDate,
+      });
+    }
+  };
   
-console.log(ScoreCurrent, "ScoreCurrentScoreCurrent");
 useEffect(() => {
   if(historyScore){
 
     handleGTM()
+    handleWebEngage()
   }
 },[historyScore])
 
@@ -383,7 +404,7 @@ useEffect(() => {
                       href={`${'/cibil-credit-score-check'}`}
                       prefetch={false}
                       className='text-[#212529] hover:text-white '>
-                      <button className='!text-[#212529] cursor-pointer hover:!text-[#212529] duration-300 hover:border-[#49d49d] mb-2 hover:bg-[#49d49d]  head-text font-[faktum] text-[18px] px-6 py-2  w-auto h-full font-semibold border rounded-lg border-[#212529]  '>
+                      <button className='!text-[#212529] cursor-pointer hover:!text-[#212529] duration-300 hover:border-[#49d49d] mb-2 hover:bg-[#49d49d]  head-text text-[18px] px-6 py-2  w-auto h-full font-semibold border rounded-lg border-[#212529]  '>
                         Check Now
                       </button>
                     </Link>

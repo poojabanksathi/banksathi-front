@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import { useRouter } from 'next/router'
@@ -46,7 +45,6 @@ export default function Index({
           <MobileFooter businessCategorydata={businessCategorydata} />
         </div>
       </div>
-      <ScrollToTop smooth color='#000' />
     </>
   )
 }
@@ -54,9 +52,6 @@ export default function Index({
 export async function getServerSideProps(context) {
   try {
     const lang_id = 1
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
-
-    const url_slug = ''
     const ref = context?.req?.headers?.referer || ''
     const h = context?.query?.h || null
     const page_url_slug = context?.resolvedUrl?.split('/')?.pop() || 'login'

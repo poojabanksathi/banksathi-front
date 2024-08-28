@@ -5,6 +5,7 @@ import { useWindowSize } from '@/hooks/useWindowSize'
 import { useContext } from 'react'
 import { MainContext } from '@/core/component/Leads/MainContext.js'
 import TagManager from 'react-gtm-module'
+import { is_webengage_event_enabled } from '@/utils/util'
 
 const LeftProductDesc = dynamic(() => import('@/core/component/Leads/LeftProductDesc'), {
   ssr: false
@@ -15,18 +16,35 @@ const LeadsStepper = dynamic(() => import('@/core/component/Leads/LeadStepper'),
 
 export default function Leads(props) {
   const productData = useContext(MainContext)
-  const category_url = productData?.product_details?.url_slug?.split('/')[1]
+  const product_url = productData?.product_details?.url_slug?.split('/')[1]
   const size = useWindowSize()
 
   const handleGTM = () => {
     TagManager?.dataLayer({
       dataLayer: {
         event: 'apply_card',
-        product_category: category_url,
+        product_category: product_url,
         product_name: productData?.product_details?.card_name,
+        product_link : ""
+
       },
     });
   }
+
+  const handleWebEngageEvent = (eventName, eventData) => {
+    if (is_webengage_event_enabled && typeof window !== 'undefined' && window.webengage) {
+      window.webengage.track(eventName, eventData);
+    }
+  }
+
+  useEffect(() => {
+    handleWebEngageEvent('apply_card', {
+        product_category: product_url,
+        product_name: productData?.product_details?.card_name || "",
+        product_link : ""
+
+    });
+}, [product_url, productData?.product_details?.card_name]);
 
   useEffect(() => {
     handleGTM();

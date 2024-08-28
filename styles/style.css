@@ -527,7 +527,7 @@
   box-shadow: 0 0 1px 0 #8d8d8d;
 }
 
-@font-face {
+ /* @font-face {
   font-family: 'faktum';
   src: url('/../fonts/ReneBieder-Faktum.otf') format('opentype');
   font-display: swap;
@@ -541,7 +541,25 @@
 
 @font-face {
   font-family: 'Poppins';
-  src: url('/fonts/Poppins-Regular.ttf') format('truetype');
+  src: url('/../fonts/Poppins-Regular.ttf') format('truetype');
+  font-display: swap;
+} */
+
+@font-face {
+  font-family: 'Faktum';
+  src: url('/fonts/ReneBieder-Faktum.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Regular.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -1095,7 +1113,7 @@ color: #49d49d !important;
     height: 100px;
   }
   .contact-banner-scroll {
-    height: 670px !important;
+    height: 400px !important;
     padding-top: 6rem;
   }
   .write-form-sec {
@@ -1371,9 +1389,6 @@ color: #49d49d !important;
   .banner-contact-same {
     height: 538px !important;
   }
-  .contact-banner-scroll {
-    height: 600px !important;
-  }
 
   .award-tree-box {
     height: 140px !important;
@@ -1483,6 +1498,9 @@ color: #49d49d !important;
 .tutorial-slide ul.slick-dots {
   display: none !important;
 }
+.enquiry-slider .slick-slide {
+  padding: 0 10px;
+}
 .faq-answer-list ul {
   list-style: auto !important;
   padding-left: 1.5%;
@@ -1570,6 +1588,9 @@ color: #49d49d !important;
   .reward-formcon h1 {
     font-size: 44px;
   }
+  .code-description{
+    column-gap: 4rem;
+  }
   .longform-list h2 {
     font-size: 24px;
     line-height: 38px;
@@ -1596,6 +1617,9 @@ color: #49d49d !important;
   .reward-formcon h1 {
     font-size: 42px;
   }
+  .code-description{
+    column-gap: 2rem;
+  }
   .longform-list h2 {
     font-size: 24px;
   }
@@ -1616,6 +1640,16 @@ color: #49d49d !important;
   }
   .sliderContainer {
     max-width: 100% !important;
+  }
+  .code-description{
+    column-gap: 1rem;
+  }
+  
+}
+@media(max-width:992px){
+  .code-description{
+    column-gap: 2rem;
+    row-gap: 1rem;
   }
 }
 
@@ -1641,6 +1675,7 @@ color: #49d49d !important;
   .credit-begincard .reward-formcon div ol {
     padding-left: 3%;
   }
+
 }
 
 @media (max-width: 834px) and (min-width: 772px) {
@@ -2106,3 +2141,12 @@ input:-webkit-autofill {
   box-shadow: 0px 6px 24px 0px #0000001A;
 }
 
+@media(max-width:425px){
+  .baaner-image{
+    height: 200px !important;
+  }
+}
+
+.longform-list strong {
+  font-weight: bolder !important;
+}

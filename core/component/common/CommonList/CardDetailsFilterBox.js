@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { memo, useEffect, useRef, useState } from 'react'
 import accordionArrowall from '../../../../public/assets/accordion-down.svg'
 import starRate from '../../../../public/assets/star-rate.svg'
 import likeIcon from '../../../../public/assets/like-icon.svg'
@@ -27,6 +27,7 @@ import {
   getPromotionObject,
   getRandomColor,
   handleRemoveLocalstorage,
+  is_webengage_event_enabled,
   sendEventToGTM
 } from '@/utils/util'
 import ProgressBars from '../ProgressBars'
@@ -440,17 +441,24 @@ function CardDetailsFilterBox({
   }
 
   const handleGTM = (profileId) => {
+    const names = profileId?.full_name.split(' ');
     TagManager?.dataLayer({
       dataLayer: {
         event: 'user_login',
-        lead_profile_id: profileId,
-        name: userData?.full_name,
-        cust_id: profileId,
-        customer_name : userData?.full_name,
-        customer_mobile_no : mobile
+        user_id: profileId?.lead_profile_id,
+        first_name: names[0],
+        last_name: names[names.length - 1],
+        phone: `+91${mobile}`,
       },
     });
   }
+
+  const handleWebEngageEvent = (eventName, eventData) => {
+    if (is_webengage_event_enabled && typeof window !== 'undefined' && window.webengage) {
+      window.webengage.track(eventName, eventData);
+    }
+  }
+
 
   const LoginOtp = (e) => {
     e?.preventDefault()
@@ -518,7 +526,31 @@ function CardDetailsFilterBox({
             localStorage.setItem('token', response?.data?.data?.access_token)
             localStorage.setItem('leadprofileid', response?.data?.data?.lead_profile_id)
             localStorage.setItem('auth_Otp', e)
-            handleGTM(response?.data?.data?.lead_profile_id)
+            handleGTM(response?.data?.data)
+            if (typeof window !== 'undefined' && window.webengage) {
+              const names = response.data.data.full_name.split(' ');
+              window.webengage.user.login(response?.data?.data?.lead_profile_id || '');
+              window.webengage.user.setAttribute('we_email', response?.data?.data?.email || '');
+              window.webengage.user.setAttribute('we_birth_date', response?.data?.data?.dob || '');
+              window.webengage.user.setAttribute('we_phone', response?.data?.data?.mobile_no ? `+91${response.data.data.mobile_no}` : "");
+              window.webengage.user.setAttribute('we_gender', response?.data?.data?.gender?.toLowerCase() || '');
+              window.webengage.user.setAttribute('we_first_name', names[0] || '');
+              window.webengage.user.setAttribute('we_last_name', names[names.length - 1] || '');
+              window.webengage.user.setAttribute('we_email_opt_in', true);
+              window.webengage.user.setAttribute('we_sms_opt_in', true);
+              window.webengage.user.setAttribute('we_whatsapp_opt_in', true);
+            }
+            handleWebEngageEvent('user_login', {
+              user_id: response?.data?.data?.lead_profile_id,
+              ...(response?.data?.data?.full_name && (() => {
+                const names = response.data.data.full_name.split(' ');
+                return {
+                  first_name: names[0],
+                  last_name: names[names.length - 1],
+                };
+              })()),
+              phone: `+91${mobile}`,
+            });
             toast.success(ApiMessage?.loginverify)
             if (response?.data?.data?.is_first_time_user === true) {
               router.push('/user/setprofile')
@@ -792,6 +824,68 @@ function CardDetailsFilterBox({
   }
   const isZeroOrNull = !getOverlallRating?.data?.over_all_rating || getOverlallRating?.data?.over_all_rating === 0
 
+  const Fees = memo(({ fees, annualFee }) => {
+    const isFree = annualFee === 0;
+    return (
+      <div>
+        <p className='text-[15px] font-bold'>{fees}</p>
+        <div className='text-[13px] font-normal'>
+          {isFree ? (
+            <div className='flex flex-col'>
+              <span>Free</span>
+            </div>
+          ) : (
+            <div className='flex flex-col'>
+              <span className='symbole-rupee'>₹ {annualFee} /-</span>
+              <span className='font-normal text-[12px] mt-[4px]'>*Applicable Taxes</span>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  });
+  
+  const JoiningFees = memo(({ joiningFees, joiningFee }) => {
+    const isFree = joiningFee === 0;
+    return (
+      <div> 
+        <p className='text-[15px] font-bold'>{joiningFees}</p>
+        <div className='text-[13px] font-normal'>
+          {isFree ? (
+            <div className='flex flex-col'>
+              <span>Free</span>
+            </div>
+          ) : (
+            <div className='flex flex-col'>
+              <span className='symbole-rupee'>₹ {joiningFee} /-</span>
+              <span className='font-normal text-[12px] mt-[4px]'>*Applicable Taxes</span>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  });
+  
+  const ForeignFee = memo(({ foreignFee, foreignTxnFee }) => (
+    <div> 
+      <p className='text-[15px] font-bold'>{foreignFee}</p>
+      <div className='flex flex-col'>
+        <p className='text-[13px] font-normal pt-1'>{foreignTxnFee}</p>
+        <span className='font-normal text-[12px] mt-[4px]'>*Applicable Taxes</span>
+      </div>
+    </div>
+  ));
+  
+  const TravelAssistance = memo(({ travelAssistance, fraudLiability }) => (
+    <div> 
+      <p className='text-[15px] font-bold'>{travelAssistance}</p>
+      {fraudLiability && (
+        <p className='text-[13px] font-normal pt-1'>{fraudLiability}</p>
+      )}
+    </div>
+  ));
+
+
   return (
     <>
       {/* <Head>
@@ -893,22 +987,13 @@ function CardDetailsFilterBox({
                               />
                             </div>
                             {productDetailsData?.product_details?.rating === 0 ||
-                            !productDetailsData?.product_details?.rating ? (
+                              !productDetailsData?.product_details?.rating ? (
                               'NA'
                             ) : (
                               <div className='border rounded-full py-1 px-4 flex gap-2  max-[320px]:px-2 items-center product-starts-rating'>
                                 <p className='xl:text-[18px] md:text-[14px] font-semibold '>
                                   {productDetailsData?.product_details?.rating}/5
                                 </p>
-
-                                {/* <ReactStars
-                                  count={starCount}
-                                  size={24}
-                                  value={productDetailsData?.product_details?.rating}
-                                  edit={false}
-                                  color1={'#ccc'}
-                                  color2={'#49d49d'}
-                                /> */}
                                 {productDetailsData?.product_details?.rating && (
                                   <StarRatings
                                     rating={productDetailsData?.product_details?.rating}
@@ -926,22 +1011,21 @@ function CardDetailsFilterBox({
 
                         <div
                           id='apply-card'
-                          className={`${
-                            isMobile
+                          className={`${isMobile
                               ? 'fixed bottom-0 bg-[#FFF] left-0 px-4 py-3 w-full justify-between items-center'
                               : ''
-                          }  flex md:flex-col lg:flex-col  items-center gap-[14px]`}>
+                            }  flex md:flex-col lg:flex-col  items-center gap-[14px]`}>
                           <ApplyNowButton
                             userData={userData}
                             data={productDetailsData?.product_details}
                             isPdp={true}
                             pos='3'
-                            disabled={productDetailsData?.product_details?.bank_name === "KOTAK MAHINDRA BANK" || url_slug_scapia === "scapia"}
+                            disabled={!productDetailsData?.product_details?.is_apply_now || url_slug_scapia === "scapia"}
                           />
                           {isEligible ? (
                             <button
                               id='eligb-card-cc-pdp'
-                              className='flex gap-2 justify-center cursor-pointer business-right-text py-3 w-full lg:w-[160px] rounded-lg text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                              className='flex gap-2 justify-center cursor-pointer font-faktum business-right-text py-3 w-full lg:w-[160px] rounded-lg text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
                               {' '}
                               <SuccessIcon />
                               Eligible
@@ -950,12 +1034,11 @@ function CardDetailsFilterBox({
                             <button
                               onClick={() => {
                                 router.push(
-                                  `/credit-cards/eligibility?eligible=${
-                                    productDetailsData?.product_details?.url_slug.split('/')[2]
+                                  `/credit-cards/eligibility?eligible=${productDetailsData?.product_details?.url_slug.split('/')[2]
                                   }`
                                 )
                               }}
-                              className=' business-right-text py-3 w-full lg:w-[160px] md:w-full rounded-lg text-[#212529] border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
+                              className=' business-right-text py-3 w-full lg:w-[160px] md:w-full rounded-lg text-[#212529] font-faktum border border-[#000] font-semibold max-[320px]:text-[13px] max-[280px]:text-[11px]'>
                               Check Eligibility
                             </button>
                           )}
@@ -1055,62 +1138,22 @@ function CardDetailsFilterBox({
                       </div>
 
                       <div className='grid grid-cols-4 gap-0  max-[576px]:grid-cols-2 max-[576px]:gap-5 max-[479px]:grid-cols-1 max-[479px]:gap-4'>
-                        <div className=''>
-                          <p className='text-[15px] font-bold '>{DetailsDatabox.fees}</p>
-                          <p className='text-[13px] font-normal'>
-                            {productDetailsData?.product_details.annual_fee == 0 ? (
-                              <div className='flex flex-col'>
-                                <span>Free</span>
-                                {/* <span className='font-normal text-[12px] mt-[4px]'>*Applicable Taxes</span> */}
-                              </div>
-                            ) : (
-                              <div className='flex flex-col'>
-                                <span className='symbole-rupee'>
-                                  ₹ {productDetailsData?.product_details.annual_fee} /-
-                                </span>
-                                <span className='font-normal text-[12px] mt-[4px]'>*Applicable Taxes</span>
-                              </div>
-                            )}
-                          </p>
-                        </div>
-
-                        <div className=''>
-                          <p className='text-[15px] font-bold'>{DetailsDatabox.joiningfees}</p>
-                          <p className='text-[13px] font-normal'>
-                            {productDetailsData?.product_details.joining_fee == 0 ? (
-                              <div className='flex flex-col'>
-                                <span>Free</span>
-                                {/* <span className='font-normal text-[12px] mt-[4px]'>*Applicable Taxes</span> */}
-                              </div>
-                            ) : (
-                              <div className='flex flex-col'>
-                                <span className='symbole-rupee'>
-                                  ₹ {productDetailsData?.product_details.joining_fee} /-
-                                </span>
-                                <span className='font-normal text-[12px] mt-[4px]'>*Applicable Taxes</span>
-                              </div>
-                            )}
-                          </p>
-                        </div>
-
-                        <div className=''>
-                          <p className='text-[15px] font-bold'>{DetailsDatabox?.foreignfee}</p>
-                          <div className='flex flex-col'>
-                            <p className='text-[13px] font-normal pt-1'>
-                              {productDetailsData?.product_details?.foreign_txn_fee}
-                            </p>
-                            <span className='font-normal text-[12px] mt-[4px]'>*Applicable Taxes</span>
-                          </div>
-                        </div>
-
-                        <div className='target-element' id='expert-review' ref={expertRef}>
-                          <p className='text-[15px] font-bold'>{DetailsDatabox.travelassistance}</p>
-                          {productDetailsData?.product_details?.fraud_liability && (
-                            <p className='text-[13px] font-normal pt-1'>
-                              {productDetailsData?.product_details?.fraud_liability}
-                            </p>
-                          )}
-                        </div>
+                        <Fees
+                          fees={DetailsDatabox.fees}
+                          annualFee={productDetailsData?.product_details.annual_fee}
+                        />
+                        <JoiningFees
+                          joiningFees={DetailsDatabox.joiningfees}
+                          joiningFee={productDetailsData?.product_details.joining_fee}
+                        />
+                        <ForeignFee
+                          foreignFee={DetailsDatabox?.foreignfee}
+                          foreignTxnFee={productDetailsData?.product_details?.foreign_txn_fee}
+                        />
+                        <TravelAssistance
+                          travelAssistance={DetailsDatabox.travelassistance}
+                          fraudLiability={productDetailsData?.product_details?.fraud_liability}
+                        />
                       </div>
                     </div>
                   </div>
@@ -1128,14 +1171,6 @@ function CardDetailsFilterBox({
                           <div className='flex items-center gap-6 justify-start max-[1024px]:justify-start pb-2 max-[479px]:gap-4'>
                             <p className='text-[15px] text-[#212529] font-medium max-[1024px]:w-[40%]'>Rating:</p>
                             <div className='flex items-center gap-2'>
-                              {/* <ReactStars
-                                count={starCount}
-                                size={22}
-                                value={productDetailsData?.product_details?.rating}
-                                edit={false}
-                                color1={'#ccc'}
-                                color2={'#49d49d'}
-                              /> */}
                               {productDetailsData?.product_details?.rating && (
                                 <StarRatings
                                   rating={productDetailsData?.product_details?.rating}
@@ -1184,15 +1219,6 @@ function CardDetailsFilterBox({
                             </p>
 
                             <div className='text-center over-rate-star flex justify-center'>
-                              {/* <ReactStars
-                                count={starCount}
-                                size={26}
-                                value={getOverlallRating?.data?.over_all_rating}
-                                edit={false}
-                                isHalf={true}
-                                color1={'#ccc'}
-                                color2={'#49d49d'}
-                              /> */}
                               {isZeroOrNull ? (
                                 ''
                               ) : (
@@ -1325,12 +1351,12 @@ function CardDetailsFilterBox({
                               value={commentdata}
                               cols='50'></textarea>
                             {riviewError && (
-                              <p className='text-[12px] text-left text-[#FF000F] font-no mt-2'>
+                              <p className='text-[12px] text-left text-[#FF000F] font-normal mt-2'>
                                 Please enter write a review
                               </p>
                             )}
                             {errorHref && (
-                              <p className='text-[12px] text-left text-[#FF000F] font-no mt-2'>
+                              <p className='text-[12px] text-left text-[#FF000F] font-normal mt-2'>
                                 {ApiMessage?.linkError}
                               </p>
                             )}
@@ -1419,16 +1445,7 @@ function CardDetailsFilterBox({
                                         color2={'#49d49d'}
                                       />
                                     )
-                                    // reviewdata?.rating && (
-                                    //   <StarRatings
-                                    //     rating={reviewdata?.rating}
-                                    //     starRatedColor='#49d49d'
-                                    //     numberOfStars={starCount}
-                                    //     name='rating'
-                                    //     starDimension='24px'
-                                    //     starSpacing='0'
-                                    //   />
-                                    // )
+
                                   }
                                   <div className=''>
                                     <p className='pt-3 text-[15px] font-normal text-justify'> {reviewdata?.comment}</p>
@@ -1603,7 +1620,7 @@ function CardDetailsFilterBox({
                           renderInput={(props) => <input {...props} />}
                         />
                         {errOtp && (
-                          <p className='text-[12px] text-[#FF000F] font-no mt-2'>{ApiMessage?.otpValidError}</p>
+                          <p className='text-[12px] text-[#FF000F] font-normal mt-2'>{ApiMessage?.otpValidError}</p>
                         )}
                       </div>
                     </div>
@@ -1646,4 +1663,4 @@ function CardDetailsFilterBox({
   )
 }
 
-export default CardDetailsFilterBox
+export default memo(CardDetailsFilterBox);

@@ -3,7 +3,6 @@ import { BASE_URL, BUSINESSCATEGORY, BrowseServices, COMMON, FAQAPI } from '@/ut
 import Axios from 'axios'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
-import ScrollToTop from 'react-scroll-to-top'
 
 const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
   ssr: false
@@ -11,9 +10,7 @@ const DynamicHeader = dynamic(() => import('@/core/component/common/Header'), {
 const MobileFooter = dynamic(() => import('@/core/component/common/MobileFooter'), {
   ssr: false
 })
-const DynamicFooter = dynamic(() => import('@/core/component/common/Footer'), {
-  ssr: false
-})
+
 const FAQ = dynamic(() => import('@/core/component/common/FAQ/FAQ'), {
   ssr: false
 })
@@ -25,6 +22,7 @@ const ServiceTabs = dynamic(() => import('@/core/component/Layout/savingAccountL
 })
 import CommonBreadCrumbComponent from '@/core/component/common/CommonList/CommonBreadCrumbComponent'
 import TagManager from 'react-gtm-module'
+import { is_webengage_event_enabled } from '@/utils/util'
 
 export async function getServerSideProps(context) {
   try {
@@ -32,7 +30,6 @@ export async function getServerSideProps(context) {
     const { resolvedUrl, req } = context
     const url_slug = resolvedUrl?.split('/')?.pop()
     const referer = req?.headers?.referer || null
-    const website_url = process.env.NEXT_PUBLIC_WEBSITE_URL
     const h = context?.query?.h || ''
     const ip = context?.req?.headers?.['x-forwarded-for']?.split(',')?.[0] || ''
     const user_agent = context?.req?.headers?.['user-agent'] || ''
@@ -163,27 +160,45 @@ const CreditCardsRecommendation = ({
     }
   }, [])
 
-  const handleGTM = () => {
-    const currentDate = new Date();
-    const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
+const handleWebEngageEvent = (eventName, eventData) => {
+    if (is_webengage_event_enabled && typeof window !== 'undefined' && window.webengage) {
+      window.webengage.track(eventName, eventData);
+    }
+  }
+
+  useEffect(() => {
+    const handleGTM = () => {
+      const currentDate = new Date();
+      const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
   
       TagManager?.dataLayer({
         dataLayer: {
-          event: 'card_recommend',
+          event: 'card_recommend_started',
           source: sourceUrl || "",
           date: formattedDate,
         },
       });
-  }
-
-  useEffect(() => {
+    };
+  
+    const handleWebEngage = () => {
+      const currentDate = new Date();
+      const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${currentDate.getFullYear()} ${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
+  
+      handleWebEngageEvent('card_recommend_started', {
+        source: sourceUrl || "",
+        date: formattedDate,
+      });
+    };
+  
     handleGTM();
-  }, []);
+    handleWebEngage();
+  }, [sourceUrl]); 
+
 
   return (
     <div>
       <div className=' bg-[#844FCF]'>
-        <DynamicHeader businessCategorydata={businessCategorydata} />
+        <DynamicHeader businessCategorydata={businessCategoryData} />
       </div>
       <div className='bg-[#F4F8FB]'>
         <CommonBreadCrumbComponent
@@ -207,19 +222,9 @@ const CreditCardsRecommendation = ({
         <div className='bg-[#F4F8FB]'>
           <FAQ faqdata={faqData} />
         </div>
-        <div></div>
-        <div>
-        </div>
-        <div>
-          <MobileFooter businessCategorydata={businessCategorydata} />
-        </div>
+        <MobileFooter businessCategorydata={businessCategoryData} />
       </div>
-      <div>
-        <DynamicFooter businessCategorydata={businessCategoryData} />
-        <div className='scroll-top'>
-          <ScrollToTop smooth color='#000' />
-        </div>
-      </div>
+
     </div>
   )
 }
