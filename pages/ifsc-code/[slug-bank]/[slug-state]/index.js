@@ -22,7 +22,6 @@ const Index = ({
 
   const mobileFooterRef = useRef(null);
 
-
   useEffect(() => {
     if (leadsParams) {
       if (typeof window !== 'undefined') {
@@ -73,12 +72,14 @@ export async function getServerSideProps(context) {
   try {
     const { query, req } = context;
     const context_params = context?.resolvedUrl?.split('/')[1] || '';
-    const url_slug = query.page === '' ? context_params : query?.['slug-bank'];
+    const url_slug = query.page === '' ? context_params : query?.['slug-state]'];
     const ref = req?.headers?.referer || '';
     const h = query?.h || '';
     const ip = req?.headers?.['x-forwarded-for']?.split(',')?.[0] || '';
     const user_agent = req?.headers?.['user-agent'] || '';
     const leadsParams = { user_agent, ip };
+
+
     const req1 = {
       lang_id: 1,
        business_category_url_slug: url_slug
