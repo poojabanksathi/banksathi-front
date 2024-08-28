@@ -73,14 +73,12 @@ export default Index;
 export async function getServerSideProps(context) {
   try {
     const { query, req } = context;
-    const context_params = context?.resolvedUrl?.split('/')[1] || '';
-    const url_slug = query.page === '' ? context_params : context?.resolvedUrl?.split('?')[0]?.split('/')[1];
+    const url_slug = context?.resolvedUrl?.split('/')[1] || '';
     const ref = req?.headers?.referer || '';
     const h = query?.h || '';
     const ip = req?.headers?.['x-forwarded-for']?.split(',')?.[0] || '';
     const user_agent = req?.headers?.['user-agent'] || '';
     const leadsParams = { user_agent, ip };
-    const page = query.page ? query.page - 1 : 0;
 
 
     const req1 = {
